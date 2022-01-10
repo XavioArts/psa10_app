@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sale_offer: 1.5
+  trade_offer: 1
+  seen: false
+  accepted: false
+  counter_offer: false
+  user: one
+  card: one
+
+two:
+  sale_offer: 1.5
+  trade_offer: 1
+  seen: false
+  accepted: false
+  counter_offer: false
+  user: two
+  card: two
