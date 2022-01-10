@@ -11,7 +11,7 @@ class Api::CardsController < ApplicationController
   end
 
   def show
-    render json: @Card
+    render json: @card
   end
 
   def create
@@ -38,7 +38,7 @@ class Api::CardsController < ApplicationController
   private
 
   def set_card
-    @card = current_user.cards.find(params[:id, :user_id, :collection_id])
+    @card = current_user.cards.find(params[:id])
   end
 
   def card_params
