@@ -9,5 +9,8 @@ Rails.application.routes.draw do
       resources :card_comments
     end
     resources :offers
+    resources :topics do
+      resources :messages
+    end
   end
 end
