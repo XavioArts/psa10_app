@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_221232) do
+ActiveRecord::Schema.define(version: 2022_01_11_223818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,17 @@ ActiveRecord::Schema.define(version: 2022_01_10_221232) do
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
-    t.float "price"
-    t.text "description"
     t.string "condition"
-    t.boolean "sale"
-    t.boolean "trade"
+    t.boolean "available"
     t.string "front_image"
     t.string "back_image"
     t.integer "likes"
+    t.string "category"
+    t.boolean "graded"
+    t.float "grade"
+    t.string "set"
+    t.integer "year"
+    t.string "card_number"
     t.bigint "user_id", null: false
     t.bigint "collection_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -64,6 +67,16 @@ ActiveRecord::Schema.define(version: 2022_01_10_221232) do
     t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "topic_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["topic_id"], name: "index_messages_on_topic_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.float "sale_offer"
     t.integer "trade_offer"
@@ -76,6 +89,15 @@ ActiveRecord::Schema.define(version: 2022_01_10_221232) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["card_id"], name: "index_offers_on_card_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -115,6 +137,9 @@ ActiveRecord::Schema.define(version: 2022_01_10_221232) do
   add_foreign_key "collection_comments", "collections"
   add_foreign_key "collection_comments", "users"
   add_foreign_key "collections", "users"
+  add_foreign_key "messages", "topics"
+  add_foreign_key "messages", "users"
   add_foreign_key "offers", "cards"
   add_foreign_key "offers", "users"
+  add_foreign_key "topics", "users"
 end
