@@ -1,14 +1,44 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# 5.times do
+#   u = User.create(
+#     # first_name: Faker::Name.first_name,
+#     # last_name: Faker::Name.last_name,
+#     password: 123456,
+#     email: Faker::Internet.email,
+#     # username: Faker::Internet.username
+#   )
 
+#   1.times do
+#     c = Collection.create(
+#       name: "Pokemon",
+#       user_id: u.id)
+#       5.times do
+#         price = rand(0..300);
+#         ca = Card.create(
+#           name: Faker::Games::Pokemon.name,
+#           price: rand(1..300).to_f,
+#           user_id: u.id,
+#           collection_id: c.id)
+#           2.times do
+#             CardComment.create(
+#               user_id: u.id,
+#               card_id: ca.id
+#           )
+#           end
+        
+#       end
+#   end
+
+<<<<<<< HEAD
+User.destroy_all
+
+=======
+ 
+# end
+# p Card.all
 
 User.destroy_all
 
+>>>>>>> c3a9e5ad03474bb5f79d5e2f3fe9c06e450943e7
 u1 = User.create(email: "test@test.com", password: 123456)
 u2 = User.create(email: "test2@test.com", password: 123456)
 u3 = User.create(email: "test3@test.com", password: 123456)
