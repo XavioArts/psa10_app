@@ -1,13 +1,9 @@
 class Api::CardsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_card, only: [:show, :destroy, :update]
 
-  def all_cards
-    render json: Card.all
-  end
 
   def index 
-    render json: current_user.cards
+    render json: Card.all
   end
 
   def show
