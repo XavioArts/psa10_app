@@ -43,7 +43,7 @@ class Api::CollectionsController < ApplicationController
     end
 
     def set_collection
-        @collection = Collection.find(:id)
+        @collection = Collection.find(params[:id])
     end
 
 end
