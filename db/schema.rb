@@ -10,10 +10,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_165810) do
+ActiveRecord::Schema.define(version: 2022_01_10_221232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "card_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_card_comments_on_card_id"
+    t.index ["user_id"], name: "index_card_comments_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.text "description"
+    t.string "condition"
+    t.boolean "sale"
+    t.boolean "trade"
+    t.string "front_image"
+    t.string "back_image"
+    t.integer "likes"
+    t.bigint "user_id", null: false
+    t.bigint "collection_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_cards_on_collection_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "collection_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "collection_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["collection_id"], name: "index_collection_comments_on_collection_id"
+    t.index ["user_id"], name: "index_collection_comments_on_user_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.text "description"
+    t.integer "likes"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.float "sale_offer"
+    t.integer "trade_offer"
+    t.boolean "seen"
+    t.boolean "accepted"
+    t.boolean "counter_offer"
+    t.bigint "user_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_offers_on_card_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +108,13 @@ ActiveRecord::Schema.define(version: 2021_12_15_165810) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "card_comments", "cards"
+  add_foreign_key "card_comments", "users"
+  add_foreign_key "cards", "collections"
+  add_foreign_key "cards", "users"
+  add_foreign_key "collection_comments", "collections"
+  add_foreign_key "collection_comments", "users"
+  add_foreign_key "collections", "users"
+  add_foreign_key "offers", "cards"
+  add_foreign_key "offers", "users"
 end
