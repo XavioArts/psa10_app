@@ -22,7 +22,7 @@ const ProfileImageUpload = () => {
             console.log(res.data)
             setSuccess(true);
             auth.setUser(res.data);
-            navigate("/");
+            setTimeout(()=>navigate("/"), 1500);
         } catch (err) {
             console.log(err.response);
             alert("there was an error uploading")
