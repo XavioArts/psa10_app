@@ -26,6 +26,7 @@ const ProfileImageUpload = () => {
             auth.setUser(res.data);
             setClicked(false);
             // setTimeout(()=>navigate("/"), 1500);
+            // setTimeout(()=>navigate("/edit_profile"), 1500);
         } catch (err) {
             console.log(err.response);
             alert("there was an error uploading")
