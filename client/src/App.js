@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Public from './pages/Public';
 import Protected from './pages/Protected';
+import EditProfileForm from './pages/EditProfileForm';
 import RequireAuth from './components/RequireAuth';
 import LogIn from './pages/LogIn';
 import Layout from './components/Layout';
@@ -21,6 +22,7 @@ function App() {
             <Route path="/protected" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
             <Route path="/collections" element={<Collections/>} />
+            <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>
       </Routes>

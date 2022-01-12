@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Protected = () => {
@@ -9,9 +9,16 @@ const Protected = () => {
 
     return (
         <div>
-            <h1>Protected</h1>
+            <h2>My Profile</h2>
+            <h3>Hey, {auth.nickname}!</h3>
+            <img src={auth.image} />
+            <p>About Me: {auth.about}</p>
+            <p>Name: {auth.first_name} {auth.last_name}</p>
+            <p>Email: {auth.email}</p>
+            <p>My ID {auth.id}</p>
             <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
             <button onClick={()=>navigate("/profile_image")} >Edit profile image</button>
+            <Link to={`/api/users/${auth.id}/edit`}>Edit Profile</Link>
         </div>
     );
 };
