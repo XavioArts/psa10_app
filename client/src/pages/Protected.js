@@ -11,6 +11,7 @@ const Protected = () => {
         <div>
             <h1>Protected</h1>
             <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
+            <button onClick={()=>navigate("/profile_image")} >Edit profile image</button>
         </div>
     );
 };

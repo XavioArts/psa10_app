@@ -66,12 +66,24 @@ collection4.collection_comments.create(user_id: users.sample.id, content: "i lik
     offer = card.offers.create(user_id: users.sample.id, sale_offer: 100.00)
 end
 
+## topics and messages
+
+topics = ["Pokemon", "Baseball", "Basketball", "Magic the Gathering"]
+
+3.times do
+    topic = users.sample.topics.create(title: topics.sample + " Rares", body: "Show us your rarest cards!")
+    topic.messages.create(user_id: users.sample.id, content: "I have this super rare card")
+end
+
 p "seeded #{User.all.length} users"
 p "seeded #{Collection.all.length} collections"
 p "seeded #{Card.all.length} cards"
 p "seeded #{CollectionComment.all.length} collection comments"
 p "seeded #{CardComment.all.length} card comments"
 p "seeded #{Offer.all.length} offers"
+p "-----------------------"
+p "seeded #{Topic.all.length} topics"
+p "seeded #{Message.all.length} messages"
 p "-----------------------"
 
 p "samples:"
