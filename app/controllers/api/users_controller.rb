@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
 
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:profile_image]
 
     def profile_image
         file = params[:file]
