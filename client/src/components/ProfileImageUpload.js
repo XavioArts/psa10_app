@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import {FaceIcon} from "@mui/icons-material";
 import { Button, Icon, Input } from "@mui/material";
 import axios from "axios";
 
@@ -11,9 +10,12 @@ const ProfileImageUpload = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        let file = document.getElementById("input").files[0].name;
+        let data = new FormData();
+        let file = document.getElementById("input").files[0];
+        data.append("file", file);
+        console.log(data)
         try {
-            let res = await axios.post('/api/users/image', file);
+            let res = await axios.post('/api/users/image', data);
             console.log(res.data)
         } catch (err) {
             console.log(err.response);
@@ -31,6 +33,8 @@ const ProfileImageUpload = () => {
                     </Icon>
                     <p style={{fontSize: "12px"}} >No profile image</p>
                 </div>}
+            {auth.image && <img src={auth.image} alt="profile image" width="200px" height="200px" />}
+            <br/>
             <label htmlFor="contained-button-file" >
                 <Input accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
                 <Button variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
