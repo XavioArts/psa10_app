@@ -4,6 +4,10 @@ class Api::CardsController < ApplicationController
 
 
   def index 
+    render json: current_user.cards
+  end
+
+  def all_cards
     render json: Card.all
   end
 

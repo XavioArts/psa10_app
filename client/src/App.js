@@ -7,6 +7,7 @@ import RequireAuth from './components/RequireAuth';
 import LogIn from './pages/LogIn';
 import Layout from './components/Layout';
 import ProfileImageUpload from './components/ProfileImageUpload';
+import Collections from './pages/Collections';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route element={<RequireAuth/>} >
             <Route path="/protected" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
+            <Route path="/collections" element={<Collections/>} />
           </Route>
         </Route>
       </Routes>
