@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -9,9 +10,10 @@ const Protected = () => {
 
     return (
         <div>
+            {!auth.image && <Alert severity="error" >Finish building your profile. <button onClick={()=>navigate(`/api/users/${auth.id}/edit`)}>Edit Profile</button></Alert>}
             <h2>My Profile</h2>
             <h3>Hey, {auth.nickname}!</h3>
-            <img src={auth.image} />
+            {auth.image && <img src={auth.image} alt="profile image" width="200px"/>}
             <p>About Me: {auth.about}</p>
             <p>Name: {auth.first_name} {auth.last_name}</p>
             <p>Email: {auth.email}</p>

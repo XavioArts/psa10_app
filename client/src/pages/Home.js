@@ -18,7 +18,7 @@ const Home = () => {
             {auth.image && <img src={auth.image} alt="profile image" width="200px"/>}
             <button onClick={()=>navigate("/login")} >Log In</button>
             <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
-            <button onClick={()=>navigate("/protected")}>User View</button>
+            <button onClick={()=>navigate("/profile")}>User View</button>
         </div>
     );
 };

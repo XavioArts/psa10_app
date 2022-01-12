@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import ProfileImageUpload from "../components/ProfileImageUpload";
+import { TextareaAutosize } from "@mui/base";
 
 
 const EditUser= (props) => {
@@ -45,24 +46,30 @@ const EditUser= (props) => {
       <form onSubmit={handleSubmit}>
         <p>Name</p>
         <input 
+        placeholder="First Name" 
         value={first_name} 
         onChange={(e)=>{setFirst_name(e.target.value);}}/>
         <input 
+        placeholder="Last Name" 
         value={last_name} 
         onChange={(e)=>{setLast_name(e.target.value);}}/>
         <p>Username</p>
         <input 
+        placeholder="Userame" 
         value={nickname} 
         onChange={(e)=>{setNickname(e.target.value);}}/>
         <p>Email</p>
         <input 
+        placeholder="email" 
         value={email} 
         onChange={(e)=>{setEmail(e.target.value);}}/>
         <p>About</p>
-        <input 
-        type='text'
+        <TextareaAutosize 
+        placeholder="Tell Us About Yourself" 
+        style={{ width: 400, height: 100 }}
         value={about} 
         onChange={(e)=>{setAbout(e.target.value);}}/>
+        <br/>
         <button>Submit</button>
       </form>
     </div>

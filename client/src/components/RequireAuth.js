@@ -12,7 +12,6 @@ const RequireAuth = () => {
 
     return (
         <div>
-            <h1>Welcome {auth.email}</h1>
             <Outlet />
         </div>
     );

@@ -41,7 +41,7 @@ const AuthProvider = (props) => {
         try {
             let res = await axios.post("/api/auth", user);
             setUser(res.data.data);
-            navigate("/");
+            navigate("/profile");
         } catch (err) {
             console.log(err.response);
             alert("An error occurred registering user");
@@ -79,7 +79,7 @@ const AuthProvider = (props) => {
             let res = await axios.put("/api/auth", user);
             console.log(res.data);
             setUser(res.data.data);
-            navigate("/protected");
+            navigate("/profile");
         }   catch (err) {
             console.log(err.response);
             alert("an error occurred updating user")
