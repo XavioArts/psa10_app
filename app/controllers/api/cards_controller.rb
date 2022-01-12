@@ -39,7 +39,7 @@ class Api::CardsController < ApplicationController
   end
 
   def card_params
-    params.requre(:card).permit(:name, :price, :description, :condition, :sale, :trade, :likes, :front_image, :back_image )
+    params.requre(:card).permit(:available, :category, :front_image, :likes, :back_image, :name, :condition, :graded, :grade, :set, :year, :card_number)
   end
 
 end
