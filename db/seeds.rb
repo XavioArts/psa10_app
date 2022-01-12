@@ -28,17 +28,8 @@
 #       end
 #   end
 
-<<<<<<< HEAD
 User.destroy_all
 
-=======
- 
-# end
-# p Card.all
-
-User.destroy_all
-
->>>>>>> c3a9e5ad03474bb5f79d5e2f3fe9c06e450943e7
 u1 = User.create(email: "test@test.com", password: 123456)
 u2 = User.create(email: "test2@test.com", password: 123456)
 u3 = User.create(email: "test3@test.com", password: 123456)

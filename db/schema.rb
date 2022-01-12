@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2022_01_11_223818) do
     t.string "set"
     t.integer "year"
     t.string "card_number"
+    t.boolean "showcase"
     t.bigint "user_id", null: false
     t.bigint "collection_id", null: false
     t.datetime "created_at", precision: 6, null: false
