@@ -23,7 +23,6 @@ const Home = () => {
                 <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "200px", height: "auto"}}/>
             </div>}
             <button onClick={()=>navigate("/login")} >Log In</button>
-            <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
             <button onClick={()=>navigate("/profile")}>User View</button>
         </div>
     );
