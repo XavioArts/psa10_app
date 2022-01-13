@@ -1,14 +1,49 @@
 class Api::CardsController < ApplicationController
-  # before_action :authenticate_user!
-  before_action :set_card, only: [:show, :destroy, :update]
+  before_action :authenticate_user!
+  before_action :set_card, only: [:show, :destroy, :update, :upload]
 
 
   def index 
     render json: current_user.cards
   end
 
+<<<<<<< HEAD
   def all_cards
+=======
+  def all_cards 
+>>>>>>> 5c2ba29098110660e1ae1380a89bd19ba49e28b8
     render json: Card.all
+  end
+
+  def upload
+    fileFront = params[:fileFront]
+    fileBack = params[:fileBack]
+
+        if fileFront && fileBack
+            begin
+                puts "saving to cloudinary"
+                cloud_image_front = Cloudinary::Uploader.upload(fileFront, public_id: fileFront.original_filename, secure: true, resource_type: :auto)
+                cloud_image_back = Cloudinary::Uploader.upload(fileBack, public_id: fileBack.original_filename, secure: true, resource_type: :auto)
+            rescue => e
+                puts "error occurred"
+                p e
+                render json: {errors: e}, status: 422
+                return
+            end
+        end
+
+        if cloud_image_front && cloud_image_front['secure_url']
+            @card.front_image = cloud_image_front['secure_url']
+        end
+        if cloud_image_back && cloud_image_back['secure_url']
+            @card.back_image = cloud_image_back['secure_url']
+        end
+
+        if @card.save
+            render json: @card
+        else
+            render json: {errors: e}, status: 422
+        end
   end
 
   def show
