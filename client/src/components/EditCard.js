@@ -23,27 +23,6 @@ const EditCard = (props) => {
 
   const auth = useContext(AuthContext);
 
-  useEffect(() => {
-    getCards();
-  }, [])
-
-  // const getCards = async () => {
-  //   let res = await axios.get("/api/cards");
-  //   console.log(res);
-  // };
-
-  const getCards = async () => {
-    setAvailable(auth.available)
-    setCategory(auth.category)
-    setName(auth.category)
-    setCondition(auth.condition)
-    setGraded(auth.graded)
-    setGrade(auth.grade)
-    setSet(auth.set)
-    setYear(auth.year)
-    setCardNumber(auth.CardNumber)
-
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

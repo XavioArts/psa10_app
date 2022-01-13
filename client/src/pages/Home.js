@@ -29,24 +29,24 @@ const Home = () => {
         <div>
             <h1>Home</h1>
             {JSON.stringify(auth)}
-            {auth.image && 
-            <div style={{width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden"}} >
-                <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "200px", height: "auto"}}/>
-            </div>}
+            {auth.image &&
+                <div style={{ width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden" }} >
+                    <img src={auth.image} alt="profile" style={{ objectFit: "cover", width: "200px", height: "auto" }} />
+                </div>}
             <ButtonDiv>
-                <Button variant="contained" onClick={()=>navigate("/login")} >Log In</Button>
-                <Button variant="contained" onClick={()=>auth.handleLogout(navigate)} >Log Out</Button>
+                <Button variant="contained" onClick={() => navigate("/login")} >Log In</Button>
+                <Button variant="contained" onClick={() => auth.handleLogout(navigate)} >Log Out</Button>
             </ButtonDiv>
-            <br/>
+            <br />
             <ButtonDiv>
-                <Button variant="contained" onClick={()=>navigate("/profile")}>User View</Button>
-                <Button variant="contained" onClick={()=>navigate("/cards/1/image")}>Test card image upload</Button>
+                <Button variant="contained" onClick={() => navigate("/profile")}>User View</Button>
+                <Button variant="contained" onClick={() => navigate("/cards/1/image")}>Test card image upload</Button>
             </ButtonDiv>
-            <br/>
+            <br />
             <ButtonDiv>
                 <Button variant="contained" onClick={getUserCards}>Test get user cards</Button>
             </ButtonDiv>
-            <br/>
+            <br />
             {cards && <p>{JSON.stringify(cards)}</p>}
         </div>
     );

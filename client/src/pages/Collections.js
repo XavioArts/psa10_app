@@ -16,7 +16,7 @@ const Collections = () => {
     getCollections();
     getCollectionCards();
     userInfo();
-  },[])
+  }, [])
 
   const getCollections = async () => {
     let res = await axios.get("/api/collections");
@@ -30,7 +30,7 @@ const Collections = () => {
     console.log(res.data)
   }
 
-  const userInfo = async () =>{
+  const userInfo = async () => {
     let res = await axios.get(`/api/users/${auth.id}`)
     setUser(res.data)
     console.log(res.data)
@@ -61,19 +61,19 @@ const Collections = () => {
   return (
     <div>
       <div>
-      {auth.image && <img src={auth.image} height="200px" />}
-      <h3>{auth.nickname}</h3>
-      <p>Joined: {user.created_at}</p>
-      <p>{auth.email}</p>
-      <p>{auth.about}</p>
+        {auth.image && <img src={auth.image} height="200px" />}
+        <h3>{auth.nickname}</h3>
+        <p>Joined: {user.created_at}</p>
+        <p>{auth.email}</p>
+        <p>{auth.about}</p>
       </div>
-      <Divider/>
+      <Divider />
       {/* a second NavBar here for overview, collection, sets, and showcases */}
       <div>
-      <a href="/dashboard">Overview</a>
-      <a href="/collections">Collections</a>
-      <a href="/sets">Sets</a>
-      <a href="/showcases">Showcases</a>
+        <a href="/dashboard">Overview</a>
+        <a href="/collections">Collections</a>
+        <a href="/sets">Sets</a>
+        <a href="/showcases">Showcases</a>
       </div>
       <Divider />
       {/* {renderCollectionCards()} */}

@@ -37,23 +37,23 @@ const ProfileImageUpload = () => {
         <div>
             <h3>Update your profile image</h3>
             {success && <Alert severity="success" >Successfully updated profile picture!</Alert>}
-            {auth.image === null && 
-                <div style={{width: "200px", height: "200px", background: "#D7D7D7", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
-                    <Icon sx={{fontSize: "115px", margin: "0"}} >
+            {auth.image === null &&
+                <div style={{ width: "200px", height: "200px", background: "#D7D7D7", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }} >
+                    <Icon sx={{ fontSize: "115px", margin: "0" }} >
                         image
                     </Icon>
-                    <p style={{fontSize: "12px"}} >No profile image</p>
+                    <p style={{ fontSize: "12px" }} >No profile image</p>
                 </div>}
-            {auth.image && 
-            <div style={{width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden"}} >
-                <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "200px", height: "auto"}}/>
-            </div>}
-            <br/>
+            {auth.image &&
+                <div style={{ width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden" }} >
+                    <img src={auth.image} alt="profile" style={{ objectFit: "cover", width: "200px", height: "auto" }} />
+                </div>}
+            <br />
             <label htmlFor="contained-button-file" >
-                <Input accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
+                <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => setFiles(e.target.value)} />
                 <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
-                {/* <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
+            {/* <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
                 <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file</Button> */}
         </div>
     )
