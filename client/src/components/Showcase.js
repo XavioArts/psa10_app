@@ -1,10 +1,38 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link} from "react-router-dom";
 
 
-const Showcase = () => {
-  const [showcaseCards, setShowcaseCards] = useState([])
+// PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
+{/* <Showcase id={auth.id}/> */}
 
-  
+
+const Showcase = (props) => {
+  const [showcases, setShowcases] = useState([])
+
+  useEffect(() => {
+    getShowcases();
+  }, [])
+
+  const getShowcases = async () => {
+    console.log(props.id)
+    try {
+        let res = await axios.get(`/api/showcases/${props.id}`);
+        // allShowcases = res.data
+        console.log(res.data)
+        setShowcases(res.data);
+    } catch (err) {
+        console.log(err.response);
+        alert("there was an error getting showcases")
+    }
+}
+
+  return (
+    <div>
+      {JSON.stringify(showcases)}
+      <Link to={'/showcase/new'}>Create A New Showcase</Link>
+    </div>
+  )
 
 }
 

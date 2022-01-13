@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :card_comments, dependent: :destroy
   has_many :collection_comments, dependent: :destroy
   has_many :topics, dependent: :destroy
+  has_many :showcases, dependent: :destroy
   has_many :messages, through: :topics
   extend Devise::Models 
   # Include default devise modules. Others available are:

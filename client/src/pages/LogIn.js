@@ -5,8 +5,8 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const LogIn = () => {
     const { handleLogin } = useContext(AuthContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("test@test.com");
+    const [password, setPassword] = useState("123456");
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
 
