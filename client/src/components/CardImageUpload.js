@@ -51,7 +51,7 @@ const CardImageUpload = () => {
             setSuccess(true);
             setCard(res.data);
             setClicked(false);
-            setTimeout(()=>navigate("/profile"), 1000);
+            // setTimeout(()=>navigate("/profile"), 1000);
         } catch (err) {
             console.log(err.response);
             setFailed(true);
@@ -73,15 +73,29 @@ const CardImageUpload = () => {
             <div style={{display: "flex", margin: "10px", padding: "10px", justifyContent: "space-around", width: "500px"}} >
                 <div>
                     <label>Front:</label>
-                    <div style={{width: "150px", height: "200px", overflow: "hidden"}} >
-                        <img src={card.front_image} alt="front" style={{objectFit: "cover", width: "150px", height: "auto"}}/>
-                    </div>
+                    {card.front_image === null && 
+                        <div style={{width: "152px", height: "212px", background: "#D7D7D7", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+                            <Icon sx={{fontSize: "90px", margin: "0"}} >
+                                cancel
+                            </Icon>
+                            <p style={{fontSize: "12px"}} >No image</p>
+                    </div>}
+                    {card.front_image && <div style={{width: "152px", height: "212px", overflow: "hidden"}} >
+                        <img src={card.front_image} alt="front" style={{objectFit: "cover", width: "152px", height: "auto"}}/>
+                    </div>}
                 </div>
                 <div>
                     <label>Back:</label>
-                    <div style={{width: "150px", height: "200px", overflow: "hidden"}} >
-                        <img src={card.back_image} alt="back" style={{objectFit: "cover", width: "150px", height: "auto"}}/>
-                    </div>
+                    {card.back_image === null && 
+                        <div style={{width: "152px", height: "212px", background: "#D7D7D7", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}} >
+                            <Icon sx={{fontSize: "90px", margin: "0"}} >
+                                cancel
+                            </Icon>
+                            <p style={{fontSize: "12px"}} >No image</p>
+                    </div>}
+                    {card.back_image && <div style={{width: "152px", height: "212px", overflow: "hidden"}} >
+                        <img src={card.back_image} alt="back" style={{objectFit: "cover", width: "152px", height: "auto"}}/>
+                    </div>}
                 </div>
             </div>
             <Divider/>
