@@ -19,7 +19,7 @@ function App() {
           <Route path="/public" element={<Public/>} />
           <Route path="/login" element={<LogIn/>} />
           <Route element={<RequireAuth/>} >
-            <Route path="/protected" element={<Protected/>} />
+            <Route path="/profile" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
             <Route path="/dashboard" element={<Collections/>}>
               {/* <Route path="/" element={<Overview/>} /> */}
@@ -28,6 +28,7 @@ function App() {
               <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
+            <Route path="/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>
       </Routes>
