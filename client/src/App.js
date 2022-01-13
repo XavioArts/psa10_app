@@ -8,6 +8,7 @@ import RequireAuth from './components/RequireAuth';
 import LogIn from './pages/LogIn';
 import Layout from './components/Layout';
 import ProfileImageUpload from './components/ProfileImageUpload';
+import CardImageUpload from './components/CardImageUpload';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route element={<RequireAuth/>} >
             <Route path="/protected" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
+            <Route path="/cards/:id/image" element={<CardImageUpload/>} />
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>
