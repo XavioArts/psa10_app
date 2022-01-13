@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -25,6 +26,7 @@ const Home = () => {
             <button onClick={()=>navigate("/login")} >Log In</button>
             <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
             <button onClick={()=>navigate("/profile")}>User View</button>
+            <Button variant="contained" onClick={()=>navigate("/cards/1/image")}>Test card image upload</Button>
         </div>
     );
 };

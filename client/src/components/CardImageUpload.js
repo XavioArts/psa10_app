@@ -45,14 +45,17 @@ const CardImageUpload = () => {
             <label htmlFor="contained-button-file" >
                 <label>Upload front image of card:</label>
                 <Input accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
+                <br/>
                 <label>Upload back image of card:</label>
-                <Input accept="image/*" value={filesBack} type="file" id="input" onChange={(e)=>setFilesBack(e.target.value)} />
+                <Input accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
                 <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
+            <br/>
                 <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
-                <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
+                <Button variant="contained" onClick={()=>console.log(filesBack)} >Log Files Two</Button>
+            <br/>
                 <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file</Button>
-                <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file 2</Button>
+                <Button variant="contained" onClick={()=>console.log(document.getElementById("inputBack").files[0])} >get file two</Button>
         </div>
     )
 }
