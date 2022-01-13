@@ -19,7 +19,7 @@ function App() {
           <Route path="/public" element={<Public/>} />
           <Route path="/login" element={<LogIn/>} />
           <Route element={<RequireAuth/>} >
-            <Route path="/protected" element={<Protected/>} />
+            <Route path="/profile" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
             <Route path="/cards/:id/image" element={<CardImageUpload/>} />
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />

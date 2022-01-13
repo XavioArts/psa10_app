@@ -10,7 +10,7 @@ const NavBar = () => {
         <div style={styles.container} > 
             <Link to="/" style={styles.link} >Home</Link>
             <Link to="/public" style={styles.link} >Public</Link>
-            {authenticated && <Link to="/protected" style={styles.link} >Protected</Link>}
+            {authenticated && <Link to="/profile" style={styles.link} >My Profile</Link>}
         </div>
     );
 };
