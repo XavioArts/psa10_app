@@ -1,5 +1,4 @@
 import { Divider } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
@@ -38,26 +37,26 @@ const Collections = () => {
     console.log(auth.id)
   }
 
-  const renderCollectionCards = () => {
-    if(!collectionCards) {
-      return <p>Loading cards</p>
-    }
-    return(
-      <div>
-        <h3>Collection Name</h3>
-        <div style={{ height:250, width: "100%"}}>
-          {collectionCards.map(cc => {
-            return (
-              <DataGrid 
-              columns={[{ field: nickname }]}
-              rows = { [<CollectionCard />] }>
-              </DataGrid>
-            )
-          })}
-        </div>
-      </div>
-    )
-  }
+  // const renderCollectionCards = () => {
+  //   if(!collectionCards) {
+  //     return <p>Loading cards</p>
+  //   }
+  //   return(
+  //     <div>
+  //       <h3>Collection Name</h3>
+  //       <div style={{ height:250, width: "100%"}}>
+  //         {collectionCards.map(cc => {
+  //           return (
+  //             <DataGrid 
+  //             columns={[{ field: nickname }]}
+  //             rows = { [<CollectionCard />] }>
+  //             </DataGrid>
+  //           )
+  //         })}
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div>
@@ -77,7 +76,7 @@ const Collections = () => {
       <a href="/showcases">Showcases</a>
       </div>
       <Divider />
-      {renderCollectionCards()}
+      {/* {renderCollectionCards()} */}
       {/* <Outlet /> */}
       {JSON.stringify(collections)}
       {JSON.stringify(collectionCards)}

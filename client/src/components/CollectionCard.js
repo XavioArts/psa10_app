@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@mui/material/styles";
+import { styled } from '@mui/material/styles';
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     maxWidth: 345
   },

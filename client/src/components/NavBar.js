@@ -12,7 +12,7 @@ const NavBar = () => {
             <Link to="/" style={styles.link} >Home</Link>
             <Link to="/public" style={styles.link} >Public</Link>
             {authenticated && <Link to="/profile" style={styles.link} >My Profile</Link>}
-            {authenticated && <Link to="/dashboard" style={styles.link} >My Collection</Link>}
+            {/* {authenticated && <Link to="/collections" style={styles.link} >My Collection</Link>} */}
             {authenticated && <button style={styles.buttonLink} onClick={()=>handleLogout(navigate)} >Log Out</button>}
             
         </div>

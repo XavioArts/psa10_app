@@ -19,11 +19,10 @@ function App() {
           <Route path="/public" element={<Public/>} />
           <Route path="/login" element={<LogIn/>} />
           <Route element={<RequireAuth/>} >
-            <Route path="/profile" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
-            <Route path="/dashboard" element={<Collections/>}>
-              {/* <Route path="/" element={<Overview/>} /> */}
-              {/* <Route path="/collections" element={<Collections/>}/> */}
+            <Route path="/profile" element={<Protected/>}>
+            {/* <Route path="/dashboard" element={<Collections/>}> */}
+              <Route path="/profile/collections" element={<Collections/>}/>
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
