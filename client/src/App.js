@@ -21,7 +21,12 @@ function App() {
           <Route element={<RequireAuth/>} >
             <Route path="/protected" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
-            <Route path="/collections" element={<Collections/>} />
+            <Route path="/dashboard" element={<Collections/>}>
+              {/* <Route path="/" element={<Overview/>} /> */}
+              {/* <Route path="/collections" element={<Collections/>}/> */}
+              {/* <Route path="/sets" element={<Sets/>}/>
+              <Route path="/showcases" element={<Showcases/>}/> */}
+            </Route>
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>
