@@ -9,10 +9,12 @@ const ProfileImageUpload = () => {
     const auth = useContext(AuthContext);
     const [files, setFiles] = useState([]);
     const [success, setSuccess] = useState(false);
+    const [clicked, setClicked] = useState(false);
     const navigate = useNavigate();
 
     const handleUpload = async (e) => {
         e.preventDefault();
+        setClicked(true);
         let data = new FormData();
         let file = document.getElementById("input").files[0];
         data.append("file", file);
@@ -22,7 +24,9 @@ const ProfileImageUpload = () => {
             console.log(res.data)
             setSuccess(true);
             auth.setUser(res.data);
-            setTimeout(()=>navigate("/"), 1500);
+            setClicked(false);
+            // setTimeout(()=>navigate("/"), 1500);
+            // setTimeout(()=>navigate("/edit_profile"), 1500);
         } catch (err) {
             console.log(err.response);
             alert("there was an error uploading")
@@ -40,11 +44,14 @@ const ProfileImageUpload = () => {
                     </Icon>
                     <p style={{fontSize: "12px"}} >No profile image</p>
                 </div>}
-            {auth.image && <img src={auth.image} alt="profile image" width="200px" height="200px" />}
+            {auth.image && 
+            <div style={{width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden"}} >
+                <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "200px", height: "auto"}}/>
+            </div>}
             <br/>
             <label htmlFor="contained-button-file" >
                 <Input accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
-                <Button variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+                <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
                 {/* <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
                 <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file</Button> */}
