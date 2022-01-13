@@ -1,8 +1,7 @@
-import { Divider } from '@mui/material';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import CollectionCard from '../components/CollectionCard';
 import { AuthContext } from '../providers/AuthProvider';
+import CollectionCard from '../components/CollectionCard';
 
 const Collections = () => {
 
@@ -10,13 +9,11 @@ const Collections = () => {
 
   const [collections, setCollections] = useState([])
   const [collectionCards, setCollectionCards] = useState([])
-  const [user, setUser] = useState([])
 
   useEffect(() => {
     getCollections();
     getCollectionCards();
-    userInfo();
-  }, [])
+  },[])
 
   const getCollections = async () => {
     let res = await axios.get("/api/collections");
@@ -30,6 +27,7 @@ const Collections = () => {
     console.log(res.data)
   }
 
+<<<<<<< HEAD
   const userInfo = async () => {
     let res = await axios.get(`/api/users/${auth.id}`)
     setUser(res.data)
@@ -37,6 +35,8 @@ const Collections = () => {
     console.log(auth.id)
   }
 
+=======
+>>>>>>> 19690fdea43a6d2ee5103644eab3c11246fd979b
   // const renderCollectionCards = () => {
   //   if(!collectionCards) {
   //     return <p>Loading cards</p>
@@ -60,6 +60,7 @@ const Collections = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       <div>
         {auth.image && <img src={auth.image} height="200px" />}
         <h3>{auth.nickname}</h3>
@@ -76,8 +77,10 @@ const Collections = () => {
         <a href="/showcases">Showcases</a>
       </div>
       <Divider />
+=======
+      <CollectionCard />
+>>>>>>> 19690fdea43a6d2ee5103644eab3c11246fd979b
       {/* {renderCollectionCards()} */}
-      {/* <Outlet /> */}
       {JSON.stringify(collections)}
       {JSON.stringify(collectionCards)}
     </div>
