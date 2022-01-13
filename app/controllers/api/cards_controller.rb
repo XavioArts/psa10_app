@@ -7,7 +7,7 @@ class Api::CardsController < ApplicationController
     render json: current_user.cards
   end
 
-  def all_cards 
+  def all_cards
     render json: Card.all
   end
 

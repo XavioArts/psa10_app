@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do
     post "users/image", to: "users#profile_image"
+    get "users/:id", to: "users#info"
     resources :collections do
       resources :collection_comments
     end
