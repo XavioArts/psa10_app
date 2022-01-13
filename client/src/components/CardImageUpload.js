@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Alert, Button, Icon, Input } from "@mui/material";
+import { Alert, Button, Divider, Icon, Input, Paper } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 const CardImageUpload = () => {
 
@@ -13,51 +14,104 @@ const CardImageUpload = () => {
     const [files, setFiles] = useState([]);
     const [filesBack, setFilesBack] = useState([]);
     const [success, setSuccess] = useState(false);
+    const [failed, setFailed] = useState(false);
     const [clicked, setClicked] = useState(false);
     const navigate = useNavigate();
+
+    const getCard = async (e) => {
+        try {
+            let res = await axios.get(`/api/cards/${id}`);
+            setCard(res.data);
+        } catch (err) {
+            console.log(err.response);
+            alert("there was an error getting card")
+        }
+    };
+
+    useEffect(()=>{
+        getCard();
+    }, [])
 
     const handleUpload = async (e) => {
         e.preventDefault();
         setClicked(true);
-        // let data = new FormData();
-        // let file = document.getElementById("input").files[0];
-        // data.append("file", file);
-        // console.log(data)
-        // try {
-        //     // let res = await axios.post('/api/users/image', data);
-        //     console.log(res.data)
-        //     setSuccess(true);
-        //     auth.setUser(res.data);
-        //     setClicked(false);
-        //     // setTimeout(()=>navigate("/"), 1500);
-        // } catch (err) {
-        //     console.log(err.response);
-        //     alert("there was an error uploading")
-        // }
+        // let dataFront = new FormData();
+        // let dataBack = new FormData();
+        let data = new FormData();
+        let fileFront = document.getElementById("input").files[0];
+        let fileBack = document.getElementById("inputBack").files[0];
+        data.append("fileFront", fileFront);
+        data.append("fileBack", fileBack);
+        console.log(data)
+        // console.log(dataBack)
+        try {
+            let res = await axios.post(`/api/cards/${id}/upload`, data);
+            console.log(res.data)
+            setFailed(false);
+            setSuccess(true);
+            setCard(res.data);
+            setClicked(false);
+            setTimeout(()=>navigate("/profile"), 1000);
+        } catch (err) {
+            console.log(err.response);
+            setFailed(true);
+            alert("there was an error uploading")
+            setClicked(false);
+        }
     }
 
     return (
-        <div>
-            <h3>Upload your card images</h3>
-            <p>{id}</p>
+        <CenteredDiv>
+            <Paper>
+            <h3>Upload your card images for {card.name}</h3>
+            {/* <p>{id}</p>
+            <p>{JSON.stringify(card)}</p> */}
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
+            {failed && <Alert severity="error" >Failed! Please select a valid image for each side.</Alert>}
             <br/>
+            <p>Current images</p>
+            <div style={{display: "flex", margin: "10px", padding: "10px", justifyContent: "space-around", width: "500px"}} >
+                <div>
+                    <label>Front:</label>
+                    <div style={{width: "150px", height: "200px", overflow: "hidden"}} >
+                        <img src={card.front_image} alt="front" style={{objectFit: "cover", width: "150px", height: "auto"}}/>
+                    </div>
+                </div>
+                <div>
+                    <label>Back:</label>
+                    <div style={{width: "150px", height: "200px", overflow: "hidden"}} >
+                        <img src={card.back_image} alt="back" style={{objectFit: "cover", width: "150px", height: "auto"}}/>
+                    </div>
+                </div>
+            </div>
+            <Divider/>
             <label htmlFor="contained-button-file" >
                 <label>Upload front image of card:</label>
-                <Input accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
+                <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
                 <br/>
                 <label>Upload back image of card:</label>
-                <Input accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
+                <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
+                <br/>
                 <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
-            <br/>
+            {/* <br/>
                 <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
                 <Button variant="contained" onClick={()=>console.log(filesBack)} >Log Files Two</Button>
             <br/>
                 <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file</Button>
-                <Button variant="contained" onClick={()=>console.log(document.getElementById("inputBack").files[0])} >get file two</Button>
-        </div>
+                <Button variant="contained" onClick={()=>console.log(document.getElementById("inputBack").files[0])} >get file two</Button> */}
+                </Paper>
+        </CenteredDiv>
     )
 }
+
+const CenteredDiv = styled.div`
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
 
 export default CardImageUpload;
