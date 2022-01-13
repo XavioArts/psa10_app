@@ -20,7 +20,7 @@ function App() {
           <Route element={<RequireAuth/>} >
             <Route path="/profile" element={<Protected/>} />
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
-            <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
+            <Route path="/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>
       </Routes>
