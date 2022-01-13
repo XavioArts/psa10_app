@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :collections do
       resources :collection_comments
     end
+    post "cards/:id/upload", to: "cards#upload"
     resources :cards do
       resources :card_comments
     end
