@@ -1,6 +1,6 @@
 import { Alert } from "@mui/material";
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Protected = () => {
@@ -21,7 +21,7 @@ const Protected = () => {
             <p>My ID {auth.id}</p>       
             <Link to={`/users/${auth.id}/edit`}>Edit Profile</Link>
             <hr/>
-            <h1>Showcase Cards Display Here</h1>
+            <Outlet />
         </div>
     );
 };

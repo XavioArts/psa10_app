@@ -29,7 +29,7 @@ before_action :authenticate_user!
         end
     end
 
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :info]
 
   def index
     other_users = User.all
@@ -37,6 +37,10 @@ before_action :authenticate_user!
   end
 
   def show
+    render json: @user
+  end
+
+  def info
     render json: @user
   end
 
@@ -69,6 +73,6 @@ before_action :authenticate_user!
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about )
+      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about)
     end
 end
