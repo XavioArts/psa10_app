@@ -18,9 +18,7 @@ const Protected = () => {
             <p>About Me: {auth.about}</p>
             <p>Name: {auth.first_name} {auth.last_name}</p>
             <p>Email: {auth.email}</p>
-            <p>My ID {auth.id}</p>
-            <button onClick={()=>auth.handleLogout(navigate)} >Log Out</button>
-            
+            <p>My ID {auth.id}</p>       
             <Link to={`/users/${auth.id}/edit`}>Edit Profile</Link>
             <hr/>
             <h1>Showcase Cards Display Here</h1>
