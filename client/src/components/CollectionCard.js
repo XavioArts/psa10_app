@@ -9,28 +9,34 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
- const CollectionCard = () => {
+const CollectionCard = (props) => {
+  const { likes, available } = props
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height= "400"
+        height="400"
         image="https://m.media-amazon.com/images/I/715E1JA9DRL._AC_SL1000_.jpg"
         alt="Charizard"
       />
       <CardActions disableSpacing>
-        <Avatar  sx={{ width: 24, height: 24 }}/>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <Avatar sx={{ width: 24, height: 24 }} />
+        <IconButton aria-label="like">
+          <FavoriteIcon />{likes}
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="trophy">
           <EmojiEventsIcon />
         </IconButton>
-        <Button variant="outlined" color="primary">
+        {available === true && <Button variant="outlined" color="primary">
           Available
-        </Button>
-        <Typography component="p"> 0 Comments</Typography>
+        </Button>}
+        {available === false && <Button variant="outlined" color="secondary">
+          Unavailable
+        </Button>}
+
+        {/* Placeholder for card comments */}
+        <Typography component="p">Comments</Typography>
       </CardActions>
     </Card>
   );

@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_215106) do
   end
 
   create_table "showcases", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "cards"
+    t.string "name", default: ""
+    t.text "description", default: ""
+    t.string "cards", default: ""
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
