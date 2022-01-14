@@ -12,7 +12,7 @@ const ShowcaseEdit = () => {
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
   const [selectedCards, setSelectedCards] = useState("")
-  const {id, name, description} = useParams()
+  const {id} = useParams()
   const navigate = useNavigate();
 
 
@@ -23,8 +23,6 @@ const ShowcaseEdit = () => {
 
   const getData = async () => {
     // need to pull user showcases not just showcase number one
-    setShowcaseName(name)
-    setShowcaseDescription(description)
     try {
         let res = await axios.get(`/api/cards`);
         setCardChoices(res.data);
@@ -33,12 +31,20 @@ const ShowcaseEdit = () => {
         console.log(err.response);
         alert("there was an error getting cards")
     }
+    try {
+      let resShowcase = await axios.get(`/api/showcases/${id}`);
+      setShowcaseName(resShowcase.data.name);
+      setShowcaseDescription(resShowcase.data.description)
+  } catch (err) {
+      console.log(err.response);
+      alert("there was an error getting showcase")
+  }
 }
 
   const updateShowcase = async () => {
     // error here user id is not populating
     let res_id = id
-    const updatedShowcase = {id: res_id, name, description}
+    const updatedShowcase = {id: res_id, showcaseName, showcaseDescription}
     console.log(updatedShowcase)
     try {
     await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
@@ -51,10 +57,17 @@ const ShowcaseEdit = () => {
   const addCard = async (id) => {
     try {
       await axios.put(`/api/showcases/card/${id}`);
-      // removeCatFromUI(id);
+      addCardToUI(id);
     } catch (err) {
       alert("err in addCard");
     }
+  };
+
+  const addCardToUI = (id) => {
+    // remove Cat from list
+    // const showcaseCards = cats.filter((cat) => cat.id !== id);
+    // get a new Cat to show
+    setSelectedCards();
   };
 
   const renderCards = () => {
@@ -91,6 +104,7 @@ const ShowcaseEdit = () => {
         style={{ width: 400, height: 100 }}
         value={showcaseDescription} 
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
+        
         <h3>Add Cards to Showcase</h3>
         {renderCards()}
         <br/>

@@ -25,7 +25,8 @@ const ShowcaseNewForm= (props) => {
     const newShowcase = {user_id: res_id, name, description}
     console.log(newShowcase)
     try {
-    await axios.post('/api/showcases', newShowcase)
+    let res = await axios.post('/api/showcases', newShowcase)
+    navigate(`/profile/showcases/${res.data.id}/edit`);
     } catch(err) {
       console.log(err.response);
       alert("there was an error adding a showcase")
@@ -36,7 +37,7 @@ const ShowcaseNewForm= (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addShowcase()
-    navigate('/profile/showcases');
+    
   };
 
 
