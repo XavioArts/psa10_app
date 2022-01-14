@@ -5,9 +5,10 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const CardImageUpload = () => {
+const CardImageUpload = (props) => {
 
-    const {id} = useParams();
+    // const {id} = useParams();
+    const {id} = props;
 
     const auth = useContext(AuthContext);
     const [card, setCard] = useState({});
@@ -62,8 +63,8 @@ const CardImageUpload = () => {
 
     return (
         <CenteredDiv>
-            <Paper>
-            <h3>Upload your card images for {card.name}</h3>
+            <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
+            <h3>Upload your images</h3>
             {/* <p>{id}</p>
             <p>{JSON.stringify(card)}</p> */}
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
@@ -99,15 +100,17 @@ const CardImageUpload = () => {
                 </div>
             </div>
             <Divider/>
-            <label htmlFor="contained-button-file" >
-                <label>Upload front image of card:</label>
-                <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
-                <br/>
-                <label>Upload back image of card:</label>
-                <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
-                <br/>
-                <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
-            </label>
+            <div style={{width: "70vw"}} >
+                <label htmlFor="contained-button-file" >
+                    <label>Upload front image of card:</label>
+                    <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
+                    <br/>
+                    <label>Upload back image of card:</label>
+                    <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
+                    <br/>
+                    <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+                </label>
+            </div>
             {/* <br/>
                 <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
                 <Button variant="contained" onClick={()=>console.log(filesBack)} >Log Files Two</Button>

@@ -47,7 +47,7 @@ class Api::CardsController < ApplicationController
   end
 
   def create
-    @card = current_user.cards.new(card_params)
+    @card = Card.new(card_params)
     if @card.save
       render json: @card
     else 
@@ -70,11 +70,11 @@ class Api::CardsController < ApplicationController
   private
 
   def set_card
-    @card = current_user.cards.find(params[:id])
+    @card = Card.find(params[:id])
   end
 
   def card_params
-    params.requre(:card).permit(:name, :price, :description, :condition, :sale, :trade, :likes, :front_image, :back_image )
+    params.require(:card).permit(:name, :category, :condition, :available, :set, :likes, :front_image, :back_image, :graded, :grade, :year, :card_number, :user_id, :collection_id, :showcase)
   end
 
 end
