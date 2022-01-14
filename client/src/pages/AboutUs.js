@@ -23,6 +23,10 @@ const AboutUs = () =>{
       <p>Hi, this is member 4</p>
     </div>
     <hr />
+    <div>
+      <h1>Member 5</h1>
+      <p>Hi, this is member 5</p>
+    </div>
     </>
   )
 }

@@ -10,28 +10,30 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 const CollectionCard = (props) => {
-  const { likes, available } = props
+  const card = props
+  // const { likes, available } = props
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="400"
-        image="https://m.media-amazon.com/images/I/715E1JA9DRL._AC_SL1000_.jpg"
+        image={card.front_image}
         alt="Charizard"
       />
+
       <CardActions disableSpacing>
         <Avatar sx={{ width: 24, height: 24 }} />
         <IconButton aria-label="like">
-          <FavoriteIcon />{likes}
+          <FavoriteIcon />{card.likes}
         </IconButton>
         <IconButton aria-label="trophy">
           <EmojiEventsIcon />
         </IconButton>
-        {available === true && <Button variant="outlined" color="primary">
+        {card.available === true && <Button variant="outlined" color="primary">
           Available
         </Button>}
-        {available === false && <Button variant="outlined" color="secondary">
+        {card.available === false && <Button variant="outlined" color="secondary">
           Unavailable
         </Button>}
 
