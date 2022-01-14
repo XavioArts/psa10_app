@@ -15,6 +15,8 @@ import Test from './pages/Test';
 import EditCard from './pages/EditCard';
 import ShowcaseNewForm from './components/ShowcaseNewForm';
 import Showcase from './components/Showcase';
+import AboutUs from './pages/AboutUs';
+import CollectionNew from './pages/CollectionNew';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
           <Route path="/public" element={<Public/>} />
+          <Route path="/about" element={<AboutUs />} /> 
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
 
@@ -43,7 +46,11 @@ function App() {
 
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
             <Route path="/showcase/new" element={<ShowcaseNewForm/>} />
+<<<<<<< HEAD
             
+=======
+            <Route path="/collection/new" element={<CollectionNew/>} />
+>>>>>>> ef5c8b7857abb1013553ad5b4fe1fb615d8802cb
             <Route path="/cards/:id/image" element={<CardImageUpload/>} />
             <Route path="/users/:id/edit" element={<EditProfileForm/>} />
           </Route>

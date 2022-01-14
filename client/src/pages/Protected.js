@@ -31,7 +31,7 @@ const Protected = () => {
             {auth.image && <img src={auth.image} alt="profile image" width="200px" />}
             <button onClick={() => navigate("/profile_image")} >Edit profile image</button>
             <h2>{auth.nickname}</h2>
-            <p>Joined: {DateTime.fromISO(user.created_at).toFormat('LLLL yyyy')}</p>
+            <p>Joined {DateTime.fromISO(user.created_at).toFormat('LLLL yyyy')}</p>
             <p>Email: {auth.email}</p>
             <p>About Me: {auth.about}</p>
             <p>Name: {auth.first_name} {auth.last_name}</p>
@@ -39,8 +39,8 @@ const Protected = () => {
             <Link to={`/users/${auth.id}/edit`}>Edit Profile</Link>
             <hr />
             <div>
-                <a href="/profile">Overview</a>
-                <a href="/profile/collections">Collections</a>
+                <Link to ={"/profile"}>Overview</Link>
+                <Link to ={"/profile/collections"}>Collections</Link>
                 <a href="/profile/sets">Sets</a>
                 <Link to={"/profile/showcases"}>Showcases</Link>
             </div>
