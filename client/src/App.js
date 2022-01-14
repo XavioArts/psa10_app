@@ -10,6 +10,8 @@ import Layout from './components/Layout';
 import ProfileImageUpload from './components/ProfileImageUpload';
 import Collections from './pages/Collections';
 import CardImageUpload from './components/CardImageUpload';
+import ShowcaseNewForm from './components/ShowcaseNewForm';
+import Showcase from './components/Showcase';
 
 function App() {
   return (
@@ -24,10 +26,12 @@ function App() {
             <Route path="/profile" element={<Protected/>}>
             {/* <Route path="/dashboard" element={<Collections/>}> */}
               <Route path="/profile/collections" element={<Collections/>}/>
+              <Route path="/profile/showcases" element={<Showcase/>}/>
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
+            <Route path="/showcase/new" element={<ShowcaseNewForm/>} />
             <Route path="/cards/:id/image" element={<CardImageUpload/>} />
             <Route path="/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
