@@ -1,7 +1,22 @@
-import { TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+
+const categories = [
+  {
+    value: "baseball",
+    label: "Baseball"
+  },
+  {
+    value: "basketball",
+    label: "Basketball"
+  },
+  {
+    value: "pokemon",
+    label: "Pokemon"
+  },
+];
 
 const CollectionNew = () => {
   const navigate = useNavigate();
@@ -12,7 +27,7 @@ const CollectionNew = () => {
   const handleChange = (e) => {
     setCategory(e.target.value);
   };
-  
+
   return (
     <Box
       component="form"
