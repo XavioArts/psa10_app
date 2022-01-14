@@ -5,6 +5,7 @@ import { Link, useNavigate, Outlet } from "react-router-dom";
 import Showcase from "../components/Showcase";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
+import EditCollection from "../components/EditCollection";
 // import EditCard from "../components/EditCard";
 
 
@@ -47,6 +48,7 @@ const Protected = () => {
             </div>
             <hr />
             <Outlet />
+            <EditCollection />
         </div>
     );
 };
