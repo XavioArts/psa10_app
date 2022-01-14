@@ -10,7 +10,6 @@ import Layout from './components/Layout';
 import ProfileImageUpload from './components/ProfileImageUpload';
 import Collections from './pages/Collections';
 import CardImageUpload from './components/CardImageUpload';
-import EditCard from './components/EditCard';
 
 function App() {
   return (
@@ -30,7 +29,6 @@ function App() {
             </Route>
             <Route path="/api/users/:id/edit" element={<EditProfileForm />} />
             <Route path="/cards/:id/image" element={<CardImageUpload />} />
-            <Route path="/cards/:id/edit" element={<EditCard />} />
             <Route path="/users/:id/edit" element={<EditProfileForm />} />
           </Route>
         </Route>

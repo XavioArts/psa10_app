@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
+// import EditCard from "../components/EditCard";
 
 
 const Protected = () => {
@@ -45,6 +46,8 @@ const Protected = () => {
             </div>
             <hr />
             <Outlet />
+
+            {/* <EditCard /> */}
 
         </div>
     );
