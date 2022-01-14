@@ -41,13 +41,11 @@ const Protected = () => {
             <div>
                 <a href="/profile">Overview</a>
                 <a href="/profile/collections">Collections</a>
-                <a href="/sets">Sets</a>
-                <a href="/showcases">Showcases</a>
+                <a href="/profile/sets">Sets</a>
+                <Link to={"/profile/showcases"}>Showcases</Link>
             </div>
             <hr />
             <Outlet />
-            <Showcase id={auth.id}/>
-
         </div>
     );
 };

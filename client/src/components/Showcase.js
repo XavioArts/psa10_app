@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams} from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -8,16 +9,18 @@ import { Link} from "react-router-dom";
 
 
 const Showcase = (props) => {
-  const [showcases, setShowcases] = useState([])
+  const [showcases, setShowcases] = useState([]);
+  const {id} = useParams()
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     getShowcases();
   }, [])
 
   const getShowcases = async () => {
-    console.log(props.id)
+    let res_id = id ? id : auth.id
     try {
-        let res = await axios.get(`/api/showcases/${props.id}`);
+        let res = await axios.get(`/api/showcases/${res_id}`);
         // allShowcases = res.data
         console.log(res.data)
         setShowcases(res.data);
