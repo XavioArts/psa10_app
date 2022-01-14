@@ -50,16 +50,16 @@ const Home = () => {
                 <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "auto", height: "200px"}}/>
             </div>}
             <ButtonDiv>
-                <Button variant="contained" onClick={()=>navigate("/login")} >Log In</Button>
-                <Button variant="contained" onClick={()=>auth.handleLogout(navigate)} >Log Out</Button>
+                <Button variant="contained" onClick={() => navigate("/login")} >Log In</Button>
+                <Button variant="contained" onClick={() => auth.handleLogout(navigate)} >Log Out</Button>
             </ButtonDiv>
-            <br/>
+            <br />
             <ButtonDiv>
                 <Button variant="contained" onClick={()=>navigate("/profile")}>User View</Button>
                 {/* vvv this button no longer works vvv */}
                 <Button disabled variant="contained" onClick={()=>navigate("/cards/1/image")}>Test card image upload</Button>
             </ButtonDiv>
-            <br/>
+            <br />
             <ButtonDiv>
                 <Button variant="contained" onClick={getUserCards}>Test get user cards</Button>
                 <Button variant="contained" onClick={()=>navigate("/test/1")}>Test page Id 1</Button>
