@@ -47,7 +47,7 @@ const Home = () => {
             {JSON.stringify(auth)}
             {auth.image && 
             <div style={{width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden"}} >
-                <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "200px", height: "auto"}}/>
+                <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "auto", height: "200px"}}/>
             </div>}
             <ButtonDiv>
                 <Button variant="contained" onClick={()=>navigate("/login")} >Log In</Button>

@@ -2,45 +2,40 @@ import {useContext, useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
-import ProfileImageUpload from "../components/ProfileImageUpload";
+import ProfileImageUpload from "./ProfileImageUpload";
 import { TextareaAutosize } from "@mui/base";
 
 
-const EditUser= (props) => {
-  const auth = useContext(AuthContext);
-  const [email, setEmail] = useState("")
-  const [first_name, setFirst_name] = useState("")
-  const [last_name, setLast_name] = useState("")
-  const [nickname, setNickname] = useState("")
-  const [about, setAbout] = useState("")
-  const navigate = useNavigate();
+const ShowcaseNewForm= (props) => {
+  // const auth = useContext(AuthContext);
+  // const [name, setName] = useState("")
+  // const [description, setDescription] = useState("")
+  // const [cardChoices, setCardChoices] = useState("")
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    getData();
-  }, [])
+  // useEffect(() => {
+  //   getData();
+  // }, [])
 
-  const getData = async () => {
-    // let res = await axios.get(`/api/users/${params.id}`)
-    // console.log(res.data)
-    setFirst_name(auth.first_name)
-    setLast_name(auth.last_name)
-    setEmail(auth.email)
-    setNickname(auth.nickname)
-    setAbout(auth.about)
-  }
+  // const getData = async () => {
+  //   let res = await axios.get('/api/cards')
+  //   let allCards = res.data 
+  //   console.log(allCards)
+  //   // console.log(res.data)
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({email, first_name, last_name, nickname, about})
-    return auth.handleUpdate({email, first_name, last_name, nickname, about}, navigate);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log({email, first_name, last_name, nickname, about})
+  //   return auth.handleUpdate({email, first_name, last_name, nickname, about}, navigate);
+  // };
 
 
 
   return (
     <div>
-      <h1>Edit My Profile</h1>
-      <ProfileImageUpload/>
+      <h1>Create A Showcase</h1>
+      {/* <ProfileImageUpload/>
       <form onSubmit={handleSubmit}>
         <p>Name</p>
         <input 
@@ -69,9 +64,9 @@ const EditUser= (props) => {
         onChange={(e)=>{setAbout(e.target.value);}}/>
         <br/>
         <button>Submit</button>
-      </form>
+      </form> */}
     </div>
   );
 };
 
-export default EditUser;
+export default ShowcaseNewForm;
