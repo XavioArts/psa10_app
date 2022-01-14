@@ -56,7 +56,8 @@ const Home = () => {
             <br/>
             <ButtonDiv>
                 <Button variant="contained" onClick={()=>navigate("/profile")}>User View</Button>
-                <Button variant="contained" onClick={()=>navigate("/cards/1/image")}>Test card image upload</Button>
+                {/* vvv this button no longer works vvv */}
+                <Button disabled variant="contained" onClick={()=>navigate("/cards/1/image")}>Test card image upload</Button>
             </ButtonDiv>
             <br/>
             <ButtonDiv>
