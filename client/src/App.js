@@ -11,6 +11,7 @@ import ProfileImageUpload from './components/ProfileImageUpload';
 import Collections from './pages/Collections';
 import CardImageUpload from './components/CardImageUpload';
 import Test from './pages/Test';
+import EditCard from './pages/EditCard';
 
 function App() {
   return (
@@ -21,15 +22,20 @@ function App() {
           <Route path="/public" element={<Public/>} />
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
+
+          {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
+            <Route path="/profile/edit_card/:id" element={<EditCard/>} />
+
+            {/* All routes nested in here will be sub pages to the profile */}
             <Route path="/profile" element={<Protected/>}>
             {/* <Route path="/dashboard" element={<Collections/>}> */}
               <Route path="/profile/collections" element={<Collections/>}/>
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
-            <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
+
             <Route path="/users/:id/edit" element={<EditProfileForm/>} />
           </Route>
         </Route>

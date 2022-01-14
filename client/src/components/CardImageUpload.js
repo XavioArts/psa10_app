@@ -64,7 +64,7 @@ const CardImageUpload = (props) => {
     return (
         <CenteredDiv>
             <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
-            <h3>Upload your card images for {card.name}</h3>
+            <h3>Upload your images</h3>
             {/* <p>{id}</p>
             <p>{JSON.stringify(card)}</p> */}
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}

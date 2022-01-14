@@ -1,21 +1,19 @@
-import { Alert, Button, CircularProgress, FormControlLabel, Input, LinearProgress, Paper, Radio, RadioGroup } from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Button, FormControlLabel, Input, Paper, Radio, RadioGroup } from "@mui/material";
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import CardImageUpload from "../components/CardImageUpload";
 import { AuthContext } from "../providers/AuthProvider";
-import CardImageUpload from "./CardImageUpload";
 
-const AddCard = (props) => {
+
+const EditCard = () => {
 
     const auth = useContext(AuthContext);
+    const {id} = useParams();
     const navigate = useNavigate();
-    const {collectionId} = props;
     const [card, setCard] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [failed, setFailed] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [clicked, setClicked] = useState(false);
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [condition, setCondition] = useState("");
@@ -25,21 +23,49 @@ const AddCard = (props) => {
     const [available, setAvailable] = useState(false);
     const [showcase, setShowcase] = useState(false);
 
-    const startCreation = async (e) => {
-        setLoading(true);
-        e.preventDefault();
-        let newCard = {user_id: auth.id, collection_id: collectionId};
+    const getCard = async () => {
         try {
-            let res = await axios.post("/api/cards", newCard);
+            let res = await axios.get(`/api/cards/${id}`);
             setCard(res.data);
-            setClicked(true);
-            setFailed(false);
-            setLoading(false);
+            setName(res.data.name);
+            setCategory(res.data.category);
+            setCondition(res.data.condition);
+            setSet(res.data.set);
+            setYear(res.data.year);
+            setCardNumber(res.data.card_number);
+            setAvailable(res.data.available);
+            setShowcase(res.data.showcase);
         } catch (err) {
             console.log(err.response);
-            setFailed(true);
+            alert("there was an error getting card")
         }
     };
+
+    // const populateForm = () => {
+    //     //set form values
+    //     setName(card ? card.name : "");
+    //     setCategory(card ? card.category : "");
+    //     setCondition(card ? card.condition : "");
+    //     setSet(card ? card.set : "");
+    //     setYear(card ? card.year : 2022);
+    //     setCardNumber(card ? card.card_number : "");
+    //     setAvailable(card ? card.available : false);
+    //     setShowcase(card ? card.showcase : false);
+    // }
+
+    useEffect(()=>{
+        getCard();
+        // populateForm();
+        //set form values
+        // setName(card.name ? card.name : "");
+        // setCategory(card.category ? card.category : "");
+        // setCondition(card.condition ? card.condition : "");
+        // setSet(card.set ? card.set : "");
+        // setYear(card.year ? card.year : 2022);
+        // setCardNumber(card.card_number ? card.card_number : "");
+        // setAvailable(card.available ? card.available : false);
+        // setShowcase(card.showcase ? card.showcase : false);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,22 +73,9 @@ const AddCard = (props) => {
         try {
             let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
             setCard(res.data);
-            setCard(null);
-            setClicked(false);
             setFailed(false);
-            //reset form values
-            setName("");
-            setCategory("");
-            setCondition("");
-            setSet("");
-            setYear(2022);
-            setCardNumber("");
-            setAvailable(false);
-            setShowcase(false);
-            //
             setSuccess(true);
-            setTimeout(()=>setSuccess(false), 6000);
-            // navigate("/profile");
+            setTimeout(()=>navigate("/profile"), 1500);
         } catch (err) {
             console.log(err.response);
             setFailed(true);
@@ -74,18 +87,8 @@ const AddCard = (props) => {
         try {
             let res = await axios.delete(`/api/cards/${card.id}`)
             setCard(null)
-            setClicked(false);
             setFailed(false);
-            //reset form values
-            setName("");
-            setCategory("");
-            setCondition("");
-            setSet("");
-            setYear(2022);
-            setCardNumber("");
-            setAvailable(false);
-            setShowcase(false);
-            // navigate("/profile");
+            navigate("/profile");
         } catch (err) {
             console.log(err.response);
             // setFailed(true);
@@ -101,17 +104,10 @@ const AddCard = (props) => {
 
     return(
         <div>
-            {success && <Alert severity="success" >Successfuly created a new card!</Alert>}
-            {failed && <Alert severity="error" >Failed to create a new card!</Alert>}
-            <Box sx={{ m: 1, position: "relative"}} >
-                <Button onClick={startCreation} disabled={clicked} variant="contained" >Add a new card</Button>
-                <br/>
-                {loading && (<LinearProgress />)}
-            </Box>
-            {/* <p>for collection {collectionId}</p> */}
+            {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
+            {failed && <Alert severity="error" >Failed to update card!</Alert>}
             {card && 
                 <div>
-                    {/* <p>{JSON.stringify(card)}</p> */}
                     <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} />
@@ -146,9 +142,11 @@ const AddCard = (props) => {
                                     </RadioGroup>
                                 </div>
                             </div>
+                            {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
+                            {failed && <Alert severity="error" >Failed to update card!</Alert>}
                             <Button variant="contained" type="submit" >Submit</Button>
                         </form>
-                        <Button variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
+                        <Button variant="contained" color="error" onClick={deleteCard} >Delete this card</Button>
                     </Paper>
                 </div>
             }
@@ -156,4 +154,4 @@ const AddCard = (props) => {
     )
 };
 
-export default AddCard;
+export default EditCard;

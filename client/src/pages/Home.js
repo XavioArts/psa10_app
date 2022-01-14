@@ -12,7 +12,7 @@ const Home = () => {
 
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    const [cards, setCards] = useState(false);
+    const [cards, setCards] = useState(null);
 
     const getUserCards = async (e) => {
         e.preventDefault();
@@ -24,6 +24,22 @@ const Home = () => {
             alert("there was an error getting cards")
         }
     }
+
+    const editCard = (e, url) => {
+        e.preventDefault();
+        navigate(url);
+    }
+
+    const renderCards = () => {
+        return cards.map((c)=> {
+            return (
+                <div key={c.id} >
+                    <h4>{c.name} - id no. {c.id}</h4>
+                    <Button variant="contained" onClick={(e)=>editCard(e,`/profile/edit_card/${c.id}`)} >Edit this card</Button>
+                </div>
+            )
+        });
+    };
 
     return (
         <div>
@@ -48,7 +64,7 @@ const Home = () => {
                 <Button variant="contained" onClick={()=>navigate("/test/1")}>Test page Id 1</Button>
             </ButtonDiv>
             <br/>
-            {cards && <p>{JSON.stringify(cards)}</p>}
+            {cards && renderCards()}
         </div>
     );
 };
