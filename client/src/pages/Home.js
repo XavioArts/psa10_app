@@ -45,6 +45,7 @@ const Home = () => {
             <br/>
             <ButtonDiv>
                 <Button variant="contained" onClick={getUserCards}>Test get user cards</Button>
+                <Button variant="contained" onClick={()=>navigate("/test/1")}>Test page Id 1</Button>
             </ButtonDiv>
             <br/>
             {cards && <p>{JSON.stringify(cards)}</p>}
