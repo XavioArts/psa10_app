@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     post "users/image", to: "users#profile_image"
     get "users/:id", to: "users#info"
+    resources :showcases 
     resources :collections do
       resources :collection_comments
     end
