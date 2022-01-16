@@ -54,10 +54,11 @@ const ShowcaseEdit = () => {
   }
   }
 
-  const addCard = async (id) => {
+  const addCard = async (card_id) => {
+    let showcase_id = id
     try {
-      await axios.put(`/api/showcases/card/${id}`);
-      addCardToUI(id);
+      await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
+      // addCardToUI(card_id);
     } catch (err) {
       alert("err in addCard");
     }

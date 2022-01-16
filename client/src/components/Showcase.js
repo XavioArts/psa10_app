@@ -4,8 +4,8 @@ import { Link, useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-
+import { Button, dividerClasses } from "@mui/material";
+import Box from '@mui/material/Box';
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -42,16 +42,32 @@ const Showcase = (props) => {
     // figure out how to map showcase cards
     return showcases.map((s)=> {
       return (
-        <div>
-          <h3>Showcase Name: {s.name}</h3>
-          <p>Description: {s.description}</p>
-          <ButtonDiv>
-          <Button onClick={()=>navigate(`/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-          </ButtonDiv>
-          <ButtonDiv>
-          <Button onClick={()=>navigate("/profile")} variant="contained">Delete Showcase</Button>
-          </ButtonDiv>
-        </div>
+        <Box key={s.id}
+        sx={{
+          maxWidth: '100vw',
+          width: '1300px',
+          height: 300,
+          borderRadius: '7px',
+          padding: '20px',
+          margin: '15px 30px',
+          color: 'rgb(77, 77, 77)',
+          backgroundColor: '#ebebeb',
+          textAlign: "center",
+          '&:hover': {
+            backgroundColor: '#dbdbdb',
+            // opacity: [0.9, 0.8, 0.7],
+            
+          },
+        }}
+      ><h3>{s.name}</h3>
+      <p>{s.description}</p>
+      <p>Cards: {JSON.stringify(s.cards)}</p>
+      <ButtonDiv>
+      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={styles.button} onClick={()=>navigate("/profile")} variant="contained">Delete Showcase</Button>
+      </ButtonDiv>
+      </Box>
+ 
       )
     }
 
@@ -60,8 +76,17 @@ const Showcase = (props) => {
 
   return (
     <div>
-      {renderShowcases()}
-      <Link to={'/showcase/new'}>Create A New Showcase</Link>
+      <div className='statsContainer'>
+        <a className='profileNavText'>cards.length</a>
+        <a className='profileNavText'>showcase.likes</a>
+      </div>
+      <div style={styles.centered}>
+        <div style={styles.row}>
+        <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
+        </div>
+        {renderShowcases()}
+        
+      </div>
     </div>
   )
 
@@ -70,5 +95,18 @@ const Showcase = (props) => {
 const ButtonDiv = styled.div`
     margin: 10px;
 `
+const styles = {
+  button: {
+    margin: '10px',
+  },
+  row: {
+    margin: '10px 200px 0px 200px'
+  },
+  centered: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  }
+}
 
 export default Showcase;

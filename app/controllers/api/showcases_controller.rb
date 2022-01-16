@@ -31,8 +31,9 @@ class Api::ShowcasesController < ApplicationController
   end
 
   def card 
-    current_showcase.cards << params[:id].to_i
-    current_showcase.save 
+    binding.pry
+    @showcase.cards << params[:id].to_i
+    @showcase.save 
   end
 
   def destroy

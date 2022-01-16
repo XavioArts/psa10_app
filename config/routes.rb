@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get "users/:id", to: "users#info"
     resources :showcases 
     get "showcases/user/:id", to: "showcases#showcases"
-    put "showcases/card/:id", to: "showcases#card"
+    put "showcases/:id/card/:id", to: "showcases#card"
     resources :collections do
       resources :collection_comments
     end
