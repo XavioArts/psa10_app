@@ -32,7 +32,7 @@ const Protected = () => {
             {auth.image && <img src={auth.image} alt="profile image" className='circletag' />}
             
                 <h2>{auth.nickname}</h2>
-                <p className='profileText'>Joined {DateTime.fromISO(user.created_at).toFormat('LLLL yyyy')}</p>
+                <p className='profileTextDate'>Joined {DateTime.fromISO(user.created_at).toFormat('LLLL yyyy')}</p>
                 <p className='profileText'>{auth.email}</p>
                 <p className='profileText'>{auth.about}</p>
                 <Link className='profileText' to={`/users/${auth.id}/edit`}>Edit Profile</Link>
