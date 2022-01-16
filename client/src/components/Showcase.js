@@ -37,12 +37,21 @@ const Showcase = (props) => {
     }
 }
 
+
+const deleteShowcase = async (id) => {
+  let res_id = id
+  console.log(res_id)
+  await axios.delete(`/api/showcases/${res_id}`);
+  // remove from UI
+  setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
+};
+
   const renderShowcases = () => {
     // let showcaseCards = 
     // figure out how to map showcase cards
     return showcases.map((s)=> {
       return (
-        <Box key={s.id}
+        <Box key={s.showcase_id}
         sx={{
           maxWidth: '100vw',
           width: '1300px',
@@ -63,8 +72,8 @@ const Showcase = (props) => {
       <p>{s.description}</p>
       <p>Cards: {JSON.stringify(s.cards)}</p>
       <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>navigate("/profile")} variant="contained">Delete Showcase</Button>
+      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
       </ButtonDiv>
       </Box>
  

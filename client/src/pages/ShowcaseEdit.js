@@ -44,7 +44,7 @@ const ShowcaseEdit = () => {
   const updateShowcase = async () => {
     // error here user id is not populating
     let res_id = id
-    const updatedShowcase = {id: res_id, showcaseName, showcaseDescription}
+    const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription}
     console.log(updatedShowcase)
     try {
     await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
@@ -87,7 +87,7 @@ const ShowcaseEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateShowcase()
-    navigate(`/profile/showcases/${id}`);
+    navigate(`/profile/showcases/`);
   };
 
   return (
