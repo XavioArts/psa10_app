@@ -4,7 +4,7 @@ class Api::CollectionsController < ApplicationController
     before_action :set_collection, only: [:destroy, :update, :show]
 
     def index
-        render json: current_user.collections
+        render json: current_user.collections, include: [:cards]
     end
 
     def all_collections
