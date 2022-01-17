@@ -18,6 +18,7 @@ import Showcases from './components/Showcases';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
+import Overview from './components/Overview';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             {/* <Route path="/dashboard" element={<Collections/>}> */}
               <Route path="/profile/collections" element={<Collections/>}/>
               <Route path="/profile/showcases" element={<Showcases/>}/>
+              <Route path="/profile/overview" element={<Overview/>}/>
               <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}

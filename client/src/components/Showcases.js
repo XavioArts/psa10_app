@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button, dividerClasses } from "@mui/material";
 import Box from '@mui/material/Box';
+import { ButtonDiv } from "./Styles";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -114,9 +115,7 @@ const updatePrimaryShowcase = async (id) => {
 
 }
 
-const ButtonDiv = styled.div`
-    margin: 10px;
-`
+
 const styles = {
   button: {
     margin: '10px',
