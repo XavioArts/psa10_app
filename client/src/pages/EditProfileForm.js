@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
@@ -6,7 +6,7 @@ import ProfileImageUpload from "../components/ProfileImageUpload";
 import { TextareaAutosize } from "@mui/base";
 
 
-const EditUser= (props) => {
+const EditUser = (props) => {
   const auth = useContext(AuthContext);
   const [email, setEmail] = useState("")
   const [first_name, setFirst_name] = useState("")
@@ -31,8 +31,8 @@ const EditUser= (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({email, first_name, last_name, nickname, about})
-    return auth.handleUpdate({email, first_name, last_name, nickname, about}, navigate);
+    console.log({ email, first_name, last_name, nickname, about })
+    return auth.handleUpdate({ email, first_name, last_name, nickname, about }, navigate);
   };
 
 
@@ -40,34 +40,34 @@ const EditUser= (props) => {
   return (
     <div>
       <h1>Edit My Profile</h1>
-      <ProfileImageUpload/>
+      <ProfileImageUpload />
       <form onSubmit={handleSubmit}>
         <p>Name</p>
-        <input 
-        placeholder="First Name" 
-        value={first_name} 
-        onChange={(e)=>{setFirst_name(e.target.value);}}/>
-        <input 
-        placeholder="Last Name" 
-        value={last_name} 
-        onChange={(e)=>{setLast_name(e.target.value);}}/>
+        <input
+          placeholder="First Name"
+          value={first_name}
+          onChange={(e) => { setFirst_name(e.target.value); }} />
+        <input
+          placeholder="Last Name"
+          value={last_name}
+          onChange={(e) => { setLast_name(e.target.value); }} />
         <p>Username</p>
-        <input 
-        placeholder="Userame" 
-        value={nickname} 
-        onChange={(e)=>{setNickname(e.target.value);}}/>
+        <input
+          placeholder="Userame"
+          value={nickname}
+          onChange={(e) => { setNickname(e.target.value); }} />
         <p>Email</p>
-        <input 
-        placeholder="email" 
-        value={email} 
-        onChange={(e)=>{setEmail(e.target.value);}}/>
+        <input
+          placeholder="email"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); }} />
         <p>About</p>
-        <TextareaAutosize 
-        placeholder="Tell Us About Yourself" 
-        style={{ width: 400, height: 100 }}
-        value={about} 
-        onChange={(e)=>{setAbout(e.target.value);}}/>
-        <br/>
+        <TextareaAutosize
+          placeholder="Tell Us About Yourself"
+          style={{ width: 400, height: 100 }}
+          value={about}
+          onChange={(e) => { setAbout(e.target.value); }} />
+        <br />
         <button>Submit</button>
       </form>
     </div>
