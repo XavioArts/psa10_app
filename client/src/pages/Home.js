@@ -44,7 +44,10 @@ const Home = () => {
     return (
         <div>
             <h1>Home</h1>
-            {JSON.stringify(auth)}
+            <p>This is a page for testing things</p>
+            <div style={{width: "85vw", margin: "auto", padding: "10px"}} >
+                <code style={{overflowWrap: "break-word"}} >{JSON.stringify(auth)}</code>
+            </div>
             {auth.image && 
             <div style={{width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden"}} >
                 <img src={auth.image} alt="profile" style={{objectFit: "cover", width: "auto", height: "200px"}}/>
