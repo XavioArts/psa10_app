@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
+import EditCollection from '../components/EditCollection';
 
 const Collections = () => {
 
@@ -25,9 +27,9 @@ const Collections = () => {
     return collections.map((c,index) => {
       return (
         <div key={index}>
-          <h1>Collection Name: {c.name}</h1>
+          <h1><Link to={`/profile/collections/${c.id}`}>Collection Name: {c.name}</Link></h1>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {c.cards.map((cc) => {
+            {c.cards.slice( 0,3).map((cc) => {
               return (
                 <Grid item xs={2} sm={4} md={4} key={cc.id}>
                   <CollectionCard {...cc} />
@@ -46,7 +48,7 @@ const Collections = () => {
       <a href = "/collection/new">Add a Collection</a>
       <hr />
       {renderCollectionCards()}
-      {JSON.stringify(collections)}
+      {/* {JSON.stringify(collections)} */}
       <hr />
       {/* <CollectionComments /> */}
     </div>

@@ -6,7 +6,8 @@ import { TextareaAutosize } from "@mui/material";
 
 
 const EditCollection = (props) => {
-  const auth = useContext(AuthContext);
+  const collection = props
+  // const auth = useContext(AuthContext);
   const [name, setName] = useState("")
   const [category, setCategory] = useState("")
   const [description, setDescription] = useState("")
@@ -17,15 +18,21 @@ const EditCollection = (props) => {
   }, [])
 
   const getData = async () => {
-    setName(auth.name)
-    setCategory(auth.category)
-    setDescription(auth.description)
+    let res = await axios.get(`/api/collections/${collection.id}`)
+    setName(res.data.name)
+    setCategory(res.data.category)
+    setDescription(res.data.description)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ name, category, description })
-    return auth.handleUpdate({ name, category, description }, navigate);
+    await axios.put(`api/collections`, {
+      name,
+      category,
+      description
+    });
+    navigate(`/profile/collections/${collection.id}`)
   };
 
   return (

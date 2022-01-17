@@ -18,6 +18,8 @@ import Showcase from './components/Showcase';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
+import Collection from './components/Collection';
+import EditCollection from './components/EditCollection';
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
             <Route path="/profile" element={<Protected/>}>
             {/* <Route path="/dashboard" element={<Collections/>}> */}
               <Route path="/profile/collections" element={<Collections/>}/>
+              <Route path="/profile/collections/:id" element={<Collection />} />
+              <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
               <Route path="/profile/showcases" element={<Showcase/>}/>
               <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
               {/* <Route path="/sets" element={<Sets/>}/>
