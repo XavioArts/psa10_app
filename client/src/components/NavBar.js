@@ -10,8 +10,8 @@ const NavBar = () => {
     return (
         <div style={styles.container} > 
             <Link to="/" style={styles.link} >Home</Link>
-            {authenticated && <Link to="/profile/collections" style={styles.link} >My Collection</Link>}
             {authenticated && <Link to="/profile" style={styles.link} >My Profile</Link>}
+            {authenticated && <Link to="/profile/collections" style={styles.link} >My Collection</Link>}
             {authenticated && <Link to="/community" style={styles.link} >Community</Link>}
             {authenticated && <Link to="/topics" style={styles.link} >Message Board</Link>}
             <Link to="/about" style={styles.link} >About Us</Link>
