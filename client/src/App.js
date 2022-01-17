@@ -18,6 +18,7 @@ import Showcase from './components/Showcase';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
+import MessageBoard from './pages/MessageBoard';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/community" element={<Community/>} />
           <Route path="/about" element={<AboutUs />} /> 
+          <Route path="/messageboard" element={<MessageBoard />} />
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
 
