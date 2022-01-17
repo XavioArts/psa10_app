@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 
 const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
+  const [primaryShowcase, setPrimaryShowcase] = useState("")
   const {id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -46,6 +47,20 @@ const deleteShowcase = async (id) => {
   setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
 };
 
+const updatePrimaryShowcase = async (id) => {
+  setPrimaryShowcase(id)
+  console.log(primaryShowcase)
+  let user_id = auth.id 
+  let updatedUserShowcase = {id: user_id, primary_showcase: id}
+  console.log(updatedUserShowcase)
+  try {
+    return auth.handleUpdate({primary_showcase: id}, navigate);
+  } catch(err) {
+    console.log(err.response);
+    alert("there was an error adding primary showcase")
+}
+}
+
   const renderShowcases = () => {
     // let showcaseCards = 
     // figure out how to map showcase cards
@@ -74,6 +89,7 @@ const deleteShowcase = async (id) => {
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
+      <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.showcase_id)} variant="contained">Set to Primary Showcase</Button>
       </ButtonDiv>
       </Box>
  
