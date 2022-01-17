@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   end
 
   create_table "showcases", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
+    t.string "name", default: ""
+    t.text "description", default: ""
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
