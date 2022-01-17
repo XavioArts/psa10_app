@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     post "users/image", to: "users#profile_image"
     get "users/:id", to: "users#info"
     resources :showcases 
+    get "showcases/user/:id", to: "showcases#showcases"
+    put "showcases/:id/card/:id", to: "showcases#card"
     resources :collections do
       resources :collection_comments
     end

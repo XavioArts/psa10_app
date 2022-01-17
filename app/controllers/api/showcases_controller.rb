@@ -9,8 +9,12 @@ class Api::ShowcasesController < ApplicationController
     render json: @showcase
   end
 
+  def showcases
+    render json: Showcase.user_showcases(params[:id])
+  end
+
   def create
-    @showcase = showcases.new(showcase_params)
+    @showcase = Showcase.new(showcase_params)
     if @showcase.save
       render json: @showcase
     else
@@ -26,6 +30,12 @@ class Api::ShowcasesController < ApplicationController
     end
   end
 
+  def card 
+    binding.pry
+    @showcase.cards << params[:id].to_i
+    @showcase.save 
+  end
+
   def destroy
     render json: @showcase.destroy
   end
@@ -37,7 +47,7 @@ class Api::ShowcasesController < ApplicationController
   end
 
   def showcase_params
-    params.require(:showcase).permit(:name, :description, :cards)
+    params.require(:showcase).permit(:name, :description, :cards, :user_id)
   end
 
 end
