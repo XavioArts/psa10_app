@@ -14,7 +14,7 @@ import CardImageUpload from './components/CardImageUpload';
 import Test from './pages/Test';
 import EditCard from './pages/EditCard';
 import ShowcaseNewForm from './components/ShowcaseNewForm';
-import Showcase from './components/Showcase';
+import Showcases from './components/Showcases';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
@@ -39,7 +39,7 @@ function App() {
             <Route path="/profile" element={<Protected/>}>
             {/* <Route path="/dashboard" element={<Collections/>}> */}
               <Route path="/profile/collections" element={<Collections/>}/>
-              <Route path="/profile/showcases" element={<Showcase/>}/>
+              <Route path="/profile/showcases" element={<Showcases/>}/>
               <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}

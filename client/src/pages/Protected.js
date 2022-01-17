@@ -2,7 +2,6 @@ import { Alert } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
-import Showcase from "../components/Showcase";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
 import EditCollection from "../components/EditCollection";

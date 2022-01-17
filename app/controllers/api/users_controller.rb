@@ -73,6 +73,6 @@ before_action :authenticate_user!, except: [:index]
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about)
+      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about, :primary_showcase)
     end
 end
