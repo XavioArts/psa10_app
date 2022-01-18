@@ -24,9 +24,9 @@ class User < ActiveRecord::Base
 
   def self.search(phrase)
     select('*')
-    .where(" users.last_name LIKE '%#{phrase}%'
-    OR users.email LIKE '%#{phrase}%' OR users.first_name LIKE '%#{phrase}%'
-    OR users.nickname LIKE '%#{phrase}%' ")
+    .where("UPPER(users.last_name) LIKE UPPER('%#{phrase}%')
+    OR UPPER(users.email) LIKE UPPER('%#{phrase}%') OR UPPER(users.first_name) LIKE UPPER('%#{phrase}%')
+    OR UPPER(users.nickname) LIKE UPPER('%#{phrase}%') ")
   end
 
 end
