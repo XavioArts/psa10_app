@@ -21,6 +21,7 @@ import Community from './pages/Community';
 import Collection from './components/Collection';
 import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
+import UserCollections from './pages/UserCollections';
 
 function App() {
   return (
@@ -29,7 +30,10 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
           <Route path="/community" element={<Community/>} />
-          <Route path="/community/users/:user_id/profile" element={<Protected/>} />
+          <Route path="/community/users/:user_id/profile" element={<Protected/>}>
+            <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
+
+          </Route>
           <Route path="/about" element={<AboutUs />} /> 
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
