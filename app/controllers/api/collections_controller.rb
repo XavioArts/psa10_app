@@ -2,6 +2,7 @@ class Api::CollectionsController < ApplicationController
 
     before_action :authenticate_user!, except: [:all_collections]
     before_action :set_collection, only: [:destroy, :update, :show]
+    before_action :set_user, only: [:user_collections]
 
     def index
         render json: current_user.collections, include: [:cards]
@@ -9,6 +10,10 @@ class Api::CollectionsController < ApplicationController
 
     def all_collections
         render json: Collection.all
+    end
+
+    def user_collections
+        render json: @user.collections, include: [:cards]
     end
 
     def show
@@ -44,6 +49,9 @@ class Api::CollectionsController < ApplicationController
 
     def set_collection
         @collection = Collection.find(params[:id])
+    end
+    def set_user
+        @user = User.find(params[:id])
     end
 
 end
