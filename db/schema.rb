@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   enable_extension "plpgsql"
 
   create_table "card_comments", force: :cascade do |t|
-    t.text "content", default: ""
+    t.text "content"
     t.bigint "user_id", null: false
     t.bigint "card_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -26,19 +26,19 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string "name", default: ""
-    t.string "condition", default: ""
-    t.boolean "available", default: false
-    t.string "front_image", default: ""
-    t.string "back_image", default: ""
-    t.integer "likes", default: 0
-    t.string "category", default: ""
+    t.string "name"
+    t.string "condition"
+    t.boolean "available"
+    t.string "front_image"
+    t.string "back_image"
+    t.integer "likes"
+    t.string "category"
     t.boolean "graded"
     t.float "grade"
-    t.string "set", default: ""
+    t.string "set"
     t.integer "year"
-    t.string "card_number", default: ""
-    t.boolean "showcase", default: false
+    t.string "card_number"
+    t.boolean "showcase"
     t.bigint "user_id", null: false
     t.bigint "collection_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   end
 
   create_table "collection_comments", force: :cascade do |t|
-    t.text "content", default: ""
+    t.text "content"
     t.bigint "collection_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.string "category", default: ""
-    t.string "name", default: ""
-    t.text "description", default: ""
-    t.integer "likes", default: 0
+    t.string "category"
+    t.string "name"
+    t.text "description"
+    t.integer "likes"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   create_table "messages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "topic_id", null: false
-    t.text "content", default: ""
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id"], name: "index_messages_on_topic_id"
@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
   end
 
   create_table "topics", force: :cascade do |t|
-    t.string "title", default: ""
-    t.text "body", default: ""
+    t.string "title"
+    t.text "body"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -124,9 +124,9 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "nickname", default: ""
-    t.string "image", default: ""
-    t.string "email", default: ""
+    t.string "nickname"
+    t.string "image"
+    t.string "email"
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -135,11 +135,11 @@ ActiveRecord::Schema.define(version: 2022_01_17_215125) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "first_name", default: ""
-    t.string "last_name", default: ""
-    t.text "about", default: ""
-    t.string "liked_collections", default: ""
-    t.string "liked_cards", default: ""
+    t.string "first_name"
+    t.string "last_name"
+    t.text "about"
+    t.string "liked_collections"
+    t.string "liked_cards"
     t.integer "primary_showcase"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
