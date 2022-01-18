@@ -11,7 +11,7 @@ const ShowcaseEdit = () => {
   const [cardChoices, setCardChoices] = useState([])
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
-  const [selectedCards, setSelectedCards] = useState("")
+  const [selectedCards, setSelectedCards] = useState([])
   const {id} = useParams()
   const navigate = useNavigate();
 
@@ -56,19 +56,24 @@ const ShowcaseEdit = () => {
 
   const addCard = async (card_id) => {
     let showcase_id = id
+    updateUI(card_id)
     try {
       await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
-      // addCardToUI(card_id);
+      // updateUI(card_id);
     } catch (err) {
       alert("err in addCard");
     }
   };
 
-  const addCardToUI = (id) => {
-    // remove Cat from list
-    // const showcaseCards = cats.filter((cat) => cat.id !== id);
-    // get a new Cat to show
-    setSelectedCards();
+  const updateUI = (id) => {
+    // remove card from unselected list
+    const unselectedCards = cardChoices.filter((c) => c.id !== id);
+    console.log(unselectedCards)
+    setCardChoices(unselectedCards)
+    let showcaseCards = []
+    showcaseCards.push(id)
+    console.log(showcaseCards)
+    setSelectedCards(showcaseCards);
   };
 
   const renderCards = () => {
@@ -78,6 +83,7 @@ const ShowcaseEdit = () => {
           <h3>{c.name}</h3>
           <p>{c.available}</p>
           <p>user_id: {c.user_id}</p>
+          <p>card_id: {c.id}</p>
           <div onClick={()=>addCard(c.id)}>Add</div>
         </div>
     )
@@ -107,6 +113,7 @@ const ShowcaseEdit = () => {
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
         
         <h3>Add Cards to Showcase</h3>
+        <p>Selected Cards: {selectedCards}</p>
         {renderCards()}
         <br/>
         <ButtonDiv>
