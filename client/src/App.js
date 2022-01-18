@@ -29,6 +29,7 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
           <Route path="/community" element={<Community/>} />
+          <Route path="/community/users/:user_id/profile" element={<Protected/>} />
           <Route path="/about" element={<AboutUs />} /> 
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
