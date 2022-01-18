@@ -1,5 +1,6 @@
-import { MenuItem, TextField } from "@mui/material";
+import { Button, FormControl, MenuItem, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -28,49 +29,73 @@ const CollectionNew = () => {
     setCategory(e.target.value);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newCollection = { category, name, description }
+    let res = await axios.post(`/api/collections`, newCollection)
+    console.log(res)
+    navigate('/profile/collections')
+    // props.addColelction(res.data)
+  }
+
   return (
-    <Box
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" }
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          required
-          id="standard-required"
-          label="Collection Name"
-          variant="standard"
-        />
-      </div>
-      <div>
-        <TextField
-          required
-          id="standard-select-category"
-          select
-          label="Select"
-          value={category}
-          onChange={handleChange}
-          helperText="Please select your category"
-          variant="standard"
+    <>
+      <FormControl>
+        <Box
+
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "25ch" }
+          }}
+          noValidate
+          autoComplete="off"
         >
-          {categories.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
-      <TextField
-        id="standard-multiline-static"
-        label="Description"
-        multiline
-        rows={5}
-        variant="standard"
-      />
-    </Box>
+          <div>
+            <TextField
+              required
+              id="standard-required"
+              label="Collection Name"
+              value={name}
+              variant="standard"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextField
+              required
+              id="standard-select-category"
+              select
+              label="Please select your category"
+              value={category}
+              onChange={handleChange}
+              variant="standard"
+            >
+              {categories.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          <TextField
+            id="standard-multiline-static"
+            label="Description"
+            multiline
+            rows={5}
+            variant="standard"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            color="success"
+          >
+            Submit
+          </Button>
+        </Box>
+      </FormControl>
+    </>
   );
 }
 
