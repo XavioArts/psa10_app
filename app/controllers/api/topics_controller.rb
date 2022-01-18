@@ -3,7 +3,7 @@ class Api::TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :destroy, :update]
 
   def index
-    render json: Topic.all
+    render json: Topic.topics_plus
   end
 
   def show
@@ -38,7 +38,7 @@ class Api::TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title)
+    params.require(:topic).permit(:title, :body)
   end
 
 
