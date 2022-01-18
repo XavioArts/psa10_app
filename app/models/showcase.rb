@@ -1,7 +1,7 @@
 class Showcase < ApplicationRecord
   belongs_to :user
 
-  # serialize :cards, Array
+  serialize :cards, Array
 
   def self.cards(ids)
     ids = ids.empty? ? [0] : ids
