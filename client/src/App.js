@@ -18,6 +18,8 @@ import Showcases from './components/Showcases';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
+import MessageBoard from './pages/MessageBoard';
+import TopicPage from './pages/TopicPage';
 import Collection from './components/Collection';
 import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
@@ -37,6 +39,8 @@ function App() {
 
           </Route>
           <Route path="/about" element={<AboutUs />} /> 
+          <Route path="/messageboard" element={<MessageBoard />} />
+          <Route path="/messageboard/:id" element={<TopicPage />} />
           <Route path="/login" element={<LogIn/>} />
           <Route path="/test/:id" element={<Test/>} />
 
