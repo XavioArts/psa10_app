@@ -31,6 +31,10 @@ const Collection = () => {
     navigate("/profile/collections")
   }
 
+  const addCard = (card) => {
+    setCollectionCards([...collectionCards, card]);
+  }
+
   const renderCollectionCards = () => {
     if (!collectionCards) {
       return <p>Loading cards</p>
@@ -60,7 +64,7 @@ const Collection = () => {
       <p>Likes: {collection.likes}</p>
       <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
-      <AddCard collectionId={params.id} />
+      <AddCard collectionId={params.id} addCard={addCard} />
       {renderCollectionCards()}
       {/* <CollectionComments /> */}
     </div>
