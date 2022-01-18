@@ -14,12 +14,13 @@ const CollectionCard = (props) => {
   // const { likes, available } = props
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <>
+    <Card sx={{ maxWidth: 345 }} key={card.id}>
       <CardMedia
         component="img"
         height="400"
         image={card.front_image}
-        alt="Charizard"
+        alt={props.name}
       />
 
       <CardActions disableSpacing>
@@ -41,6 +42,7 @@ const CollectionCard = (props) => {
         <Typography component="p">Comments</Typography>
       </CardActions>
     </Card>
+    </>
   );
 }
 

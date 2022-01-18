@@ -37,30 +37,43 @@ u4 = User.create(email: "test4@test.com", password: 123456)
 
 users = [u1, u2, u3, u4]
 
+card_names = [
+    "Charizard",
+    "Pikachu",
+    "Mew",
+    "Lugia",
+    "Jirachi"
+]
+
+collection_contents = [
+    "I like this!",
+    "Cool Stuff",
+    "Where did you get these?"
+]
 
 
-collection1 = u1.collections.create(name: "collection1")
-collection1.collection_comments.create(user_id: users.sample.id, content: "i like this")
+collection1 = u1.collections.create(name: "collection1 1")
+collection1.collection_comments.create(user_id: users.sample.id, content: collection_contents.sample)
 3.times do
-    card = collection1.cards.create(name: "charizard", user_id: u1.id)
+    card = collection1.cards.create(name: card_names.sample, user_id: u1.id)
     comment = card.card_comments.create(user_id: users.sample.id, content: "radical")
 end
-collection2 = u2.collections.create(name: "collection1")
-collection2.collection_comments.create(user_id: users.sample.id, content: "i like this")
+collection2 = u2.collections.create(name: "collection1 2")
+collection2.collection_comments.create(user_id: users.sample.id, content: collection_contents.sample)
 3.times do
-    card = collection2.cards.create(name: "charizard", user_id: u2.id)
+    card = collection2.cards.create(name: card_names.sample, user_id: u2.id)
     comment = card.card_comments.create(user_id: users.sample.id, content: "radical")
 end
-collection3 = u3.collections.create(name: "collection1")
-collection3.collection_comments.create(user_id: users.sample.id, content: "i like this")
+collection3 = u3.collections.create(name: "collection1 3")
+collection3.collection_comments.create(user_id: users.sample.id, content: collection_contents.sample)
 3.times do
-    card = collection3.cards.create(name: "charizard", user_id: u3.id)
+    card = collection3.cards.create(name: card_names.sample, user_id: u3.id)
     comment = card.card_comments.create(user_id: users.sample.id, content: "radical")
 end
-collection4 = u4.collections.create(name: "collection1")
-collection4.collection_comments.create(user_id: users.sample.id, content: "i like this")
+collection4 = u4.collections.create(name: "collection1 4")
+collection4.collection_comments.create(user_id: users.sample.id, content: collection_contents.sample)
 3.times do
-    card = collection4.cards.create(name: "charizard", user_id: u4.id)
+    card = collection4.cards.create(name: card_names.sample, user_id: u4.id)
     comment = card.card_comments.create(user_id: users.sample.id, content: "radical")
 end
 
