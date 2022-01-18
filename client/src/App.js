@@ -18,13 +18,10 @@ import Showcases from './components/Showcases';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
-<<<<<<< HEAD
 import Overview from './components/Overview';
-=======
 import Collection from './components/Collection';
 import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
->>>>>>> 6b7e005f613810cc418fdeec17e5f2d4cf1bdb71
 
 function App() {
   return (

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :showcases 
     get "showcases/user/:id", to: "showcases#showcases"
     put "showcases/:showcase_id/card/:id", to: "showcases#card"
+    put "showcases/:showcase_id/card/:id", to: "showcases#rmcard"
     resources :collections do
       resources :collection_comments
     end

@@ -9,6 +9,7 @@ import styled from "styled-components";
 
 const ShowcaseEdit = () => {
   const [cardChoices, setCardChoices] = useState([])
+  const [showcase, setShowcase] = useState({})
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
   const [selectedCards, setSelectedCards] = useState([])
@@ -33,6 +34,7 @@ const ShowcaseEdit = () => {
     }
     try {
       let resShowcase = await axios.get(`/api/showcases/${id}`);
+      setShowcase(resShowcase.data)
       setShowcaseName(resShowcase.data.name);
       setShowcaseDescription(resShowcase.data.description)
   } catch (err) {
@@ -57,24 +59,45 @@ const ShowcaseEdit = () => {
   const addCard = async (card_id) => {
     let showcase_id = id
     updateUI(card_id)
+    console.log(selectedCards)
     try {
       await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
+      console.log()
       // updateUI(card_id);
     } catch (err) {
       alert("err in addCard");
     }
   };
 
+  const removeCard = async (card_id) => {
+    let showcase_id = id
+    // updateUI(card_id)
+    console.log(selectedCards)
+    try {
+      await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`, );
+      console.log()
+      // updateUI(card_id);
+    } catch (err) {
+      alert("err in addCard");
+    }
+  };
+  
   const updateUI = (id) => {
     // remove card from unselected list
     const unselectedCards = cardChoices.filter((c) => c.id !== id);
     console.log(unselectedCards)
     setCardChoices(unselectedCards)
-    let showcaseCards = []
+    let showcaseCards = selectedCards
     showcaseCards.push(id)
     console.log(showcaseCards)
     setSelectedCards(showcaseCards);
   };
+
+  const renderSelectedCards = () => {
+    return (
+      <p>{selectedCards}</p>
+    )
+  }
 
   const renderCards = () => {
     return cardChoices.map((c) => {
@@ -113,7 +136,8 @@ const ShowcaseEdit = () => {
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
         
         <h3>Add Cards to Showcase</h3>
-        <p>Selected Cards: {selectedCards}</p>
+        <p>In my showcase: {JSON.stringify(showcase)}</p>
+        <h3>{renderSelectedCards()}</h3>
         {renderCards()}
         <br/>
         <ButtonDiv>
