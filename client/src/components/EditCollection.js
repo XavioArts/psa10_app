@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../providers/AuthProvider";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { TextareaAutosize } from "@mui/material";
 
 
-const EditCollection = (props) => {
-  const collection = props
-  // const auth = useContext(AuthContext);
+const EditCollection = () => {
+  const params = useParams()
   const [name, setName] = useState("")
   const [category, setCategory] = useState("")
   const [description, setDescription] = useState("")
@@ -18,7 +16,7 @@ const EditCollection = (props) => {
   }, [])
 
   const getData = async () => {
-    let res = await axios.get(`/api/collections/${collection.id}`)
+    let res = await axios.get(`/api/collections/${params.id}`)
     setName(res.data.name)
     setCategory(res.data.category)
     setDescription(res.data.description)
@@ -27,12 +25,9 @@ const EditCollection = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ name, category, description })
-    await axios.put(`api/collections`, {
-      name,
-      category,
-      description
-    });
-    navigate(`/profile/collections/${collection.id}`)
+    let updatedCollection = {name, category, description}
+    let res = await axios.put(`/api/collections/${params.id}`, updatedCollection);
+    navigate(`/profile/collections/${params.id}`)
   };
 
   return (
@@ -43,11 +38,11 @@ const EditCollection = (props) => {
         <input
           placeholder="Name"
           value={name}
-          onChange={(e) => { name(e.target.value); }} />
+          onChange={(e) => { setName(e.target.value); }} />
         <input
           placeholder="Category"
           value={category}
-          onChange={(e) => { category(e.target.value); }} />
+          onChange={(e) => { setCategory(e.target.value); }} />
         <br />
         <TextareaAutosize
           placeholder="Description"

@@ -12,7 +12,7 @@ class Api::CollectionsController < ApplicationController
     end
 
     def show
-        render json: @collection
+        render json: @collection, include: [:cards]
     end
 
     def create

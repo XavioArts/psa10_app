@@ -1,26 +1,33 @@
 import { Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 
 const Collection = () => {
-  const id = useParams()
+  const navigate = useNavigate();
+  const params = useParams()
   const [collectionCards, setCollectionCards] = useState([])
+  const [collection, setCollection] = useState([])
 
   useEffect(() => {
     getCollectionCards();
   }, [])
 
   const getCollectionCards = async () => {
-    let res = await axios.get("/api/collections")
-    setCollectionCards(res.data)
+    let res = await axios.get(`/api/collections/${params.id}`)
     console.log(res.data)
+    console.log(res.data.cards)
+    setCollectionCards(res.data.cards)
+    setCollection(res.data)
   }
+  console.log(params)
 
-  const deleteCollection = () =>{
-
+  const deleteCollection = async (id) =>{
+    await axios.delete(`/api/collections/${params.id}`)
+    setCollectionCards(collectionCards.filter((cc) => cc.id !== id));
+    navigate("/profile/collections")
   }
 
   const renderCollectionCards = () => {
@@ -45,13 +52,14 @@ const Collection = () => {
 
   return (
     <div>
-      <h1>Collection Name</h1>
-      <h3>Category</h3>
-      <p>Description</p>
-      <p>Likes</p>
+      <Link to={`/profile/collections`} >Back to Collections</Link>
+      <h1>{collection.name}</h1>
+      <h3>Category: {collection.category}</h3>
+      <p>Description: {collection.description}</p>
+      <p>Likes: {collection.likes}</p>
+      <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
+      <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
       {renderCollectionCards()}
-      <Link to={`/collections/${id}/edit`}>Edit Collection</Link>
-      <button onClick={() => deleteCollection(id)}>Delete this Collection</button>
       {/* <CollectionComments /> */}
     </div>
   )

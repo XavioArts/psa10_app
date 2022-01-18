@@ -20,7 +20,7 @@ const CollectionCard = (props) => {
         component="img"
         height="400"
         image={card.front_image}
-        alt="Charizard"
+        alt={props.name}
       />
 
       <CardActions disableSpacing>

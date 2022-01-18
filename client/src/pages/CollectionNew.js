@@ -19,7 +19,7 @@ const categories = [
   },
 ];
 
-const CollectionNew = (props) => {
+const CollectionNew = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
