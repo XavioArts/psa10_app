@@ -24,7 +24,7 @@ const Collection = () => {
   }
   console.log(params)
 
-  const deleteCollection = async (id) =>{
+  const deleteCollection = async (id) => {
     await axios.delete(`/api/collections/${params.id}`)
     setCollectionCards(collectionCards.filter((cc) => cc.id !== id));
     navigate("/profile/collections")
