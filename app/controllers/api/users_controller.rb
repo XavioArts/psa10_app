@@ -1,6 +1,8 @@
 class Api::UsersController < ApplicationController
 
-before_action :authenticate_user!, except: [:index]
+before_action :authenticate_user!, except: [:index, :search]
+
+before_action :set_user, only: [:show, :update, :destroy, :info]
 
 
     def profile_image
@@ -29,11 +31,14 @@ before_action :authenticate_user!, except: [:index]
         end
     end
 
-  before_action :set_user, only: [:show, :update, :destroy, :info]
-
   def index
     other_users = User.all
     render json: other_users
+  end
+
+  def search 
+    phrase = params[:search]
+    render json: User.search(phrase)
   end
 
   def show
