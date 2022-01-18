@@ -61,6 +61,12 @@ const updatePrimaryShowcase = async (id) => {
   const renderShowcases = () => {
     // let showcaseCards = 
     // figure out how to map showcase cards
+    const renderShowcaseCards = (s) => {
+      for (let i in s.cards) {
+        if (s.cards[i] == s.card_id) {
+          return s.card_name
+        } 
+    }}
     return showcases.map((s)=> {
       return (
         <Box key={s.showcase_id}
@@ -83,6 +89,7 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       <p>Cards: {JSON.stringify(s.cards)}</p>
+      {renderShowcaseCards(s)}
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
