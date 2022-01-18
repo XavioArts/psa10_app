@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 
@@ -28,6 +29,10 @@ const Collection = () => {
     await axios.delete(`/api/collections/${params.id}`)
     setCollectionCards(collectionCards.filter((cc) => cc.id !== id));
     navigate("/profile/collections")
+  }
+
+  const addCard = (card) => {
+    setCollectionCards([...collectionCards, card]);
   }
 
   const renderCollectionCards = () => {
@@ -59,6 +64,7 @@ const Collection = () => {
       <p>Likes: {collection.likes}</p>
       <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
+      <AddCard collectionId={params.id} addCard={addCard} />
       {renderCollectionCards()}
       {/* <CollectionComments /> */}
     </div>

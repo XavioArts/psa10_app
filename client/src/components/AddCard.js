@@ -10,7 +10,7 @@ const AddCard = (props) => {
 
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    const {collectionId} = props;
+    const {collectionId, addCard} = props;
     const [card, setCard] = useState(null);
     const [loading, setLoading] = useState(false);
     const [failed, setFailed] = useState(false);
@@ -46,7 +46,7 @@ const AddCard = (props) => {
         let updatedCard = {name, category, condition, set, year, card_number, available, showcase};
         try {
             let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
-            setCard(res.data);
+            addCard(res.data);
             setCard(null);
             setClicked(false);
             setFailed(false);
