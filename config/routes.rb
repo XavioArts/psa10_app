@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     post "users/image", to: "users#profile_image"
     get "users/:id", to: "users#info"
+    get "users/search/:search", to: "users#search"
     resources :showcases 
     get "showcases/user/:id", to: "showcases#showcases"
     put "showcases/:showcase_id/card/:id", to: "showcases#card"
