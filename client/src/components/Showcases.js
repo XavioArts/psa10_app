@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, dividerClasses } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
+import CollectionCard from "./CollectionCard";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -15,6 +16,7 @@ import { ButtonDiv } from "./Styles";
 
 const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
+  const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
   const {id} = useParams()
   const auth = useContext(AuthContext);
@@ -22,63 +24,52 @@ const Showcase = (props) => {
 
 
   useEffect(() => {
-    getShowcases();
+    getData();
+    normalizeData();
   }, [])
 
-  const getShowcases = async () => {
+  const getData = async () => {
     let res_id = id ? id : auth.id
     // need to pull user showcases not just showcase number one
     try {
-        let res = await axios.get(`/api/showcases/user/${res_id}`);
+        let res = await axios.get("/api/cards");
         // allShowcases = res.data
         console.log(res.data)
-        setShowcases(res.data);
+        setCards(res.data);
     } catch (err) {
         console.log(err.response);
-        alert("there was an error getting showcases")
+        alert("there was an error getting cards")
     }
+    try {
+      let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
+      // allShowcases = res.data
+      console.log(res_showcases.data)
+      setShowcases(res_showcases.data);
+  } catch (err) {
+      console.log(err.response);
+      alert("there was an error getting showcases")
+  }
 }
 
-// const normalizeData = () => {
-//   let showcase_ids = showcases.map((s) => s.id);
-//   let showcasesUnique = [...new Set(showcase_ids)];
-//   let newData = showcasesUnique.map((id) => {
-//       let cards = showcases.filter((i) => i.user_id === i.card_user_id);
-//       let buyersIds = buyers.map((i)=>i.buyer_id);
-//       let buyersUnique = [...new Set(buyersIds)];
-//       let buyerData = buyersUnique.map((id) => {
-//           let buyerProducts = data.filter((i)=> i.buyer_id === id)
-//           let cleanProducts = buyerProducts.map((p) => {
-//               return {id: p.product_id, price: p.price, category: p.category, description: p.description};
-//           })
-//           return {buyer_id: buyerProducts[0].buyer_id, buyer_name: buyerProducts[0].buyer_name, 
-//               max_price: buyerProducts[0].max_price, desired_cat: buyerProducts[0].desired_cat, 
-//               products: cleanProducts};
-//       })
-//       return {id: buyers[0].id, name: buyers[0].name, email: buyers[0].email, buyers: buyerData};
-//       // let cleanProducts = products.map((p) => {
-//       //     return {id: p.id, price: p.price, description: p.description, category: p.category}
-//       // });
-//       // return {name: products[0].name, email: products[0].email, id: products[0].id, products: cleanProducts};
-//   });
-//   let sellerNames = newData.map((s)=>s.name)
-//   // may need to add seller id here ^^^^
-//   setSellers(sellerNames);
-//   return newData;
-// }
-
-// const normalizeShowcases = () => {
+const normalizeData = () => {
+  let showcaseCards = showcases.map((s)=> {
+    console.log(s.cards)
+    let cards_array = s.cards
+    let cardsOfShowcase = cards.filter((c) => {
+      for (let i = 0; i<cards_array.length; i++) {
+        if (cards_array[i] == c.id) {
+          return {
+            c 
+          }
+      }
     
-//   let showcaseCards = showcases.map((s) => {
-//     return { id: }
-
-//   // setUser({key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age});
-//   return { key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age }
-// })
-
-// choices.push({key:0, value:0, text: "New User"})
-// return choices;
-// };
+    }})
+    return {key: s.id, id: s.id, name: s.name, description: s.description, cards: cardsOfShowcase}
+})
+setShowcases(showcaseCards)
+}
+  
+    
 
 
 const deleteShowcase = async (id) => {
@@ -102,19 +93,17 @@ const updatePrimaryShowcase = async (id) => {
   const renderShowcases = () => {
     // let showcaseCards = 
     // figure out how to map showcase cards
-    const renderShowcaseCards = (s) => {
-      for (let i in s.cards) {
-        if (s.cards[i] == s.card_id) {
-          return s.card_name
-        } 
-    }}
+    
+    const renderShowcaseCards=(s) => s.cards.map((c)=>{
+      return (<CollectionCard {...c} />)
+    })
     return showcases.map((s)=> {
       return (
-        <Box key={s.showcase_id}
+        <Box key={s.key}
         sx={{
           maxWidth: '100vw',
           width: '1300px',
-          height: 300,
+          height: 'auto',
           borderRadius: '7px',
           padding: '20px',
           margin: '15px 30px',
@@ -130,7 +119,9 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       <p>Cards: {JSON.stringify(s.cards)}</p>
+      <div style={styles.cardsDiv}>
       {renderShowcaseCards(s)}
+      </div>
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
@@ -155,14 +146,14 @@ const updatePrimaryShowcase = async (id) => {
         <div style={styles.row}>
         <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
         </div>
+        <div >
         {renderShowcases()}
-        
+        </div>
       </div>
     </div>
   )
 
 }
-
 
 const styles = {
   button: {
@@ -174,6 +165,12 @@ const styles = {
   centered: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  cardsDiv: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     justifyContent: 'center',
   }
 }
