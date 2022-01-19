@@ -71,7 +71,6 @@ const Home = () => {
             <br />
             {cards && renderCards()}
 
-            <Landing />
         </div>
 
     );

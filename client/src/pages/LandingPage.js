@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,59 +6,19 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import LoginIcon from '@mui/icons-material/Login';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+const LandingPage = () => {
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
+  const navigate = useNavigate();
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -97,8 +57,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Login</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+      <MenuItem onClick={() => navigate("/login")}>Login</MenuItem>
+      <MenuItem>Signup</MenuItem>
     </Menu>
   );
 
@@ -119,7 +79,8 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+
+      <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -129,7 +90,7 @@ export default function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Login/Sign Up</p>
+        <p>Profile</p>
       </MenuItem>
     </Menu>
   );
@@ -138,14 +99,13 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-
           <Typography
             variant="p"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            PSA Logo Here
+            "PSA 10 logo here"
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -158,19 +118,8 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
             <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-            </IconButton>
-            <IconButton
-              size="large"
+              size="medium"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -200,3 +149,90 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+export default LandingPage;
+
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
+
+
+
+
+
+
+
+
+// const Landing = () => {
+
+//   // const [show, setShow] = useState(false);
+//   const auth = useContext(AuthContext);
+//   const navigate = useNavigate();
+
+//   // const toggleShow = () => {
+//   //   setShow(!show)
+//   // }
+
+//   return (
+//     <div>
+
+//       <Stack direction="row">
+//         <Button onClick={() => navigate("/login")}>Login</Button>
+//         <Button onClick={() => navigate("/register")}>Sign Up</Button>
+//       </Stack>
+
+//       {/* <p>Not you? Register here.</p>
+//             <button onClick={toggleShow} >{show ? "Cancel" : "Register"}</button>
+//             {show && <Register/>} */}
+//       {/* <ButtonDiv>
+//         <Button variant="contained" onClick={() => navigate("/login")} >Log In</Button>
+//         <Button variant="contained" onClick={() => auth.handleLogout(navigate)} >Log Out</Button>
+//       </ButtonDiv>
+//       <br />
+//       <ButtonDiv>
+//         <Button variant="contained" onClick={() => navigate("/profile")}>User View</Button>
+//       </ButtonDiv>
+//       <br /> */}
+
+//     </div>
+//   );
+// };
+
+// export default Landing;

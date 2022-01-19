@@ -8,7 +8,8 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={styles.container} > 
+        <div style={styles.container} >
+            <Link to="/landingpage" style={styles.link}>Landing Page</Link>
             <Link to="/" style={styles.link} >Home</Link>
             {authenticated && <Link to="/profile" style={styles.link} >My Profile</Link>}
             {authenticated && <Link to="/profile/collections" style={styles.link} >My Collection</Link>}
@@ -16,8 +17,8 @@ const NavBar = () => {
             <Link to="/messageboard" style={styles.link} >Message Board</Link>
             <Link to="/about" style={styles.link} >About Us</Link>
             {/* {authenticated && <Link to="/collections" style={styles.link} >My Collection</Link>} */}
-            {authenticated && <button style={styles.buttonLink} onClick={()=>handleLogout(navigate)} >Log Out</button>}
-            
+            {authenticated && <button style={styles.buttonLink} onClick={() => handleLogout(navigate)} >Log Out</button>}
+
         </div>
     );
 };
