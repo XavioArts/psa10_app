@@ -51,7 +51,8 @@ const ShowcaseEdit = () => {
     const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription, cards: cardIds}
     console.log(updatedShowcase)
     try {
-    await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
+    let res = await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
+    console.log(res)
     } catch(err) {
       console.log(err.response);
       alert("there was an error adding a showcase")

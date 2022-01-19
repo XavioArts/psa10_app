@@ -25,7 +25,6 @@ const Showcase = (props) => {
 
   useEffect(() => {
     getData();
-    normalizeData();
   }, [])
 
   const getData = async () => {
@@ -36,35 +35,29 @@ const Showcase = (props) => {
         // allShowcases = res.data
         console.log(res.data)
         setCards(res.data);
+        let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
+        // allShowcases = res.data
+        console.log(res_showcases.data)
+        normalizeData(res_showcases.data, res.data);
     } catch (err) {
         console.log(err.response);
-        alert("there was an error getting cards")
+        alert("there was an error getting data")
     }
-    try {
-      let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
-      // allShowcases = res.data
-      console.log(res_showcases.data)
-      setShowcases(res_showcases.data);
-  } catch (err) {
-      console.log(err.response);
-      alert("there was an error getting showcases")
-  }
+    
 }
 
-const normalizeData = () => {
-  let showcaseCards = showcases.map((s)=> {
+const normalizeData = (res_showcases, res_cards) => {
+  console.log(res_showcases)
+  let showcaseCards = res_showcases.map((s)=> {
     console.log(s.cards)
     let cards_array = s.cards
-    let cardsOfShowcase = cards.filter((c) => {
+    let cardsOfShowcase = res_cards.filter((c) => {
       for (let i = 0; i<cards_array.length; i++) {
         if (cards_array[i] == c.id) {
-          return {
-            c 
-          }
+          return true
       }
-    
     }})
-    return {key: s.id, id: s.id, name: s.name, description: s.description, cards: cardsOfShowcase}
+    return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
 })
 setShowcases(showcaseCards)
 }
@@ -91,12 +84,10 @@ const updatePrimaryShowcase = async (id) => {
 }
 
   const renderShowcases = () => {
-    // let showcaseCards = 
-    // figure out how to map showcase cards
-    
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
       return (<CollectionCard {...c} />)
     })
+    console.log("showcases", showcases)
     return showcases.map((s)=> {
       return (
         <Box key={s.key}
@@ -118,30 +109,23 @@ const updatePrimaryShowcase = async (id) => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <p>Cards: {JSON.stringify(s.cards)}</p>
       <div style={styles.cardsDiv}>
       {renderShowcaseCards(s)}
       </div>
       <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.showcase_id)} variant="contained">Set to Primary Showcase</Button>}
+      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
+      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
       </ButtonDiv>
       </Box>
  
       )
     }
-
     )
   }
 
   return (
     <div>
-      <div className='statsContainer'>
-        <a className='profileNavText'>cards.length</a>
-        <a className='profileNavText'>showcase.likes</a>
-        <a className='profileNavText'>Primary Showcase: {auth.primary_showcase}</a>
-      </div>
       <div style={styles.centered}>
         <div style={styles.row}>
         <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
