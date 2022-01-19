@@ -1,6 +1,6 @@
 class Api::ShowcasesController < ApplicationController
   before_action :set_showcase, only: [:show, :destroy, :update]
-  before_action :set_addCard_showcase, only: [:card]
+  before_action :set_addCard_showcase, only: [:card, :rmCard]
 
   def index
     render json: Showcase.all
@@ -24,7 +24,7 @@ class Api::ShowcasesController < ApplicationController
   end
 
   def update
-    if @showcase.update(showcase_params)
+    if @showcase.update(update_showcase_params)
       render json: @showcase
     else
       render json: {error: @showcase.errors}, status: 422
@@ -34,6 +34,12 @@ class Api::ShowcasesController < ApplicationController
   def card 
     # binding.pry
     @showcase.cards << params[:id].to_i
+    @showcase.save 
+  end
+
+  def rmCard 
+    # binding.pry
+    @showcase.cards.delete(params[:id].to_i)
     @showcase.save 
   end
 
@@ -53,6 +59,10 @@ class Api::ShowcasesController < ApplicationController
 
   def showcase_params
     params.require(:showcase).permit(:name, :description, :cards, :user_id)
+  end
+
+  def update_showcase_params
+    params.require(:showcase).permit(:name, :description, {:cards=>[]}, :id)
   end
 
 end

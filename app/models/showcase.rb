@@ -17,4 +17,7 @@ def self.user_showcases(id)
   .where('user_id = ?', id)
 end
 
+
+
 end
+

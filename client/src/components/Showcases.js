@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button, dividerClasses } from "@mui/material";
 import Box from '@mui/material/Box';
+import { ButtonDiv } from "./Styles";
+import CollectionCard from "./CollectionCard";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -14,29 +16,53 @@ import Box from '@mui/material/Box';
 
 const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
+  const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
-  const {id} = useParams()
+  const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    getShowcases();
+    getData();
   }, [])
 
-  const getShowcases = async () => {
-    let res_id = id ? id : auth.id
+  const getData = async () => {
+    let res_id = user_id ? user_id : auth.id
     // need to pull user showcases not just showcase number one
     try {
-        let res = await axios.get(`/api/showcases/user/${res_id}`);
+        let res = await axios.get("/api/cards");
         // allShowcases = res.data
         console.log(res.data)
-        setShowcases(res.data);
+        setCards(res.data);
+        let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
+        // allShowcases = res.data
+        console.log(res_showcases.data)
+        normalizeData(res_showcases.data, res.data);
     } catch (err) {
         console.log(err.response);
-        alert("there was an error getting showcases")
+        alert("there was an error getting data")
     }
+    
 }
+
+const normalizeData = (res_showcases, res_cards) => {
+  console.log(res_showcases)
+  let showcaseCards = res_showcases.map((s)=> {
+    console.log(s.cards)
+    let cards_array = s.cards
+    let cardsOfShowcase = res_cards.filter((c) => {
+      for (let i = 0; i<cards_array.length; i++) {
+        if (cards_array[i] == c.id) {
+          return true
+      }
+    }})
+    return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
+})
+setShowcases(showcaseCards)
+}
+  
+    
 
 
 const deleteShowcase = async (id) => {
@@ -58,15 +84,17 @@ const updatePrimaryShowcase = async (id) => {
 }
 
   const renderShowcases = () => {
-    // let showcaseCards = 
-    // figure out how to map showcase cards
+    const renderShowcaseCards=(s) => s.cards.map((c)=>{
+      return (<CollectionCard {...c} />)
+    })
+    console.log("showcases", showcases)
     return showcases.map((s)=> {
       return (
-        <Box key={s.showcase_id}
+        <Box key={s.key}
         sx={{
           maxWidth: '100vw',
           width: '1300px',
-          height: 300,
+          height: 'auto',
           borderRadius: '7px',
           padding: '20px',
           margin: '15px 30px',
@@ -81,42 +109,36 @@ const updatePrimaryShowcase = async (id) => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <p>Cards: {JSON.stringify(s.cards)}</p>
+      <div style={styles.cardsDiv}>
+      {renderShowcaseCards(s)}
+      </div>
       <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.showcase_id)} variant="contained">Set to Primary Showcase</Button>}
+      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
+      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
       </ButtonDiv>
       </Box>
  
       )
     }
-
     )
   }
 
   return (
     <div>
-      <div className='statsContainer'>
-        <a className='profileNavText'>cards.length</a>
-        <a className='profileNavText'>showcase.likes</a>
-        <a className='profileNavText'>Primary Showcase: {auth.primary_showcase}</a>
-      </div>
       <div style={styles.centered}>
         <div style={styles.row}>
         <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
         </div>
+        <div >
         {renderShowcases()}
-        
+        </div>
       </div>
     </div>
   )
 
 }
 
-const ButtonDiv = styled.div`
-    margin: 10px;
-`
 const styles = {
   button: {
     margin: '10px',
@@ -127,6 +149,12 @@ const styles = {
   centered: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  cardsDiv: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     justifyContent: 'center',
   }
 }

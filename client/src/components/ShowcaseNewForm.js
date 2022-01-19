@@ -57,7 +57,6 @@ const ShowcaseNewForm= (props) => {
         style={{ width: 400, height: 100 }}
         value={description} 
         onChange={(e)=>{setDescription(e.target.value);}}/>
-        <p>Select Cards to Add</p>
         <br/>
         <ButtonDiv>
           <Button type="submit" variant="contained">Add Showcase</Button>

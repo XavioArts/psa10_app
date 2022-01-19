@@ -9,9 +9,10 @@ import styled from "styled-components";
 
 const ShowcaseEdit = () => {
   const [cardChoices, setCardChoices] = useState([])
+  const [showcase, setShowcase] = useState({})
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
-  const [selectedCards, setSelectedCards] = useState("")
+  const [selectedCards, setSelectedCards] = useState([])
   const {id} = useParams()
   const navigate = useNavigate();
 
@@ -22,7 +23,6 @@ const ShowcaseEdit = () => {
   }, [])
 
   const getData = async () => {
-    // need to pull user showcases not just showcase number one
     try {
         let res = await axios.get(`/api/cards`);
         setCardChoices(res.data);
@@ -33,43 +33,110 @@ const ShowcaseEdit = () => {
     }
     try {
       let resShowcase = await axios.get(`/api/showcases/${id}`);
+      setShowcase(resShowcase.data)
       setShowcaseName(resShowcase.data.name);
       setShowcaseDescription(resShowcase.data.description)
+      // setShowcaseCards(resShowcase.data.cards)
   } catch (err) {
       console.log(err.response);
       alert("there was an error getting showcase")
   }
 }
 
+
   const updateShowcase = async () => {
     // error here user id is not populating
     let res_id = id
-    const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription}
+    let cardIds = selectedCards.map((c)=>c.id)
+    const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription, cards: cardIds}
     console.log(updatedShowcase)
     try {
-    await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
+    let res = await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
+    console.log(res)
     } catch(err) {
       console.log(err.response);
       alert("there was an error adding a showcase")
   }
+  console.log("showcase updated")
   }
 
   const addCard = async (card_id) => {
-    let showcase_id = id
-    try {
-      await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
-      // addCardToUI(card_id);
-    } catch (err) {
-      alert("err in addCard");
-    }
+    // let showcase_id = id
+    updateUIAdd(card_id)
+    console.log(selectedCards)
+    // try {
+    //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
+    //   console.log()
+    //   // updateUI(card_id);
+    // } catch (err) {
+    //   alert("err in addCard");
+    // }
   };
 
-  const addCardToUI = (id) => {
-    // remove Cat from list
-    // const showcaseCards = cats.filter((cat) => cat.id !== id);
-    // get a new Cat to show
-    setSelectedCards();
+  const removeCard = async (card_id) => {
+    // let showcase_id = id
+    updateUIRemove(card_id)
+    console.log(selectedCards)
+    // try {
+    //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`, );
+    //   console.log()
+    //   // updateUI(card_id);
+    // } catch (err) {
+    //   alert("err in rmCard");
+    // }
   };
+  
+  const updateUIAdd = (card) => {
+    // remove card from unselected list
+    console.log(card)
+    const unselectedCards = cardChoices.filter((c) => c.id !== card.id);
+    console.log("unselectedCards", unselectedCards)
+    setCardChoices(unselectedCards)
+    let showcaseCards = selectedCards
+    showcaseCards.push(card)
+    console.log(showcaseCards)
+    setSelectedCards(showcaseCards);
+  };
+
+  const updateUIRemove = (card) => {
+    // remove card from unselected list
+    const nowSelectedCards = selectedCards.filter((c) => c.id !== card.id);
+    console.log("nowSelectedCards", nowSelectedCards)
+    setSelectedCards(nowSelectedCards)
+    let choices = cardChoices
+    choices.push(card)
+    console.log(choices)
+    setCardChoices(choices);
+  };
+
+
+  const renderSelectedCards = () => {
+    return selectedCards.map((c)=>{
+      return (
+        <div key={c.id}>
+          <h3>{c.name}</h3>
+          <p>{c.available}</p>
+          <p>user_id: {c.user_id}</p>
+          <p>card_id: {c.id}</p>
+          <div onClick={()=>removeCard(c)}>Add</div>
+        </div>
+      )
+    })
+  }
+
+  const renderCardChoices = () => {
+    return cardChoices.map((c)=>{
+      return (
+        <div key={c.id}>
+          <h3>{c.name}</h3>
+          <p>{c.available}</p>
+          <p>user_id: {c.user_id}</p>
+          <p>card_id: {c.id}</p>
+          <div onClick={()=>addCard(c)}>Add</div>
+        </div>
+      )
+    })
+  }
 
   const renderCards = () => {
     return cardChoices.map((c) => {
@@ -78,6 +145,7 @@ const ShowcaseEdit = () => {
           <h3>{c.name}</h3>
           <p>{c.available}</p>
           <p>user_id: {c.user_id}</p>
+          <p>card_id: {c.id}</p>
           <div onClick={()=>addCard(c.id)}>Add</div>
         </div>
     )
@@ -107,7 +175,12 @@ const ShowcaseEdit = () => {
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
         
         <h3>Add Cards to Showcase</h3>
-        {renderCards()}
+        <p>In my showcase: {JSON.stringify(showcase)}</p>
+        <h2>Selected Cards</h2>
+        {renderSelectedCards()}
+        <h2>Choose Cards to Add</h2>
+        {renderCardChoices()}
+        {/* {renderCards()} */}
         <br/>
         <ButtonDiv>
           <Button type="submit" variant="contained">Update Showcase</Button>
