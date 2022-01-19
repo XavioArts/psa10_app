@@ -60,10 +60,6 @@ const MessageBoard = (props) => {
         <div><AddTopic addTopic={addTopic}/></div>
       </Modal>
       {renderTopics(topics)}
-      <div style={{width: "85vw", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
-        <h3>This JSON is for testing purposes</h3>
-        <code style={{overflowWrap: "break-word"}} >{JSON.stringify(topics)}</code>
-      </div>
     </div>
   )
 }
