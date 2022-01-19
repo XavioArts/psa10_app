@@ -18,7 +18,7 @@ const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
-  const {id} = useParams()
+  const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const Showcase = (props) => {
   }, [])
 
   const getData = async () => {
-    let res_id = id ? id : auth.id
+    let res_id = user_id ? user_id : auth.id
     // need to pull user showcases not just showcase number one
     try {
         let res = await axios.get("/api/cards");

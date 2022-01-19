@@ -17,7 +17,7 @@ import CollectionCard from "./CollectionCard";
 const Overview = () => {
   const [primaryShowcase, setPrimaryShowcase] = useState("")
   const [user, setUser] = useState({})
-  const {id} = useParams()
+  const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [showcases, setShowcases] = useState([]);
@@ -30,7 +30,7 @@ const Overview = () => {
 
 
   const getData = async () => {
-    let res_id = id ? id : auth.id
+    let res_id = user_id ? user_id : auth.id
     console.log(res_id)
     // need to pull user showcases not just showcase number one
     try {
