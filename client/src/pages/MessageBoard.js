@@ -36,7 +36,7 @@ const MessageBoard = (props) => {
   }
   const renderLoginBox = () => {
     return(
-      <div style={{width: "85vw", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
+      <div style={{width: "93%", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
         <h3>Want to join the conversation?</h3>
         <h3>{<Link to="/login">Login</Link>} or {<Link to="/login">Register</Link>}</h3>
       </div>

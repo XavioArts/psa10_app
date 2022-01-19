@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import EditTopic from '../components/EditTopic';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 const TopicPage = () => {
   const auth = useContext(AuthContext);
@@ -15,6 +15,7 @@ const TopicPage = () => {
   const [content, setContent] = useState([])
   const [open, setOpen] = useState(false);
   const [tic, setTic] = useState(false);
+  const [clickedEdit, setClickedEdit] = useState(false);
   const handleOpen = () => setOpen(true);
   const navigate = useNavigate()
   
@@ -67,22 +68,47 @@ const TopicPage = () => {
     }
   }
 
+  const handleEditClicked = () => {
+    if(clickedEdit){
+      console.log('put axios request here')
+      setClickedEdit(!clickedEdit)
+    } else {
+      console.log('Show Edit Form Here')
+      setClickedEdit(!clickedEdit)
+    }
+
+  }
+
   const renderMessages = (messages) => {
     let messageBox = messages.map(m=>{
       return(
         <Box key={m.id} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
           <h6 style={{margin: '5px'}}>Posted by User {m.user_id}</h6>
           <h3>{m.content}</h3>
-          {auth.id === m.user_id &&<Button variant="contained">Edit</Button>}
-          {auth.id === m.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained">Delete</Button>}
+          {auth.id === m.user_id &&<Button variant="contained" onClick={handleEditClicked}>{clickedEdit ? 'Update' : 'Edit'}</Button>}
+          {auth.id === m.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={() => deleteMessage(m.id)}>Delete</Button>}
         </Box>
       )
     })
     return messageBox
   }
 
+  const renderLoginBox = () => {
+    return(
+      <div style={{width: "93%", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
+        <h3>Want to join the conversation?</h3>
+        <h3>{<Link to="/login">Login</Link>} or {<Link to="/login">Register</Link>}</h3>
+      </div>
+    )
+  }
+
   const editTopic = () => {
     handleClose()
+  }
+
+  const deleteMessage = async (id) => {
+    await axios.delete(`/api/topics/${params.id}/messages/${id}`)
+    setTic(!tic)
   }
 
   const deleteTopic = async (id) => {
@@ -100,14 +126,14 @@ const TopicPage = () => {
       {auth.id === topic.user_id &&<Button variant="contained" style={{ backgroundColor: 'red'}} onClick={() => deleteTopic(topic.id)}>Delete Topic</Button>}
       <h1>{topic.title}</h1>
       <p>{topic.body}</p>
-      <Box style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+      {auth.authenticated ? <Box style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
         <form onSubmit={handleSubmit}>
           <h6 style={{margin: '5px'}}>Posted by User {auth.id}</h6>
           <textarea style={{ resize: 'none', overflow: 'auto', marginTop: '25px', marginBottom: '15px', fontSize: '1.17em', width: '99%'}} rows="4"  value={content} onChange={(e) => setContent(e.target.value)}/>
           <br/>
           <Button variant="contained" type='submit'>Post</Button>
         </form>
-      </Box>
+      </Box> : renderLoginBox()}
       {renderMessages(messages)}
       <div style={{width: "85vw", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
         <h3>This JSON is for testing purposes</h3>
