@@ -9,9 +9,10 @@ import styled from "styled-components";
 
 const ShowcaseEdit = () => {
   const [cardChoices, setCardChoices] = useState([])
+  const [showcase, setShowcase] = useState({})
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
-  const [selectedCards, setSelectedCards] = useState("")
+  const [selectedCards, setSelectedCards] = useState([])
   const {id} = useParams()
   const navigate = useNavigate();
 
@@ -22,7 +23,6 @@ const ShowcaseEdit = () => {
   }, [])
 
   const getData = async () => {
-    // need to pull user showcases not just showcase number one
     try {
         let res = await axios.get(`/api/cards`);
         setCardChoices(res.data);
@@ -33,18 +33,21 @@ const ShowcaseEdit = () => {
     }
     try {
       let resShowcase = await axios.get(`/api/showcases/${id}`);
+      setShowcase(resShowcase.data)
       setShowcaseName(resShowcase.data.name);
       setShowcaseDescription(resShowcase.data.description)
+      // setShowcaseCards(resShowcase.data.cards)
   } catch (err) {
       console.log(err.response);
       alert("there was an error getting showcase")
   }
 }
 
+
   const updateShowcase = async () => {
     // error here user id is not populating
     let res_id = id
-    const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription}
+    const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription, cards: selectedCards}
     console.log(updatedShowcase)
     try {
     await axios.put(`/api/showcases/${res_id}`, updatedShowcase)
@@ -56,20 +59,52 @@ const ShowcaseEdit = () => {
 
   const addCard = async (card_id) => {
     let showcase_id = id
-    try {
-      await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
-      // addCardToUI(card_id);
-    } catch (err) {
-      alert("err in addCard");
-    }
+    updateUI(card_id)
+    console.log(selectedCards)
+    // try {
+    //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
+    //   console.log()
+    //   // updateUI(card_id);
+    // } catch (err) {
+    //   alert("err in addCard");
+    // }
   };
 
-  const addCardToUI = (id) => {
-    // remove Cat from list
-    // const showcaseCards = cats.filter((cat) => cat.id !== id);
-    // get a new Cat to show
-    setSelectedCards();
+  // const removeCard = async (card_id) => {
+  //   let showcase_id = id
+  //   // updateUI(card_id)
+  //   console.log(selectedCards)
+  //   try {
+  //     await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`, );
+  //     console.log()
+  //     // updateUI(card_id);
+  //   } catch (err) {
+  //     alert("err in rmCard");
+  //   }
+  // };
+  
+  const updateUI = (id) => {
+    // remove card from unselected list
+    const unselectedCards = cardChoices.filter((c) => c.id !== id);
+    console.log(unselectedCards)
+    setCardChoices(unselectedCards)
+    let showcaseCards = selectedCards
+    showcaseCards.push(id)
+    console.log(showcaseCards)
+    setSelectedCards(showcaseCards);
   };
+
+
+  const renderSelectedCards = () => {
+    selectedCards.map((c)=>{
+      return (
+        <div>
+          <h3>c.name</h3>
+          <p>c.id</p>
+        </div>
+      )
+    })
+  }
 
   const renderCards = () => {
     return cardChoices.map((c) => {
@@ -78,6 +113,7 @@ const ShowcaseEdit = () => {
           <h3>{c.name}</h3>
           <p>{c.available}</p>
           <p>user_id: {c.user_id}</p>
+          <p>card_id: {c.id}</p>
           <div onClick={()=>addCard(c.id)}>Add</div>
         </div>
     )
@@ -107,6 +143,9 @@ const ShowcaseEdit = () => {
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
         
         <h3>Add Cards to Showcase</h3>
+        {renderSelectedCards()}
+        <p>In my showcase: {JSON.stringify(showcase)}</p>
+        <h3>{renderSelectedCards()}</h3>
         {renderCards()}
         <br/>
         <ButtonDiv>

@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button, dividerClasses } from "@mui/material";
 import Box from '@mui/material/Box';
+import { ButtonDiv } from "./Styles";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -38,6 +39,47 @@ const Showcase = (props) => {
     }
 }
 
+// const normalizeData = () => {
+//   let showcase_ids = showcases.map((s) => s.id);
+//   let showcasesUnique = [...new Set(showcase_ids)];
+//   let newData = showcasesUnique.map((id) => {
+//       let cards = showcases.filter((i) => i.user_id === i.card_user_id);
+//       let buyersIds = buyers.map((i)=>i.buyer_id);
+//       let buyersUnique = [...new Set(buyersIds)];
+//       let buyerData = buyersUnique.map((id) => {
+//           let buyerProducts = data.filter((i)=> i.buyer_id === id)
+//           let cleanProducts = buyerProducts.map((p) => {
+//               return {id: p.product_id, price: p.price, category: p.category, description: p.description};
+//           })
+//           return {buyer_id: buyerProducts[0].buyer_id, buyer_name: buyerProducts[0].buyer_name, 
+//               max_price: buyerProducts[0].max_price, desired_cat: buyerProducts[0].desired_cat, 
+//               products: cleanProducts};
+//       })
+//       return {id: buyers[0].id, name: buyers[0].name, email: buyers[0].email, buyers: buyerData};
+//       // let cleanProducts = products.map((p) => {
+//       //     return {id: p.id, price: p.price, description: p.description, category: p.category}
+//       // });
+//       // return {name: products[0].name, email: products[0].email, id: products[0].id, products: cleanProducts};
+//   });
+//   let sellerNames = newData.map((s)=>s.name)
+//   // may need to add seller id here ^^^^
+//   setSellers(sellerNames);
+//   return newData;
+// }
+
+// const normalizeShowcases = () => {
+    
+//   let showcaseCards = showcases.map((s) => {
+//     return { id: }
+
+//   // setUser({key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age});
+//   return { key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age }
+// })
+
+// choices.push({key:0, value:0, text: "New User"})
+// return choices;
+// };
+
 
 const deleteShowcase = async (id) => {
   let res_id = id
@@ -60,6 +102,12 @@ const updatePrimaryShowcase = async (id) => {
   const renderShowcases = () => {
     // let showcaseCards = 
     // figure out how to map showcase cards
+    const renderShowcaseCards = (s) => {
+      for (let i in s.cards) {
+        if (s.cards[i] == s.card_id) {
+          return s.card_name
+        } 
+    }}
     return showcases.map((s)=> {
       return (
         <Box key={s.showcase_id}
@@ -82,6 +130,7 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       <p>Cards: {JSON.stringify(s.cards)}</p>
+      {renderShowcaseCards(s)}
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.showcase_id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.showcase_id)} variant="contained">Delete Showcase</Button>
@@ -114,9 +163,7 @@ const updatePrimaryShowcase = async (id) => {
 
 }
 
-const ButtonDiv = styled.div`
-    margin: 10px;
-`
+
 const styles = {
   button: {
     margin: '10px',

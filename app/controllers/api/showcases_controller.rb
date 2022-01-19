@@ -1,6 +1,6 @@
 class Api::ShowcasesController < ApplicationController
   before_action :set_showcase, only: [:show, :destroy, :update]
-  before_action :set_addCard_showcase, only: [:card]
+  before_action :set_addCard_showcase, only: [:card, :rmCard]
 
   def index
     render json: Showcase.all
@@ -34,6 +34,12 @@ class Api::ShowcasesController < ApplicationController
   def card 
     # binding.pry
     @showcase.cards << params[:id].to_i
+    @showcase.save 
+  end
+
+  def rmCard 
+    # binding.pry
+    @showcase.cards.delete(params[:id].to_i)
     @showcase.save 
   end
 
