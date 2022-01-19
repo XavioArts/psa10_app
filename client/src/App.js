@@ -34,6 +34,16 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
+
+          <Route path="/community" element={<Community/>} />
+          <Route path="/community/users/:user_id/profile" element={<Protected/>}>
+            <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
+            <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
+            <Route path="/community/users/:user_id/profile/showcases" element={<Showcases/>} />
+            <Route path="/community/users/:user_id/profile" element={<Overview/>} />
+
+          </Route>
+
           <Route path="/about" element={<AboutUs />} /> 
           <Route path="/messageboard" element={<MessageBoard />} />
           <Route path="/messageboard/:id" element={<TopicPage />} />
@@ -43,11 +53,11 @@ function App() {
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
             {/* these routes are for viewing user profiles */}
-            <Route path="/community" element={<Community/>} />
+            {/* <Route path="/community" element={<Community/>} />
             <Route path="/community/users/:user_id/profile" element={<Protected/>}>
               <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
               <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
-            </Route>
+            </Route> */}
 
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
             <Route path="/profile/edit_card/:id" element={<EditCard/>} />
