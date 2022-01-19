@@ -45,7 +45,7 @@ const Community = () => {
                 <ListItem key={u.id} secondaryAction={
                     <>
                     <label>View profile</label>
-                    <IconButton onClick={()=>navigate(`/community/users/${u.id}`)} >
+                    <IconButton onClick={()=>navigate(`/community/users/${u.id}/profile`)} >
                         <Icon>visibility</Icon>
                     </IconButton>
                     <IconButton>
