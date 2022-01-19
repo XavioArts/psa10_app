@@ -37,6 +37,8 @@ function App() {
           <Route path="/community/users/:user_id/profile" element={<Protected/>}>
             <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
             <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
+            <Route path="/community/users/:user_id/profile/showcases" element={<Showcases/>} />
+            <Route path="/community/users/:user_id/profile" element={<Overview/>} />
 
           </Route>
           <Route path="/about" element={<AboutUs />} /> 
