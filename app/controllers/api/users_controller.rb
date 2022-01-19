@@ -1,9 +1,6 @@
 class Api::UsersController < ApplicationController
-
-before_action :authenticate_user!, except: [:index, :search]
-
+before_action :authenticate_user!, except: [:index, :search, :show]
 before_action :set_user, only: [:show, :update, :destroy, :info]
-
 
     def profile_image
         file = params[:file]

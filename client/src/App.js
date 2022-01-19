@@ -18,6 +18,7 @@ import Showcases from './components/Showcases';
 import AboutUs from './pages/AboutUs';
 import CollectionNew from './pages/CollectionNew';
 import Community from './pages/Community';
+import Overview from './components/Overview';
 import MessageBoard from './pages/MessageBoard';
 import TopicPage from './pages/TopicPage';
 import Collection from './components/Collection';
@@ -57,6 +58,7 @@ function App() {
               <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
               <Route path="/profile/showcases" element={<Showcase/>}/>
               <Route path="/profile/showcases" element={<Showcases/>}/>
+              <Route path="/profile/overview" element={<Overview/>}/>
               <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}
