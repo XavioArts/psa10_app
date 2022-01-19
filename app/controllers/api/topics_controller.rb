@@ -34,7 +34,7 @@ class Api::TopicsController < ApplicationController
   private
 
   def set_topic
-    @topic = current_user.topics.find(params[:id])
+    @topic = Topic.find(params[:id])
   end
 
   def topic_params
