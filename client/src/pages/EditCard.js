@@ -88,7 +88,7 @@ const EditCard = () => {
             let res = await axios.delete(`/api/cards/${card.id}`)
             setCard(null)
             setFailed(false);
-            navigate("/profile");
+            navigate("/profile/collections");
         } catch (err) {
             console.log(err.response);
             // setFailed(true);
