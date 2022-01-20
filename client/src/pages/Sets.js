@@ -1,7 +1,8 @@
-import { Button, Icon, Input, Stack } from "@mui/material";
+import { Button, Grid, Icon, Input, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import CollectionCard from "../components/CollectionCard";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Sets = () => {
@@ -26,6 +27,12 @@ const Sets = () => {
             alert("error searching")
         }
     }
+
+    const renderCards = () => {
+        return cards.map((c)=>{
+        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false}/></div>)
+      });
+    };
 
     return (
         <div>
@@ -52,8 +59,13 @@ const Sets = () => {
                 <Icon sx={{fontSize:"150px"}} >pageview</Icon>
                 <p>There are no cards to diplay, please search for a set..</p>
             </Box>}
-            {cards && <Box sx={{width: "80vw", bgcolor: "#D7D7D7", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
-                <code>{JSON.stringify(cards)}</code>
+            {cards && <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "20px"}} >
+                {/* <code>{JSON.stringify(cards)}</code> */}
+                <div style={{margin: "auto"}} >
+                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {renderCards()}
+                    </Grid>
+                </div>
             </Box>}
         </div>
     )
