@@ -26,6 +26,8 @@ import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
 import UserCollections from './pages/UserCollections';
 import UserCollectView from './pages/UserCollectView';
+import UserOverview from './components/UserOverview';
+import UserShowcases from './components/UserShowcases';
 
 function App() {
   return (
@@ -37,8 +39,8 @@ function App() {
           <Route path="/community/users/:user_id/profile" element={<Protected/>}>
             <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
             <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
-            <Route path="/community/users/:user_id/profile/showcases" element={<Showcases/>} />
-            <Route path="/community/users/:user_id/profile" element={<Overview/>} />
+            <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases/>} />
+            <Route path="/community/users/:user_id/profile" element={<UserOverview/>} />
 
           </Route>
           <Route path="/about" element={<AboutUs />} /> 
