@@ -1,12 +1,9 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Button, dividerClasses } from "@mui/material";
 import Box from '@mui/material/Box';
-import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
 
 
@@ -14,7 +11,7 @@ import CollectionCard from "./CollectionCard";
 {/* <Showcase id={auth.id}/> */}
 
 
-const Showcase = (props) => {
+const UserShowcases = (props) => {
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
@@ -54,30 +51,10 @@ const normalizeData = (res_showcases, res_cards) => {
 })
 setShowcases(showcaseCards)
 }
-  
-    
-
-
-const deleteShowcase = async (id) => {
-  let res_id = id
-  await axios.delete(`/api/showcases/${res_id}`);
-  // remove from UI
-  setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
-};
-
-const updatePrimaryShowcase = async (id) => {
-  setPrimaryShowcase(id)
-  try {
-    return auth.handleUpdate({primary_showcase: id}, navigate);
-  } catch(err) {
-    console.log(err.response);
-    alert("there was an error adding primary showcase")
-}
-}
 
   const renderShowcases = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard  {...c} /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard {...c} /></div>)
     })
     return showcases.map((s)=> {
       return (
@@ -103,11 +80,6 @@ const updatePrimaryShowcase = async (id) => {
       <div style={styles.cardsDiv}>
       {renderShowcaseCards(s)}
       </div>
-      <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
-      </ButtonDiv>
       </Box>
  
       )
@@ -118,9 +90,6 @@ const updatePrimaryShowcase = async (id) => {
   return (
     <div>
       <div style={styles.centered}>
-        <div style={styles.row}>
-        <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
-        </div>
         <div >
         {renderShowcases()}
         </div>
@@ -153,4 +122,4 @@ const styles = {
   }
 }
 
-export default Showcase;
+export default UserShowcases;
