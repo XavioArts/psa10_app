@@ -25,8 +25,8 @@ import Collection from './components/Collection';
 import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
 import UserCollections from './pages/UserCollections';
-import LandingPage from './pages/LandingPage';
 import UserCollectView from './pages/UserCollectView';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -38,14 +38,9 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/community/users/:user_id/profile" element={<Protected />}>
             <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
-        <Route element={<Layout/>}>
-          <Route path="/" element={<Home/>} />
-          <Route path="/community" element={<Community/>} />
-          <Route path="/community/users/:user_id/profile" element={<Protected/>}>
-            <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
-            <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
-            <Route path="/community/users/:user_id/profile/showcases" element={<Showcases/>} />
-            <Route path="/community/users/:user_id/profile" element={<Overview/>} />
+            <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
+            <Route path="/community/users/:user_id/profile/showcases" element={<Showcases />} />
+            <Route path="/community/users/:user_id/profile" element={<Overview />} />
 
           </Route>
           <Route path="/about" element={<AboutUs />} />
@@ -65,10 +60,10 @@ function App() {
               <Route path="/profile/collections" element={<Collections />} />
               <Route path="/profile/collections/:id" element={<Collection />} />
               <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
-              <Route path="/profile/showcases" element={<Showcase/>}/>
-              <Route path="/profile/showcases" element={<Showcases/>}/>
-              <Route path="/profile/overview" element={<Overview/>}/>
-              <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
+              <Route path="/profile/showcases" element={<Showcase />} />
+              <Route path="/profile/showcases" element={<Showcases />} />
+              <Route path="/profile/overview" element={<Overview />} />
+              <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit />} />
               {/* <Route path="/sets" element={<Sets/>}/>
               <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
