@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
 import EditTopic from '../components/EditTopic';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
@@ -110,14 +109,14 @@ const TopicPage = () => {
       {auth.id === topic.user_id &&<Button variant="contained" style={{ backgroundColor: 'red'}} onClick={() => deleteTopic(topic.id)}>Delete Topic</Button>}
       <h1>{topic.title}</h1>
       <p>{topic.body}</p>
-      {auth.authenticated ? <Box style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+      {auth.authenticated ? <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
         <form onSubmit={handleSubmit}>
-          <h6 style={{margin: '5px'}}>Posted by User {auth.id}</h6>
+          <h6 style={{margin: '5px'}}>Posted by {auth.nickname}</h6>
           <textarea style={{ resize: 'none', overflow: 'auto', marginTop: '25px', marginBottom: '15px', fontSize: '1.17em', width: '99%'}} rows="4"  value={content} onChange={(e) => setContent(e.target.value)}/>
           <br/>
           <Button variant="contained" type='submit'>Post</Button>
         </form>
-      </Box> : renderLoginBox()}
+      </Paper> : renderLoginBox()}
       {renderMessages(messages)}
     </div>
   )

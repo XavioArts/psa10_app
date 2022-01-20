@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button } from "@mui/material";
-import Box from '@mui/material/Box';
+import { Button, Paper } from "@mui/material";
 import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 
@@ -35,7 +34,8 @@ const Message = (props) => {
   const getMessage = async () => {
     try {
       let res = await axios.get(`/api/topics/${props.topic_id}/messages/${props.id}`);
-      setMessage(res.data);
+      console.log(res.data[0])
+      setMessage(res.data[0]);
     } catch (err) {
       console.log(err.response);
       alert("Error getting messages")
@@ -44,24 +44,24 @@ const Message = (props) => {
 
   if(clickedEdit){
     return(
-        <Box style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+        <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
           <form onSubmit={handleSubmit}>
-            <h6 style={{margin: '5px'}}>Posted by User {auth.id}</h6>
+            <h6 style={{margin: '5px'}}>Posted by {message.user_nickname}</h6>
             <textarea style={{ resize: 'none', overflow: 'auto', marginTop: '25px', marginBottom: '15px', fontSize: '1.17em', width: '99%'}} rows="4"  value={content} onChange={(e) => setContent(e.target.value)}/>
             <br/>
             {auth.id === message.user_id &&<Button variant="contained" type='submit'>Update</Button>}
             {auth.id === message.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
         </form>
-      </Box>
+      </Paper>
       )
   } else {
     return(
-      <Box style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
-        <h6 style={{margin: '5px'}}>Posted by User {message.user_id}</h6>
+      <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+        <h6 style={{margin: '5px'}}>Posted by {message.user_nickname}</h6>
         <h3>{message.content}</h3>
         {auth.id === message.user_id &&<Button variant="contained" onClick={handleEditClicked}>Edit</Button>}
         {auth.id === message.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
-      </Box>
+      </Paper>
     )
   }
 }

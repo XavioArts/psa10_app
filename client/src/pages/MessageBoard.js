@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Box from '@mui/material/Box';
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import Modal from '@mui/material/Modal';
 import AddTopic from '../components/AddTopic';
 import { AuthContext } from '../providers/AuthProvider';
@@ -49,11 +48,11 @@ const MessageBoard = (props) => {
         navigate(`/messageboard/${t.id}`)
       }
       return(
-        <Box key={t.id} onClick={()=>handleOnClick()} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+        <Paper key={t.id} elevation={5} onClick={()=>handleOnClick()} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px', cursor: 'pointer' }}>
           <h6 style={{margin: '5px'}}>Posted by {t.user_nickname}</h6>
           <h3>{t.title}</h3>
           <p>{t.body}</p>
-        </Box>
+        </Paper>
       )
     })
     return topicBox
