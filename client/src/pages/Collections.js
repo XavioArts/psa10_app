@@ -32,7 +32,7 @@ const Collections = () => {
             {c.cards.slice( 0,3).map((cc) => {
               return (
                 <Grid item xs={2} sm={4} md={4} key={cc.id}>
-                  <CollectionCard {...cc} />
+                  <CollectionCard key={cc.id} card={{...cc}} show={false} personal={false} />
                 </Grid>
               )
             })}

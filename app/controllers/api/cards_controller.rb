@@ -1,10 +1,16 @@
 class Api::CardsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:card_search]
   before_action :set_card, only: [:show, :destroy, :update, :upload]
 
 
   def index 
     render json: current_user.cards
+  end
+
+  def card_search
+    @user = User.find(params[:id])
+    phrase = params[:search]
+    render json: @user.card_search(phrase)
   end
 
   def all_cards
