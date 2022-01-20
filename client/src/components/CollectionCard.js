@@ -5,6 +5,8 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -16,6 +18,7 @@ const CollectionCard = (props) => {
   // const { likes, available } = props
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [visibleImage, setVisibleImage] = React.useState(card.front_image);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -34,17 +37,34 @@ const CollectionCard = (props) => {
     e.preventDefault();
     navigate(url);
 }
+  const flipCard = (e) => {
+    e.preventDefault();
+    if (visibleImage === card.front_image) {
+      setVisibleImage(card.back_image);
+    } else {
+      setVisibleImage(card.front_image);
+    };
+  };
 
   return (
     <>
     <Card sx={{ maxWidth: 345 }} key={card.id}>
       <CardMedia
-        component="img"
-        height="400"
-        image={card.front_image}
+        component="div"
+        sx={{height: "400px"}}
+        image={visibleImage}
         alt={card.name}
-        onClick={handleOpen}
-      />
+         >
+          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%"}} >
+            <IconButton onClick={flipCard} >
+              <ArrowBackIosIcon sx={{fontSize: "60px"}} />
+            </IconButton>
+            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
+            <IconButton onClick={flipCard} >
+              <ArrowForwardIosIcon sx={{fontSize: "60px"}} />
+            </IconButton>
+          </div>
+        </CardMedia>
       {show && 
       <Modal
         open={open}
@@ -64,7 +84,7 @@ const CollectionCard = (props) => {
         </Box>
       </Modal>}
 
-      <CardActions disableSpacing>
+      <CardActions disableSpacing >
         <Avatar sx={{ width: 24, height: 24 }} />
         <IconButton aria-label="like">
           <FavoriteIcon />{card.likes}
