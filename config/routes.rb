@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :collection_comments
     end
     post "cards/:id/upload", to: "cards#upload"
+    get "cards/:id/search/:search", to: "cards#card_search"
     resources :cards do
       resources :card_comments
     end

@@ -26,6 +26,7 @@ import EditCollection from './components/EditCollection';
 import Showcase from './components/Showcases';
 import UserCollections from './pages/UserCollections';
 import UserCollectView from './pages/UserCollectView';
+import Sets from './pages/Sets';
 import UserOverview from './components/UserOverview';
 import UserShowcases from './components/UserShowcases';
 
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>} />
+
           <Route path="/community" element={<Community/>} />
           <Route path="/community/users/:user_id/profile" element={<Protected/>}>
             <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
@@ -43,6 +45,7 @@ function App() {
             <Route path="/community/users/:user_id/profile" element={<UserOverview/>} />
 
           </Route>
+
           <Route path="/about" element={<AboutUs />} /> 
           <Route path="/messageboard" element={<MessageBoard />} />
           <Route path="/messageboard/:id" element={<TopicPage />} />
@@ -51,6 +54,13 @@ function App() {
 
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
+            {/* these routes are for viewing user profiles */}
+            {/* <Route path="/community" element={<Community/>} />
+            <Route path="/community/users/:user_id/profile" element={<Protected/>}>
+              <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
+              <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
+            </Route> */}
+
             <Route path="/profile_image" element={<ProfileImageUpload/>} />
             <Route path="/profile/edit_card/:id" element={<EditCard/>} />
 
@@ -64,8 +74,8 @@ function App() {
               <Route path="/profile/showcases" element={<Showcases/>}/>
               <Route path="/profile/overview" element={<Overview/>}/>
               <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
-              {/* <Route path="/sets" element={<Sets/>}/>
-              <Route path="/showcases" element={<Showcases/>}/> */}
+              <Route path="/profile/sets" element={<Sets/>}/>
+              {/* <Route path="/showcases" element={<Showcases/>}/> */}
             </Route>
 
             <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />

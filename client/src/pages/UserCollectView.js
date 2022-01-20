@@ -33,7 +33,7 @@ const UserCollectView = () => {
           {collectionCards.map(cc => {
             return (
               <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} {...cc} />
+                <CollectionCard key={cc.id} card={{...cc}} show={true} personal={false} />
               </Grid>
             )
           })}
