@@ -10,10 +10,10 @@ import CollectionCard from "./CollectionCard";
 {/* <Showcase id={auth.id}/> */}
 
 
-const Overview = () => {
+const UserOverview = () => {
   const [primaryShowcase, setPrimaryShowcase] = useState("")
   const [user, setUser] = useState({})
-  const {id} = useParams()
+  const {user_id} = useParams();
   const auth = useContext(AuthContext);
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
@@ -25,7 +25,7 @@ const Overview = () => {
 
 
   const getData = async () => {
-    let res_id = auth.id
+    let res_id = user_id
     console.log(res_id)
     // need to pull user showcases not just showcase number one
     try {
@@ -219,4 +219,4 @@ const styles = {
   }
 }
 
-export default Overview; 
+export default UserOverview; 
