@@ -13,6 +13,10 @@ const EditUser = (props) => {
   const [last_name, setLast_name] = useState("")
   const [nickname, setNickname] = useState("")
   const [about, setAbout] = useState("")
+  const [twitter, setTwitter] = useState("")
+  const [discord, setDiscord] = useState("")
+  const [facebook, setFacebook] = useState("")
+  const [instagram, setInstagram] = useState("")
   const navigate = useNavigate();
 
   useEffect(() => {
