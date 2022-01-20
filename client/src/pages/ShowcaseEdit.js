@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { TextareaAutosize } from "@mui/base";
 import { Button } from "@mui/material";
 import styled from "styled-components";
+import CollectionCard from "../components/CollectionCard";
 
 
 const ShowcaseEdit = () => {
@@ -26,7 +27,6 @@ const ShowcaseEdit = () => {
     try {
         let res = await axios.get(`/api/cards`);
         setCardChoices(res.data);
-        renderCards()
     } catch (err) {
         console.log(err.response);
         alert("there was an error getting cards")
@@ -63,7 +63,7 @@ const ShowcaseEdit = () => {
   const addCard = async (card_id) => {
     // let showcase_id = id
     updateUIAdd(card_id)
-    console.log(selectedCards)
+    //this code lets you add cards to the array as you go instead of on submit. May use later
     // try {
     //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
     //   console.log()
@@ -74,51 +74,32 @@ const ShowcaseEdit = () => {
   };
 
   const removeCard = async (card_id) => {
-    // let showcase_id = id
     updateUIRemove(card_id)
-    console.log(selectedCards)
-    // try {
-    //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`, );
-    //   console.log()
-    //   // updateUI(card_id);
-    // } catch (err) {
-    //   alert("err in rmCard");
-    // }
   };
   
   const updateUIAdd = (card) => {
     // remove card from unselected list
-    console.log(card)
     const unselectedCards = cardChoices.filter((c) => c.id !== card.id);
-    console.log("unselectedCards", unselectedCards)
     setCardChoices(unselectedCards)
     let showcaseCards = selectedCards
     showcaseCards.push(card)
-    console.log(showcaseCards)
     setSelectedCards(showcaseCards);
   };
 
   const updateUIRemove = (card) => {
     // remove card from unselected list
     const nowSelectedCards = selectedCards.filter((c) => c.id !== card.id);
-    console.log("nowSelectedCards", nowSelectedCards)
     setSelectedCards(nowSelectedCards)
     let choices = cardChoices
     choices.push(card)
-    console.log(choices)
     setCardChoices(choices);
   };
 
 
   const renderSelectedCards = () => {
     return selectedCards.map((c)=>{
-      return (
-        <div key={c.id}>
-          <h3>{c.name}</h3>
-          <p>{c.available}</p>
-          <p>user_id: {c.user_id}</p>
-          <p>card_id: {c.id}</p>
-          <div onClick={()=>removeCard(c)}>Add</div>
+      return ( <div style={styles.margin}><CollectionCard {...c}/>
+          <Button variant="contained" onClick={()=>removeCard(c)}>Remove Card</Button>
         </div>
       )
     })
@@ -126,31 +107,12 @@ const ShowcaseEdit = () => {
 
   const renderCardChoices = () => {
     return cardChoices.map((c)=>{
-      return (
-        <div key={c.id}>
-          <h3>{c.name}</h3>
-          <p>{c.available}</p>
-          <p>user_id: {c.user_id}</p>
-          <p>card_id: {c.id}</p>
-          <div onClick={()=>addCard(c)}>Add</div>
+      return (  <div style={styles.margin}><CollectionCard {...c}/>
+        <Button variant="contained" onClick={()=>addCard(c)}>Add Card</Button>
         </div>
       )
     })
   }
-
-  const renderCards = () => {
-    return cardChoices.map((c) => {
-      return (
-        <div key={c.id}>
-          <h3>{c.name}</h3>
-          <p>{c.available}</p>
-          <p>user_id: {c.user_id}</p>
-          <p>card_id: {c.id}</p>
-          <div onClick={()=>addCard(c.id)}>Add</div>
-        </div>
-    )
-  }
-  )}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -174,13 +136,19 @@ const ShowcaseEdit = () => {
         value={showcaseDescription} 
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
         
-        <h3>Add Cards to Showcase</h3>
-        <p>In my showcase: {JSON.stringify(showcase)}</p>
-        <h2>Selected Cards</h2>
-        {renderSelectedCards()}
-        <h2>Choose Cards to Add</h2>
-        {renderCardChoices()}
-        {/* {renderCards()} */}
+        <h2>Add Cards to Showcase</h2>
+        <div style={styles.graybox}>
+          <h4>Selected Cards</h4>
+          <div style={styles.cardsDiv}>
+          {renderSelectedCards()}
+          </div>
+        </div>
+          <div style={styles.graybox}>
+          <h4>Choose Cards to Add</h4>
+          <div style={styles.cardsDiv}>
+          {renderCardChoices()}
+          </div>
+        </div>
         <br/>
         <ButtonDiv>
           <Button type="submit" variant="contained">Update Showcase</Button>
@@ -194,5 +162,25 @@ const ShowcaseEdit = () => {
 const ButtonDiv = styled.div`
     margin: 10px;
 `
+
+const styles = {
+  button: {
+    margin: '10px',
+  },
+  margin: {
+    margin: '10px'
+  },
+  graybox: {
+    backgroundColor: '#ebebeb',
+    margin: '15px',
+    padding: '15px'
+  },
+  cardsDiv: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'left',
+  }
+}
 
 export default ShowcaseEdit;
