@@ -35,7 +35,7 @@ const Sets = () => {
                 <Input 
                 fullWidth 
                 startAdornment={<Icon>search</Icon>} 
-                placeholder="Search by name, username, or email.." 
+                placeholder="Search for a set.." 
                 value={search}
                 onChange={(e)=>{setSearch(e.target.value)}}
                 type="search" />
