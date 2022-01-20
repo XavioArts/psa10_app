@@ -54,7 +54,7 @@ setShowcases(showcaseCards)
 
   const renderShowcases = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard {...c} /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} /></div>)
     })
     return showcases.map((s)=> {
       return (

@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
     OR UPPER(users.nickname) LIKE UPPER('%#{phrase}%') ")
   end
 
+  def card_search(phrase)
+    self.cards.where("UPPER(cards.set) LIKE UPPER('%#{phrase}%')")
+  end
+
 end
