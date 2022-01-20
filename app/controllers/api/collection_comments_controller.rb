@@ -4,7 +4,7 @@ class Api::CollectionCommentsController < ApplicationController
   before_action :set_collection_comment, only: [:show, :update, :destroy]
 
   def index
-    render json: @collection.collection_comments
+    render json: @collection.collection_comments.userInfo
   end
 
   def show

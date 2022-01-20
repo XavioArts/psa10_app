@@ -18,11 +18,10 @@ const CollectionCard = (props) => {
     <Card sx={{ maxWidth: 345 }} key={card.id}>
       <CardMedia
         component="img"
-        height="400"
+        // height="500"
         image={card.front_image}
         alt={props.name}
       />
-
       <CardActions disableSpacing>
         <Avatar sx={{ width: 24, height: 24 }} />
         <IconButton aria-label="like">

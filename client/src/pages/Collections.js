@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import EditCollection from '../components/EditCollection';
 
 const Collections = () => {
 
@@ -48,9 +47,7 @@ const Collections = () => {
       <a href = "/collection/new">Add a Collection</a>
       <hr />
       {renderCollectionCards()}
-      {/* {JSON.stringify(collections)} */}
       <hr />
-      {/* <CollectionComments /> */}
     </div>
   )
 };
