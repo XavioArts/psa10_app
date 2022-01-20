@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import EditTopic from '../components/EditTopic';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import Message from '../components/Message';
 
 const TopicPage = () => {
   const auth = useContext(AuthContext);
@@ -15,7 +16,6 @@ const TopicPage = () => {
   const [content, setContent] = useState([])
   const [open, setOpen] = useState(false);
   const [tic, setTic] = useState(false);
-  const [clickedEdit, setClickedEdit] = useState(false);
   const handleOpen = () => setOpen(true);
   const navigate = useNavigate()
   
@@ -68,26 +68,10 @@ const TopicPage = () => {
     }
   }
 
-  const handleEditClicked = () => {
-    if(clickedEdit){
-      console.log('put axios request here')
-      setClickedEdit(!clickedEdit)
-    } else {
-      console.log('Show Edit Form Here')
-      setClickedEdit(!clickedEdit)
-    }
-
-  }
-
   const renderMessages = (messages) => {
     let messageBox = messages.map(m=>{
       return(
-        <Box key={m.id} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
-          <h6 style={{margin: '5px'}}>Posted by User {m.user_id}</h6>
-          <h3>{m.content}</h3>
-          {auth.id === m.user_id &&<Button variant="contained" onClick={handleEditClicked}>{clickedEdit ? 'Update' : 'Edit'}</Button>}
-          {auth.id === m.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={() => deleteMessage(m.id)}>Delete</Button>}
-        </Box>
+        <Message key={m.id} {...m} deleteMessage={deleteMessage}/>
       )
     })
     return messageBox
@@ -135,10 +119,6 @@ const TopicPage = () => {
         </form>
       </Box> : renderLoginBox()}
       {renderMessages(messages)}
-      <div style={{width: "85vw", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
-        <h3>This JSON is for testing purposes</h3>
-        <code style={{overflowWrap: "break-word"}} >{JSON.stringify(messages)}</code>
-      </div>
     </div>
   )
 }
