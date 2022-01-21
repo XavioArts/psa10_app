@@ -133,14 +133,11 @@ const updatePrimaryShowcase = async (id) => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      {/* <div style={styles.cardsDiv}> */}
       <div >
       <Carousel show={4} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>
       </div>
-      {/* </div> */}
-
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
