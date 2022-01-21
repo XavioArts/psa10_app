@@ -49,7 +49,7 @@ const Showcase = (props) => {
   }, [])
 
   const getData = async () => {
-    let res_id = user_id ? user_id : auth.id
+    let res_id = auth.id
     try {
         let res = await axios.get("/api/cards");
         setCards(res.data);
@@ -134,7 +134,6 @@ const updatePrimaryShowcase = async (id) => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      {/* <div style={styles.cardsDiv}> */}
       <div >
       {s.cards.length > 4 && <Carousel show={4} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
@@ -146,12 +145,10 @@ const updatePrimaryShowcase = async (id) => {
             </Grid>
           </div>}
       </div>
-      {/* </div> */}
-
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
       </ButtonDiv>
       </Box>
  
