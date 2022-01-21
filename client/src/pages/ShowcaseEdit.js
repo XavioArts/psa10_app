@@ -26,23 +26,33 @@ const ShowcaseEdit = () => {
   const getData = async () => {
     try {
         let res = await axios.get(`/api/cards`);
-        setCardChoices(res.data);
+        // setCardChoices(res.data);
+        let resShowcase = await axios.get(`/api/showcases/${id}`);
+        setShowcase(resShowcase.data)
+        setShowcaseName(resShowcase.data.name);
+        console.log(resShowcase.data.name)
+        setShowcaseDescription(resShowcase.data.description)
+        console.log(resShowcase.data, res.data)
+        normalizeData(resShowcase.data, res.data)
     } catch (err) {
         console.log(err.response);
         alert("there was an error getting cards")
     }
-    try {
-      let resShowcase = await axios.get(`/api/showcases/${id}`);
-      setShowcase(resShowcase.data)
-      setShowcaseName(resShowcase.data.name);
-      setShowcaseDescription(resShowcase.data.description)
-      // setShowcaseCards(resShowcase.data.cards)
-  } catch (err) {
-      console.log(err.response);
-      alert("there was an error getting showcase")
-  }
 }
 
+
+  const normalizeData = (res_showcase, res_cards) => {
+    let cards_array = res_showcase.cards
+    let cardsOfShowcase = res_cards.filter((c) => {
+      for (let i = 0; i<cards_array.length; i++) {
+        if (cards_array[i] == c.id) {
+          return true
+      }
+    }})
+    setSelectedCards(cardsOfShowcase)
+    let unselectedCards = res_cards.filter((c) => !cardsOfShowcase.includes(c))
+    setCardChoices(unselectedCards)
+  }
 
   const updateShowcase = async () => {
     // error here user id is not populating
@@ -58,6 +68,38 @@ const ShowcaseEdit = () => {
       alert("there was an error adding a showcase")
   }
   console.log("showcase updated")
+  }
+
+  // const normalizeData = (res_showcases, res_cards, res_user) => {
+  //   console.log(res_showcases)
+  //   let showcaseCards = res_showcases.map((s)=> {
+  //     console.log(s.cards)
+  //     let cards_array = s.cards
+  //     let cardsOfShowcase = res_cards.filter((c) => {
+  //       for (let i = 0; i<cards_array.length; i++) {
+  //         if (cards_array[i] == c.id) {
+  //           return true
+  //       }
+  //     }})
+  //     return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
+  // })
+  // setShowcases(showcaseCards)
+  // userPrimaryShowcase(res_user, showcaseCards)
+  // }
+
+  const updateCards = async () => {
+    let showcasedCards = selectedCards.map((c)=> {return {id: c.id, showcase: true}})
+    console.log(showcasedCards)
+    let endpoints = showcasedCards.map((c)=> {return {axios: `/api/cards/${c.id}`, id: c.id, showcase: true}})
+    console.log(endpoints)
+    try {
+    let res = await axios.all(endpoints.map((e)=> axios.put(e.axios, {id: e.id, showcase: e.showcase})))
+    console.log(res)
+    } catch(err) {
+      console.log(err.response);
+      alert("there was an error updating cards")
+  }
+  // console.log("showcase updated")
   }
 
   const addCard = async (card_id) => {
@@ -97,6 +139,7 @@ const ShowcaseEdit = () => {
 
 
   const renderSelectedCards = () => {
+    
     return selectedCards.map((c)=>{
       return ( <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false}/>
           <Button variant="contained" onClick={()=>removeCard(c)}>Remove Card</Button>
@@ -116,7 +159,8 @@ const ShowcaseEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateShowcase()
+    updateShowcase();
+    updateCards();
     navigate(`/profile/showcases/`);
   };
 
