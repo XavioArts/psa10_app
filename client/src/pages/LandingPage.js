@@ -3,9 +3,10 @@ import React from 'react'
 
 const LandingPage = () => {
   return (
-    <div>
-      <p sx={styles.margin}>A DIGITAL WAY TO SHOWCASE, TRADE AND CHAT WITH OTHER COLLECTORS</p>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%" }}>
+      <p>A DIGITAL WAY TO SHOWCASE, TRADE AND CHAT WITH OTHER COLLECTORS</p>
       <h1>PSA 10</h1>
+      <br />
       <Button onClick="submit">Start your search</Button>
     </div>
   );
