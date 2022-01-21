@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams} from "react-router-dom";
 import { useNavigate } from "react-router";
 import { TextareaAutosize } from "@mui/base";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import CollectionCard from "../components/CollectionCard";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const ShowcaseEdit = () => {
@@ -14,6 +15,9 @@ const ShowcaseEdit = () => {
   const [showcaseName, setShowcaseName] = useState("")
   const [showcaseDescription, setShowcaseDescription] = useState("")
   const [selectedCards, setSelectedCards] = useState([])
+  const [showcases, setShowcases] = useState([]);
+  const [showcaseCards, setShowcaseCards] = useState([]);
+  const auth = useContext(AuthContext);
   const {id} = useParams()
   const navigate = useNavigate();
 
@@ -24,16 +28,17 @@ const ShowcaseEdit = () => {
   }, [])
 
   const getData = async () => {
+    let res_id = auth.id
     try {
         let res = await axios.get(`/api/cards`);
         // setCardChoices(res.data);
         let resShowcase = await axios.get(`/api/showcases/${id}`);
+        let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
+        setShowcases(res_showcases.data)
         setShowcase(resShowcase.data)
         setShowcaseName(resShowcase.data.name);
-        console.log(resShowcase.data.name)
         setShowcaseDescription(resShowcase.data.description)
-        console.log(resShowcase.data, res.data)
-        normalizeData(resShowcase.data, res.data)
+        normalizeData(resShowcase.data, res.data, res_showcases.data)
     } catch (err) {
         console.log(err.response);
         alert("there was an error getting cards")
@@ -41,7 +46,7 @@ const ShowcaseEdit = () => {
 }
 
 
-  const normalizeData = (res_showcase, res_cards) => {
+  const normalizeData = (res_showcase, res_cards, res_showcases) => {
     let cards_array = res_showcase.cards
     let cardsOfShowcase = res_cards.filter((c) => {
       for (let i = 0; i<cards_array.length; i++) {
@@ -52,6 +57,13 @@ const ShowcaseEdit = () => {
     setSelectedCards(cardsOfShowcase)
     let unselectedCards = res_cards.filter((c) => !cardsOfShowcase.includes(c))
     setCardChoices(unselectedCards)
+    let allShowcaseCardsArray = []
+    let allShowcaseCards = res_showcases.map((s)=>{
+      allShowcaseCardsArray = [...allShowcaseCardsArray, ...s.cards]
+      return allShowcaseCardsArray
+    })
+    console.log(allShowcaseCardsArray)
+    setShowcaseCards(allShowcaseCardsArray)
   }
 
   const updateShowcase = async () => {
@@ -70,27 +82,19 @@ const ShowcaseEdit = () => {
   console.log("showcase updated")
   }
 
-  // const normalizeData = (res_showcases, res_cards, res_user) => {
-  //   console.log(res_showcases)
-  //   let showcaseCards = res_showcases.map((s)=> {
-  //     console.log(s.cards)
-  //     let cards_array = s.cards
-  //     let cardsOfShowcase = res_cards.filter((c) => {
-  //       for (let i = 0; i<cards_array.length; i++) {
-  //         if (cards_array[i] == c.id) {
-  //           return true
-  //       }
-  //     }})
-  //     return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
-  // })
-  // setShowcases(showcaseCards)
-  // userPrimaryShowcase(res_user, showcaseCards)
-  // }
 
   const updateCards = async () => {
+    let showcaseCheck = cardChoices.map((c)=> {
+      if (!showcaseCards.includes(c.id)) {
+      return {id: c.id, showcase: false}} 
+      else {return {id: c.id, showcase: true}}
+    })
+    // console.log(showcaseCheck)
     let showcasedCards = selectedCards.map((c)=> {return {id: c.id, showcase: true}})
-    console.log(showcasedCards)
-    let endpoints = showcasedCards.map((c)=> {return {axios: `/api/cards/${c.id}`, id: c.id, showcase: true}})
+    // console.log(showcasedCards)
+    let updatedCards = showcaseCheck.concat(showcasedCards)
+    // console.log(updatedCards)
+    let endpoints = updatedCards.map((c)=> {return {axios: `/api/cards/${c.id}`, id: c.id, showcase: c.showcase}})
     console.log(endpoints)
     try {
     let res = await axios.all(endpoints.map((e)=> axios.put(e.axios, {id: e.id, showcase: e.showcase})))
@@ -99,7 +103,7 @@ const ShowcaseEdit = () => {
       console.log(err.response);
       alert("there was an error updating cards")
   }
-  // console.log("showcase updated")
+  console.log("cards updated")
   }
 
   const addCard = async (card_id) => {
