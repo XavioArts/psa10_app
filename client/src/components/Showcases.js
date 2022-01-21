@@ -134,8 +134,8 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       {/* <div style={styles.cardsDiv}> */}
-      <div style={styles.margin}>
-      <Carousel show={4} infiniteLoop={false}>
+      <div >
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>
       </div>
