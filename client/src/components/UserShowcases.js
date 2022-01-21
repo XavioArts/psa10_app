@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import CollectionCard from "./CollectionCard";
+import Carousel from "./Carousel";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -25,9 +26,10 @@ const UserShowcases = (props) => {
   }, [])
 
   const getData = async () => {
-    let res_id = user_id ? user_id : auth.id
+    let res_id = user_id
     try {
-        let res = await axios.get("/api/cards");
+        let res = await axios.get("/api/cards/all_cards");
+        console.log(res.data)
         setCards(res.data);
         let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
         normalizeData(res_showcases.data, res.data);
@@ -50,6 +52,7 @@ const normalizeData = (res_showcases, res_cards) => {
     return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
 })
 setShowcases(showcaseCards)
+console.log(showcaseCards)
 }
 
   const renderShowcases = () => {
@@ -77,9 +80,9 @@ setShowcases(showcaseCards)
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <div style={styles.cardsDiv}>
-      {renderShowcaseCards(s)}
-      </div>
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>
       </Box>
  
       )

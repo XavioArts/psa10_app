@@ -4,6 +4,7 @@ import { useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Box from '@mui/material/Box';
 import CollectionCard from "./CollectionCard";
+import Carousel from "./Carousel";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -32,7 +33,7 @@ const UserOverview = () => {
         let res_user = await axios.get(`/api/users/${res_id}`);
         console.log(res_user.data)
         setUser(res_user.data)
-        let res = await axios.get("/api/cards");
+        let res = await axios.get("/api/cards/all_cards");
         // allShowcases = res.data
         console.log(res.data)
         setCards(res.data);
@@ -101,9 +102,9 @@ const UserOverview = () => {
         }}
       ><h3>{primaryShowcase.name}</h3>
       <p>{primaryShowcase.description}</p>
-      <div style={styles.cardsDiv}>
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
       {renderShowcaseCards(primaryShowcase)}
-      </div>
+      </Carousel>
       </Box>
  
       )
@@ -136,9 +137,9 @@ const UserOverview = () => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <div style={styles.cardsDiv}>
-      {renderShowcaseCards(s)}
-      </div>
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>
       </Box>
  
       )
@@ -166,9 +167,9 @@ const UserOverview = () => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <div style={styles.cardsDiv}>
-      {renderShowcaseCards(s)}
-      </div>
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>
       </Box>
  
       )

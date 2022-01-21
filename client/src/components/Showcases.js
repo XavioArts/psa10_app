@@ -116,39 +116,36 @@ const Showcase = (props) => {
       return (
 
         <Box key={s.key}
-          sx={{
-            maxWidth: '100vw',
-            width: '1300px',
-            height: 'auto',
-            borderRadius: '7px',
-            padding: '20px',
-            margin: '15px 30px',
-            color: 'rgb(77, 77, 77)',
-            backgroundColor: '#ebebeb',
-            textAlign: "center",
-            '&:hover': {
-              backgroundColor: '#dbdbdb',
-              // opacity: [0.9, 0.8, 0.7],
-
-            },
-          }}
-        ><h3>{s.name}</h3>
-          <p>{s.description}</p>
-          {/* <div style={styles.cardsDiv}> */}
-          <div >
-            <Carousel show={4} infiniteLoop={true} style={styles.margin}>
-              {renderShowcaseCards(s)}
-            </Carousel>
-          </div>
-          {/* </div> */}
-
-          <ButtonDiv>
-            <Button style={styles.button} onClick={() => navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-            <Button style={styles.button} onClick={() => deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
-            {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={() => updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
-          </ButtonDiv>
-        </Box>
-
+        sx={{
+          maxWidth: '100vw',
+          width: '1300px',
+          height: 'auto',
+          borderRadius: '7px',
+          padding: '20px',
+          margin: '15px 30px',
+          color: 'rgb(77, 77, 77)',
+          backgroundColor: '#ebebeb',
+          textAlign: "center",
+          '&:hover': {
+            backgroundColor: '#dbdbdb',
+            // opacity: [0.9, 0.8, 0.7],
+            
+          },
+        }}
+      ><h3>{s.name}</h3>
+      <p>{s.description}</p>
+      <div >
+      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>
+      </div>
+      <ButtonDiv>
+      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
+      {auth.primary_showcase !== s.showcase_id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      </ButtonDiv>
+      </Box>
+ 
       )
     }
     )
