@@ -3,9 +3,9 @@ class ApplicationController < ActionController::API
         before_action :configure_permitted_parameters, if: :devise_controller?
 
         protected
-
+        
         def configure_permitted_parameters
-        added_attrs = [:nickname, :email, :password, :password_confirmation, :first_name, :last_name, :about, :liked_collections, :liked_cards, :image, :created_at, :primary_showcase]
+        added_attrs = [:nickname, :email, :password, :password_confirmation, :first_name, :last_name, :about, :liked_collections, :liked_cards, :image, :created_at, :primary_showcase, :twitter, :discord, :facebook, :instagram]
         devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
         devise_parameter_sanitizer.permit :account_update, keys: added_attrs
         end

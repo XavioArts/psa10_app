@@ -8,15 +8,19 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { Button, TextField } from "@mui/material";
+import { Button, Modal, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { AuthContext } from "../providers/AuthProvider";
+import CollectionCommentEdit from "./CollectionCommentEdit";
 
 const CollectionComments = (props) => {
   const auth = useContext(AuthContext)
   const [collectionComments, setCollectionComments] = useState([]);
   const [newContent, setNewContent] = useState([])
   const [editComment, setEditComment] = useState();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -34,32 +38,33 @@ const CollectionComments = (props) => {
     }
   }
 
-  const deleteCollectionComments = async (id) =>{
+  const deleteCollectionComments = async (id) => {
     await axios.delete(`/api/collections/${params.id}/collection_comments/${id}`)
     setCollectionComments(collectionComments.filter((cc) => cc.id !== id));
     navigate(`/profile/collections/${params.id}`)
   }
 
   const addComment = (collectionComment) => {
-    let displayNewComment = {...collectionComment, image: auth.image, nickname: auth.nickname}
+    let displayNewComment = { ...collectionComment, image: auth.image, nickname: auth.nickname }
     setCollectionComments([displayNewComment, ...collectionComments])
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newComment = {content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname}
+    let newComment = { content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname }
     let res = await axios.post(`/api/collections/${params.id}/collection_comments`, newComment)
     console.log(res)
     addComment(res.data)
   }
-  
-  const handleEdit = async (e, id) => {
-    e.preventDefault();
-    let newComment = {content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname}
-    let res = await axios.put(`/api/collections/${params.id}/collection_comments/${id}`, newComment)
-    console.log(res)
-    setEditComment()
-  }
+
+  // const handleEdit = async (e, id) => {
+  //   e.preventDefault();
+  //   let newComment = { content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname }
+  //   let res = await axios.put(`/api/collections/${params.id}/collection_comments/${id}`, newComment)
+  //   console.log(res)
+  //   setEditComment(res.data)
+  //   console.log("Handle Edit clicked")
+  // }
 
   const renderCollectionComments = () => {
     if (!collectionComments) {
@@ -71,7 +76,7 @@ const CollectionComments = (props) => {
     }
     return (
       collectionComments.map((cc) => (
-        <div key = {cc.id}>
+        <div key={cc.id}>
 
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
@@ -93,14 +98,23 @@ const CollectionComments = (props) => {
               }
             />
           </ListItem>
-          {/* have a delete button here and a condition to render, only collection owner and the person who left the comment. Collection.user_id & collection_comment.user_id == auth.id*/}
-          {(auth.id === cc.user_id  || auth.id === props.collectionId ) && <button onClick = {(e) => handleEdit(e, cc.id)}>Edit</button>}
-          {(auth.id === cc.user_id  || auth.id === props.collectionId ) && <button onClick = {() => deleteCollectionComments(cc.id)}>Delete this comment</button>}
+          {/* onClick={(e) => handleEdit(e, cc.id)} */}
+          {auth.id === cc.user_id && <button onClick={handleOpen}>Edit</button>}
+          <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <div>
+              <CollectionCommentEdit {...cc} />
+            </div>
+          </Modal>
+          {(auth.id === cc.user_id || auth.id === props.collectionId) && <button onClick={() => deleteCollectionComments(cc.id)}>Delete this comment</button>}
           <Divider variant="inset" component="li" />
         </div>
+        
       ))
-    )
-  }
+      )
+    }
   console.log(collectionComments)
 
   return (
