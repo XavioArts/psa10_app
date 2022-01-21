@@ -4,7 +4,7 @@ import { Link, useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Button, ButtonGroup, dividerClasses, Paper } from "@mui/material";
+import { Button, ButtonGroup, dividerClasses, Grid, Paper } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
@@ -111,6 +111,7 @@ const updatePrimaryShowcase = async (id) => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
       return (<div style={styles.margin} key={c.id}><CollectionCard  key={c.id} card={{...c}} show={false} personal={false} /></div>)
     })
+
     return showcases.map((s)=> {
       return (
         
@@ -135,9 +136,15 @@ const updatePrimaryShowcase = async (id) => {
       <p>{s.description}</p>
       {/* <div style={styles.cardsDiv}> */}
       <div >
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      {s.cards.length > 4 && <Carousel show={4} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
-      </Carousel>
+      </Carousel>}
+      {s.cards.length < 5 && 
+          <div style={{margin: "auto"}} >
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {renderShowcaseCards(s)}
+            </Grid>
+          </div>}
       </div>
       {/* </div> */}
 

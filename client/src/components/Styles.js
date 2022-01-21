@@ -9,6 +9,15 @@ export const PageDiv = styled.div`
     padding: 20px 30px;
 `
 
+export const FlexColumnDiv = styled.div`
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
+
 export const ModalBoxStyle = {
     position: 'absolute',
     top: '50%',
