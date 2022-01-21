@@ -31,12 +31,16 @@ const EditUser = (props) => {
     setEmail(auth.email)
     setNickname(auth.nickname)
     setAbout(auth.about)
+    setDiscord(auth.discord)
+    setFacebook(auth.facebook)
+    setTwitter(auth.twitter)
+    setInstagram(auth.instagram)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, first_name, last_name, nickname, about })
-    return auth.handleUpdate({ email, first_name, last_name, nickname, about }, navigate);
+    return auth.handleUpdate({ email, first_name, last_name, nickname, about, discord, facebook, twitter, instagram }, navigate);
   };
 
 
@@ -71,6 +75,27 @@ const EditUser = (props) => {
           style={{ width: 400, height: 100 }}
           value={about}
           onChange={(e) => { setAbout(e.target.value); }} />
+        <p>Social Media Links:</p>
+        <p>Discord</p>
+        <input
+          placeholder="Discord link"
+          value={discord}
+          onChange={(e) => { setDiscord(e.target.value); }} />
+        <p>Twitter</p>
+        <input
+          placeholder="Twitter link"
+          value={twitter}
+          onChange={(e) => { setTwitter(e.target.value); }} />
+        <p>Facebook</p>
+        <input
+          placeholder="Facebook link"
+          value={facebook}
+          onChange={(e) => { setFacebook(e.target.value); }} />
+        <p>Instagram</p>
+        <input
+          placeholder="Instagram link"
+          value={instagram}
+          onChange={(e) => { setInstagram(e.target.value); }} />
         <br />
         <button>Submit</button>
       </form>

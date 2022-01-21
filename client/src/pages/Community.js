@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageDiv } from "../components/Styles";
+import UserContactModal from "../components/UserContactModal";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Community = () => {
@@ -48,9 +49,7 @@ const Community = () => {
                     <IconButton onClick={()=>navigate(`/community/users/${u.id}/profile`)} >
                         <Icon>visibility</Icon>
                     </IconButton>
-                    <IconButton>
-                        <Icon>message</Icon>
-                    </IconButton>
+                    <UserContactModal {...u} />
                     </>
                 } >
                     <ListItemAvatar>
