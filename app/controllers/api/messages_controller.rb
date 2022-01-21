@@ -9,7 +9,9 @@ class Api::MessagesController < ApplicationController
     end
 
     def show
-        render json: @message
+        topic = @topic
+        message = @message
+        render json: Message.messages_plus(topic.id, message.id)
     end
 
     def create
