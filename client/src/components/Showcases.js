@@ -4,10 +4,12 @@ import { Link, useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Button, dividerClasses } from "@mui/material";
+import { Button, ButtonGroup, dividerClasses, Paper } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
+import Carousel from "./Carousel";
+
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -21,6 +23,25 @@ const Showcase = (props) => {
   const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    }
+  };
 
 
   useEffect(() => {
@@ -75,12 +96,24 @@ const updatePrimaryShowcase = async (id) => {
 }
 }
 
+
   const renderShowcases = () => {
+//     const renderShowcaseCards=(s) =>{ return (
+//       <Carousel show={4} infiniteLoop={true}>
+//     {
+//       s.cards.map((c)=>
+//       <div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} /></div>)
+        
+//         // items.map( (item, i) => <Item key={i} item={item} /> )
+//     }
+//     </Carousel>
+// )}
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
       return (<div style={styles.margin} key={c.id}><CollectionCard  key={c.id} card={{...c}} show={false} personal={false} /></div>)
     })
     return showcases.map((s)=> {
       return (
+        
         <Box key={s.key}
         sx={{
           maxWidth: '100vw',
@@ -100,9 +133,14 @@ const updatePrimaryShowcase = async (id) => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <div style={styles.cardsDiv}>
-      {renderShowcaseCards(s)}
+      {/* <div style={styles.cardsDiv}> */}
+      <div style={styles.margin}>
+      <Carousel show={4} infiniteLoop={false}>
+        {renderShowcaseCards(s)}
+      </Carousel>
       </div>
+      {/* </div> */}
+
       <ButtonDiv>
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
@@ -114,7 +152,7 @@ const updatePrimaryShowcase = async (id) => {
     }
     )
   }
-
+console.log("primary:", auth.primary_showcase)
   return (
     <div>
       <div style={styles.centered}>
