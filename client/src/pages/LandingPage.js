@@ -17,14 +17,14 @@ const LandingPage = () => {
 
   const navigate = useNavigate();
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchor, setAnchor] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
+  const isMenuOpen = Boolean(anchor);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchor(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -32,7 +32,7 @@ const LandingPage = () => {
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    setAnchor(null);
     handleMobileMenuClose();
   };
 
@@ -43,7 +43,7 @@ const LandingPage = () => {
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
-      anchorEl={anchorEl}
+      anchor={anchor}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -195,44 +195,3 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-
-
-
-
-
-// const Landing = () => {
-
-//   // const [show, setShow] = useState(false);
-//   const auth = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   // const toggleShow = () => {
-//   //   setShow(!show)
-//   // }
-
-//   return (
-//     <div>
-
-//       <Stack direction="row">
-//         <Button onClick={() => navigate("/login")}>Login</Button>
-//         <Button onClick={() => navigate("/register")}>Sign Up</Button>
-//       </Stack>
-
-//       {/* <p>Not you? Register here.</p>
-//             <button onClick={toggleShow} >{show ? "Cancel" : "Register"}</button>
-//             {show && <Register/>} */}
-//       {/* <ButtonDiv>
-//         <Button variant="contained" onClick={() => navigate("/login")} >Log In</Button>
-//         <Button variant="contained" onClick={() => auth.handleLogout(navigate)} >Log Out</Button>
-//       </ButtonDiv>
-//       <br />
-//       <ButtonDiv>
-//         <Button variant="contained" onClick={() => navigate("/profile")}>User View</Button>
-//       </ButtonDiv>
-//       <br /> */}
-
-//     </div>
-//   );
-// };
-
-// export default Landing;
