@@ -7,7 +7,7 @@ class CollectionComment < ApplicationRecord
   # FROM collection_comments
   # inner join users as u on u.id = collection_comments.user_id
   def self.userInfo
-    select("collection_comments.id as collection_comments_id, collection_comments.content, collection_id, user_id, image, nickname")
+    select("collection_comments.id, collection_comments.content, collection_id, user_id, image, nickname")
     .joins("inner join users as u on u.id = collection_comments.user_id")
   end
 end

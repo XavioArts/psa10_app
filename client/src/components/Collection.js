@@ -66,7 +66,7 @@ const Collection = () => {
       <AddCard collectionId={params.id} addCard={addCard} />
       {renderCollectionCards()}
       <hr />
-      <CollectionComments />
+      <CollectionComments collectionId = {collection.user_id}/>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 class Api::CollectionCommentsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_collection
   before_action :set_collection_comment, only: [:show, :update, :destroy]
 
