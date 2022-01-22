@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import { TextField } from "@mui/material";
+import { Modal, TextField } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router";
 
 const CollectionCommentEdit = (props) => {
-  const { content, collection_id, user_id, id } = props
+  const { content, collection_id, user_id, id, setEditedComment } = props
   const [comment, setComment] = useState(content)
   const params = useParams();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleEdit = async (e) => {
     e.preventDefault();
     let commentId = id
-    let newComment = { content: content, collection_id: collection_id, user_id: user_id }
+    let newComment = { content: comment, collection_id: collection_id, user_id: user_id }
     let res = await axios.put(`/api/collections/${params.id}/collection_comments/${commentId}`, newComment)
+    setComment(res.data.content)
+    setEditedComment(true)
+    setOpen(false)
     console.log(res)
-    setComment(res.data)
-    console.log("Handle Edit clicked")
+    console.log(res.data)
   }
 
   const style = {
@@ -32,19 +37,28 @@ const CollectionCommentEdit = (props) => {
   };
 
   return (
-    <Box sx={style}>
-      <form onSubmit={handleEdit}>
-        <h2>Edit this Comment</h2>
-        <TextField
-          value={comment}
-          onChange = {(e) => setComment(e.target.value)}
-          style={{ width: 300 }}
-          multiline
-          rows={4}
-        />
-        <button type="submit">Edit Comment</button>
-      </form>
-    </Box>
+    <div>
+      <button onClick={handleOpen}>Edit</button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <Box sx={style}>
+          <form onSubmit={handleEdit}>
+            <h2>Edit this Comment</h2>
+            <TextField
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              style={{ width: 300 }}
+              multiline
+              rows={4}
+            />
+            <button type="submit">Edit Comment</button>
+          </form>
+          {JSON.stringify(comment)}
+        </Box>
+      </Modal>
+    </div>
   )
 }
 

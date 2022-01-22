@@ -17,16 +17,14 @@ const CollectionComments = (props) => {
   const auth = useContext(AuthContext)
   const [collectionComments, setCollectionComments] = useState([]);
   const [newContent, setNewContent] = useState([])
-  const [editComment, setEditComment] = useState();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [editedComment, setEditedComment] = useState(false)
   const params = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCollectionComments()
-  }, [])
+    getCollectionComments();
+    setEditedComment(false)
+  }, [editedComment])
 
   const getCollectionComments = async () => {
     try {
@@ -56,15 +54,6 @@ const CollectionComments = (props) => {
     console.log(res)
     addComment(res.data)
   }
-
-  // const handleEdit = async (e, id) => {
-  //   e.preventDefault();
-  //   let newComment = { content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname }
-  //   let res = await axios.put(`/api/collections/${params.id}/collection_comments/${id}`, newComment)
-  //   console.log(res)
-  //   setEditComment(res.data)
-  //   console.log("Handle Edit clicked")
-  // }
 
   const renderCollectionComments = () => {
     if (!collectionComments) {
@@ -99,15 +88,7 @@ const CollectionComments = (props) => {
             />
           </ListItem>
           {/* onClick={(e) => handleEdit(e, cc.id)} */}
-          {auth.id === cc.user_id && <button onClick={handleOpen}>Edit</button>}
-          <Modal
-            open={open}
-            onClose={handleClose}
-          >
-            <div>
-              <CollectionCommentEdit {...cc} />
-            </div>
-          </Modal>
+          {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment}/>}
           {(auth.id === cc.user_id || auth.id === props.collectionId) && <button onClick={() => deleteCollectionComments(cc.id)}>Delete this comment</button>}
           <Divider variant="inset" component="li" />
         </div>
