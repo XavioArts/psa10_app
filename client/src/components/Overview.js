@@ -69,11 +69,7 @@ const Overview = () => {
     // getUser()
     if (user === null) { return }
     let showcase_id = user.primary_showcase
-    console.log(showcase_id)
-      console.log(user.primary_showcase)
-      console.log(showcaseCards)
       let res_showcase = showcaseCards.find((s)=> s.id == showcase_id)
-      console.log(res_showcase)
       setPrimaryShowcase(res_showcase)
   }
 

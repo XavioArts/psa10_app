@@ -105,6 +105,11 @@ code {
       display: none;
   }
 }
+
+.carousel-content.show-1 > * {
+  width: 100%;
+}
+
 .carousel-content.show-2 > * {
   width: 50%;
 }
