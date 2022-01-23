@@ -87,7 +87,7 @@ const Protected = () => {
             {!user && <div className='profileNavContainer'>
                 <Link className='profileNavText' to ={"/profile/overview"}>Overview</Link>
                 <Link className='profileNavText' to ={"/profile/collections"}>Collections</Link>
-                <a className='profileNavText' href="/profile/sets">Sets</a>
+                <Link className='profileNavText' to={"/profile/sets"}>Sets</Link>
                 <Link className='profileNavText' to={"/profile/showcases"}>Showcases</Link>
             </div>}
             {user && <div className='profileNavContainer'>

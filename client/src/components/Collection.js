@@ -23,7 +23,6 @@ const Collection = () => {
     setCollectionCards(res.data.cards)
     setCollection(res.data)
   }
-  console.log(params)
 
   const deleteCollection = async (id) =>{
     await axios.delete(`/api/collections/${params.id}`)
@@ -66,7 +65,8 @@ const Collection = () => {
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
       <AddCard collectionId={params.id} addCard={addCard} />
       {renderCollectionCards()}
-      {/* <CollectionComments /> */}
+      <hr />
+      <CollectionComments collectionId = {collection.user_id}/>
     </div>
   )
 }
