@@ -98,7 +98,6 @@ const sizeWindow = () => {
     console.log(size.width)
     return 4
   }  
-  // return cardSize
 }
 
 
@@ -134,7 +133,7 @@ const sizeWindow = () => {
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>}
-      {s.cards.length < 5 && 
+      {s.cards.length < 5 && (sizeWindow() > 1260) &&
           <div style={{margin: "auto"}} >
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
@@ -145,6 +144,9 @@ const sizeWindow = () => {
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
       {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      {s.cards.length < 5 && (sizeWindow() < 1260) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>}
       </ButtonDiv>
       </Box>
  
