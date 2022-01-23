@@ -1,10 +1,10 @@
-import { Alert, LinearProgress } from "@mui/material";
+import { Alert, LinearProgress, Paper } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
-import EditCollection from "../components/EditCollection";
+import styled from "styled-components";
 // import EditCard from "../components/EditCard";
 
 
@@ -20,6 +20,10 @@ const Protected = () => {
     useEffect(() => {
         userInfo();
     }, [])
+
+    useEffect(() => {
+        coverImage();
+    }, [user])
 
     const userInfo = async () => {
         if (user_id) {
@@ -56,32 +60,46 @@ const Protected = () => {
             </div>
         );
     }
+    
+    const coverImage = () => {
+        if (user) {
+            console.log(user.cover_image)
+            return user.cover_image
+        } 
+        console.log(auth.cover_image)
+        return auth.cover_image
+    }
 
-
+    const Cover = styled.div`
+    background-image: url(${props => props.image}), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    overflow: hidden;
+    `;
+    
     return (
         <div>
             {!auth.image && !user && <Alert severity="error" >Finish building your profile. <button onClick={() => navigate(`/users/${auth.id}/edit`)}>Edit Profile</button></Alert>}
             <div className="pageContainer">
-            <div className='profileInfo'>
+            <Cover image={coverImage()} className='profileInfo'>
             {!user && auth.image && <img src={auth.image} alt="profile image" className='circletag' />}
             {user && <img src={user.image} alt="profile image" className='circletag' />}
             
             {!user &&
-            <div>
+            <Paper>
                 <h2>{auth.nickname}</h2>
                 <p className='profileTextDate'>Joined {DateTime.fromISO(auth.created_at).toFormat('LLLL yyyy')}</p>
                 <p className='profileText'>{auth.email}</p>
                 <p className='profileText'>{auth.about}</p>
                 <Link className='profileText' to={`/users/${auth.id}/edit`}>Edit Profile</Link>
-            </div>}
+                <Link className='profileText' to={"/profile/cover_image"}>Edit Cover Image</Link>
+            </Paper>}
             {user &&
-            <div>
+            <Paper>
                 <h2>{user.nickname}</h2>
                 <p className='profileTextDate'>Joined {DateTime.fromISO(user.created_at).toFormat('LLLL yyyy')}</p>
                 <p className='profileText'>{user.email}</p>
                 <p className='profileText'>{user.about}</p>
-            </div>}
-            </div>
+            </Paper>}
+            </Cover>
        
             <div className='profileNavContainer'>
             {!user && <div className='profileNavContainer'>
@@ -103,5 +121,6 @@ const Protected = () => {
         </div>
     );
 };
+
 
 export default Protected;
