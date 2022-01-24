@@ -46,8 +46,10 @@ const Collections = () => {
 
   return (
     <PageDiv>
-      <button><Link to="/collection/new" className="link">Add a Collection</Link></button>
-      <hr />
+      {/* flexbox */}
+      <div style={{ display: "flex", justifyContent: "right" }}>
+        <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
+      </div>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>

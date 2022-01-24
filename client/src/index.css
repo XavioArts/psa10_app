@@ -127,10 +127,18 @@ code {
 }
 
 .link {
-  color: #f0d3e1;
+  color: black;
   text-decoration: none;
+  font-size: large;
 }
 
 .link:hover {
-  color: #DAF7A6;
+  color: #F3F3B4;
+}
+
+.link-button {
+  background:#F3D4B4;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
 }
