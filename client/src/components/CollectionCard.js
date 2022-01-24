@@ -48,10 +48,10 @@ const CollectionCard = (props) => {
 
   return (
     <>
-    <Card sx={{ maxWidth: 345 }} key={card.id}>
+    <Card sx={{ minWidth: "300px", maxWidth: "300px" }} key={card.id}>
       <CardMedia
         component="div"
-        sx={{height: "400px"}}
+        sx={{height: "415px", minHeight: "415px"}}
         image={visibleImage}
         alt={card.name}
          >

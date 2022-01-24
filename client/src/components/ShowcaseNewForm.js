@@ -6,6 +6,8 @@ import ProfileImageUpload from "./ProfileImageUpload";
 import { TextareaAutosize } from "@mui/base";
 import { Button } from "@mui/material";
 import styled from "styled-components";
+import Showcase from "./Showcases";
+import UserShowcases from "./UserShowcases";
 
 
 
@@ -19,7 +21,7 @@ const ShowcaseNewForm= (props) => {
   const {id} = useParams()
 
 
-  const addShowcase = async () => {
+  const addShowcase = async (props) => {
     // error here user id is not populating
     let res_id = id ? id : auth.id
     const newShowcase = {user_id: res_id, name, description}
