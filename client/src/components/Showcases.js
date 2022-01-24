@@ -21,12 +21,8 @@ const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
-<<<<<<< HEAD
-  const { user_id } = useParams()
-=======
   const [cardSize, setCardSize] = useState(4)
   const {user_id} = useParams()
->>>>>>> dda5195778fca40a31921687afa5b4029cfdc7f2
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const size = useWindowSize();

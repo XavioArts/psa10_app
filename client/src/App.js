@@ -30,6 +30,7 @@ import Sets from './pages/Sets';
 import UserOverview from './components/UserOverview';
 import UserShowcases from './components/UserShowcases';
 import CoverImgUpload from './pages/CoverImgUpload';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -82,9 +83,9 @@ function App() {
                   {/* <Route path="/showcases" element={<Showcases/>}/> */}
                 </Route>
 
-            <Route path="/profile/cover_image" element={<CoverImgUpload/>}/>
-            <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
-            <Route path="/showcase/new" element={<ShowcaseNewForm/>} />
+                <Route path="/profile/cover_image" element={<CoverImgUpload />} />
+                <Route path="/api/users/:id/edit" element={<EditProfileForm />} />
+                <Route path="/showcase/new" element={<ShowcaseNewForm />} />
 
                 <Route path="/collection/new" element={<CollectionNew />} />
                 <Route path="/cards/:id/image" element={<CardImageUpload />} />
