@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
+import CollectionComments from "../components/CollectionComments";
 
 
 const UserCollectView = () => {
@@ -54,7 +55,7 @@ const UserCollectView = () => {
       <p>Description: {collection.description}</p>
       <p>Likes: {collection.likes}</p>
       {renderCollectionCards()}
-      {/* <CollectionComments /> */}
+      <CollectionComments />
     </div>
   )
 }

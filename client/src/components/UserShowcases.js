@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
+import useWindowSize from "./UseWindowSize";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -19,6 +20,7 @@ const UserShowcases = (props) => {
   const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const size = useWindowSize();
 
 
   useEffect(() => {
@@ -55,6 +57,27 @@ setShowcases(showcaseCards)
 console.log(showcaseCards)
 }
 
+const sizeWindow = () => {
+  if (size.width <= 500) {
+    console.log(1)
+    console.log(size.width)
+    return 1
+  }
+  if (size.width > 500 && size.width < 900) {
+    console.log(2)
+    console.log(size.width)
+    return 2
+  } if (size.width > 900 && size.width < 1200) {
+    console.log(3)
+    console.log(size.width)
+    return 3
+  } if (size.width > 1200) {
+    console.log(4)
+    console.log(size.width)
+    return 4
+  }  
+}
+
   const renderShowcases = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
       return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} /></div>)
@@ -80,7 +103,7 @@ console.log(showcaseCards)
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>
       </Box>

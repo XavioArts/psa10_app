@@ -28,6 +28,32 @@ before_action :set_user, only: [:show, :update, :destroy, :info]
         end
     end
 
+    def cover_image
+      file = params[:file]
+
+      if file
+          begin
+              puts "saving to cloudinary"
+              cloud_image = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true, resource_type: :auto)
+          rescue => e
+              puts "error occurred"
+              p e
+              render json: {errors: e}, status: 422
+              return
+          end
+      end
+
+      if cloud_image && cloud_image['secure_url']
+          current_user.cover_image = cloud_image['secure_url']
+      end
+
+      if current_user.save
+          render json: current_user
+      else
+          render json: {errors: e}, status: 422
+      end
+  end
+
   def index
     other_users = User.all
     render json: other_users
@@ -75,6 +101,6 @@ before_action :set_user, only: [:show, :update, :destroy, :info]
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about, :primary_showcase)
+      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about, :primary_showcase, :cover_image)
     end
 end

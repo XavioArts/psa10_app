@@ -46,6 +46,7 @@ code {
     margin: 4px 0px;
     font-size: 15px;
 }
+
 .carousel-container {
   width: 100%;
   display: flex;
@@ -105,6 +106,11 @@ code {
       display: none;
   }
 }
+
+.carousel-content.show-1 > * {
+  width: 100%;
+}
+
 .carousel-content.show-2 > * {
   width: 50%;
 }
