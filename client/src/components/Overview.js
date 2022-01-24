@@ -167,9 +167,13 @@ const Overview = () => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      {s.cards.length > 4 && <Carousel show={4} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
-      </Carousel>
+      </Carousel>}
+      {s.cards.length < 5 &&  
+          <div style={{margin: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center" }} >
+              {renderShowcaseCards(s)}
+          </div>}
       </Box>
  
       )

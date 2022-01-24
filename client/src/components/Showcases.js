@@ -135,14 +135,16 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       <div >
-      {s.cards.length > 4 && <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      {s.cards.length > 4 && 
+      <Carousel show={4} infiniteLoop={false} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>}
-      {s.cards.length < 5 && 
-          <div style={{margin: "auto"}} >
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {/* {s.cards.length === 4 && <Carousel show={3} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>} */}
+      {s.cards.length < 5 &&  
+          <div style={{margin: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center" }} >
               {renderShowcaseCards(s)}
-            </Grid>
           </div>}
       </div>
       <ButtonDiv>
