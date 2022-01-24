@@ -33,16 +33,16 @@ const Protected = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div style={styles.center}>
-        <p>Loading..</p>
-        <div style={{ width: "75vw" }}>
-          <LinearProgress />
-        </div>
-      </div>
-    );
-  }
+//   if (loading) {
+//     return (
+//       <div style={styles.center}>
+//         <p>Loading..</p>
+//         <div style={{ width: "75vw" }}>
+//           <LinearProgress />
+//         </div>
+//       </div>
+//     );
+//   }
 
     const coverImage = () => {
       if (user) {
