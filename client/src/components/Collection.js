@@ -44,7 +44,7 @@ const Collection = () => {
           {collectionCards.map(cc => {
             return (
               <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} card={{...cc}} show={true} personal={true} />
+                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} />
               </Grid>
             )
           })}
@@ -56,17 +56,19 @@ const Collection = () => {
 
   return (
     <div>
-      <Link to={`/profile/collections`} >Back to Collections</Link>
-      <h1>{collection.name}</h1>
-      <h3>Category: {collection.category}</h3>
-      <p>Description: {collection.description}</p>
-      <p>Likes: {collection.likes}</p>
+      <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
+      <div>
+        <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
+        <h3>Category: {collection.category}</h3>
+        <p>Description: {collection.description}</p>
+        <p>Likes: {collection.likes}</p>
+      </div>
       <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
       <AddCard collectionId={params.id} addCard={addCard} />
       {renderCollectionCards()}
       <hr />
-      <CollectionComments collectionId = {collection.user_id}/>
+      <CollectionComments collectionId={collection.user_id} />
     </div>
   )
 }

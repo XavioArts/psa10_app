@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -40,9 +41,9 @@ const CollectionNew = () => {
 
   return (
     <>
+      <button><Link to={`/profile/collections/`}>Back</Link></button>
       <FormControl>
         <Box
-
           component="form"
           sx={{
             "& .MuiTextField-root": { m: 1, width: "25ch" }
