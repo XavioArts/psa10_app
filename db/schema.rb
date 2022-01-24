@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_215911) do
     t.string "discord", default: ""
     t.string "facebook", default: ""
     t.string "instagram", default: ""
-    t.string "cover_image"
+    t.string "cover_image", default: "https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
