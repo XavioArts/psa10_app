@@ -63,6 +63,16 @@ code {
   font-style: italic;
 }
 
+.profileButton {
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px;
+  float: right;
+}
+
 .carousel-container {
   width: 100%;
   display: flex;

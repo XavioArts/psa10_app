@@ -31,18 +31,19 @@ const Protected = () => {
         console.log(err.response);
       }
     }
+    setLoading(auth.id ? false : true)
   };
 
-//   if (loading) {
-//     return (
-//       <div style={styles.center}>
-//         <p>Loading..</p>
-//         <div style={{ width: "75vw" }}>
-//           <LinearProgress />
-//         </div>
-//       </div>
-//     );
-//   }
+  if (loading) {
+    return (
+      <div style={styles.center}>
+        <p>Loading..</p>
+        <div style={{ width: "75vw" }}>
+          <LinearProgress />
+        </div>
+      </div>
+    );
+  }
 
     const coverImage = () => {
       if (user) {
@@ -92,22 +93,13 @@ const Protected = () => {
                   <h2>{auth.nickname}</h2>
                   <p className="profileText">{auth.email}</p>
                   <p className="profileText">{auth.about}</p>
-                  <p className="profileTextDate">
-                    Member Since{" "}
-                    {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}
-                  </p>
-                  <Link className="profileText" to={`/users/${auth.id}/edit`}>
-                    Edit Profile
-                  </Link>
-                  <Link className="profileText" to={"/profile/cover_image"}>
-                    Edit Cover Image
-                  </Link>
+                  <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
                 </>
               )}
             </Paper>
           )}
           {user && (
-            <Paper>
+            <Paper className="profileInfoTextBox">
               <h2>{user.nickname}</h2>
               <p className="profileTextDate">
                 Joined {DateTime.fromISO(user.created_at).toFormat("LLLL yyyy")}
@@ -116,49 +108,39 @@ const Protected = () => {
               <p className="profileText">{user.about}</p>
             </Paper>
           )}
+            <Link className="profileButton" to={`/users/${auth.id}/edit`}>Edit Profile</Link>
+            <Link className="profileButton" to={"/profile/cover_image"}>Edit Cover Image</Link>
         </Cover>
 
         <div className="profileNavContainer">
           {!user && (
             <div className="profileNavContainer">
-              <Link className="profileNavText" to={"/profile/overview"}>
-                Overview
-              </Link>
-              <Link className="profileNavText" to={"/profile/collections"}>
-                Collections
-              </Link>
-              <Link className="profileNavText" to={"/profile/sets"}>
-                Sets
-              </Link>
-              <Link className="profileNavText" to={"/profile/showcases"}>
-                Showcases
-              </Link>
+              <Link className="profileNavText" to={"/profile/overview"}> Overview</Link>
+              <Link className="profileNavText" to={"/profile/collections"}> Collections </Link>
+              <Link className="profileNavText" to={"/profile/sets"}> Sets </Link>
+              <Link className="profileNavText" to={"/profile/showcases"}> Showcases </Link>
             </div>
           )}
           {user && (
             <div className="profileNavContainer">
               <Link
                 className="profileNavText"
-                to={`/community/users/${user_id}/profile`}
-              >
+                to={`/community/users/${user_id}/profile`} >
                 Overview
               </Link>
               <Link
                 className="profileNavText"
-                to={`/community/users/${user_id}/profile/collections`}
-              >
+                to={`/community/users/${user_id}/profile/collections`} >
                 Collections
               </Link>
               <Link
                 className="profileNavText"
-                to={`/community/users/${user_id}/profile/sets`}
-              >
+                to={`/community/users/${user_id}/profile/sets`}>
                 Sets
               </Link>
               <Link
                 className="profileNavText"
-                to={`/community/users/${user_id}/profile/showcases`}
-              >
+                to={`/community/users/${user_id}/profile/showcases`} >
                 Showcases
               </Link>
             </div>
@@ -167,7 +149,6 @@ const Protected = () => {
         <Outlet />
       </div>
     </div>
-    // <h1>hi</h1>
   );
 };
 
