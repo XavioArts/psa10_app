@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import useWindowSize from "./UseWindowSize";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
-{/* <Showcase id={auth.id}/> */}
+{/* <Showcase id={auth.id}/> */ }
 
 
 const Showcase = (props) => {
@@ -34,50 +34,51 @@ const Showcase = (props) => {
   const getData = async () => {
     let res_id = auth.id
     try {
-        let res = await axios.get("/api/cards");
-        setCards(res.data);
-        let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
-        normalizeData(res_showcases.data, res.data);
+      let res = await axios.get("/api/cards");
+      setCards(res.data);
+      let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
+      normalizeData(res_showcases.data, res.data);
     } catch (err) {
-        console.log(err.response);
-        alert("there was an error getting data")
+      console.log(err.response);
+      alert("there was an error getting data")
     }
-    
-}
 
-const normalizeData = (res_showcases, res_cards) => {
-  let showcaseCards = res_showcases.map((s)=> {
-    let cards_array = s.cards
-    let cardsOfShowcase = res_cards.filter((c) => {
-      for (let i = 0; i<cards_array.length; i++) {
-        if (cards_array[i] == c.id) {
-          return true
-      }
-    }})
-    return {key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase}
-})
-setShowcases(showcaseCards)
-}
-  
-    
+  }
+
+  const normalizeData = (res_showcases, res_cards) => {
+    let showcaseCards = res_showcases.map((s) => {
+      let cards_array = s.cards
+      let cardsOfShowcase = res_cards.filter((c) => {
+        for (let i = 0; i < cards_array.length; i++) {
+          if (cards_array[i] == c.id) {
+            return true
+          }
+        }
+      })
+      return { key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase }
+    })
+    setShowcases(showcaseCards)
+  }
 
 
-const deleteShowcase = async (id) => {
-  let res_id = id
-  await axios.delete(`/api/showcases/${res_id}`);
-  // remove from UI
-  setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
-};
 
-const updatePrimaryShowcase = async (id) => {
-  setPrimaryShowcase(id)
-  try {
-    return auth.handleUpdate({primary_showcase: id}, navigate);
-  } catch(err) {
-    console.log(err.response);
-    alert("there was an error adding primary showcase")
-}
-}
+
+  const deleteShowcase = async (id) => {
+    let res_id = id
+    await axios.delete(`/api/showcases/${res_id}`);
+    // remove from UI
+    setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
+  };
+
+  const updatePrimaryShowcase = async (id) => {
+    setPrimaryShowcase(id)
+    try {
+      return auth.handleUpdate({ primary_showcase: id }, navigate);
+    } catch (err) {
+      console.log(err.response);
+      alert("there was an error adding primary showcase")
+    }
+  }
 
 const sizeWindow = () => {
   if (size.width <= 500) {
@@ -109,7 +110,7 @@ const sizeWindow = () => {
 
     return showcases.map((s)=> {
       return (
-        
+
         <Box key={s.key}
         sx={{
           maxWidth: '100vw',
@@ -165,7 +166,7 @@ const sizeWindow = () => {
         {/* <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button> */}
         </div>
         <div >
-        {renderShowcases()}
+          {renderShowcases()}
         </div>
       </div>
       <div>
