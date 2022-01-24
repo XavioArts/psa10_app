@@ -137,6 +137,7 @@ const sizeWindow = () => {
           <div style={{margin: "auto"}} >
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
+            </Grid>
           </div>}
       </div>
       <ButtonDiv>

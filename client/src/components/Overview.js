@@ -180,7 +180,7 @@ const Overview = () => {
       <p>{s.description}</p>
       <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
-      </Carousel>}
+      </Carousel>
       {s.cards.length < 5 &&  
           <div style={{margin: "auto", display: "flex", justifyContent: "space-evenly", alignItems: "center" }} >
               {renderShowcaseCards(s)}
