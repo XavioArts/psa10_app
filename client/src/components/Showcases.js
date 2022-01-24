@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
+import useWindowSize from "./UseWindowSize";
 
 
 
@@ -20,29 +21,11 @@ const Showcase = (props) => {
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
+  const [cardSize, setCardSize] = useState(4)
   const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 4,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    }
-  };
-
+  const size = useWindowSize();
 
   useEffect(() => {
     getData();
@@ -96,18 +79,30 @@ const updatePrimaryShowcase = async (id) => {
 }
 }
 
+const sizeWindow = () => {
+  if (size.width <= 500) {
+    console.log(1)
+    console.log(size.width)
+    return 1
+  }
+  if (size.width > 500 && size.width < 900) {
+    console.log(2)
+    console.log(size.width)
+    return 2
+  } if (size.width > 900 && size.width < 1200) {
+    console.log(3)
+    console.log(size.width)
+    return 3
+  } if (size.width > 1200) {
+    console.log(4)
+    console.log(size.width)
+    return 4
+  }  
+}
+
 
   const renderShowcases = () => {
-//     const renderShowcaseCards=(s) =>{ return (
-//       <Carousel show={4} infiniteLoop={true}>
-//     {
-//       s.cards.map((c)=>
-//       <div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} /></div>)
-        
-//         // items.map( (item, i) => <Item key={i} item={item} /> )
-//     }
-//     </Carousel>
-// )}
+
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
       return (<div style={styles.margin} key={c.id}><CollectionCard  key={c.id} card={{...c}} show={false} personal={false} /></div>)
     })
@@ -135,10 +130,10 @@ const updatePrimaryShowcase = async (id) => {
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
       <div >
-      {s.cards.length > 4 && <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>}
-      {s.cards.length < 5 && 
+      {s.cards.length < 5 && (sizeWindow() > 1260) &&
           <div style={{margin: "auto"}} >
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
@@ -149,6 +144,9 @@ const updatePrimaryShowcase = async (id) => {
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
       {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      {s.cards.length < 5 && (sizeWindow() < 1260) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>}
       </ButtonDiv>
       </Box>
  
@@ -156,16 +154,22 @@ const updatePrimaryShowcase = async (id) => {
     }
     )
   }
-console.log("primary:", auth.primary_showcase)
+
+  
+
   return (
     <div>
       <div style={styles.centered}>
         <div style={styles.row}>
-        <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button>
+        <Link to="/showcase/new" showcases = {showcases} >Create A New Showcase</Link>
+        {/* <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button> */}
         </div>
         <div >
         {renderShowcases()}
         </div>
+      </div>
+      <div>
+      <p>{sizeWindow()}</p>
       </div>
     </div>
   )

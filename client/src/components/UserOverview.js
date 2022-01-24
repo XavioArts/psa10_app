@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Box from '@mui/material/Box';
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
+import useWindowSize from "./UseWindowSize";
 
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
@@ -18,7 +19,7 @@ const UserOverview = () => {
   const auth = useContext(AuthContext);
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
-
+  const size = useWindowSize();
 
   useEffect(() => {
     getData();
@@ -77,6 +78,28 @@ const UserOverview = () => {
       setPrimaryShowcase(res_showcase)
   }
 
+  const sizeWindow = () => {
+    if (size.width <= 500) {
+      console.log(1)
+      console.log(size.width)
+      return 1
+    }
+    if (size.width > 500 && size.width < 900) {
+      console.log(2)
+      console.log(size.width)
+      return 2
+    } if (size.width > 900 && size.width < 1200) {
+      console.log(3)
+      console.log(size.width)
+      return 3
+    } if (size.width > 1200) {
+      console.log(4)
+      console.log(size.width)
+      return 4
+    }  
+  }
+  
+
 
   const renderPrimaryShowcase = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
@@ -102,7 +125,7 @@ const UserOverview = () => {
         }}
       ><h3>{primaryShowcase.name}</h3>
       <p>{primaryShowcase.description}</p>
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
       {renderShowcaseCards(primaryShowcase)}
       </Carousel>
       </Box>
@@ -137,7 +160,7 @@ const UserOverview = () => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>
       </Box>
@@ -167,7 +190,7 @@ const UserOverview = () => {
         }}
       ><h3>{s.name}</h3>
       <p>{s.description}</p>
-      <Carousel show={4} infiniteLoop={true} style={styles.margin}>
+      <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>
       </Box>

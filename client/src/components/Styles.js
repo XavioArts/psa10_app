@@ -29,3 +29,8 @@ export const ModalBoxStyle = {
     boxShadow: 24,
     p: 4,
   };
+
+  export const Cover = styled.div`
+  background-image: url(${props => props.image}), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+  overflow: hidden;
+  `;

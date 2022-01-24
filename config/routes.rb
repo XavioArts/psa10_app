@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [:index, :show]
     post "users/image", to: "users#profile_image"
+    post "users/cover_image", to: "users#cover_image"
     get "users/:id", to: "users#info"
     get "users/search/:search", to: "users#search"
     get "users/:id/collections", to: "collections#user_collections"
