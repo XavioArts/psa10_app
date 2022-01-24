@@ -241,10 +241,10 @@ const UserOverview = () => {
     <div>
       <div style={styles.centered}>
         <div style={styles.row}>
-          <h3>This is my primary showcase</h3>
+          
         </div>
 
-        {primaryShowcase && <div>{renderPrimaryShowcase()}</div>}
+        {primaryShowcase && <div><h3>This is my primary showcase</h3> {renderPrimaryShowcase()}</div>}
         <div style={styles.row}>
           <h3>These are the rest of my showcases</h3>
         </div>
