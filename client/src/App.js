@@ -57,14 +57,8 @@ function App() {
               <Route path="/login" element={<LogIn />} />
               <Route path="/test/:id" element={<Test />} />
 
-              {/* All routes below here are required to be logged in */}
-              <Route element={<RequireAuth />} >
-                {/* these routes are for viewing user profiles */}
-                {/* <Route path="/community" element={<Community/>} />
-            <Route path="/community/users/:user_id/profile" element={<Protected/>}>
-              <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
-              <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
-            </Route> */}
+          {/* All routes below here are required to be logged in */}
+          <Route element={<RequireAuth/>} >
 
                 <Route path="/profile_image" element={<ProfileImageUpload />} />
                 <Route path="/profile/edit_card/:id" element={<EditCard />} />
