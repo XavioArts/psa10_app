@@ -31,6 +31,7 @@ import UserOverview from './components/UserOverview';
 import UserShowcases from './components/UserShowcases';
 import CoverImgUpload from './pages/CoverImgUpload';
 import LandingPage from './pages/LandingPage';
+import UserSets from './pages/UserSets';
 
 function App() {
   return (
@@ -40,13 +41,14 @@ function App() {
         <div>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/landingpage" element={<LandingPage />} />
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/test" element={<Home />} />
               <Route path="/community" element={<Community />} />
               <Route path="/community/users/:user_id/profile" element={<Protected />}>
                 <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
                 <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
                 <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
+                <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
                 <Route path="/community/users/:user_id/profile" element={<UserOverview />} />
 
               </Route>
