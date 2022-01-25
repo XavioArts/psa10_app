@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import EditCollection from '../components/EditCollection';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
+import styled from "styled-components"
 
 const Collections = () => {
 
@@ -25,15 +25,15 @@ const Collections = () => {
     if (!collections) {
       return <p>Loading collections</p>
     }
-    return collections.map((c,index) => {
+    return collections.map((c, index) => {
       return (
         <div key={index}>
-          <h1><Link to={`/profile/collections/${c.id}`}>Collection Name: {c.name}</Link></h1>
+          <h1 style={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold" }}><Link to={`/profile/collections/${c.id}`}>{c.name}</Link></h1>
           <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {c.cards.slice( 0,3).map((cc) => {
+            {c.cards.slice(0, 3).map((cc) => {
               return (
                 <Grid item xs={2} sm={4} md={4} key={cc.id}>
-                  <CollectionCard key={cc.id} card={{...cc}} show={false} personal={false} />
+                  <CollectionCard key={cc.id} card={{ ...cc }} show={false} personal={false} />
                 </Grid>
               )
             })}
@@ -46,10 +46,12 @@ const Collections = () => {
 
   return (
     <PageDiv>
-      <a href = "/collection/new">Add a Collection</a>
-      <hr />
+      {/* flexbox */}
+      <div style={{ display: "flex", justifyContent: "right" }}>
+        <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
+      </div>
       <FlexColumnDiv>
-      {renderCollectionCards()}
+        {renderCollectionCards()}
       </FlexColumnDiv>
       {/* {JSON.stringify(collections)} */}
       <hr />

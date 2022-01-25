@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import { TextareaAutosize } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 const EditCollection = () => {
@@ -32,9 +33,9 @@ const EditCollection = () => {
 
   return (
     <div>
+      <button><Link to={`/profile/collections/${params.id}`}>Back</Link></button>
       <h1>Edit Collection Page</h1>
       <form onSubmit={handleSubmit}>
-        <p>Card Name</p>
         <input
           placeholder="Name"
           value={name}
