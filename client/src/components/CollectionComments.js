@@ -52,6 +52,7 @@ const CollectionComments = (props) => {
     let newComment = { content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname }
     let res = await axios.post(`/api/collections/${params.id}/collection_comments`, newComment)
     console.log(res)
+    setNewContent("")
     addComment(res.data)
   }
 
@@ -101,7 +102,7 @@ const CollectionComments = (props) => {
   return (
     <div>
       <h2>Comments:</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextField
           required
           label="Add comment"
@@ -110,7 +111,7 @@ const CollectionComments = (props) => {
           onChange={(e) => setNewContent(e.target.value)}
         />
         <Button
-          onClick={handleSubmit}
+          type = "submit"
           variant="contained"
           color="success"
         >
