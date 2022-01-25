@@ -69,8 +69,16 @@ code {
   color: white;
   text-decoration: none;
   padding: 10px;
-  margin: 10px;
-  float: right;
+  margin: 30px 10px;
+}
+
+.leftRight {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexEnd {
+  align-self: flex-end;
 }
 
 .carousel-container {

@@ -73,6 +73,7 @@ const Protected = () => {
       <div className="pageContainer">
         <Cover image={coverImage()} className="profileInfo">
           {!user && (
+              <div className="leftRight">
             <Paper className="profileInfoTextBox" elevation={3}>
               {!user && auth.image && (
                 <img
@@ -97,6 +98,11 @@ const Protected = () => {
                 </>
               )}
             </Paper>
+            <div className="flexEnd">
+                      <Link className="profileButton" to={`/users/${auth.id}/edit`}>Edit Profile</Link>
+                      <Link className="profileButton" to={"/profile/cover_image"}>Edit Cover Image</Link>
+                      </div>
+                      </div>
           )}
           {user && (
             <Paper className="profileInfoTextBox">
@@ -108,8 +114,6 @@ const Protected = () => {
               <p className="profileText">{user.about}</p>
             </Paper>
           )}
-            <Link className="profileButton" to={`/users/${auth.id}/edit`}>Edit Profile</Link>
-            <Link className="profileButton" to={"/profile/cover_image"}>Edit Cover Image</Link>
         </Cover>
 
         <div className="profileNavContainer">
