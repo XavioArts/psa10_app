@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Carousel = (props) => {
   const { children, show, infiniteLoop } = props;
 
-  const [currentIndex, setCurrentIndex] = useState(infiniteLoop ? show : 0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
 
   const [isRepeating, setIsRepeating] = useState(
