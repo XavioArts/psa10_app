@@ -95,9 +95,12 @@ const CollectionCard = (props) => {
         <IconButton aria-label="like">
           <FavoriteIcon />{card.likes}
         </IconButton>
-        <IconButton aria-label="trophy">
-          <EmojiEventsIcon />
-        </IconButton>
+        {!card.showcase && <IconButton aria-label="trophy">
+          <EmojiEventsIcon  />
+        </IconButton>}
+        {card.showcase && <IconButton aria-label="trophy">
+          <EmojiEventsIcon color="warning" />
+        </IconButton>}
         {card.available === true && <Button variant="outlined" color="primary">
           Available
         </Button>}
