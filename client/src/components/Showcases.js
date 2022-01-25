@@ -81,20 +81,20 @@ const Showcase = (props) => {
   }
 
 const sizeWindow = () => {
-  if (size.width <= 500) {
+  if (size.width <= 625) {
     console.log(1)
     console.log(size.width)
     return 1
   }
-  if (size.width > 500 && size.width < 900) {
+  if (size.width > 625 && size.width <= 950) {
     console.log(2)
     console.log(size.width)
     return 2
-  } if (size.width > 900 && size.width < 1200) {
+  } if (size.width > 950 && size.width <= 1260) {
     console.log(3)
     console.log(size.width)
     return 3
-  } if (size.width > 1200) {
+  } if (size.width > 1260) {
     console.log(4)
     console.log(size.width)
     return 4
@@ -105,7 +105,7 @@ const sizeWindow = () => {
   const renderShowcases = () => {
 
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard  key={c.id} card={{...c}} show={false} personal={false} /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard  key={c.id} card={{...c}} show={true} personal={false} /></div>)
     })
 
     return showcases.map((s)=> {
@@ -134,9 +134,36 @@ const sizeWindow = () => {
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>}
-      {s.cards.length < 5 && (sizeWindow() > 1260) &&
+      {s.cards.length === 4 && (sizeWindow() === 4) &&
           <div style={{margin: "auto"}} >
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {renderShowcaseCards(s)}
+            </Grid>
+          </div>}
+      {s.cards.length === 4 && (sizeWindow() < 4) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>}
+      {s.cards.length === 3 && (sizeWindow() >= 3) &&
+          <div style={{margin: "auto"}} >
+            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {renderShowcaseCards(s)}
+            </Grid>
+          </div>}
+      {s.cards.length === 3 && (sizeWindow() < 3) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>}
+      {s.cards.length === 2 && (sizeWindow() >= 2) &&
+          <div style={{margin: "auto"}} >
+            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {renderShowcaseCards(s)}
+            </Grid>
+          </div>}
+      {s.cards.length === 2 && (sizeWindow() < 2) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+        {renderShowcaseCards(s)}
+      </Carousel>}
+      {s.cards.length === 1 && (sizeWindow() >= 1) &&
+          <div style={{margin: "auto"}} >
+            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
             </Grid>
           </div>}
@@ -145,9 +172,6 @@ const sizeWindow = () => {
       <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
       {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
-      {s.cards.length < 5 && (sizeWindow() < 1260) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
-        {renderShowcaseCards(s)}
-      </Carousel>}
       </ButtonDiv>
       </Box>
  

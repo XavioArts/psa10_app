@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
 import useWindowSize from "./UseWindowSize";
@@ -145,9 +146,44 @@ const UserOverview = () => {
       >
         <h3>{primaryShowcase.name}</h3>
         <p>{primaryShowcase.description}</p>
-        <Carousel show={sizeWindow()} infiniteLoop={true} style={styles.margin}>
+        <div >
+        {primaryShowcase.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
           {renderShowcaseCards(primaryShowcase)}
-        </Carousel>
+        </Carousel>}
+        {primaryShowcase.cards.length === 4 && (sizeWindow() === 4) &&
+            <div style={{margin: "auto"}} >
+              <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {renderShowcaseCards(primaryShowcase)}
+              </Grid>
+            </div>}
+        {primaryShowcase.cards.length === 4 && (sizeWindow() < 4) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+          {renderShowcaseCards(primaryShowcase)}
+        </Carousel>}
+        {primaryShowcase.cards.length === 3 && (sizeWindow() >= 3) &&
+            <div style={{margin: "auto"}} >
+              <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {renderShowcaseCards(primaryShowcase)}
+              </Grid>
+            </div>}
+        {primaryShowcase.cards.length === 3 && (sizeWindow() < 3) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+          {renderShowcaseCards(primaryShowcase)}
+        </Carousel>}
+        {primaryShowcase.cards.length === 2 && (sizeWindow() >= 2) &&
+            <div style={{margin: "auto"}} >
+              <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {renderShowcaseCards(primaryShowcase)}
+              </Grid>
+            </div>}
+        {primaryShowcase.cards.length === 2 && (sizeWindow() < 2) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+          {renderShowcaseCards(primaryShowcase)}
+        </Carousel>}
+        {primaryShowcase.cards.length === 1 && (sizeWindow() >= 1) &&
+            <div style={{margin: "auto"}} >
+              <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {renderShowcaseCards(primaryShowcase)}
+              </Grid>
+            </div>}
+      </div>
       </Box>
     );
   };
@@ -191,13 +227,44 @@ const UserOverview = () => {
             >
               <h3>{s.name}</h3>
               <p>{s.description}</p>
-              <Carousel
-                show={sizeWindow()}
-                infiniteLoop={true}
-                style={styles.margin}
-              >
-                {renderShowcaseCards(s)}
-              </Carousel>
+              <div >
+                {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                  {renderShowcaseCards(s)}
+                </Carousel>}
+                {s.cards.length === 4 && (sizeWindow() === 4) &&
+                    <div style={{margin: "auto"}} >
+                      <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {renderShowcaseCards(s)}
+                      </Grid>
+                    </div>}
+                {s.cards.length === 4 && (sizeWindow() < 4) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                  {renderShowcaseCards(s)}
+                </Carousel>}
+                {s.cards.length === 3 && (sizeWindow() >= 3) &&
+                    <div style={{margin: "auto"}} >
+                      <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {renderShowcaseCards(s)}
+                      </Grid>
+                    </div>}
+                {s.cards.length === 3 && (sizeWindow() < 3) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                  {renderShowcaseCards(s)}
+                </Carousel>}
+                {s.cards.length === 2 && (sizeWindow() >= 2) &&
+                    <div style={{margin: "auto"}} >
+                      <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {renderShowcaseCards(s)}
+                      </Grid>
+                    </div>}
+                {s.cards.length === 2 && (sizeWindow() < 2) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                  {renderShowcaseCards(s)}
+                </Carousel>}
+                {s.cards.length === 1 && (sizeWindow() >= 1) &&
+                    <div style={{margin: "auto"}} >
+                      <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {renderShowcaseCards(s)}
+                      </Grid>
+                    </div>}
+                </div>
             </Box>
           );
         }
@@ -225,13 +292,44 @@ const UserOverview = () => {
           >
             <h3>{s.name}</h3>
             <p>{s.description}</p>
-            <Carousel
-              show={sizeWindow()}
-              infiniteLoop={true}
-              style={styles.margin}
-            >
-              {renderShowcaseCards(s)}
-            </Carousel>
+            <div >
+              {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                {renderShowcaseCards(s)}
+              </Carousel>}
+              {s.cards.length === 4 && (sizeWindow() === 4) &&
+                  <div style={{margin: "auto"}} >
+                    <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      {renderShowcaseCards(s)}
+                    </Grid>
+                  </div>}
+              {s.cards.length === 4 && (sizeWindow() < 4) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                {renderShowcaseCards(s)}
+              </Carousel>}
+              {s.cards.length === 3 && (sizeWindow() >= 3) &&
+                  <div style={{margin: "auto"}} >
+                    <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      {renderShowcaseCards(s)}
+                    </Grid>
+                  </div>}
+              {s.cards.length === 3 && (sizeWindow() < 3) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                {renderShowcaseCards(s)}
+              </Carousel>}
+              {s.cards.length === 2 && (sizeWindow() >= 2) &&
+                  <div style={{margin: "auto"}} >
+                    <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      {renderShowcaseCards(s)}
+                    </Grid>
+                  </div>}
+              {s.cards.length === 2 && (sizeWindow() < 2) && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
+                {renderShowcaseCards(s)}
+              </Carousel>}
+              {s.cards.length === 1 && (sizeWindow() >= 1) &&
+                  <div style={{margin: "auto"}} >
+                    <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      {renderShowcaseCards(s)}
+                    </Grid>
+                  </div>}
+              </div>
           </Box>
         );
       });
