@@ -27,8 +27,8 @@ code {
 
 .circletag {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   background: #f1f3ff;
   object-fit: cover;
   border-radius: 50%;
@@ -41,6 +41,8 @@ code {
   border: 0px;
   background-color: #f1f3ff;
   width: 200px;
+  border-radius: 15px !important;
+  text-align: center;
   /* display: flex; */
 }
 
