@@ -30,59 +30,66 @@ import Sets from './pages/Sets';
 import UserOverview from './components/UserOverview';
 import UserShowcases from './components/UserShowcases';
 import CoverImgUpload from './pages/CoverImgUpload';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route element={<Layout/>}>
-          <Route path="/" element={<Home/>} />
+    <div className="page-container">
+      <div className="content-wrap">
 
-          <Route path="/community" element={<Community/>} />
-          <Route path="/community/users/:user_id/profile" element={<Protected/>}>
-            <Route path="/community/users/:user_id/profile/collections" element={<UserCollections/>} />
-            <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView/>} />
-            <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases/>} />
-            <Route path="/community/users/:user_id/profile" element={<UserOverview/>} />
+        <div>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/landingpage" element={<LandingPage />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/community/users/:user_id/profile" element={<Protected />}>
+                <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
+                <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
+                <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
+                <Route path="/community/users/:user_id/profile" element={<UserOverview />} />
 
-          </Route>
+              </Route>
 
-          <Route path="/about" element={<AboutUs />} /> 
-          <Route path="/messageboard" element={<MessageBoard />} />
-          <Route path="/messageboard/:id" element={<TopicPage />} />
-          <Route path="/login" element={<LogIn/>} />
-          <Route path="/test/:id" element={<Test/>} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/messageboard" element={<MessageBoard />} />
+              <Route path="/messageboard/:id" element={<TopicPage />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/test/:id" element={<Test />} />
+
 
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
 
-            <Route path="/profile_image" element={<ProfileImageUpload/>} />
-            <Route path="/profile/edit_card/:id" element={<EditCard/>} />
+                <Route path="/profile_image" element={<ProfileImageUpload />} />
+                <Route path="/profile/edit_card/:id" element={<EditCard />} />
 
-            {/* All routes nested in here will be sub pages to the profile */}
-            <Route path="/profile" element={<Protected/>}>
-            {/* <Route path="/dashboard" element={<Collections/>}> */}
-              <Route path="/profile/collections" element={<Collections/>}/>
-              <Route path="/profile/collections/:id" element={<Collection />} />
-              <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
-              <Route path="/profile/showcases" element={<Showcase/>}/>
-              <Route path="/profile/showcases" element={<Showcases/>}/>
-              <Route path="/profile/overview" element={<Overview/>}/>
-              <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit/>} />
-              <Route path="/profile/sets" element={<Sets/>}/>
-              {/* <Route path="/showcases" element={<Showcases/>}/> */}
+                {/* All routes nested in here will be sub pages to the profile */}
+                <Route path="/profile" element={<Protected />}>
+                  {/* <Route path="/dashboard" element={<Collections/>}> */}
+                  <Route path="/profile/collections" element={<Collections />} />
+                  <Route path="/profile/collections/:id" element={<Collection />} />
+                  <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
+                  <Route path="/profile/showcases" element={<Showcase />} />
+                  <Route path="/profile/showcases" element={<Showcases />} />
+                  <Route path="/profile/overview" element={<Overview />} />
+                  <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit />} />
+                  <Route path="/profile/sets" element={<Sets />} />
+                  {/* <Route path="/showcases" element={<Showcases/>}/> */}
+                </Route>
+
+                <Route path="/profile/cover_image" element={<CoverImgUpload />} />
+                <Route path="/api/users/:id/edit" element={<EditProfileForm />} />
+                <Route path="/showcase/new" element={<ShowcaseNewForm />} />
+
+                <Route path="/collection/new" element={<CollectionNew />} />
+                <Route path="/cards/:id/image" element={<CardImageUpload />} />
+                <Route path="/users/:id/edit" element={<EditProfileForm />} />
+              </Route>
             </Route>
-
-            <Route path="/profile/cover_image" element={<CoverImgUpload/>}/>
-            <Route path="/api/users/:id/edit" element={<EditProfileForm/>} />
-            <Route path="/showcase/new" element={<ShowcaseNewForm/>} />
-
-            <Route path="/collection/new" element={<CollectionNew/>} />
-            <Route path="/cards/:id/image" element={<CardImageUpload/>} />
-            <Route path="/users/:id/edit" element={<EditProfileForm/>} />
-          </Route>
-        </Route>
-      </Routes>
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }

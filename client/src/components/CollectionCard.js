@@ -10,10 +10,12 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Box, Icon, Modal } from '@mui/material';
+import { Box, CardContent, Icon, Modal } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const CollectionCard = (props) => {
+  const auth = React.useContext(AuthContext)
   const {card, show, personal} = props
   // const { likes, available } = props
   const navigate = useNavigate();
@@ -83,9 +85,13 @@ const CollectionCard = (props) => {
           {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
         </Box>
       </Modal>}
-
+      <CardContent>
+        <Typography sx={{ textAlign: 'center', textTransform: 'capitalize', fontWeight:"bold", fontSize: 20}}>
+          {card.name}
+        </Typography>
+      </CardContent>
       <CardActions disableSpacing >
-        <Avatar sx={{ width: 24, height: 24 }} />
+        <Avatar sx={{ width: 30, height: 30 }} src={auth.image}/>
         <IconButton aria-label="like">
           <FavoriteIcon />{card.likes}
         </IconButton>
@@ -98,7 +104,6 @@ const CollectionCard = (props) => {
         {card.available === false && <Button variant="outlined" color="secondary">
           Unavailable
         </Button>}
-
         {/* Placeholder for card comments */}
         <Typography component="p">Comments</Typography>
       </CardActions>
