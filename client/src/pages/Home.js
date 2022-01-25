@@ -42,6 +42,19 @@ const Home = () => {
         });
     };
 
+    const resetShowcase = async () => {
+        cards.forEach( async (c) => {
+            try {
+                let reset = {showcase: false}
+                let res = await axios.put(`/api/cards/${c.id}`, reset)
+                console.log(res.data);
+            } catch (err) {
+                console.log(err.response);
+                alert("there was an error")
+            }
+        })
+    }
+
     return (
         <div>
             <h1>Home</h1>
@@ -69,7 +82,12 @@ const Home = () => {
                 <Button variant="contained" onClick={() => navigate("/test/1")}>Test page Id 1</Button>
             </ButtonDiv>
             <br />
-            {cards && renderCards()}
+            {cards && 
+                <div>
+                    <Button onClick={resetShowcase} >Reset Showcase All</Button>
+                    {renderCards()}
+                </div>
+            }
 
         </div>
 

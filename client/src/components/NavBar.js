@@ -9,8 +9,9 @@ const NavBar = () => {
 
     return (
         <div style={styles.container} >
-            <Link to="/landingpage" style={styles.link}>Landing Page</Link>
-            <Link to="/" style={styles.link} >Home</Link>
+            {/* this will be taken out soon */}
+            <Link to="/" style={styles.link}>Home</Link>
+            <Link to="/test" style={styles.link} >Test</Link>
             {authenticated && <Link to="/profile/overview" style={styles.link} >My Profile</Link>}
             {authenticated && <Link to="/profile/collections" style={styles.link} >My Collection</Link>}
             {authenticated && <Link to="/community" style={styles.link} >Community</Link>}
