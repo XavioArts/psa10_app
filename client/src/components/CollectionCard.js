@@ -79,8 +79,12 @@ const CollectionCard = (props) => {
           <h4>Set: {card.set}</h4>
           <h4>Year: {card.year}</h4>
           <h4>Card No.: {card.card_number}</h4>
+          {card.graded && <h4>Grade: {card.grade}</h4>}
           {card.available === true && <Button variant="outlined" color="primary">
           Available
+          </Button>}
+          {card.graded === true && <Button variant="outlined" color="warning">
+          Graded
           </Button>}
           {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
         </Box>
