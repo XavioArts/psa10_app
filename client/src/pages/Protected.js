@@ -5,6 +5,7 @@ import { Link, useNavigate, Outlet, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
 import styled from "styled-components";
+import UserContactModal from "../components/UserContactModal";
 // import EditCard from "../components/EditCard";
 
 const Protected = () => {
@@ -80,13 +81,6 @@ const Protected = () => {
                   className="circletag"
                 />
               )}
-              {user && (
-                <img
-                  src={user.image}
-                  alt="profile image"
-                  className="circletag"
-                />
-              )}
               {!user && (
                 <>
                   <h2>{auth.nickname}</h2>
@@ -102,18 +96,27 @@ const Protected = () => {
                   <Link className="profileText" to={"/profile/cover_image"}>
                     Edit Cover Image
                   </Link>
+                  <UserContactModal {...auth} />
                 </>
               )}
             </Paper>
           )}
           {user && (
-            <Paper>
+            <Paper className="profileInfoTextBox" elevation={3}>
+              {user && (
+                <img
+                  src={user.image}
+                  alt="profile image"
+                  className="circletag"
+                />
+              )}
               <h2>{user.nickname}</h2>
               <p className="profileTextDate">
                 Joined {DateTime.fromISO(user.created_at).toFormat("LLLL yyyy")}
               </p>
               <p className="profileText">{user.email}</p>
               <p className="profileText">{user.about}</p>
+              <UserContactModal {...user} />
             </Paper>
           )}
         </Cover>
