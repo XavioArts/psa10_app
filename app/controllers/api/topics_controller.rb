@@ -1,6 +1,7 @@
 class Api::TopicsController < ApplicationController
   #before_action :authenticate_user!
   before_action :set_topic, only: [:show, :destroy, :update]
+  before_action :page, only: [:allTopics]
 
   def index
     render json: Topic.topics_plus
@@ -31,7 +32,22 @@ class Api::TopicsController < ApplicationController
     render json: @topic.destroy
   end
 
+  def allTopics 
+    count = Topic.count 
+    render json: {topic: Topic.page(@page).per(@per), count: count, per:@per}
+  end
+
+  def search 
+    phrase = params[:search]
+    render json: Topic.search(phrase)
+  end
+
   private
+
+  def page
+    @page = params[:page] || 1
+    @per = params[:per] || 5
+  end
 
   def set_topic
     @topic = Topic.find(params[:id])

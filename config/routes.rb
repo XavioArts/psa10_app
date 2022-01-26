@@ -28,5 +28,7 @@ Rails.application.routes.draw do
     resources :topics do
       resources :messages
     end
+    get "/allTopics", to:'topics#allTopics'
+    get "topics/search/:search", to: "topics#search"
   end
 end

@@ -196,3 +196,30 @@ code {
   padding: 10px;
   border-radius: 20px;
 }
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border:1px solid #C4C4C4;
+  width: max-content;
+  color: #272830;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.page-item {
+  list-style-type: none;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.messagePageContainer {
+  margin: 30px;
+}
+
+.flexOpposite {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
