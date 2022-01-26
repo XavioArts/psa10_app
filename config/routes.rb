@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     post "users/image", to: "users#profile_image"
     post "users/cover_image", to: "users#cover_image"
     get "users/:id", to: "users#info"
+    get "users/:id/card_stats", to: "users#card_stats"
+    get "users/:id/collection_stats", to: "users#collection_stats"
     get "users/search/:search", to: "users#search"
     get "users/:id/collections", to: "collections#user_collections"
     resources :showcases 

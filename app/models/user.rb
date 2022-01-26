@@ -36,9 +36,4 @@ class User < ActiveRecord::Base
     self.cards.where("UPPER(cards.set) LIKE UPPER('%#{phrase}%')")
   end
 
-  # def self.liked(ids)
-  #   ids = ids.empty? ? [0] : ids
-  #   Collection.where("id IN (?)", ids)
-  # end
-
 end
