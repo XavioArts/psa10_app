@@ -41,7 +41,7 @@ const AuthProvider = (props) => {
         try {
             let res = await axios.post("/api/auth", user);
             setUser(res.data.data);
-            navigate("/profile");
+            navigate("/profile/overview");
         } catch (err) {
             console.log(err.response);
             alert("An error occurred registering user");
@@ -54,7 +54,7 @@ const AuthProvider = (props) => {
             let res = await axios.post("/api/auth/sign_in", user);
             console.log(res.data);
             setUser(res.data.data);
-            navigate("/");
+            navigate("/profile/overview");
         } catch (err) {
             console.log(err.response);
             alert("An error occurred logging in");
@@ -91,7 +91,7 @@ const AuthProvider = (props) => {
             let res = await axios.delete("/api/auth")
             console.log(res);
             setUser(null);
-            navigate("/public");
+            navigate("/");
         } catch (err) {
             console.log(err.response);
             alert("there was an error deleting your account");
