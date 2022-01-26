@@ -13,4 +13,10 @@ class Topic < ApplicationRecord
     .order('created_at desc')
   end
 
+  def self.search(phrase)
+    select('*')
+    .where("UPPER(topics.title) LIKE UPPER('%#{phrase}%')
+    OR UPPER(topics.body) LIKE UPPER('%#{phrase}%') ")
+  end
+
 end
