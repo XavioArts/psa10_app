@@ -38,22 +38,27 @@ export const Cover = styled.div`
 
 export const theme = createTheme({
     palette: {
+        // Primary is Violet Blue Crayola
         primary: {
             main: '#6569C8',
             contrastText: '#FFFFFF',
         },
+        // Secondary is Aero
         secondary: {
             main: '#90BDEE',
             contrastText: '#FFFFFF',
         },
+        // Accent is Silver
         accent: {
             main: '#C4C4C4',
             contrastText: '#FFFFFF',
         },
+        // White
         white: {
             main: '#FFFFFF',
             contrastText: '#272830',
         },
+        // Black is Raisin Black
         black: {
             main: '#272830',
             contrastText: '#FFFFFF',
