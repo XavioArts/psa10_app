@@ -1,3 +1,4 @@
+import { createTheme } from "@mui/material";
 import styled from "styled-components";
 
 export const ButtonDiv = styled.div`
@@ -28,9 +29,39 @@ export const ModalBoxStyle = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
-  export const Cover = styled.div`
+export const Cover = styled.div`
   background-image: url(${props => props.image}), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
   overflow: hidden;
   `;
+
+export const theme = createTheme({
+    palette: {
+        // Primary is Violet Blue Crayola
+        primary: {
+            main: '#6569C8',
+            contrastText: '#FFFFFF',
+        },
+        // Secondary is Aero
+        secondary: {
+            main: '#90BDEE',
+            contrastText: '#FFFFFF',
+        },
+        // Accent is Silver
+        accent: {
+            main: '#C4C4C4',
+            contrastText: '#FFFFFF',
+        },
+        // White
+        white: {
+            main: '#FFFFFF',
+            contrastText: '#272830',
+        },
+        // Black is Raisin Black
+        black: {
+            main: '#272830',
+            contrastText: '#FFFFFF',
+        },
+    }
+});
