@@ -7,6 +7,7 @@ import { Grid } from "@mui/material";
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
 import useWindowSize from "./UseWindowSize";
+import { textAlign } from "@mui/system";
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
 {
@@ -336,18 +337,16 @@ const UserOverview = () => {
   };
 
   return (
-    <div>
-      <div style={styles.centered}>
-        <div style={styles.row}>
-          
-        </div>
-
-        {primaryShowcase && <div><h3>This is my primary showcase</h3> {renderPrimaryShowcase()}</div>}
-        <div style={styles.row}>
+    <div style={styles.centered}>
+        {primaryShowcase && 
+        <div>
+          <h3>This is my primary showcase</h3>
+          <div> {renderPrimaryShowcase()}</div>
+        </div>}
+        <div>
           <h3>These are the rest of my showcases</h3>
-        </div>
         {showcases && <div>{renderShowcases()}</div>}
-      </div>
+        </div> 
     </div>
   );
 };
@@ -357,7 +356,7 @@ const styles = {
     margin: "10px",
   },
   row: {
-    margin: "10px 200px 0px 200px",
+    margin: "auto",
   },
   margin: {
     margin: "10px",
@@ -373,6 +372,7 @@ const styles = {
     flexDirection: "row",
     justifyContent: "center",
   },
+
 };
 
 export default UserOverview;
