@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Public from './pages/Public';
 import Protected from './pages/Protected';
+import UploadCollectible from './pages/UploadCollectible';
 import EditProfileForm from './pages/EditProfileForm';
 import RequireAuth from './components/RequireAuth';
 import LogIn from './pages/LogIn';
@@ -65,10 +66,10 @@ function App() {
 
                 <Route path="/profile_image" element={<ProfileImageUpload />} />
                 <Route path="/profile/edit_card/:id" element={<EditCard />} />
+                <Route path="/upload" element={<UploadCollectible />} />
 
                 {/* All routes nested in here will be sub pages to the profile */}
                 <Route path="/profile" element={<Protected />}>
-                  {/* <Route path="/dashboard" element={<Collections/>}> */}
                   <Route path="/profile/collections" element={<Collections />} />
                   <Route path="/profile/collections/:id" element={<Collection />} />
                   <Route path="/profile/collections/:id/edit" element={<EditCollection />} />
@@ -77,7 +78,6 @@ function App() {
                   <Route path="/profile/overview" element={<Overview />} />
                   <Route path="/profile/showcases/:id/edit" element={<ShowcaseEdit />} />
                   <Route path="/profile/sets" element={<Sets />} />
-                  {/* <Route path="/showcases" element={<Showcases/>}/> */}
                 </Route>
 
                 <Route path="/profile/cover_image" element={<CoverImgUpload />} />

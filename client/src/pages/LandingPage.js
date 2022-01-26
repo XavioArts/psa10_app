@@ -29,7 +29,7 @@ const LandingPage = () => {
           <h1>Tyranitar V</h1>
         </Box>
         <br />
-        <Button variant="contained" onClick="">View Collection</Button>
+        <Button variant="contained" onClick={()=>navigate("login")}>View Collection</Button>
       </div>
       <div>
 
