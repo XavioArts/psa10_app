@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -6,15 +6,17 @@ import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
+import CollectionLike2 from "./CollectionLike2";
 
 const Collection = () => {
   const navigate = useNavigate();
   const params = useParams()
-  const [collectionCards, setCollectionCards] = useState([])
-  const [collection, setCollection] = useState([])
+  const [collectionCards, setCollectionCards] = useState(null)
+  const [collection, setCollection] = useState(null)
 
   useEffect(() => {
     getCollectionCards();
+    console.log(collection)
   }, [])
 
   const getCollectionCards = async () => {
@@ -36,7 +38,7 @@ const Collection = () => {
   }
 
   const renderCollectionCards = () => {
-    if (!collectionCards) {
+    if (!collectionCards && !collection) {
       return <p>Loading cards</p>
     }
     return (
@@ -56,21 +58,30 @@ const Collection = () => {
 
 
   return (
-    <div>
-      <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
-      <div>
+    <>
+      {collection && (<div>
+        <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
+        <br />
         <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
-        <h3>Category: {collection.category}</h3>
-        <p>Description: {collection.description}</p>
-        {CollectionLike(collection)}
-      </div>
-      <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
-      <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
-      <AddCard collectionId={params.id} addCard={addCard} />
-      {renderCollectionCards()}
-      <hr />
-      <CollectionComments collectionId={collection.user_id} />
-    </div>
+        <div style={{ display: "flex", justifyContent: "right" }}>
+          <button><Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link></button>
+          <br />
+          <br />
+          <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
+        </div>
+        <div>
+          <Container maxWidth="sm">
+            <h3>Category: {collection.category}</h3>
+            <p>Description: {collection.description}</p>
+            <CollectionLike2 collection={collection} />
+          </Container>
+        </div>
+        <AddCard collectionId={params.id} addCard={addCard} />
+        {renderCollectionCards()}
+        <hr />
+        <CollectionComments collectionId={collection.user_id} />
+      </div>)}
+    </>
   )
 }
 

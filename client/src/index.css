@@ -181,17 +181,17 @@ code {
 }
 
 .link {
-  color: black;
+  color: #6569C8;
   text-decoration: none;
   font-size: large;
 }
 
 .link:hover {
-  color: #F3F3B4;
+  color: #FFFFFF;
 }
 
 .link-button {
-  background:#F3D4B4;
+  background:#90BDEE;
   margin: 10px;
   padding: 10px;
   border-radius: 20px;
