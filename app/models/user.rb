@@ -33,4 +33,23 @@ class User < ActiveRecord::Base
     self.cards.where("UPPER(cards.set) LIKE UPPER('%#{phrase}%')")
   end
 
+  # SELECT users.id AS user_id, c.id AS card_id, c.likes AS card_likes, c.graded, c.available FROM users
+  # INNER JOIN cards AS c ON users.id = c.user_id;
+
+
+  def self.card_stats(id)
+    select("users.id AS user_id, c.id AS card_id, c.likes AS card_likes, c.graded, c.available")
+    .joins("INNER JOIN cards AS c ON users.id = c.user_id")
+    .where('users.id = ?', id)
+  end
+
+#   SELECT users.id AS user_id, co.id AS collection_id, co.likes AS collection_likes FROM users
+# INNER JOIN collections AS co ON users.id = co.user_id;
+
+  def self.collection_stats(id)
+    select("users.id AS user_id, co.id AS collection_id, co.likes AS collection_likes")
+    .joins("INNER JOIN collections AS co ON users.id = co.user_id")
+    .where('users.id = ?', id)
+  end
+
 end
