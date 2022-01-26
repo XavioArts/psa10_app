@@ -4,7 +4,6 @@ import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
-import styled from "styled-components"
 
 const Collections = () => {
 
@@ -38,6 +37,7 @@ const Collections = () => {
               )
             })}
           </Grid>
+          <hr />
         </div>
       )
     })
@@ -45,18 +45,16 @@ const Collections = () => {
 
 
   return (
-    <PageDiv>
-      {/* flexbox */}
+    <>
       <div style={{ display: "flex", justifyContent: "right" }}>
         <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
       </div>
+    <PageDiv>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>
-      {/* {JSON.stringify(collections)} */}
-      <hr />
-      {/* <CollectionComments /> */}
     </PageDiv>
+    </>
   )
 };
 

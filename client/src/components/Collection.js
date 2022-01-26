@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
+import CollectionLike from "./CollectionLike";
 
 const Collection = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Collection = () => {
         <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
         <h3>Category: {collection.category}</h3>
         <p>Description: {collection.description}</p>
-        <p>Likes: {collection.likes}</p>
+        {CollectionLike(collection)}
       </div>
       <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>

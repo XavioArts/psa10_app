@@ -9,12 +9,15 @@ class User < ActiveRecord::Base
   has_many :topics, dependent: :destroy
   has_many :showcases, dependent: :destroy
   has_many :messages, through: :topics
+  serialize :liked_collections, Array
+  serialize :liked_cards, Array
   extend Devise::Models 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
 
   ### SQL call to search for users based on a search term
   # SELECT * from users 
@@ -32,5 +35,10 @@ class User < ActiveRecord::Base
   def card_search(phrase)
     self.cards.where("UPPER(cards.set) LIKE UPPER('%#{phrase}%')")
   end
+
+  # def self.liked(ids)
+  #   ids = ids.empty? ? [0] : ids
+  #   Collection.where("id IN (?)", ids)
+  # end
 
 end

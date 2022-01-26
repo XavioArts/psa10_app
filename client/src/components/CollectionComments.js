@@ -97,7 +97,6 @@ const CollectionComments = (props) => {
       ))
       )
     }
-  console.log(collectionComments)
 
   return (
     <div>
