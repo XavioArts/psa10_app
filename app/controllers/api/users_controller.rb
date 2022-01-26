@@ -72,15 +72,13 @@ before_action :set_user, only: [:show, :update, :destroy, :info]
     render json: @user
   end
 
-  # def create
-  #   @user = User.new(user_params)
+  def card_stats
+    render json: User.card_stats(params[:id])
+  end
 
-  #   if (@user.save)
-  #     render json: @user
-  #   else
-  #     render json: {error: @user.errors}, status: 422
-  #   end
-  # end
+  def collection_stats
+    render json: User.collection_stats(params[:id])
+  end
 
   def update
     if (@user.update(user_params))
