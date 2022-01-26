@@ -16,7 +16,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
-  const {card, show, personal} = props
+  const { card, show, personal } = props
   // const { likes, available } = props
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -38,7 +38,7 @@ const CollectionCard = (props) => {
   const editCard = (e, url) => {
     e.preventDefault();
     navigate(url);
-}
+  }
   const flipCard = (e) => {
     e.preventDefault();
     if (visibleImage === card.front_image) {
@@ -50,71 +50,71 @@ const CollectionCard = (props) => {
 
   return (
     <>
-    <Card sx={{ minWidth: "300px", maxWidth: "300px" }} key={card.id}>
-      <CardMedia
-        component="div"
-        sx={{height: "415px", minHeight: "415px"}}
-        image={visibleImage}
-        alt={card.name}
-         >
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%"}} >
+      <Card sx={{ minWidth: "300px", maxWidth: "300px" }} key={card.id}>
+        <CardMedia
+          component="div"
+          sx={{ height: "415px", minHeight: "415px" }}
+          image={visibleImage}
+          alt={card.name}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%" }} >
             <IconButton onClick={flipCard} >
-              <ArrowBackIosIcon sx={{fontSize: "60px"}} />
+              <ArrowBackIosIcon sx={{ fontSize: "60px" }} />
             </IconButton>
-            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
+            <div onClick={handleOpen} style={{ height: "100%", width: "100%" }} />
             <IconButton onClick={flipCard} >
-              <ArrowForwardIosIcon sx={{fontSize: "60px"}} />
+              <ArrowForwardIosIcon sx={{ fontSize: "60px" }} />
             </IconButton>
           </div>
         </CardMedia>
-      {show && 
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <Box sx={style}>
-          <h1>{card.name}</h1>
-          <h4>Category: {card.category}</h4>
-          <h4>Condition: {card.condition}</h4>
-          <h4>Set: {card.set}</h4>
-          <h4>Year: {card.year}</h4>
-          <h4>Card No.: {card.card_number}</h4>
-          {card.graded && <h4>Grade: {card.grade}</h4>}
+        {show &&
+          <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={style}>
+              <h1>{card.name}</h1>
+              <h4>Category: {card.category}</h4>
+              <h4>Condition: {card.condition}</h4>
+              <h4>Set: {card.set}</h4>
+              <h4>Year: {card.year}</h4>
+              <h4>Card No.: {card.card_number}</h4>
+              {card.graded && <h4>Grade: {card.grade}</h4>}
+              {card.available === true && <Button variant="outlined" color="primary">
+                Available
+              </Button>}
+              {card.graded === true && <Button variant="outlined" color="warning">
+                Graded
+              </Button>}
+              {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
+            </Box>
+          </Modal>}
+        <CardContent>
+          <Typography sx={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold", fontSize: 20 }}>
+            {card.name}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing >
+          <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
+          <IconButton aria-label="like">
+            <FavoriteIcon />{card.likes}
+          </IconButton>
+          {!card.showcase && <IconButton aria-label="trophy">
+            <EmojiEventsIcon />
+          </IconButton>}
+          {card.showcase && <IconButton aria-label="trophy">
+            <EmojiEventsIcon color="warning" />
+          </IconButton>}
           {card.available === true && <Button variant="outlined" color="primary">
-          Available
+            Available
           </Button>}
-          {card.graded === true && <Button variant="outlined" color="warning">
-          Graded
+          {card.available === false && <Button variant="outlined" color="secondary">
+            Unavailable
           </Button>}
-          {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
-        </Box>
-      </Modal>}
-      <CardContent>
-        <Typography sx={{ textAlign: 'center', textTransform: 'capitalize', fontWeight:"bold", fontSize: 20}}>
-          {card.name}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing >
-        <Avatar sx={{ width: 30, height: 30 }} src={auth.image}/>
-        <IconButton aria-label="like">
-          <FavoriteIcon />{card.likes}
-        </IconButton>
-        {!card.showcase && <IconButton aria-label="trophy">
-          <EmojiEventsIcon  />
-        </IconButton>}
-        {card.showcase && <IconButton aria-label="trophy">
-          <EmojiEventsIcon color="warning" />
-        </IconButton>}
-        {card.available === true && <Button variant="outlined" color="primary">
-          Available
-        </Button>}
-        {card.available === false && <Button variant="outlined" color="secondary">
-          Unavailable
-        </Button>}
-        {/* Placeholder for card comments */}
-        <Typography component="p">Comments</Typography>
-      </CardActions>
-    </Card>
+          {/* Placeholder for card comments */}
+          <Typography component="p">Comments</Typography>
+        </CardActions>
+      </Card>
     </>
   );
 }
