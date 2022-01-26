@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, FormControlLabel, FormGroup, Icon, Input, Paper, Stack, Switch } from "@mui/material";
+import { Button, FormControlLabel, FormGroup, Icon, Input, Paper, Stack, Switch, AppBar, Avatar, createTheme, ThemeProvider } from "@mui/material";
+
 import Modal from '@mui/material/Modal';
 import AddTopic from '../components/AddTopic';
 import { AuthContext } from '../providers/AuthProvider';
 import ReactPaginate from 'react-paginate';
 import ReactDOM from 'react-dom';
+
+
+
 
 const MessageBoard = (props) => {
   const auth = useContext(AuthContext);
@@ -14,18 +18,39 @@ const MessageBoard = (props) => {
   const [filteredTopics, setFilteredTopics] = useState([]);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [expandedSearch, setExpandedSearch] = useState(false);
   const [currentTopics, setCurrentTopics] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [topicOffset, setTopicOffset] = useState(0);
-  // const [pageTopics, setPageTopics] = useState([])
-  // const [count, setCount] = useState(1)
-  // const [per, setPer] = useState(1)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const topicsPerPage = 4
 
   const navigate = useNavigate()
+
+  const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#6569C8',
+            contrastText: '#FFFFFF',
+        },
+        secondary: {
+            main: '#90BDEE',
+            contrastText: '#FFFFFF',
+        },
+        accent: {
+            main: '#C4C4C4',
+            contrastText: '#FFFFFF',
+        },
+        white: {
+            main: '#FFFFFF',
+            contrastText: '#272830',
+        },
+        black: {
+            main: '#272830',
+            contrastText: '#FFFFFF',
+        },
+    }
+});
 
   useEffect(()=>{
     getTopics()
@@ -56,10 +81,6 @@ const MessageBoard = (props) => {
       setCurrentTopics(res.data.slice(0, 4))
       setPageCount(Math.ceil(res.data.length / topicsPerPage));
       console.log(res.data)
-      // let res_page = await axios.get('/api/allTopics')
-      // setPageTopics(res_page.data.topic)
-      // setCount(res_page.data.count)
-      // setPer(res_page.data.per)
     } catch (err) {
       console.log(err.response);
       alert("Error getting topics")
@@ -87,7 +108,7 @@ const MessageBoard = (props) => {
         navigate(`/messageboard/${t.id}`)
       }
       return(
-        <Paper key={t.id} elevation={5} onClick={()=>handleOnClick()} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px', cursor: 'pointer' }}>
+        <Paper key={t.id} elevation={0} onClick={()=>handleOnClick()} style={{ padding: '5px', border: '1px solid #C4C4C4', borderRadius: '10px', margin: '20px 0px', cursor: 'pointer' }}>
           <h6 style={{margin: '5px'}}>Posted by {t.user_nickname}</h6>
           <h3>{t.title}</h3>
           <p>{t.body}</p>
@@ -96,40 +117,6 @@ const MessageBoard = (props) => {
     })
     return topicBox
   }
-
-  //   const renderTopics = (topics) => {
-  //   let topicBox = topics.filter(t=>t.title.toUpperCase().includes(search.toUpperCase()) || (expandedSearch && t.body.toUpperCase().includes(search.toUpperCase())) ).map(t=>{
-  //     const handleOnClick = () =>{
-  //       navigate(`/messageboard/${t.id}`)
-  //     }
-  //     return(
-  //       <Paper key={t.id} elevation={5} onClick={()=>handleOnClick()} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px', cursor: 'pointer' }}>
-  //         <h6 style={{margin: '5px'}}>Posted by {t.user_nickname}</h6>
-  //         <h3>{t.title}</h3>
-  //         <p>{t.body}</p>
-  //       </Paper>
-  //     )
-  //   })
-  //   return topicBox
-  // }
-
-  // const newPage = async (page) =>{
-  //   try {
-  //     let res = await axios.get(`/api/allTopics?page=${page}`)
-  //     setPageTopics(res.data.topic)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
-  // const renderButtons = () => {
-  //   const numPage = Math.ceil(count/per) //expecting this to be 5
-  //   const buttonarr = []
-  //   for(let i = 1; i <=numPage; i ++){
-  //     buttonarr.push(<button onClick={()=>newPage(i)}>{i}</button>)
-  //   }
-  //   return buttonarr
-  // }
 
   const searchTopics = async (e) => {
     e.preventDefault();
@@ -144,38 +131,19 @@ const MessageBoard = (props) => {
     }
 }
 
-
 const clearSearch = (e) => {
   e.preventDefault();
   setFilteredTopics(topics);
+  setSearch("")
 }
 
-  // const handleOnChange = () => {
-  //   setExpandedSearch(!expandedSearch)
-  // }
-
   return (
-    <div>
+    <ThemeProvider theme={theme} >
+    <div className="messagePageContainer">
+      <div className="flexOpposite">
       <h1>Message Board</h1>
-      {auth.authenticated ? <Button variant="contained" onClick={handleOpen}>Create Topic</Button> : renderLoginBox()}
-      {/* <div style={{width: "75vw", margin: "auto", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} >
-        <div style={{width: "60vw", margin: "10px"}} >
-                <Input 
-                fullWidth 
-                startAdornment={<Icon>search</Icon>} 
-                placeholder={expandedSearch ? "Search by Title or Description" : "Search by Title"}
-                value={search}
-                onChange={(e)=>{setSearch(e.target.value)}}
-                type="search" />
-          <FormGroup style={{marginTop: '15px'}}>
-            <FormControlLabel
-              onChange={handleOnChange}
-              control={<Switch />}
-              label="Expand Your Search"
-              />
-          </FormGroup>
-        </div>
-      </div> */}
+      {auth.authenticated ? <Button variant="contained" onClick={handleOpen} style={{height:"40px", alignSelf: "center", borderRadius: "40px" }}>Create Topic</Button> : renderLoginBox()}
+      </div>
         <div style={{width: "75vw", margin: "auto", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} >
           <div style={{width: "60vw", margin: "10px"}} >
           <Input 
@@ -187,8 +155,8 @@ const clearSearch = (e) => {
           type="search" />
           </div>
           <Stack spacing={1} direction="row" >    
-              <Button onClick={searchTopics} variant="contained" >Search</Button>
-              <Button onClick={clearSearch} variant="outlined" >Clear</Button>
+              <Button onClick={searchTopics} variant="contained" color="primary" style={{borderRadius: "40px" }}>Search</Button>
+              <Button onClick={clearSearch} variant="outlined" style={{borderRadius: "40px" }}>Clear</Button>
           </Stack>
       </div>
       <Modal
@@ -199,7 +167,6 @@ const clearSearch = (e) => {
       </Modal>
 
       <>
-      {renderTopics()}
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
@@ -208,9 +175,18 @@ const clearSearch = (e) => {
         pageCount={pageCount}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
+        containerClassName="pagination-container"
+        pageClassName="page-item"
+        // pageLinkClassName="page-link"
+        previousClassName="page-item"
+        // previousLinkClassName="page-link"
+        nextClassName="page-item"
+        // nextLinkClassName="page-link"
       />
+      {renderTopics()}
       </>
     </div>
+    </ThemeProvider>
   )
 }
 
