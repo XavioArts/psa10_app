@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
     .where('users.id = ?', id)
   end
 
+  def token_validation_response
+    self.as_json
+  end
+
 end
