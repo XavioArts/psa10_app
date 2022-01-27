@@ -1,33 +1,3 @@
-# 5.times do
-#   u = User.create(
-#     # first_name: Faker::Name.first_name,
-#     # last_name: Faker::Name.last_name,
-#     password: 123456,
-#     email: Faker::Internet.email,
-#     # username: Faker::Internet.username
-#   )
-
-#   1.times do
-#     c = Collection.create(
-#       name: "Pokemon",
-#       user_id: u.id)
-#       5.times do
-#         price = rand(0..300);
-#         ca = Card.create(
-#           name: Faker::Games::Pokemon.name,
-#           price: rand(1..300).to_f,
-#           user_id: u.id,
-#           collection_id: c.id)
-#           2.times do
-#             CardComment.create(
-#               user_id: u.id,
-#               card_id: ca.id
-#           )
-#           end
-        
-#       end
-#   end
-
 User.destroy_all
 
 u1 = User.create(email: "test@test.com", password: 123456)
