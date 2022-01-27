@@ -95,15 +95,9 @@ const Community = () => {
                     {renderUsers()}
                 </List>
             </Box>
-            {/* <div style={{width: "85vw", margin: "auto", padding: "10px", background: "#DCDCDC"}} >
-                <h3>This JSON is for testing purposes</h3>
-                <code style={{overflowWrap: "break-word"}} >{JSON.stringify(users)}</code>
-            </div> */}
             </>}
         </PageDiv>
     );
 };
-
-// {/* <img src={auth.image} alt="profile image" className='circletag' /> */}
 
 export default Community;

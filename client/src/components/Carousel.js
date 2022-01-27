@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 
 const Carousel = (props) => {
   const { children, show, infiniteLoop } = props;
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
-
   const [isRepeating, setIsRepeating] = useState(
     infiniteLoop && children.length > show
   );
   const [transitionEnabled, setTransitionEnabled] = useState(true);
-
   const [touchPosition, setTouchPosition] = useState(null);
 
   // Set the length to match current children from props
@@ -97,7 +94,6 @@ const Carousel = (props) => {
   return (
     <div className="carousel-container">
       <div className="carousel-wrapper">
-        {/* You can alwas change the content of the button to other things */}
         {(isRepeating || currentIndex > 0) && (
           <button onClick={prev} className="left-arrow">
             &lt;
@@ -121,7 +117,6 @@ const Carousel = (props) => {
             {length > show && isRepeating && renderExtraNext()}
           </div>
         </div>
-        {/* You can alwas change the content of the button to other things */}
         {(isRepeating || currentIndex < length - show) && (
           <button onClick={next} className="right-arrow">
             &gt;
