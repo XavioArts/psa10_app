@@ -37,7 +37,7 @@ const UserCollections = (props) => {
             {c.cards.slice( 0,3).map((cc) => {
               return (
                 <Grid item xs={2} sm={4} md={4} key={cc.id}>
-                  <CollectionCard key={cc.id} card={{...cc}} show={false} personal={false} user={user} />
+                  <CollectionCard key={cc.id} card={{...cc}} show={false} personal={false} user={user} size="small" />
                 </Grid>
               )
             })}

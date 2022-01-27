@@ -47,7 +47,7 @@ const UserSets = () => {
 
     const renderCards = () => {
         return cards.map((c)=>{
-        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} user={user} /></div>)
+        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} user={user} size="medium" /></div>)
       });
     };
 

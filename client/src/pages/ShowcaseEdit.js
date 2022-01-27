@@ -128,7 +128,7 @@ const ShowcaseEdit = () => {
   const renderSelectedCards = () => {
     
     return selectedCards.map((c)=>{
-      return ( <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false}/>
+      return ( <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} size="xs"/>
           <Button variant="contained" onClick={()=>removeCard(c)}>Remove Card</Button>
         </div>
       )
@@ -137,7 +137,7 @@ const ShowcaseEdit = () => {
 
   const renderCardChoices = () => {
     return cardChoices.map((c)=>{
-      return (  <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false}/>
+      return (  <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} size="xs" />
         <Button variant="contained" onClick={()=>addCard(c)}>Add Card</Button>
         </div>
       )

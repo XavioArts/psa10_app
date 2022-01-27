@@ -93,6 +93,7 @@ const UserOverview = () => {
               show={true}
               personal={false}
               user={user}
+              size="medium"
             />
           </div>
         );
@@ -170,6 +171,7 @@ const UserOverview = () => {
               show={true}
               personal={false}
               user={user}
+              size="small"
             />
           </div>
         );

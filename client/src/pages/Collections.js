@@ -27,7 +27,7 @@ const Collections = () => {
       return (
         <div key={index}>
           <h1 style={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold" }}><Link to={`/profile/collections/${c.id}`}>{c.name}</Link></h1>
-          <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {c.cards.slice(0, 4).map((cc) => {
               return (
                 <Grid item xs="auto" sm="auto" md="auto" key={cc.id}>

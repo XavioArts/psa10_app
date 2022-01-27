@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
+import { FlexColumnDiv } from "./Styles";
 
 const Collection = () => {
   const navigate = useNavigate();
@@ -41,8 +42,8 @@ const Collection = () => {
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="small" />
+              <Grid item xs="auto" sm="auto" md="auto">
+                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="medium" />
               </Grid>
             )
           })}
@@ -64,14 +65,9 @@ const Collection = () => {
       <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
       <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
       <AddCard collectionId={params.id} addCard={addCard} />
-      {collectionCards && <div>
-        {/* testing stuff DELETE THIS AFTER */}
-        <CollectionCard key={collectionCards[0].id} card={{ ...collectionCards[0] }} show={true} personal={true} size="large" />
-        <CollectionCard key={collectionCards[0].id} card={{ ...collectionCards[0] }} show={true} personal={true} size="medium" />
-        <CollectionCard key={collectionCards[0].id} card={{ ...collectionCards[0] }} show={true} personal={true} size="small" />
-        <CollectionCard key={collectionCards[0].id} card={{ ...collectionCards[0] }} show={true} personal={true} size="xs" />
-      </div>}
-      {renderCollectionCards()}
+      <FlexColumnDiv>
+        {renderCollectionCards()}
+      </FlexColumnDiv>
       <hr />
       <CollectionComments collectionId={collection.user_id} />
     </div>

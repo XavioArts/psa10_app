@@ -110,13 +110,17 @@ const CollectionCard = (props) => {
             {props.size !== "xs" && <IconButton onClick={flipCard} >
               <ArrowBackIosIcon sx={{fontSize: findButtonSize()}} />
             </IconButton>}
-            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} >
-              <Button>PSA {card.grade}</Button>
-            </div>
+            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
             {props.size !== "xs" && <IconButton onClick={flipCard} >
               <ArrowForwardIosIcon sx={{fontSize: findButtonSize()}} />
             </IconButton>}
           </div>
+          {card.graded === true && 
+          <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: 0}} >
+            <Box sx={{borderRadius: "20px", backgroundColor: "#FFFFFF", width: 65, height: 30, display: "flex", alignItems: "center", justifyContent: "center", mr: 2, borderColor: "#90BDEE", borderWidth: "2px", borderStyle: "solid"}} >
+              <Typography variant="body2" color="secondary" >PSA {card.grade}</Typography>
+            </Box>
+          </Box>}
         </CardMedia>
       {show && 
       <Modal
@@ -140,6 +144,11 @@ const CollectionCard = (props) => {
           {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
         </Box>
       </Modal>}
+      {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
+        <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
+
+        </Box>
+      </Box> */}
       {props.size !== "xs" && 
       <>
       <Box sx={{margin: "10px 0px 0px 0px", display: 'flex', alignItems: "center", justifyContent: "space-between"}} >
