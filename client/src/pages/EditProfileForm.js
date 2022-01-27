@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
-import axios from "axios";
 import ProfileImageUpload from "../components/ProfileImageUpload";
 import { TextareaAutosize } from "@mui/base";
 
@@ -24,8 +23,6 @@ const EditUser = (props) => {
   }, [])
 
   const getData = async () => {
-    // let res = await axios.get(`/api/users/${params.id}`)
-    // console.log(res.data)
     setFirst_name(auth.first_name)
     setLast_name(auth.last_name)
     setEmail(auth.email)
@@ -39,11 +36,8 @@ const EditUser = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, first_name, last_name, nickname, about })
     return auth.handleUpdate({ email, first_name, last_name, nickname, about, discord, facebook, twitter, instagram }, navigate);
   };
-
-
 
   return (
     <div>
@@ -85,7 +79,7 @@ const EditUser = (props) => {
         <input
           placeholder="Twitter link"
           value={twitter}
-          onChange={(e) => { setTwitter(e.target.value); }} />
+          onChange={(e)=> setTwitter(e.target.value) } />
         <p>Facebook</p>
         <input
           placeholder="Facebook link"

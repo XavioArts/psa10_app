@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Alert, Button, Icon, Input } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const ProfileImageUpload = () => {
 
@@ -10,7 +9,6 @@ const ProfileImageUpload = () => {
     const [files, setFiles] = useState([]);
     const [success, setSuccess] = useState(false);
     const [clicked, setClicked] = useState(false);
-    const navigate = useNavigate();
 
     const handleUpload = async (e) => {
         e.preventDefault();
@@ -25,8 +23,6 @@ const ProfileImageUpload = () => {
             setSuccess(true);
             auth.setUser(res.data);
             setClicked(false);
-            // setTimeout(()=>navigate("/"), 1500);
-            // setTimeout(()=>navigate("/edit_profile"), 1500);
         } catch (err) {
             console.log(err.response);
             alert("there was an error uploading")
@@ -81,8 +77,6 @@ const ProfileImageUpload = () => {
                 <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />
                 <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
-            {/* <Button variant="contained" onClick={()=>console.log(files)} >Log Files</Button>
-                <Button variant="contained" onClick={()=>console.log(document.getElementById("input").files[0])} >get file</Button> */}
         </div>
     )
 }

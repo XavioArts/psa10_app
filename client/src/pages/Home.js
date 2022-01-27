@@ -4,12 +4,8 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import styled from "styled-components";
-import Landing from "./LandingPage";
 
 const Home = () => {
-    // This home page is just a place holder for the time being
-    // And will probably become the dashboard page
-    /// we will need a separate landing page
 
     const auth = useContext(AuthContext);
     const navigate = useNavigate();

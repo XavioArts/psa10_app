@@ -1,13 +1,11 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import CollectionCard from "./CollectionCard";
 import Carousel from "./Carousel";
 import useWindowSize from "./UseWindowSize";
-import { textAlign } from "@mui/system";
 
 // PUT THE BELOW CODE WHEREVER YOU WANT YOUR SHOWCASE COMPONENT TO DISPLAY
 {
@@ -18,7 +16,6 @@ const UserOverview = () => {
   const [primaryShowcase, setPrimaryShowcase] = useState(null);
   const [user, setUser] = useState({});
   const { user_id } = useParams();
-  const auth = useContext(AuthContext);
   const [showcases, setShowcases] = useState(null);
   const [cards, setCards] = useState([]);
   const size = useWindowSize();
@@ -27,22 +24,14 @@ const UserOverview = () => {
     getData();
   }, []);
 
-  console.log(user_id);
   const getData = async () => {
     let res_id = user_id;
-    console.log(res_id);
-    // need to pull user showcases not just showcase number one
     try {
       let res_user = await axios.get(`/api/users/${res_id}`);
-      console.log(res_user.data);
       setUser(res_user.data);
       let res = await axios.get("/api/cards/all_cards");
-      // allShowcases = res.data
-      console.log(res.data);
       setCards(res.data);
       let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
-      // allShowcases = res.data
-      console.log(res_showcases.data);
       normalizeData(res_showcases.data, res.data, res_user.data);
     } catch (err) {
       console.log(err.response);
@@ -51,9 +40,7 @@ const UserOverview = () => {
   };
 
   const normalizeData = (res_showcases, res_cards, res_user) => {
-    console.log(res_showcases);
     let showcaseCards = res_showcases.map((s) => {
-      console.log(s.cards);
       let cards_array = s.cards;
       let cardsOfShowcase = res_cards.filter((c) => {
         for (let i = 0; i < cards_array.length; i++) {
@@ -75,40 +62,23 @@ const UserOverview = () => {
   };
 
   const userPrimaryShowcase = (user, showcaseCards) => {
-    // getUser()
     if (user === null) {
       return;
     }
     let showcase_id = user.primary_showcase;
-    console.log(showcase_id);
-    console.log(user.primary_showcase);
-    console.log(showcaseCards);
     let res_showcase = showcaseCards.find((s) => s.id == showcase_id);
-    console.log(res_showcase);
     setPrimaryShowcase(res_showcase);
   };
 
   const sizeWindow = () => {
     if (size.width <= 500) {
-      console.log(1);
-      console.log(size.width);
-      return 1;
-    }
+      return 1; }
     if (size.width > 500 && size.width < 900) {
-      console.log(2);
-      console.log(size.width);
-      return 2;
-    }
+      return 2;}
     if (size.width > 900 && size.width < 1200) {
-      console.log(3);
-      console.log(size.width);
-      return 3;
-    }
+      return 3; }
     if (size.width > 1200) {
-      console.log(4);
-      console.log(size.width);
-      return 4;
-    }
+      return 4; }
   };
 
   const renderPrimaryShowcase = () => {
@@ -142,7 +112,6 @@ const UserOverview = () => {
           textAlign: "center",
           "&:hover": {
             backgroundColor: "#dbdbdb",
-            // opacity: [0.9, 0.8, 0.7],
           },
         }}
       >
@@ -224,7 +193,6 @@ const UserOverview = () => {
                 textAlign: "center",
                 "&:hover": {
                   backgroundColor: "#dbdbdb",
-                  // opacity: [0.9, 0.8, 0.7],
                 },
               }}
             >
@@ -289,7 +257,6 @@ const UserOverview = () => {
               textAlign: "center",
               "&:hover": {
                 backgroundColor: "#dbdbdb",
-                // opacity: [0.9, 0.8, 0.7],
               },
             }}
           >

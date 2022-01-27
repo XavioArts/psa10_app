@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
 import CollectionComments from "../components/CollectionComments";
 

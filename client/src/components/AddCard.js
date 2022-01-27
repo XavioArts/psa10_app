@@ -1,15 +1,13 @@
-import { Alert, Autocomplete, Button, CircularProgress, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField } from "@mui/material";
+import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
 
 const AddCard = (props) => {
 
     const auth = useContext(AuthContext);
-    const navigate = useNavigate();
     const {collectionId, addCard} = props;
     const [card, setCard] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -94,11 +92,8 @@ const AddCard = (props) => {
             setYear(2022);
             setCardNumber("");
             setAvailable(false);
-            // setShowcase(false);
-            //
             setSuccess(true);
             setTimeout(()=>setSuccess(false), 6000);
-            // navigate("/profile");
         } catch (err) {
             console.log(err.response);
             setFailed(true);
@@ -120,11 +115,8 @@ const AddCard = (props) => {
             setYear(2022);
             setCardNumber("");
             setAvailable(false);
-            // setShowcase(false);
-            // navigate("/profile");
         } catch (err) {
             console.log(err.response);
-            // setFailed(true);
         }
     };
 
@@ -151,10 +143,8 @@ const AddCard = (props) => {
                 <br/>
                 {loading && (<LinearProgress />)}
             </Box>
-            {/* <p>for collection {collectionId}</p> */}
             {card && 
                 <div>
-                    {/* <p>{JSON.stringify(card)}</p> */}
                     <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} />
@@ -221,7 +211,6 @@ const AddCard = (props) => {
                                         <MenuItem value="" >
                                             <em>None</em>
                                         </MenuItem>
-                                        {/* <GradeOptions /> ****THIS DOESNT WORK FOR SOME REASON */}
                                         <MenuItem value={10.0} >10.0</MenuItem>
                                         <MenuItem value={9.9} >9.9</MenuItem>
                                         <MenuItem value={9.8} >9.8</MenuItem>
@@ -316,13 +305,6 @@ const AddCard = (props) => {
                                         <FormHelperText>Please select your grade</FormHelperText>
                                     </Select>
                                 </FormControl>
-                                {/* <div>
-                                    <label>Showcase</label>
-                                    <RadioGroup value={showcase} onChange={handleShowcase} >
-                                        <FormControlLabel value={true} control={<Radio/>} label="Yes" />
-                                        <FormControlLabel value={false} control={<Radio/>} label="No" />
-                                    </RadioGroup>
-                                </div> */}
                             </div>
                             <Button variant="contained" type="submit" >Submit</Button>
                         </form>

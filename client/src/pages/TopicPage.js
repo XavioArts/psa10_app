@@ -56,10 +56,8 @@ const TopicPage = () => {
     e.preventDefault()
     let user_id = auth.id
     let newMessage = {content, user_id}
-    console.log(newMessage)
     try {
       let res =  await axios.post(`/api/topics/${params.id}/messages`, newMessage)
-      console.log(res)
       setMessages([res.data, ...messages])
       setContent('')
     } catch(err){
