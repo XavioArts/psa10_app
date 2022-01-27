@@ -16,7 +16,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
-  const {card, show, personal} = props
+  const { card, show, personal } = props
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [visibleImage, setVisibleImage] = React.useState(card.front_image);
@@ -96,7 +96,7 @@ const CollectionCard = (props) => {
         <CardActions disableSpacing >
           <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
           <IconButton aria-label="like">
-            <FavoriteIcon />{card.likes}
+            <FavoriteIcon />{card.like}
           </IconButton>
           {!card.showcase && <IconButton aria-label="trophy">
             <EmojiEventsIcon />
