@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useNavigate } from "react-router";
 import { TextareaAutosize } from "@mui/base";
 import { Button } from "@mui/material";
@@ -31,7 +31,6 @@ const ShowcaseEdit = () => {
     let res_id = auth.id
     try {
         let res = await axios.get(`/api/cards`);
-        // setCardChoices(res.data);
         let resShowcase = await axios.get(`/api/showcases/${id}`);
         let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
         setShowcases(res_showcases.data)
@@ -67,7 +66,6 @@ const ShowcaseEdit = () => {
   }
 
   const updateShowcase = async () => {
-    // error here user id is not populating
     let res_id = id
     let cardIds = selectedCards.map((c)=>c.id)
     const updatedShowcase = {id: res_id, name: showcaseName, description: showcaseDescription, cards: cardIds}
@@ -89,34 +87,19 @@ const ShowcaseEdit = () => {
       return {id: c.id, showcase: false}} 
       else {return {id: c.id, showcase: true}}
     })
-    // console.log(showcaseCheck)
     let showcasedCards = selectedCards.map((c)=> {return {id: c.id, showcase: true}})
-    // console.log(showcasedCards)
     let updatedCards = showcaseCheck.concat(showcasedCards)
-    // console.log(updatedCards)
     let endpoints = updatedCards.map((c)=> {return {axios: `/api/cards/${c.id}`, id: c.id, showcase: c.showcase}})
-    console.log(endpoints)
     try {
     let res = await axios.all(endpoints.map((e)=> axios.put(e.axios, {id: e.id, showcase: e.showcase})))
-    console.log(res)
     } catch(err) {
       console.log(err.response);
       alert("there was an error updating cards")
   }
-  console.log("cards updated")
   }
 
   const addCard = async (card_id) => {
-    // let showcase_id = id
     updateUIAdd(card_id)
-    //this code lets you add cards to the array as you go instead of on submit. May use later
-    // try {
-    //   await axios.put(`/api/showcases/${showcase_id}/card/${card_id}`);
-    //   console.log()
-    //   // updateUI(card_id);
-    // } catch (err) {
-    //   alert("err in addCard");
-    // }
   };
 
   const removeCard = async (card_id) => {
@@ -212,9 +195,6 @@ const ButtonDiv = styled.div`
 `
 
 const styles = {
-  button: {
-    margin: '10px',
-  },
   margin: {
     margin: '10px'
   },

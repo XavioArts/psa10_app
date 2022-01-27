@@ -29,7 +29,6 @@ const CollectionComments = (props) => {
   const getCollectionComments = async () => {
     try {
       let res = await axios.get(`/api/collections/${params.id}/collection_comments`)
-      console.log(res.data)
       setCollectionComments(res.data)
     } catch (err) {
       alert("error occurred getCollectionComments")
@@ -51,7 +50,6 @@ const CollectionComments = (props) => {
     e.preventDefault();
     let newComment = { content: newContent, collection_id: params.id, user_id: auth.id, image: auth.image, nickname: auth.nickname }
     let res = await axios.post(`/api/collections/${params.id}/collection_comments`, newComment)
-    console.log(res)
     setNewContent("")
     addComment(res.data)
   }
@@ -88,7 +86,6 @@ const CollectionComments = (props) => {
               }
             />
           </ListItem>
-          {/* onClick={(e) => handleEdit(e, cc.id)} */}
           {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment}/>}
           {(auth.id === cc.user_id || auth.id === props.collectionId) && <button onClick={() => deleteCollectionComments(cc.id)}>Delete this comment</button>}
           <Divider variant="inset" component="li" />
@@ -120,7 +117,6 @@ const CollectionComments = (props) => {
       <List sx={{ width: '100%', maxWidth: "80%", bgcolor: 'background.paper' }}>
         {renderCollectionComments()}
       </List>
-      {/* {JSON.stringify(collectionComments)} */}
     </div>
   )
 }

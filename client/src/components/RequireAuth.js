@@ -19,7 +19,6 @@ const RequireAuth = () => {
                 <div style={{width: "75vw"}} >
                     <LinearProgress />
                 </div>
-                {/* {setTimeout(()=>setRedirect(true), 5000)} */}
                 {timeRedirect()}
                 {redirect && <Navigate to="/login" />}
             </div>

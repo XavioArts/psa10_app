@@ -20,8 +20,6 @@ const Collection = () => {
 
   const getCollectionCards = async () => {
     let res = await axios.get(`/api/collections/${params.id}`)
-    console.log(res.data)
-    console.log(res.data.cards)
     setCollectionCards(res.data.cards)
     setCollection(res.data)
   }

@@ -17,10 +17,7 @@ import { Grid } from "@mui/material";
 const UserShowcases = (props) => {
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
-  const [primaryShowcase, setPrimaryShowcase] = useState("")
   const {user_id} = useParams()
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
   const size = useWindowSize();
 
 
@@ -60,23 +57,11 @@ console.log(showcaseCards)
 
 const sizeWindow = () => {
   if (size.width <= 500) {
-    console.log(1)
-    console.log(size.width)
-    return 1
-  }
+    return 1}
   if (size.width > 500 && size.width < 900) {
-    console.log(2)
-    console.log(size.width)
-    return 2
-  } if (size.width > 900 && size.width < 1200) {
-    console.log(3)
-    console.log(size.width)
-    return 3
-  } if (size.width > 1200) {
-    console.log(4)
-    console.log(size.width)
-    return 4
-  }  
+    return 2} if (size.width > 900 && size.width < 1200) {
+    return 3} if (size.width > 1200) {
+    return 4}  
 }
 
   const renderShowcases = () => {
@@ -97,9 +82,7 @@ const sizeWindow = () => {
           backgroundColor: '#ebebeb',
           textAlign: "center",
           '&:hover': {
-            backgroundColor: '#dbdbdb',
-            // opacity: [0.9, 0.8, 0.7],
-            
+            backgroundColor: '#dbdbdb',            
           },
         }}
       ><h3>{s.name}</h3>

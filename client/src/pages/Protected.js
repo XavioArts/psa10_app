@@ -1,4 +1,4 @@
-import { Alert, LinearProgress, Paper } from "@mui/material";
+import { Alert, Paper, createTheme, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet, useParams } from "react-router-dom";
@@ -7,6 +7,10 @@ import { DateTime } from "luxon";
 import styled from "styled-components";
 import UserContactIcons from "../components/UserContactIcons";
 import { Box } from "@mui/system";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EmailIcon from '@mui/icons-material/Email';
+
 
 const Protected = () => {
     const { user_id } = useParams();
@@ -21,37 +25,40 @@ const Protected = () => {
     setLoading(auth.id ? false : true)
   }, []);
 
-
-//   const normalizeData = (res_showcases, res_cards) => {
-//     let showcaseCards = res_showcases.map((s) => {
-//       let cards_array = s.cards
-//       let cardsOfShowcase = res_cards.filter((c) => {
-//         for (let i = 0; i < cards_array.length; i++) {
-//           if (cards_array[i] == c.id) {
-//             return true
-//           }
-//         }
-//       })
-//       return { key: s.showcase_id, id: s.showcase_id, name: s.name, description: s.description, cards: cardsOfShowcase }
-//     })
-//     setShowcases(showcaseCards)
-//   }
+  const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#6569C8',
+            contrastText: '#FFFFFF',
+        },
+        secondary: {
+            main: '#90BDEE',
+            contrastText: '#FFFFFF',
+        },
+        accent: {
+            main: '#C4C4C4',
+            contrastText: '#FFFFFF',
+        },
+        white: {
+            main: '#FFFFFF',
+            contrastText: '#272830',
+        },
+        black: {
+            main: '#272830',
+            contrastText: '#FFFFFF',
+        },
+    }
+});
 
 const normalizeStats = (cardStats, collectionStats) => {
     function add(accumulator, a) {
       return accumulator + a;
     }
-    console.log("userCard:", cardStats)
     let cardLikes = cardStats.map((c)=>c.card_likes).reduce(add, 0) 
-    console.log(cardLikes)
     let collectionLikes = collectionStats.map((c)=>c.collection_likes).reduce(add, 0)
-    console.log(collectionLikes)
     let totalCards = cardStats.map((c)=>c.card_id).length
-    console.log(totalCards)
     let gradedCards = cardStats.filter((c)=>c.graded == true).length
-    console.log(gradedCards)
     let availableCards = cardStats.filter((c)=>c.available == true).length 
-    console.log(availableCards)
     const userStats = {cardLikes: cardLikes, collectionLikes: collectionLikes, totalCards: totalCards, gradedCards: gradedCards, availableCards: availableCards}
     setStats(userStats) 
 }
@@ -63,7 +70,6 @@ const normalizeStats = (cardStats, collectionStats) => {
       try {
         let res = await axios.get(`/api/users/${user_id}`);
         setUser(res.data);
-        console.log(res.data);
         let res_card_stats = await axios.get(`/api/users/${user_id}/card_stats`);
         let res_col_stats = await axios.get(`/api/users/${user_id}/collection_stats`);
         normalizeStats(res_card_stats.data, res_col_stats.data)
@@ -92,6 +98,7 @@ const normalizeStats = (cardStats, collectionStats) => {
   `;
 
   return (
+    <ThemeProvider theme={theme} >
     <div>
       {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
         <Alert severity="error">
@@ -117,7 +124,7 @@ const normalizeStats = (cardStats, collectionStats) => {
               {!user && (
                 <>
                   <h2>{auth.nickname}</h2>
-                  <p className="profileText">{auth.email}</p>
+                  <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
                   <p className="profileText">{auth.about}</p>
                   <UserContactIcons {...auth} />
                   <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
@@ -157,8 +164,8 @@ const normalizeStats = (cardStats, collectionStats) => {
           {!user && (
               <div className="flexEnd">
                       <div >
-                      <Link className="profileButton" to={`/users/${auth.id}/edit`}>Edit Profile</Link>
-                      <Link className="profileButton" to={"/profile/cover_image"}>Edit Cover Image</Link>
+                      <Link className="profileButton" to={`/users/${auth.id}/edit`}> <AccountCircleIcon style={{margin: "2px", position: "relative", top:"8px"}}/> Edit Profile</Link>
+                      <Link className="profileButton" to={"/profile/cover_image"}><AddAPhotoIcon style={{margin: "2px", position: "relative", top:"7px"}}/> Edit Cover Image</Link>
                       </div>
                       </div>)}
         </Cover>
@@ -184,6 +191,7 @@ const normalizeStats = (cardStats, collectionStats) => {
         <Outlet />
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 

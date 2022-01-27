@@ -60,7 +60,6 @@ const Sets = () => {
                 <p>There are no cards to diplay, please search for a set..</p>
             </Box>}
             {cards && <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "20px"}} >
-                {/* <code>{JSON.stringify(cards)}</code> */}
                 <div style={{margin: "auto"}} >
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {renderCards()}

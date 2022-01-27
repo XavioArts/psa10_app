@@ -8,7 +8,6 @@ import { FlexColumnDiv, PageDiv } from '../components/Styles';
 const Collections = () => {
 
   const [collections, setCollections] = useState(null)
-  console.log(collections)
 
   useEffect(() => {
     getCollections();
@@ -17,7 +16,6 @@ const Collections = () => {
   const getCollections = async () => {
     let res = await axios.get("/api/collections");
     setCollections(res.data);
-    console.log(res.data)
   }
 
   const renderCollectionCards = () => {
@@ -45,16 +43,15 @@ const Collections = () => {
 
 
   return (
-    <>
+    <PageDiv>
       <div style={{ display: "flex", justifyContent: "right" }}>
         <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
       </div>
-    <PageDiv>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>
+      <hr />
     </PageDiv>
-    </>
   )
 };
 
