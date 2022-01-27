@@ -31,4 +31,5 @@ Rails.application.routes.draw do
     get "/allTopics", to:'topics#allTopics'
     get "topics/search/:search", to: "topics#search"
   end
+  get '*other', to: 'static#index'
 end
