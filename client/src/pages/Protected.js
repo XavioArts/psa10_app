@@ -93,7 +93,7 @@ const normalizeStats = (cardStats, collectionStats) => {
 
   return (
     <div>
-      {!auth.image && !user && (
+      {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
         <Alert severity="error">
           Finish building your profile.{" "}
           <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
