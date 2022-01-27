@@ -4,7 +4,7 @@ class Api::CollectionCommentsController < ApplicationController
   before_action :set_collection_comment, only: [:show, :update, :destroy]
 
   def index
-    render json: @collection.collection_comments.userInfo
+    render json: @collection.collection_comments.userInfo.order(created_at: :desc)
   end
 
   def show

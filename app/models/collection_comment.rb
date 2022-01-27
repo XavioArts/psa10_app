@@ -9,5 +9,6 @@ class CollectionComment < ApplicationRecord
   def self.userInfo
     select("collection_comments.id, collection_comments.content, collection_id, user_id, image, nickname")
     .joins("inner join users as u on u.id = collection_comments.user_id")
+    # .order('created_at desc')
   end
 end

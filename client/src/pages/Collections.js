@@ -4,11 +4,10 @@ import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
-import styled from "styled-components"
 
 const Collections = () => {
 
-  const [collections, setCollections] = useState([])
+  const [collections, setCollections] = useState(null)
 
   useEffect(() => {
     getCollections();
@@ -36,6 +35,7 @@ const Collections = () => {
               )
             })}
           </Grid>
+          <hr />
         </div>
       )
     })
