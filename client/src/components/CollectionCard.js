@@ -17,7 +17,6 @@ import { AuthContext } from '../providers/AuthProvider';
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
   const {card, show, personal} = props
-  // const { likes, available } = props
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [visibleImage, setVisibleImage] = React.useState(card.front_image);

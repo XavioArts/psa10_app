@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button, ButtonGroup, dividerClasses, Grid, Paper } from "@mui/material";
 import Box from '@mui/material/Box';
@@ -22,7 +21,6 @@ const Showcase = (props) => {
   const [cards, setCards] = useState([]);
   const [primaryShowcase, setPrimaryShowcase] = useState("")
   const [cardSize, setCardSize] = useState(4)
-  const {user_id} = useParams()
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const size = useWindowSize();
@@ -123,9 +121,7 @@ const sizeWindow = () => {
           backgroundColor: '#ebebeb',
           textAlign: "center",
           '&:hover': {
-            backgroundColor: '#dbdbdb',
-            // opacity: [0.9, 0.8, 0.7],
-            
+            backgroundColor: '#dbdbdb',            
           },
         }}
       ><h3>{s.name}</h3>

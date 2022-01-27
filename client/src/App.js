@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Public from './pages/Public';
 import Protected from './pages/Protected';
 import UploadCollectible from './pages/UploadCollectible';
 import EditProfileForm from './pages/EditProfileForm';
@@ -12,7 +11,6 @@ import Layout from './components/Layout';
 import ProfileImageUpload from './components/ProfileImageUpload';
 import Collections from './pages/Collections';
 import CardImageUpload from './components/CardImageUpload';
-import Test from './pages/Test';
 import EditCard from './pages/EditCard';
 import ShowcaseNewForm from './components/ShowcaseNewForm';
 import Showcases from './components/Showcases';
@@ -60,10 +58,9 @@ function App() {
               <Route path="/messageboard" element={<MessageBoard />} />
               <Route path="/messageboard/:id" element={<TopicPage />} />
               <Route path="/login" element={<LogIn />} />
+
               <Route path="/register" element={<Register />} />
               <Route path="/welcome" element={<Welcome />} />
-              <Route path="/test/:id" element={<Test />} />
-
 
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >

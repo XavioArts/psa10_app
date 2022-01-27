@@ -1,14 +1,9 @@
 import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, MenuItem, Paper, Radio, RadioGroup, Select, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CardImageUpload from "../components/CardImageUpload";
-import { AuthContext } from "../providers/AuthProvider";
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UploadCollectible = () => {
-
-    const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const [failed, setFailed] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -63,7 +58,6 @@ const UploadCollectible = () => {
         let newCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded};
         try {
             let res = await axios.post('/api/cards', newCard)
-            // setCard(res.data);
             setFailed(false);
             setSuccess(true);
             setTimeout(()=>navigate("/profile"), 1500);
@@ -94,8 +88,6 @@ const UploadCollectible = () => {
                 <div>
                     <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload images and then fill out card info</h4>
-                    {/* <CardImageUpload id={card.id} /> *** WILL NEED A NEW IMAGE UPLOAD COMPONENT **
-                            vvvvvvv  And it will be in the form vvvv  */}
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
                             <Input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
@@ -124,10 +116,6 @@ const UploadCollectible = () => {
                                         
                                 />
                             </FormControl>
-                            {/* <label>Category: </label>
-                            <Input type="text" value={category} onChange={(e)=>setCategory(e.target.value)} /> 
-                            <label>Condition: </label>
-                            <Input type="text" value={condition} onChange={(e)=>setCondition(e.target.value)} /> */}
                             <br/>
                             <label>Set: </label>
                             <Input type="text" value={set} onChange={(e)=>setSet(e.target.value)} />
@@ -163,7 +151,6 @@ const UploadCollectible = () => {
                                         <MenuItem value="" >
                                             <em>None</em>
                                         </MenuItem>
-                                        {/* <GradeOptions /> ****THIS DOESNT WORK FOR SOME REASON */}
                                         <MenuItem value={10.0} >10.0</MenuItem>
                                         <MenuItem value={9.9} >9.9</MenuItem>
                                         <MenuItem value={9.8} >9.8</MenuItem>

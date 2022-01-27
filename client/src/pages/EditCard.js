@@ -31,9 +31,7 @@ const EditCard = () => {
             let res = await axios.get(`/api/cards/${id}`);
             setCard(res.data);
             setName(res.data.name);
-            // setCategory(res.data.category);
             setCategory(categories[0]);
-            // setCondition(res.data.condition);
             setCondition(conditions[0]);
             setSet(res.data.set);
             setYear(res.data.year);
@@ -132,12 +130,6 @@ const EditCard = () => {
                     <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} />
-                    {/* <Button onClick={()=> {
-                        console.log("category:", category);
-                        console.log("chosen category:", chosenCategory);
-                        console.log("condition:", condition);
-                        console.log("chosen condition:", chosenCondition);
-                    }} >Log inputs</Button> */}
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
                             <Input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
@@ -166,10 +158,6 @@ const EditCard = () => {
                                         
                                 />
                             </FormControl>
-                            {/* <label>Category: </label>
-                            <Input type="text" value={category} onChange={(e)=>setCategory(e.target.value)} /> 
-                            <label>Condition: </label>
-                            <Input type="text" value={condition} onChange={(e)=>setCondition(e.target.value)} /> */}
                             <br/>
                             <label>Set: </label>
                             <Input type="text" value={set} onChange={(e)=>setSet(e.target.value)} />
@@ -205,7 +193,6 @@ const EditCard = () => {
                                         <MenuItem value="" >
                                             <em>None</em>
                                         </MenuItem>
-                                        {/* <GradeOptions /> ****THIS DOESNT WORK FOR SOME REASON */}
                                         <MenuItem value={10.0} >10.0</MenuItem>
                                         <MenuItem value={9.9} >9.9</MenuItem>
                                         <MenuItem value={9.8} >9.8</MenuItem>
@@ -300,13 +287,6 @@ const EditCard = () => {
                                         <FormHelperText>Please select your grade</FormHelperText>
                                     </Select>
                                 </FormControl>
-                                {/* <div>
-                                    <label>Showcase</label>
-                                    <RadioGroup value={showcase} onChange={handleShowcase} >
-                                        <FormControlLabel value={true} control={<Radio/>} label="Yes" />
-                                        <FormControlLabel value={false} control={<Radio/>} label="No" />
-                                    </RadioGroup>
-                                </div> */}
                             </div>
                             {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
                             {failed && <Alert severity="error" >Failed to update card!</Alert>}

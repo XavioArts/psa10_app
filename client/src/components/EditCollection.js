@@ -25,7 +25,6 @@ const EditCollection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, category, description })
     let updatedCollection = {name, category, description}
     let res = await axios.put(`/api/collections/${params.id}`, updatedCollection);
     navigate(`/profile/collections/${params.id}`)

@@ -1,7 +1,7 @@
 import { AppBar, Avatar, Box, Button, Container, createTheme, Divider, IconButton, InputBase, Menu, MenuItem, Paper, ThemeProvider, Toolbar, Tooltip, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
@@ -297,20 +297,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         </AppBar>
       </ThemeProvider>
 
-    // return (
-    //     <div style={styles.container} >
-    //         {/* this will be taken out soon */}
-    //         <Link to="/" style={styles.link}>Home</Link>
-    //         <Link to="/test" style={styles.link} >Test</Link>
-    //         {authenticated && <Link to="/profile/overview" style={styles.link} >My Profile</Link>}
-    //         {authenticated && <Link to="/profile/collections" style={styles.link} >My Collection</Link>}
-    //         {authenticated && <Link to="/community" style={styles.link} >Community</Link>}
-    //         <Link to="/messageboard" style={styles.link} >Message Board</Link>
-    //         <Link to="/about" style={styles.link} >About Us</Link>
-    //         {/* {authenticated && <Link to="/collections" style={styles.link} >My Collection</Link>} */}
-    //         {authenticated && <button style={styles.buttonLink} onClick={() => handleLogout(navigate)} >Log Out</button>}
-
-    //     </div>
     );
 };
 

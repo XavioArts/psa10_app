@@ -44,7 +44,6 @@ code {
   width: 200px;
   border-radius: 15px !important;
   text-align: center;
-  /* display: flex; */
 }
 
 .profileText {
@@ -62,7 +61,6 @@ code {
 .profileStats {
   color: #ffffff;
   display: flex;
-  /* flex-direction: column;  */
   line-height: 9px;
   float: left;
   margin: 2em 0em 0em 6em;
