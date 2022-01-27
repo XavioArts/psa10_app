@@ -9,7 +9,6 @@ import styled from "styled-components"
 const Collections = () => {
 
   const [collections, setCollections] = useState([])
-  console.log(collections)
 
   useEffect(() => {
     getCollections();
@@ -18,7 +17,6 @@ const Collections = () => {
   const getCollections = async () => {
     let res = await axios.get("/api/collections");
     setCollections(res.data);
-    console.log(res.data)
   }
 
   const renderCollectionCards = () => {
@@ -46,16 +44,13 @@ const Collections = () => {
 
   return (
     <PageDiv>
-      {/* flexbox */}
       <div style={{ display: "flex", justifyContent: "right" }}>
         <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
       </div>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>
-      {/* {JSON.stringify(collections)} */}
       <hr />
-      {/* <CollectionComments /> */}
     </PageDiv>
   )
 };

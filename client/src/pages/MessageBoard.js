@@ -2,15 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Icon, Input, Paper, Stack, createTheme, ThemeProvider } from "@mui/material";
-
 import Modal from '@mui/material/Modal';
 import AddTopic from '../components/AddTopic';
 import { AuthContext } from '../providers/AuthProvider';
 import ReactPaginate from 'react-paginate';
-import ReactDOM from 'react-dom';
-
-
-
 
 const MessageBoard = (props) => {
   const auth = useContext(AuthContext);
@@ -60,16 +55,12 @@ const MessageBoard = (props) => {
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = topicOffset + topicsPerPage;
-    console.log(`Loading items from ${topicOffset} to ${endOffset}`);
     setCurrentTopics(filteredTopics.slice(topicOffset, endOffset));
     setPageCount(Math.ceil(filteredTopics.length / topicsPerPage));
   }, [topicOffset, topicsPerPage, filteredTopics]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * topicsPerPage) % topics.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setTopicOffset(newOffset);
   };
 
@@ -80,7 +71,6 @@ const MessageBoard = (props) => {
       setFilteredTopics(res.data)
       setCurrentTopics(res.data.slice(0, 4))
       setPageCount(Math.ceil(res.data.length / topicsPerPage));
-      console.log(res.data)
     } catch (err) {
       console.log(err.response);
       alert("Error getting topics")
@@ -122,7 +112,6 @@ const MessageBoard = (props) => {
     e.preventDefault();
     try {
         let res = await axios.get(`/api/topics/search/${search}`);
-        console.log(res.data)
         setFilteredTopics(res.data);
         setTopicOffset(0);
     } catch (err) {
