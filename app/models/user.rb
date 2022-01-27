@@ -55,9 +55,8 @@ class User < ActiveRecord::Base
     .where('users.id = ?', id)
   end
 
-  # def self.liked_collections(ids)
-  #   ids = ids.empty? ? [0] : ids
-  #   Collection.where("id IN (?)", ids)
-  # end
+  def token_validation_response
+    self.as_json
+  end
 
 end
