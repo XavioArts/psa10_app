@@ -122,6 +122,7 @@ const UserOverview = () => {
               card={{ ...c }}
               show={true}
               personal={false}
+              user={user}
             />
           </div>
         );
@@ -199,6 +200,7 @@ const UserOverview = () => {
               card={{ ...c }}
               show={true}
               personal={false}
+              user={user}
             />
           </div>
         );

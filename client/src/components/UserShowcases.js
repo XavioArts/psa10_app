@@ -22,16 +22,21 @@ const UserShowcases = (props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const size = useWindowSize();
+  const [user, setUser] = useState(null);
 
 
+    
+  
   useEffect(() => {
     getData();
   }, [])
-
+  
   const getData = async () => {
     let res_id = user_id
     try {
-        let res = await axios.get("/api/cards/all_cards");
+      let res = await axios.get("/api/cards/all_cards");
+      let user_res = await axios.get(`/api/users/${user_id}`);
+      setUser(user_res.data);
         console.log(res.data)
         setCards(res.data);
         let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
@@ -81,7 +86,7 @@ const sizeWindow = () => {
 
   const renderShowcases = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} user={user} /></div>)
     })
     return showcases.map((s)=> {
       return (

@@ -1,7 +1,7 @@
 import { Button, Grid, Icon, Input, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
 import { AuthContext } from "../providers/AuthProvider";
@@ -12,6 +12,21 @@ const UserSets = () => {
     const {user_id} = useParams();
     const [cards, setCards] = useState(null);
     const [search, setSearch] = useState("");
+    const [user, setUser] = useState(null);
+
+
+    const getUser = async () => {
+        try {
+            let user_res = await axios.get(`/api/users/${user_id}`);
+            setUser(user_res.data);
+        } catch (err) {
+            console.log(err.response)
+        }
+    };
+
+    useEffect(()=>{
+        getUser();
+    }, [])
 
     const clearSearch = (e) => {
         e.preventDefault();
@@ -32,7 +47,7 @@ const UserSets = () => {
 
     const renderCards = () => {
         return cards.map((c)=>{
-        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false}/></div>)
+        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} user={user} /></div>)
       });
     };
 

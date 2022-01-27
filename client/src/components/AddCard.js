@@ -64,7 +64,7 @@ const AddCard = (props) => {
     const startCreation = async (e) => {
         setLoading(true);
         e.preventDefault();
-        let newCard = {user_id: auth.id, collection_id: collectionId};
+        let newCard = {user_id: auth.id, collection_id: collectionId, likes: 0};
         try {
             let res = await axios.post("/api/cards", newCard);
             setCard(res.data);
