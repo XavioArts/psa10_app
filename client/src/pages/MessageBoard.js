@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, FormControlLabel, FormGroup, Icon, Input, Paper, Stack, Switch, AppBar, Avatar, createTheme, ThemeProvider } from "@mui/material";
+import { Button, Icon, Input, Paper, Stack, createTheme, ThemeProvider } from "@mui/material";
 
 import Modal from '@mui/material/Modal';
 import AddTopic from '../components/AddTopic';

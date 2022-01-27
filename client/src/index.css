@@ -95,6 +95,14 @@ code {
   margin: 30px 10px;
 }
 
+.profileButton:hover {
+  border: 1px solid #90BDEE;
+  color: #90BDEE;
+  text-decoration: none;
+  padding: 12px;
+  margin: 30px 10px;
+}
+
 .leftRight {
   display: flex;
   justify-content: space-between;
