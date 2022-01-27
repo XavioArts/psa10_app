@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
 import CollectionComments from "../components/CollectionComments";
+import CollectionLike from "../components/CollectionLike";
 
 
 const UserCollectView = () => {
@@ -51,7 +52,7 @@ const UserCollectView = () => {
       <h1>{collection.name}</h1>
       <h3>Category: {collection.category}</h3>
       <p>Description: {collection.description}</p>
-      <p>Likes: {collection.likes}</p>
+      <CollectionLike collection={collection} />
       {renderCollectionCards()}
       <CollectionComments />
     </div>
