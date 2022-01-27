@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Box from '@mui/material/Box';
 import CollectionCard from "./CollectionCard";
@@ -16,7 +15,6 @@ import { Grid } from "@mui/material";
 const Overview = () => {
   const [primaryShowcase, setPrimaryShowcase] = useState("")
   const [user, setUser] = useState({})
-  const {id} = useParams()
   const auth = useContext(AuthContext);
   const [showcases, setShowcases] = useState([]);
   const [cards, setCards] = useState([]);
@@ -35,10 +33,8 @@ const Overview = () => {
         let res_user = await axios.get(`/api/users/${res_id}`);
         setUser(res_user.data)
         let res = await axios.get("/api/cards");
-        // allShowcases = res.data
         setCards(res.data);
         let res_showcases = await axios.get(`/api/showcases/user/${res_id}`);
-        // allShowcases = res.data
         normalizeData(res_showcases.data, res.data, res_user.data);
         
     } catch (err) {
@@ -63,7 +59,6 @@ const Overview = () => {
   }
 
   const userPrimaryShowcase = (user, showcaseCards) => {
-    // getUser()
     if (user === null) { return }
     let showcase_id = user.primary_showcase
       let res_showcase = showcaseCards.find((s)=> s.id == showcase_id)
@@ -72,21 +67,13 @@ const Overview = () => {
 
   const sizeWindow = () => {
     if (size.width <= 500) {
-      // console.log(1)
-      // console.log(size.width)
       return 1
     }
     if (size.width > 500 && size.width < 900) {
-      // console.log(2)
-      // console.log(size.width)
       return 2
     } if (size.width > 900 && size.width < 1200) {
-      // console.log(3)
-      // console.log(size.width)
       return 3
     } if (size.width > 1200) {
-      // console.log(4)
-      // console.log(size.width)
       return 4
     }  
   }
@@ -108,9 +95,7 @@ const Overview = () => {
           backgroundColor: '#ebebeb',
           textAlign: "center",
           '&:hover': {
-            backgroundColor: '#dbdbdb',
-            // opacity: [0.9, 0.8, 0.7],
-            
+            backgroundColor: '#dbdbdb'           
           },
         }}
       ><h3>{primaryShowcase.name}</h3>

@@ -1,11 +1,8 @@
-import { Box, Icon, IconButton, Modal, SvgIcon } from "@mui/material";
-import React, { useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import React from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { ModalBoxStyle } from "./Styles";
-import { useNavigate } from "react-router-dom";
-import DiscordIcon from "../Discord-Logo-Black.svg"
 import DiscordIconColor from "../Discord-Logo-Color.svg"
 
 const UserContactIcons = (props) => {

@@ -34,7 +34,6 @@ const Message = (props) => {
   const getMessage = async () => {
     try {
       let res = await axios.get(`/api/topics/${props.topic_id}/messages/${props.id}`);
-      console.log(res.data[0])
       setMessage(res.data[0]);
     } catch (err) {
       console.log(err.response);
