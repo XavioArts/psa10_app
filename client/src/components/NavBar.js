@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PSA10Logo from '../2.png';
+import LogIn from "../pages/LogIn";
 
 const NavBar = () => {
 
@@ -18,6 +19,7 @@ const NavBar = () => {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElLogin, setAnchorElLogin] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,12 +28,20 @@ const NavBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+  const handleOpenLoginMenu = (event) => {
+    setAnchorElLogin(event.currentTarget);
+  };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleCloseLoginMenu = () => {
+    setAnchorElLogin(null);
   };
 
   const theme = createTheme({
@@ -200,9 +210,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 variant="contained" 
                 color="primary" 
                 sx={{borderRadius: "20px", marginRight: "20px"}}
-                onClick={()=>navigate("/login")} >
+                onClick={handleOpenLoginMenu} >
                     Login
                 </Button>
+                <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElLogin}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                open={Boolean(anchorElLogin)}
+                onClose={handleCloseLoginMenu}
+                >
+                    <Box sx={{ marginLeft: '25px', marginRight: '25px', marginBottom: '10px'}}>
+                        <LogIn />
+                    </Box>
+                </Menu>
                 <Button 
                 variant="outlined" 
                 color="black" 
@@ -255,6 +285,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 ))}
                 <MenuItem key={'logout'} onClick={()=>{
                     handleCloseUserMenu();
+                    handleCloseLoginMenu();
                     auth.handleLogout(navigate);}}>
                     <Typography textAlign="center">Logout</Typography>
                     </MenuItem>
