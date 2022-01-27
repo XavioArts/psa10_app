@@ -34,6 +34,7 @@ import CoverImgUpload from './pages/CoverImgUpload';
 import LandingPage from './pages/LandingPage';
 import UserSets from './pages/UserSets';
 import Register from './components/Register';
+import Welcome from './pages/Welcome';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               <Route path="/messageboard/:id" element={<TopicPage />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/welcome" element={<Welcome />} />
               <Route path="/test/:id" element={<Test />} />
 
 
