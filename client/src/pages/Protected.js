@@ -1,4 +1,4 @@
-import { Alert, LinearProgress, Paper } from "@mui/material";
+import { Alert, LinearProgress, Paper, createTheme, ThemeProvider  } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet, useParams } from "react-router-dom";
@@ -7,6 +7,11 @@ import { DateTime } from "luxon";
 import styled from "styled-components";
 import UserContactIcons from "../components/UserContactIcons";
 import { Box } from "@mui/system";
+import IconButton from '@mui/material/IconButton';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EmailIcon from '@mui/icons-material/Email';
+
 
 const Protected = () => {
     const { user_id } = useParams();
@@ -20,6 +25,31 @@ const Protected = () => {
     userInfo();
     setLoading(auth.id ? false : true)
   }, []);
+
+  const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#6569C8',
+            contrastText: '#FFFFFF',
+        },
+        secondary: {
+            main: '#90BDEE',
+            contrastText: '#FFFFFF',
+        },
+        accent: {
+            main: '#C4C4C4',
+            contrastText: '#FFFFFF',
+        },
+        white: {
+            main: '#FFFFFF',
+            contrastText: '#272830',
+        },
+        black: {
+            main: '#272830',
+            contrastText: '#FFFFFF',
+        },
+    }
+});
 
 
 //   const normalizeData = (res_showcases, res_cards) => {
@@ -92,6 +122,7 @@ const normalizeStats = (cardStats, collectionStats) => {
   `;
 
   return (
+    <ThemeProvider theme={theme} >
     <div>
       {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
         <Alert severity="error">
@@ -117,7 +148,7 @@ const normalizeStats = (cardStats, collectionStats) => {
               {!user && (
                 <>
                   <h2>{auth.nickname}</h2>
-                  <p className="profileText">{auth.email}</p>
+                  <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
                   <p className="profileText">{auth.about}</p>
                   <UserContactIcons {...auth} />
                   <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
@@ -157,8 +188,8 @@ const normalizeStats = (cardStats, collectionStats) => {
           {!user && (
               <div className="flexEnd">
                       <div >
-                      <Link className="profileButton" to={`/users/${auth.id}/edit`}>Edit Profile</Link>
-                      <Link className="profileButton" to={"/profile/cover_image"}>Edit Cover Image</Link>
+                      <Link className="profileButton" to={`/users/${auth.id}/edit`}> <AccountCircleIcon style={{margin: "2px", position: "relative", top:"8px"}}/> Edit Profile</Link>
+                      <Link className="profileButton" to={"/profile/cover_image"}><AddAPhotoIcon style={{margin: "2px", position: "relative", top:"7px"}}/> Edit Cover Image</Link>
                       </div>
                       </div>)}
         </Cover>
@@ -184,6 +215,7 @@ const normalizeStats = (cardStats, collectionStats) => {
         <Outlet />
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 
