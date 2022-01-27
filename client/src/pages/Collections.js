@@ -7,7 +7,7 @@ import { FlexColumnDiv, PageDiv } from '../components/Styles';
 
 const Collections = () => {
 
-  const [collections, setCollections] = useState([])
+  const [collections, setCollections] = useState(null)
   console.log(collections)
 
   useEffect(() => {

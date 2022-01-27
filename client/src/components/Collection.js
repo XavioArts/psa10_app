@@ -6,7 +6,6 @@ import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
-import CollectionLike2 from "./CollectionLike2";
 
 const Collection = () => {
   const navigate = useNavigate();
@@ -70,10 +69,10 @@ const Collection = () => {
           <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
         </div>
         <div>
-          <Container maxWidth="sm">
+          <Container>
             <h3>Category: {collection.category}</h3>
             <p>Description: {collection.description}</p>
-            <CollectionLike2 collection={collection} />
+            <CollectionLike collection={collection} />
           </Container>
         </div>
         <AddCard collectionId={params.id} addCard={addCard} />
