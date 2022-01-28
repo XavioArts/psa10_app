@@ -6,6 +6,7 @@ import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
+import { FlexColumnDiv } from "./Styles";
 
 const Collection = () => {
   const navigate = useNavigate();
@@ -43,8 +44,8 @@ const Collection = () => {
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} />
+              <Grid item xs="auto" sm="auto" md="auto">
+                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="medium" />
               </Grid>
             )
           })}
@@ -56,17 +57,16 @@ const Collection = () => {
 
   return (
     <>
-      {collection && (<div>
+      {collection && (<div style={{ padding: "20px" }}>
         <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
-        <br />
-        <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
-        <div style={{ display: "flex", justifyContent: "right" }}>
-          <button><Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link></button>
-          <br />
-          <br />
-          <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
-        </div>
         <div>
+          <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
+          <div style={{ display: "flex", justifyContent: "right" }}>
+            <button><Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link></button>
+            <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
+          </div>
+          <div>
+          </div>
           <Container>
             <h3>Category: {collection.category}</h3>
             <p>Description: {collection.description}</p>

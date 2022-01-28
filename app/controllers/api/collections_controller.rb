@@ -38,8 +38,6 @@ class Api::CollectionsController < ApplicationController
     end
 
     def destroy
-        # map over the user to check for collection id is in liked_collections, remove it and update user's liked_collections.
-        # User.all
         render json: @collection.destroy
     end
 

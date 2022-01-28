@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
 import CollectionComments from "../components/CollectionComments";
+import CollectionLike from "../components/CollectionLike";
 
 
 const UserCollectView = () => {
@@ -11,6 +12,7 @@ const UserCollectView = () => {
   const params = useParams()
   const [collectionCards, setCollectionCards] = useState(null)
   const [collection, setCollection] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     getCollectionCards();
@@ -18,6 +20,10 @@ const UserCollectView = () => {
 
   const getCollectionCards = async () => {
     let res = await axios.get(`/api/collections/${params.id}`)
+    let user_res = await axios.get(`/api/users/${params.user_id}`);
+    setUser(user_res.data);
+    console.log(res.data)
+    console.log(res.data.cards)
     setCollectionCards(res.data.cards)
     setCollection(res.data)
   }
@@ -32,7 +38,7 @@ const UserCollectView = () => {
           {collectionCards.map(cc => {
             return (
               <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} card={{...cc}} show={true} personal={false} />
+                <CollectionCard key={cc.id} card={{...cc}} show={true} personal={false} user={user} size="medium" />
               </Grid>
             )
           })}
@@ -51,7 +57,7 @@ const UserCollectView = () => {
       <h1>{collection.name}</h1>
       <h3>Category: {collection.category}</h3>
       <p>Description: {collection.description}</p>
-      <p>Likes: {collection.likes}</p>
+      <CollectionLike collection={collection} />
       {renderCollectionCards()}
       <CollectionComments />
     </div>

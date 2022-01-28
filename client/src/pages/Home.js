@@ -41,7 +41,8 @@ const Home = () => {
     const resetShowcase = async () => {
         cards.forEach( async (c) => {
             try {
-                let reset = {showcase: false}
+                let reset = {likes: 0}
+                // let reset = {showcase: false}
                 let res = await axios.put(`/api/cards/${c.id}`, reset)
                 console.log(res.data);
             } catch (err) {

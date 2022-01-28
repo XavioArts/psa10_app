@@ -30,7 +30,7 @@ const Sets = () => {
 
     const renderCards = () => {
         return cards.map((c)=>{
-        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false}/></div>)
+        return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} size="medium" /></div>)
       });
     };
 

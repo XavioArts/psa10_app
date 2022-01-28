@@ -1,0 +1,27 @@
+{
+  "name": "psa10_app",
+  "version": "1.0.0",
+  "description": "# PSA 10  This is an app for showing off colectibles and finding a community to talk, share, and trade collectible cards. We created this app as a final project for our full-time web development bootcamp with DevPoint Labs.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "cd client && npm install --only=dev && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client Built'"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XavioArts/psa10_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XavioArts/psa10_app/issues"
+  },
+  "homepage": "https://github.com/XavioArts/psa10_app#readme"
+}
