@@ -5,8 +5,8 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const LogIn = () => {
     const { handleLogin } = useContext(AuthContext);
-    const [email, setEmail] = useState("test@test.com");
-    const [password, setPassword] = useState("123456");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -19,7 +19,7 @@ const LogIn = () => {
             <h1>Log In</h1>
             <form onSubmit={handleSubmit} >
                 <TextField style={{marginRight: '25px'}}label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} />
-                <TextField label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                <TextField type='password' label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} />
                 <br />
                 <Button style={{marginTop: '15px'}}variant="contained" type="submit" >Log in</Button>
             </form>

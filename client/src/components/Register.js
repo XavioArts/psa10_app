@@ -60,6 +60,17 @@ const Register = () => {
         }
     }
 
+    const handlePasswordMessage = () => {
+        let filter = /[0-9a-zA-Z]{6,}/
+        if (filter.test(password)){
+            return(
+                <p style={{color: 'green', margin: '10px'}}>Password must be 6 characters long</p>
+            )
+        } return (
+            <p style={{color: 'red', margin: '10px'}}>Password must be 6 characters long</p>
+        )
+        }
+
     const handleEmailerror = () => {
         if (!emailVerify){
             return(
@@ -248,6 +259,7 @@ const Register = () => {
                     <br />
                     {handlePasswordError()}
                     <br />
+                    {handlePasswordMessage()}
                     <Button style={{margin: '10px'}} variant="contained" type="submit" >Register</Button>
                 </form>
             </div>

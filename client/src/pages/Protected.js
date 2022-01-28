@@ -1,7 +1,7 @@
-import { Alert, Paper, createTheme, ThemeProvider } from "@mui/material";
+import { Alert, Paper, createTheme, ThemeProvider, Button, Modal } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, Outlet, useParams } from "react-router-dom";
+import { Link, useNavigate, Outlet, useParams, useLocation } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
 import styled from "styled-components";
@@ -10,20 +10,38 @@ import { Box } from "@mui/system";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
+import Welcome from "./Welcome";
 
 
 const Protected = () => {
+    const {state} = useLocation();
     const { user_id } = useParams();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState({});
+    const [open, setOpen] = useState(state ? true : false);
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
+    const handleClose = () => setOpen(false);
 
   useEffect(() => {
     userInfo();
     setLoading(auth.id ? false : true)
   }, []);
+
+  const handleWelcomeModal = () => {
+    if (state) {
+      return (
+        <Modal
+        hideBackdrop
+          open={open}
+          onClose={handleClose}
+        >
+          <div><Welcome handleClose={handleClose}/></div>
+        </Modal>
+      )
+    }
+  }
 
   const theme = createTheme({
     palette: {
@@ -50,19 +68,18 @@ const Protected = () => {
     }
 });
 
-const normalizeStats = (cardStats, collectionStats) => {
-    function add(accumulator, a) {
-      return accumulator + a;
-    }
-    let cardLikes = cardStats.map((c)=>c.card_likes).reduce(add, 0) 
-    let collectionLikes = collectionStats.map((c)=>c.collection_likes).reduce(add, 0)
-    let totalCards = cardStats.map((c)=>c.card_id).length
-    let gradedCards = cardStats.filter((c)=>c.graded == true).length
-    let availableCards = cardStats.filter((c)=>c.available == true).length 
-    const userStats = {cardLikes: cardLikes, collectionLikes: collectionLikes, totalCards: totalCards, gradedCards: gradedCards, availableCards: availableCards}
-    setStats(userStats) 
-}
-
+  const normalizeStats = (cardStats, collectionStats) => {
+      function add(accumulator, a) {
+        return accumulator + a;
+      }
+      let cardLikes = cardStats.map((c)=>c.card_likes).reduce(add, 0) 
+      let collectionLikes = collectionStats.map((c)=>c.collection_likes).reduce(add, 0)
+      let totalCards = cardStats.map((c)=>c.card_id).length
+      let gradedCards = cardStats.filter((c)=>c.graded == true).length
+      let availableCards = cardStats.filter((c)=>c.available == true).length 
+      const userStats = {cardLikes: cardLikes, collectionLikes: collectionLikes, totalCards: totalCards, gradedCards: gradedCards, availableCards: availableCards}
+      setStats(userStats) 
+  }
 
  const userInfo = async () => {
     if (user_id) {
@@ -99,96 +116,99 @@ const normalizeStats = (cardStats, collectionStats) => {
 
   return (
     <ThemeProvider theme={theme} >
-    <div>
-      {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
-        <Alert severity="error">
-          Finish building your profile.{" "}
-          <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
-            Edit Profile
-          </button>
-        </Alert>
-      )}
-      <div >
-        <Cover image={coverImage()} className="profileInfo">
-        <div className="flexLeft">
-          {!user && (
-              <div className="leftRight">
-            <Paper className="profileInfoTextBox" elevation={7}>
-              {!user && auth.image && (
-                <img
-                  src={auth.image}
-                  alt="profile image"
-                  className="circletag"
-                />
-              )}
-              {!user && (
-                <>
-                  <h2>{auth.nickname}</h2>
-                  <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
-                  <p className="profileText">{auth.about}</p>
-                  <UserContactIcons {...auth} />
-                  <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
-                </>
-              )}
-            </Paper>
+      <div>
+        {handleWelcomeModal()}
+        <div>
+          {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
+            <Alert severity="error">
+              Finish building your profile.{" "}
+              <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
+                Edit Profile
+              </button>
+            </Alert>
+        )}
+        <div >
+          <Cover image={coverImage()} className="profileInfo">
+          <div className="flexLeft">
+            {!user && (
+                <div className="leftRight">
+              <Paper className="profileInfoTextBox" elevation={7}>
+                {!user && auth.image && (
+                  <img
+                    src={auth.image}
+                    alt="profile image"
+                    className="circletag"
+                  />
+                )}
+                {!user && (
+                  <>
+                    <h2>{auth.nickname}</h2>
+                    <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
+                    <p className="profileText">{auth.about}</p>
+                    <UserContactIcons {...auth} />
+                    <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
+                  </>
+                )}
+              </Paper>
 
+              </div>
+            )}
+            {user && (
+              <Paper className="profileInfoTextBox" elevation={3}>
+                {user && (
+                  <img
+                    src={user.image}
+                    alt="profile image"
+                    className="circletag"
+                  />
+                )}
+                <h2>{user.nickname}</h2>
+                <p className="profileTextDate">Member Since {DateTime.fromISO(user.created_at).toFormat("LLLL yyyy")}</p>
+                <p className="profileText">{user.email}</p>
+                <p className="profileText">{user.about}</p>
+                <UserContactIcons {...user} />
+              </Paper>
+            )}
+            <div className="profileStats">
+            <Box >
+                  <h3>STATS</h3>
+                  <h4>{stats.collectionLikes} collection likes</h4>
+                  <h4>{stats.cardLikes} card likes</h4>  
+                  <h4>{stats.totalCards} total cards</h4> 
+                  <h4>{stats.gradedCards} graded cards</h4>
+                  <h4>{stats.availableCards} cards for trade</h4>
+                </Box>
             </div>
-          )}
-          {user && (
-            <Paper className="profileInfoTextBox" elevation={3}>
-              {user && (
-                <img
-                  src={user.image}
-                  alt="profile image"
-                  className="circletag"
-                />
-              )}
-              <h2>{user.nickname}</h2>
-              <p className="profileTextDate">Member Since {DateTime.fromISO(user.created_at).toFormat("LLLL yyyy")}</p>
-              <p className="profileText">{user.email}</p>
-              <p className="profileText">{user.about}</p>
-              <UserContactIcons {...user} />
-            </Paper>
-          )}
-          <div className="profileStats">
-          <Box >
-                <h3>STATS</h3>
-                <h4>{stats.collectionLikes} collection likes</h4>
-                <h4>{stats.cardLikes} card likes</h4>  
-                <h4>{stats.totalCards} total cards</h4> 
-                <h4>{stats.gradedCards} graded cards</h4>
-                <h4>{stats.availableCards} cards for trade</h4>
-              </Box>
-          </div>
-          </div>
-          {!user && (
-              <div className="flexEnd">
-                      <div >
-                      <Link className="profileButton" to={`/users/${auth.id}/edit`}> <AccountCircleIcon style={{margin: "2px", position: "relative", top:"8px"}}/> Edit Profile</Link>
-                      <Link className="profileButton" to={"/profile/cover_image"}><AddAPhotoIcon style={{margin: "2px", position: "relative", top:"7px"}}/> Edit Cover Image</Link>
-                      </div>
-                      </div>)}
-        </Cover>
+            </div>
+            {!user && (
+                <div className="flexEnd">
+                        <div >
+                        <Link className="profileButton" to={`/users/${auth.id}/edit`}> <AccountCircleIcon style={{margin: "2px", position: "relative", top:"8px"}}/> Edit Profile</Link>
+                        <Link className="profileButton" to={"/profile/cover_image"}><AddAPhotoIcon style={{margin: "2px", position: "relative", top:"7px"}}/> Edit Cover Image</Link>
+                        </div>
+                        </div>)}
+          </Cover>
 
-        <div className="profileNavContainer">
-          {!user && (
-            <div className="profileNavContainer">
-              <Link className="profileNavText" to={"/profile/overview"}> Overview</Link>
-              <Link className="profileNavText" to={"/profile/collections"}> Collections </Link>
-              <Link className="profileNavText" to={"/profile/sets"}> Sets </Link>
-              <Link className="profileNavText" to={"/profile/showcases"}> Showcases </Link>
-            </div>
-          )}
-          {user && (
-            <div className="profileNavContainer">
-              <Link className="profileNavText" to={`/community/users/${user_id}/profile`} >Overview</Link>
-              <Link className="profileNavText" to={`/community/users/${user_id}/profile/collections`} >Collections</Link>
-              <Link className="profileNavText" to={`/community/users/${user_id}/profile/sets`}>Sets</Link>
-              <Link className="profileNavText" to={`/community/users/${user_id}/profile/showcases`} >Showcases</Link>
-            </div>
-          )}
+          <div className="profileNavContainer">
+            {!user && (
+              <div className="profileNavContainer">
+                <Link className="profileNavText" to={"/profile/overview"}> Overview</Link>
+                <Link className="profileNavText" to={"/profile/collections"}> Collections </Link>
+                <Link className="profileNavText" to={"/profile/sets"}> Sets </Link>
+                <Link className="profileNavText" to={"/profile/showcases"}> Showcases </Link>
+              </div>
+            )}
+            {user && (
+              <div className="profileNavContainer">
+                <Link className="profileNavText" to={`/community/users/${user_id}/profile`} >Overview</Link>
+                <Link className="profileNavText" to={`/community/users/${user_id}/profile/collections`} >Collections</Link>
+                <Link className="profileNavText" to={`/community/users/${user_id}/profile/sets`}>Sets</Link>
+                <Link className="profileNavText" to={`/community/users/${user_id}/profile/showcases`} >Showcases</Link>
+              </div>
+            )}
+          </div>
+          <Outlet />
         </div>
-        <Outlet />
       </div>
     </div>
     </ThemeProvider>

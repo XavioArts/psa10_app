@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import ProfileImageUpload from "../components/ProfileImageUpload";
-import { Button, Divider, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 

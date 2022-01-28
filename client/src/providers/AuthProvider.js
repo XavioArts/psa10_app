@@ -41,7 +41,7 @@ const AuthProvider = (props) => {
         try {
             let res = await axios.post("/api/auth", user);
             setUser(res.data.data);
-            navigate("/profile");
+            navigate("/profile", {state: {openWelcome: true}});
         } catch (err) {
             console.log(err.response);
             alert("An error occurred registering user");
