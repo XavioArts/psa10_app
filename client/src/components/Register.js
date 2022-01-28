@@ -1,5 +1,4 @@
 import { Button, TextField } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -235,7 +234,7 @@ const Register = () => {
     }
 
     return (
-        <Box style={{margin:'50px'}}>
+        <div style={{position: 'absolute', left: '15%', marginTop: '50px'}}>
             <h1>Create a new account</h1>
             <p>You can set preferred display name and manage other personal settings.</p>
             <div>
@@ -252,7 +251,7 @@ const Register = () => {
                     <Button style={{margin: '10px'}} variant="contained" type="submit" >Register</Button>
                 </form>
             </div>
-        </Box>
+        </div>
     );
 };
 
