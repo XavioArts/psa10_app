@@ -5,13 +5,11 @@ import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 
 const CardLike = (props) => {
-  console.log(props)
   const auth = useContext(AuthContext);
   const [liked, setLiked] = useState(null);
   const [like, setLike] = useState(props.likes)
   const [likedArray, setLikedArray] = useState([])
-  console.log(auth.liked_cards)
-  console.log(liked)
+
 
 
   useEffect(() => {
@@ -28,10 +26,11 @@ const CardLike = (props) => {
     if (!liked) {
       setLiked(true);
       let likesArray = [...likedArray, props.id]
+      console.log(likesArray)
       let liked = like + 1
       let updatedCardLikes = await axios.put(`/api/users/liked_cards`, { liked_cards: likesArray })
       let updateCardLikes = await axios.put(`/api/cards/${props.id}`, { likes: liked })
-      console.log(updateCardLikes.data)
+      console.log(updatedCardLikes.data.liked_cards)
       setLike(liked)
     }
     else {

@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import { Box, CardContent, Icon, Modal } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import CardLike from './CardLike';
 
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
@@ -96,7 +97,7 @@ const CollectionCard = (props) => {
         <CardActions disableSpacing >
           <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
           <IconButton aria-label="like">
-            <FavoriteIcon />{card.like}
+            {CardLike(card)}
           </IconButton>
           {!card.showcase && <IconButton aria-label="trophy">
             <EmojiEventsIcon />
