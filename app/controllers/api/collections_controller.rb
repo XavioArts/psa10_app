@@ -9,7 +9,7 @@ class Api::CollectionsController < ApplicationController
     end
 
     def all_collections
-        render json: Collection.all
+        render json: Collection.all, include: [:cards]
     end
 
     def user_collections
