@@ -97,7 +97,7 @@ const CollectionCard = (props) => {
         <CardActions disableSpacing >
           <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
           <IconButton aria-label="like">
-            {CardLike(card)}
+            <FavoriteIcon />
           </IconButton>
           {!card.showcase && <IconButton aria-label="trophy">
             <EmojiEventsIcon />
