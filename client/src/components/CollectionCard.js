@@ -17,7 +17,7 @@ import { theme } from './Styles';
 
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
-  const {card, show, personal, user} = props
+  const { card, show, personal, user } = props
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [visibleImage, setVisibleImage] = React.useState(card.front_image);
@@ -60,7 +60,7 @@ const CollectionCard = (props) => {
     }
     return "300px";
   }
-  
+
   const findHeight = () => {
     if (props.size === "xs") {
       return "213px";
@@ -99,28 +99,28 @@ const CollectionCard = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px" }} key={card.id} >
-      <CardMedia
-        component="div"
-        sx={{height: findHeight(), maxHeight: "425px", borderRadius: "15px"}}
-        image={visibleImage}
-        alt={card.name}
-         >
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%"}} >
+      <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px" }} key={card.id} >
+        <CardMedia
+          component="div"
+          sx={{ height: findHeight(), maxHeight: "425px", borderRadius: "15px" }}
+          image={visibleImage}
+          alt={card.name}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%" }} >
             {props.size !== "xs" && <IconButton onClick={flipCard} >
-              <ArrowBackIosIcon sx={{fontSize: findButtonSize()}} />
+              <ArrowBackIosIcon sx={{ fontSize: findButtonSize() }} />
             </IconButton>}
-            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
+            <div onClick={handleOpen} style={{ height: "100%", width: "100%" }} />
             {props.size !== "xs" && <IconButton onClick={flipCard} >
-              <ArrowForwardIosIcon sx={{fontSize: findButtonSize()}} />
+              <ArrowForwardIosIcon sx={{ fontSize: findButtonSize() }} />
             </IconButton>}
           </div>
-          {card.graded === true && 
-          <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: 0}} >
-            <Box sx={{borderRadius: "20px", backgroundColor: "#FFFFFF", width: 65, height: 30, display: "flex", alignItems: "center", justifyContent: "center", mr: 2, borderColor: "#90BDEE", borderWidth: "2px", borderStyle: "solid"}} >
-              <Typography variant="body2" color="secondary" >PSA {card.grade}</Typography>
-            </Box>
-          </Box>}
+          {card.graded === true &&
+            <Box sx={{ position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: 0 }} >
+              <Box sx={{ borderRadius: "20px", backgroundColor: "#FFFFFF", width: 65, height: 30, display: "flex", alignItems: "center", justifyContent: "center", mr: 2, borderColor: "#90BDEE", borderWidth: "2px", borderStyle: "solid" }} >
+                <Typography variant="body2" color="secondary" >PSA {card.grade}</Typography>
+              </Box>
+            </Box>}
         </CardMedia>
         {show &&
           <Modal
@@ -144,75 +144,49 @@ const CollectionCard = (props) => {
               {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
             </Box>
           </Modal>}
-        <CardContent>
-          <Typography sx={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold", fontSize: 20 }}>
-            {card.name}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing >
-          <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
-          <IconButton aria-label="like">
-            <FavoriteIcon />
-          </IconButton>
-          {!card.showcase && <IconButton aria-label="trophy">
-            <EmojiEventsIcon />
-          </IconButton>}
-          {card.showcase && <IconButton aria-label="trophy">
-            <EmojiEventsIcon color="warning" />
-          </IconButton>}
-          {card.available === true && <Button variant="outlined" color="primary">
-            Available
-          </Button>}
-          {card.available === false && <Button variant="outlined" color="secondary">
-            Unavailable
-          </Button>}
-          {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
-        </Box>
-      </Modal>}
-      {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
+        {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
         <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
-
         </Box>
       </Box> */}
-      {props.size !== "xs" && 
-      <>
-      <Box sx={{margin: "10px 0px 0px 0px", display: 'flex', alignItems: "center", justifyContent: "space-between"}} >
-        <Typography sx={{ ml: '15px', textTransform: 'capitalize', fontWeight:"bold", fontSize: findFontSize()}}>
-          {card.name}
-        </Typography>
-        {card.available && <Button variant="contained" color="primary" size="small" sx={{mr: "15px"}} >4trade</Button>}
-        {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{mr: "15px"}} >hodl</Button>}
-      </Box>
-      <CardActions disableSpacing >
-          <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
-          <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image}/>
-          <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}} >
-            <IconButton aria-label="like">
-              <FavoriteIcon />
-            </IconButton>
-            <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
-              <p>{card.likes}</p>
+        {props.size !== "xs" &&
+          <>
+            <Box sx={{ margin: "10px 0px 0px 0px", display: 'flex', alignItems: "center", justifyContent: "space-between" }} >
+              <Typography sx={{ ml: '15px', textTransform: 'capitalize', fontWeight: "bold", fontSize: findFontSize() }}>
+                {card.name}
+              </Typography>
+              {card.available && <Button variant="contained" color="primary" size="small" sx={{ mr: "15px" }} >4trade</Button>}
+              {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{ mr: "15px" }} >hodl</Button>}
             </Box>
-          </Box>
-        {!card.showcase && <IconButton sx={{mr: 1}} aria-label="trophy">
-          <EmojiEventsIcon  />
-        </IconButton>}
-        {card.showcase && <IconButton sx={{mr: 1}} aria-label="trophy">
-          <EmojiEventsIcon color="secondary" />
-        </IconButton>}
-        </Box>
-      </CardActions>
-      </>}
-      {props.size === "xs" && 
-      <CardContent>
-        <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
-          <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image}/>
-          {card.available && <Button variant="contained" color="primary" size="small" sx={{mr: "15px"}} >4trade</Button>}
-        {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{mr: "15px"}} >hodl</Button>}
-        </Box>
-      </CardContent>
-      }
-    </Card>
+            <CardActions disableSpacing >
+              <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }} >
+                <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image} />
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
+                  <IconButton aria-label="like">
+                    <FavoriteIcon />
+                  </IconButton>
+                  <Box sx={{ borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center" }} >
+                    <p>{card.likes}</p>
+                  </Box>
+                </Box>
+                {!card.showcase && <IconButton sx={{ mr: 1 }} aria-label="trophy">
+                  <EmojiEventsIcon />
+                </IconButton>}
+                {card.showcase && <IconButton sx={{ mr: 1 }} aria-label="trophy">
+                  <EmojiEventsIcon color="secondary" />
+                </IconButton>}
+              </Box>
+            </CardActions>
+          </>}
+        {props.size === "xs" &&
+          <CardContent>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }} >
+              <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image} />
+              {card.available && <Button variant="contained" color="primary" size="small" sx={{ mr: "15px" }} >4trade</Button>}
+              {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{ mr: "15px" }} >hodl</Button>}
+            </Box>
+          </CardContent>
+        }
+      </Card>
     </ThemeProvider>
   );
 }
