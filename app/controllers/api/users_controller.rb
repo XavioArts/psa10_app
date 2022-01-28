@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
 before_action :authenticate_user!, except: [:index, :search, :show]
 before_action :set_user, only: [:show, :update, :destroy, :info]
+before_action :liked_collection_params, only: [:update_collection_likes]
 
     def profile_image
         file = params[:file]
@@ -84,9 +85,13 @@ before_action :set_user, only: [:show, :update, :destroy, :info]
     if (@user.update(user_params))
       render json: @user
     end
-
   end
 
+  def update_collection_likes
+    if (current_user.update(liked_collection_params))
+      render json: current_user
+    end
+  end
 
   def destroy
     @user.destroy
@@ -99,6 +104,10 @@ before_action :set_user, only: [:show, :update, :destroy, :info]
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about, :primary_showcase, :cover_image)
+      params.require(:user).permit(:email, :password, :image, :nickname, :first_name, :last_name, :about, :primary_showcase, :cover_image, :liked_collections, :liked_cards)
+    end
+
+    def liked_collection_params
+      params.require(:user).permit(:liked_collections => [])
     end
 end
