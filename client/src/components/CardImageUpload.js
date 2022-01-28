@@ -48,6 +48,39 @@ const CardImageUpload = (props) => {
         }
     }
 
+    const fileValidation = () => {
+        const fi = document.getElementById('input');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+    
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 4096) {
+                    alert(
+                      "File too Big, please select a file less than 4mb");
+                } else if (file < 200) {
+                    alert(
+                      "File too small, please select a file greater than 200kb");
+                } else {
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB';
+                }
+            }
+        }
+    }
+    
+    const onChangeFuncFront = (e) => {
+        setFiles(e)
+        fileValidation(e)
+    }
+
+    const onChangeFuncBack = (e) => {
+        setFilesBack(e)
+        fileValidation(e)
+    }
+
     return (
         <CenteredDiv>
             <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
@@ -88,10 +121,10 @@ const CardImageUpload = (props) => {
             <div style={{width: "70vw"}} >
                 <label htmlFor="contained-button-file" >
                     <label>Upload front image of card:</label>
-                    <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>setFiles(e.target.value)} />
+                    <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>onChangeFuncFront(e.target.value)} />
                     <br/>
                     <label>Upload back image of card:</label>
-                    <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>setFilesBack(e.target.value)} />
+                    <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>onChangeFuncBack(e.target.value)} />
                     <br/>
                     <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
                 </label>

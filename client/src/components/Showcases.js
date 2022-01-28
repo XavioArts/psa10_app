@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { Button, ButtonGroup, dividerClasses, Grid, Paper } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
@@ -79,23 +79,27 @@ const Showcase = (props) => {
   }
 
 const sizeWindow = () => {
-  if (size.width <= 625) {
-    console.log(1)
-    console.log(size.width)
+  if (size.width <= 500) {
+    // console.log(1)
+    // console.log(size.width)
     return 1
   }
-  if (size.width > 625 && size.width <= 950) {
-    console.log(2)
-    console.log(size.width)
+  if (size.width > 500 && size.width <= 625) {
+    // console.log(2)
+    // console.log(size.width)
     return 2
-  } if (size.width > 950 && size.width <= 1260) {
-    console.log(3)
-    console.log(size.width)
+  } if (size.width > 626 && size.width <= 910) {
+    // console.log(3)
+    // console.log(size.width)
     return 3
-  } if (size.width > 1260) {
-    console.log(4)
-    console.log(size.width)
+  }if (size.width > 911 && size.width <= 1260) {
+    // console.log(3)
+    // console.log(size.width)
     return 4
+  } if (size.width > 1260) {
+    // console.log(4)
+    // console.log(size.width)
+    return 5
   }  
 }
 
@@ -183,7 +187,6 @@ const sizeWindow = () => {
       <div style={styles.centered}>
         <div style={styles.row}>
         <Link to="/showcase/new" showcases = {showcases} >Create A New Showcase</Link>
-        {/* <Button style={{margin:'10px 0px 0px 0px'}} onClick={()=>navigate('/showcase/new')} variant="contained">Create A New Showcase</Button> */}
         </div>
         <div >
           {renderShowcases()}
