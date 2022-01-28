@@ -178,6 +178,7 @@ const Register = () => {
                 <>
                 <TextField style={{margin: '10px'}}
                     error
+                    type='password'
                     label="Password"
                     value={password}
                     onChange={(e) => {
@@ -189,6 +190,7 @@ const Register = () => {
                 <br />
                 <TextField style={{margin: '10px'}}
                     error
+                    type='password'
                     label="Confirm Password"
                     value={passwordConfirm}
                     onChange={(e) => {
@@ -204,6 +206,7 @@ const Register = () => {
             <>
             <TextField style={{margin: '10px'}}
                 error
+                type='password'
                 label="Password"
                 value={password}
                 onChange={(e) => {
@@ -215,6 +218,7 @@ const Register = () => {
             <br />
             <TextField style={{margin: '10px'}}
                 error
+                type='password'
                 label="Confirm Password"
                 value={passwordConfirm}
                 onChange={(e) => {
@@ -229,12 +233,14 @@ const Register = () => {
             return(
                 <>
                 <TextField style={{margin: '10px'}}
+                    type='password'
                     label="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <br />
                 <TextField style={{margin: '10px'}}
+                    type='password'
                     label="Confirm Password"
                     value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
