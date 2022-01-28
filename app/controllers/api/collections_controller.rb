@@ -5,7 +5,7 @@ class Api::CollectionsController < ApplicationController
     before_action :set_user, only: [:user_collections]
 
     def index
-        render json: current_user.collections, include: [:cards]
+        render json: current_user.collections.order(:id), include: [:cards]
     end
 
     def all_collections

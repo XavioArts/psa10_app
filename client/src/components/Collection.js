@@ -1,19 +1,22 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
+import CollectionLike from "./CollectionLike";
+import { FlexColumnDiv } from "./Styles";
 
 const Collection = () => {
   const navigate = useNavigate();
   const params = useParams()
-  const [collectionCards, setCollectionCards] = useState([])
-  const [collection, setCollection] = useState([])
+  const [collectionCards, setCollectionCards] = useState(null)
+  const [collection, setCollection] = useState(null)
 
   useEffect(() => {
     getCollectionCards();
+    console.log(collection)
   }, [])
 
   const getCollectionCards = async () => {
@@ -33,7 +36,7 @@ const Collection = () => {
   }
 
   const renderCollectionCards = () => {
-    if (!collectionCards) {
+    if (!collectionCards && !collection) {
       return <p>Loading cards</p>
     }
     return (
@@ -41,8 +44,8 @@ const Collection = () => {
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={2} sm={4} md={4}>
-                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} />
+              <Grid item xs="auto" sm="auto" md="auto">
+                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="medium" />
               </Grid>
             )
           })}
@@ -53,21 +56,29 @@ const Collection = () => {
 
 
   return (
-    <div>
-      <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
-      <div>
-        <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
-        <h3>Category: {collection.category}</h3>
-        <p>Description: {collection.description}</p>
-        <p>Likes: {collection.likes}</p>
-      </div>
-      <Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link><br />
-      <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
-      <AddCard collectionId={params.id} addCard={addCard} />
-      {renderCollectionCards()}
-      <hr />
-      <CollectionComments collectionId={collection.user_id} />
-    </div>
+    <>
+      {collection && (<div style={{ padding: "20px" }}>
+        <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
+        <div>
+          <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
+          <div style={{ display: "flex", justifyContent: "right" }}>
+            <button><Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link></button>
+            <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
+          </div>
+          <div>
+          </div>
+          <Container>
+            <h3>Category: {collection.category}</h3>
+            <p>Description: {collection.description}</p>
+            <CollectionLike collection={collection} />
+          </Container>
+        </div>
+        <AddCard collectionId={params.id} addCard={addCard} />
+        {renderCollectionCards()}
+        <hr />
+        <CollectionComments collectionId={collection.user_id} />
+      </div>)}
+    </>
   )
 }
 

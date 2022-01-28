@@ -9,12 +9,15 @@ class User < ActiveRecord::Base
   has_many :topics, dependent: :destroy
   has_many :showcases, dependent: :destroy
   has_many :messages, through: :topics
+  serialize :liked_collections, Array
+  serialize :liked_cards, Array
   extend Devise::Models 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
 
   ### SQL call to search for users based on a search term
   # SELECT * from users 

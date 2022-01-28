@@ -4,11 +4,10 @@ import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
-import styled from "styled-components"
 
 const Collections = () => {
 
-  const [collections, setCollections] = useState([])
+  const [collections, setCollections] = useState(null)
 
   useEffect(() => {
     getCollections();
@@ -27,15 +26,16 @@ const Collections = () => {
       return (
         <div key={index}>
           <h1 style={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold" }}><Link to={`/profile/collections/${c.id}`}>{c.name}</Link></h1>
-          <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {c.cards.slice(0, 3).map((cc) => {
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            {c.cards.slice(0, 4).map((cc) => {
               return (
-                <Grid item xs={2} sm={4} md={4} key={cc.id}>
-                  <CollectionCard key={cc.id} card={{ ...cc }} show={false} personal={false} />
+                <Grid item xs="auto" sm="auto" md="auto" key={cc.id}>
+                  <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={false} size="small" />
                 </Grid>
               )
             })}
           </Grid>
+          <hr />
         </div>
       )
     })
