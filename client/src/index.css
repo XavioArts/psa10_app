@@ -186,6 +186,10 @@ code {
   width: calc(100% / 4);
 }
 
+.carousel-content.show-5 > * {
+  width: calc(100% / 5);
+}
+
 .link {
   color: #6569C8;
   text-decoration: none;
