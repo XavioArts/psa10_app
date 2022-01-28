@@ -38,7 +38,7 @@ const CollectionCard = (props) => {
   const editCard = (e, url) => {
     e.preventDefault();
     navigate(url);
-}
+  }
   const flipCard = (e) => {
     e.preventDefault();
     if (visibleImage === card.front_image) {
@@ -122,24 +122,49 @@ const CollectionCard = (props) => {
             </Box>
           </Box>}
         </CardMedia>
-      {show && 
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <Box sx={style}>
-          <h1>{card.name}</h1>
-          <h4>Category: {card.category}</h4>
-          <h4>Condition: {card.condition}</h4>
-          <h4>Set: {card.set}</h4>
-          <h4>Year: {card.year}</h4>
-          <h4>Card No.: {card.card_number}</h4>
-          {card.graded && <h4>Grade: {card.grade}</h4>}
+        {show &&
+          <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={style}>
+              <h1>{card.name}</h1>
+              <h4>Category: {card.category}</h4>
+              <h4>Condition: {card.condition}</h4>
+              <h4>Set: {card.set}</h4>
+              <h4>Year: {card.year}</h4>
+              <h4>Card No.: {card.card_number}</h4>
+              {card.graded && <h4>Grade: {card.grade}</h4>}
+              {card.available === true && <Button variant="outlined" color="primary">
+                Available
+              </Button>}
+              {card.graded === true && <Button variant="outlined" color="warning">
+                Graded
+              </Button>}
+              {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
+            </Box>
+          </Modal>}
+        <CardContent>
+          <Typography sx={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold", fontSize: 20 }}>
+            {card.name}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing >
+          <Avatar sx={{ width: 30, height: 30 }} src={auth.image} />
+          <IconButton aria-label="like">
+            <FavoriteIcon />
+          </IconButton>
+          {!card.showcase && <IconButton aria-label="trophy">
+            <EmojiEventsIcon />
+          </IconButton>}
+          {card.showcase && <IconButton aria-label="trophy">
+            <EmojiEventsIcon color="warning" />
+          </IconButton>}
           {card.available === true && <Button variant="outlined" color="primary">
-          Available
+            Available
           </Button>}
-          {card.graded === true && <Button variant="outlined" color="warning">
-          Graded
+          {card.available === false && <Button variant="outlined" color="secondary">
+            Unavailable
           </Button>}
           {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
         </Box>
