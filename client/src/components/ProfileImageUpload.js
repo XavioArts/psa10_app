@@ -43,7 +43,7 @@ const ProfileImageUpload = () => {
                       "File too Big, please select a file less than 4mb");
                 } else if (file < 200) {
                     alert(
-                      "File too small, please select a file greater than 2mb");
+                      "File too small, please select a file greater than 200kb");
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                     + file + '</b> KB';
