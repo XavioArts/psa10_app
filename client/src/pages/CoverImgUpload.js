@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Alert, Button, Icon, Input } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CoverImgUpload = () => {
   const auth = useContext(AuthContext);
   const [files, setFiles] = useState([]);
   const [success, setSuccess] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const navigate = useNavigate();
 
   const handleUpload = async (e) => {
       e.preventDefault();
