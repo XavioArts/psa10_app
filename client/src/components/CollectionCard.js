@@ -134,7 +134,7 @@ const CollectionCard = (props) => {
         onClose={handleClose}
       >
         <Box sx={style}>
-          <h1>{card.name}</h1>
+          <h1>{card.name} - card id: {card.id}</h1>
           <h4>Category: {card.category}</h4>
           <h4>Condition: {card.condition}</h4>
           <h4>Set: {card.set}</h4>
