@@ -56,7 +56,7 @@ const CollectionLike = (props) => {
   }
 
   return (
-    <Box>
+    <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}} >
       <IconButton
         onClick={handleLike}
         disabled={clicked}
