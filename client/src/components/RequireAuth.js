@@ -20,7 +20,7 @@ const RequireAuth = () => {
                     <LinearProgress />
                 </div>
                 {timeRedirect()}
-                {redirect && <Navigate to="/login" />}
+                {redirect && <Navigate to="/" />}
             </div>
         );
     }
