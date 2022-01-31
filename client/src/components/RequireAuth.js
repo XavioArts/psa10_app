@@ -15,12 +15,12 @@ const RequireAuth = () => {
     if (!auth.authenticated) {
         return (
             <div style={styles.center} >
-                <p>Checking authentication..</p>
+                <p>Loading...</p>
                 <div style={{width: "75vw"}} >
                     <LinearProgress />
                 </div>
                 {timeRedirect()}
-                {redirect && <Navigate to="/login" />}
+                {redirect && <Navigate to="/" />}
             </div>
         );
     }

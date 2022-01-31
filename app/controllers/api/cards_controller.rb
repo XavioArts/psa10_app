@@ -17,6 +17,11 @@ end
     render json: @user.card_search(phrase)
   end
 
+  def card_search_by_name
+    phrase = params[:search]
+    render json: current_user.card_search_by_name(phrase)
+  end
+
   def all_cards
     render json: Card.all
   end

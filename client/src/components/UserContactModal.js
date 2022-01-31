@@ -1,4 +1,5 @@
 import { Box, Icon, IconButton, Modal } from "@mui/material";
+import ContactsIcon from "@mui/icons-material/Contacts";
 import React, { useState } from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -15,7 +16,7 @@ const UserContactModal = (props) => {
     return (
         <>
             <IconButton onClick={handleOpen} >
-                <Icon>message</Icon>
+                <ContactsIcon/>
             </IconButton>
             <Modal
                 open={open}

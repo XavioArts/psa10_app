@@ -8,6 +8,8 @@ export const AuthContext = React.createContext();
 const AuthProvider = (props) => {
 
     const [user, setUser] = useState(null);
+    const [likedCards, setLikedCards] = useState(null);
+    const [likedCollections, setLikedCollections] = useState(null);
     // The user state will keep track of the user that is logged in
     // We initialize the state as null, which is a user that is not logged in
 
@@ -27,6 +29,8 @@ const AuthProvider = (props) => {
             console.log("validating token");
             const res = await axios.get("/api/auth/validate_token");
             setUser(res.data.data);
+            setLikedCards(res.data.data.liked_cards);
+            setLikedCollections(res.data.data.liked_collections);
         } catch (err) {
             console.log(err.respose);
             console.log("unable to validate token");
@@ -109,6 +113,10 @@ const AuthProvider = (props) => {
             handleDelete,
             handleUpdate,
             checkingAuthStatus,
+            likedCards,
+            setLikedCards,
+            likedCollections,
+            setLikedCollections,
         }} >
             {props.children}
         </AuthContext.Provider>

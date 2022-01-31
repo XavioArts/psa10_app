@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
     post "cards/:id/upload", to: "cards#upload"
     get "cards/:id/search/:search", to: "cards#card_search"
+    get "cards/search_by_name/:search", to: "cards#card_search_by_name"
     resources :cards do
       resources :card_comments
     end
