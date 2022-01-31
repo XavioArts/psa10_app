@@ -55,6 +55,15 @@ const AddCard = (props) => {
         {name: 'Tennis', value: "Tennis", subCategory: "Sports"},
         {name: 'Soccer', value: "Soccer", subCategory: "Sports"},
         {name: 'Wrestling', value: "Wrestling", subCategory: "Sports"},
+        {name: 'Coins', value: "Coins", subCategory: "Misc. Collectibles"},
+        {name: 'Stamps', value: "Stamps", subCategory: "Misc. Collectibles"},
+        {name: 'Pins', value: "Pins", subCategory: "Misc. Collectibles"},
+        {name: 'Rocks & Gems', value: "Rocks & Gems", subCategory: "Misc. Collectibles"},
+        {name: 'Comic Books', value: "Comic Books", subCategory: "Misc. Collectibles"},
+        {name: 'Toys', value: "Toys", subCategory: "Misc. Collectibles"},
+        {name: 'Furniture', value: "Furniture", subCategory: "Misc. Collectibles"},
+        {name: 'Vinyl Records', value: "Vinyl Records", subCategory: "Misc. Collectibles"},
+        {name: 'Other', value: "Other", subCategory: "Misc. Collectibles"},
     ]
     const conditions = [
         {name: 'Mint', value: 'Mint'},
@@ -86,31 +95,6 @@ const AddCard = (props) => {
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     let updatedCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded};
-    //     try {
-    //         let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
-    //         addCard(res.data);
-    //         setCard(null);
-    //         setClicked(false);
-    //         setFailed(false);
-    //         //reset form values
-    //         setName("");
-    //         setCategory("");
-    //         setCondition("");
-    //         setSet("");
-    //         setYear(2022);
-    //         setCardNumber("");
-    //         setAvailable(false);
-    //         setSuccess(true);
-    //         setTimeout(()=>setSuccess(false), 6000);
-    //     } catch (err) {
-    //         console.log(err.response);
-    //         setFailed(true);
-    //     }
-    // }
-
     const handleSubmit = async (e) => {
         if(e){e.preventDefault();}
         if(upload===true){
@@ -123,8 +107,8 @@ const AddCard = (props) => {
                 setFailed(false);
                 //reset form values
                 setName("");
-                setCategory("");
-                setCondition("");
+                setCategory(categories[0]);
+                setCondition(conditions[0]);
                 setSet("");
                 setYear(2022);
                 setCardNumber("");

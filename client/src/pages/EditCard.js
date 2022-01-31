@@ -31,12 +31,13 @@ const EditCard = () => {
             let res = await axios.get(`/api/cards/${id}`);
             setCard(res.data);
             setName(res.data.name);
-            setCategory(categories[0]);
-            setCondition(conditions[0]);
+            setCategory(categories.find((c)=>c.value === res.data.category));
+            setCondition(conditions.find((c)=>c.value === res.data.condition));
             setSet(res.data.set);
             setYear(res.data.year);
             setCardNumber(res.data.card_number);
             setAvailable(res.data.available);
+            setGraded(res.data.graded);
         } catch (err) {
             console.log(err.response);
             alert("there was an error getting card")
@@ -67,6 +68,15 @@ const EditCard = () => {
         {name: 'Tennis', value: "Tennis", subCategory: "Sports"},
         {name: 'Soccer', value: "Soccer", subCategory: "Sports"},
         {name: 'Wrestling', value: "Wrestling", subCategory: "Sports"},
+        {name: 'Coins', value: "Coins", subCategory: "Misc. Collectibles"},
+        {name: 'Stamps', value: "Stamps", subCategory: "Misc. Collectibles"},
+        {name: 'Pins', value: "Pins", subCategory: "Misc. Collectibles"},
+        {name: 'Rocks & Gems', value: "Rocks & Gems", subCategory: "Misc. Collectibles"},
+        {name: 'Comic Books', value: "Comic Books", subCategory: "Misc. Collectibles"},
+        {name: 'Toys', value: "Toys", subCategory: "Misc. Collectibles"},
+        {name: 'Furniture', value: "Furniture", subCategory: "Misc. Collectibles"},
+        {name: 'Vinyl Records', value: "Vinyl Records", subCategory: "Misc. Collectibles"},
+        {name: 'Other', value: "Other", subCategory: "Misc. Collectibles"},
     ]
     const conditions = [
         {name: 'Mint', value: 'Mint'},
@@ -132,7 +142,7 @@ const EditCard = () => {
                     <CardImageUpload id={card.id} />
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
-                            <Input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
+                            <Input type="text" required value={name} onChange={(e)=>setName(e.target.value)} />
                             <FormControl sx={{ m:1, minWidth: 250}} >
                                 <Autocomplete 
                                     options={categories}
@@ -160,11 +170,11 @@ const EditCard = () => {
                             </FormControl>
                             <br/>
                             <label>Set: </label>
-                            <Input type="text" value={set} onChange={(e)=>setSet(e.target.value)} />
+                            <Input type="text" required value={set} onChange={(e)=>setSet(e.target.value)} />
                             <label>Year: </label>
-                            <Input type="number" value={year} onChange={(e)=>setYear(e.target.value)} />
+                            <Input type="number" required value={year} onChange={(e)=>setYear(e.target.value)} />
                             <label>Card No.: </label>
-                            <Input type="text" value={card_number} onChange={(e)=>setCardNumber(e.target.value)} />
+                            <Input type="text" required value={card_number} onChange={(e)=>setCardNumber(e.target.value)} />
                             <br/>
                             <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}} >
                                 <div>
