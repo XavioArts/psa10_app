@@ -113,11 +113,12 @@ const CollectionCard = (props) => {
         alt={card.name}
          >
           <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%"}} >
-            {props.size !== "xs" && <IconButton onClick={flipCard} >
+            {props.size !== "xs" && 
+            <IconButton onClick={flipCard} sx={{background: "rgba(255,255,255,0.35)"}} >
               <ArrowBackIosIcon sx={{fontSize: findButtonSize()}} />
             </IconButton>}
             <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
-            {props.size !== "xs" && <IconButton onClick={flipCard} >
+            {props.size !== "xs" && <IconButton onClick={flipCard} sx={{background: "rgba(255,255,255,0.35)"}} >
               <ArrowForwardIosIcon sx={{fontSize: findButtonSize()}} />
             </IconButton>}
           </div>
@@ -175,10 +176,10 @@ const CollectionCard = (props) => {
               <p>{cardData.likes}</p>
             </Box>
           </Box>
-        {!card.showcase && <IconButton sx={{mr: 1}} aria-label="trophy">
+        {!card.showcase && <IconButton disableRipple sx={{mr: 1}} aria-label="trophy">
           <EmojiEventsIcon  />
         </IconButton>}
-        {card.showcase && <IconButton sx={{mr: 1}} aria-label="trophy">
+        {card.showcase && <IconButton disableRipple sx={{mr: 1}} aria-label="trophy">
           <EmojiEventsIcon color="secondary" />
         </IconButton>}
         </Box>
