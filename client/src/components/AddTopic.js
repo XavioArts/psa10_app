@@ -52,7 +52,7 @@ const AddTopic = (props) => {
         return true
     }
   }
-
+ 
   const handleTitleError = () => {
     if (!titleVerify){
         return(
@@ -80,7 +80,7 @@ const AddTopic = (props) => {
   }
 
   const handleBobyError = () => {
-    if (!titleVerify){
+    if (!BodyVerify){
         return(
               <TextField
                 error

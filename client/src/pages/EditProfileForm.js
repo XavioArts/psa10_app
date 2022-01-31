@@ -164,6 +164,7 @@ const EditUser = (props) => {
           return(
               <TextField style={{margin: '10px'}}
                   error
+                  inputProps={{ maxLength: 10 }} 
                   label="Nickname"
                   value={nickname}
                   onChange={(e) => {
@@ -176,6 +177,7 @@ const EditUser = (props) => {
       } else {
           return(
               <TextField style={{margin: '10px'}}
+              inputProps={{ maxLength: 10 }} 
               label="Display Name"
               value={nickname} 
               onChange={(e) => setNickname(e.target.value)}
