@@ -22,7 +22,6 @@ const AddTopic = (props) => {
     } if (checkTitle() && checkBody()) {
       let user_id = auth.id
       let newTopic = {title, body, user_id}
-      console.log(newTopic)
       try {
         let res =  await axios.post('/api/topics', newTopic)
         console.log(res)
