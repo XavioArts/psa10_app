@@ -46,6 +46,9 @@ const Community = () => {
     }
 
     const renderUsers = () => {
+        if (filteredUsers.length === 0) {
+            return <h1 style={{textAlign: "center"}} >No users found.</h1>
+        }
         return filteredUsers.map((u) => {
             return (
                 <ListItem key={u.id} secondaryAction={
