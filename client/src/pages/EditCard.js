@@ -38,6 +38,9 @@ const EditCard = () => {
             setCardNumber(res.data.card_number);
             setAvailable(res.data.available);
             setGraded(res.data.graded);
+            if(res.data.grade) {
+                setGrade(res.data.grade);
+            }
         } catch (err) {
             console.log(err.response);
             alert("there was an error getting card")

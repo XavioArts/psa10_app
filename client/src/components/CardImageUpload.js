@@ -58,9 +58,11 @@ const CardImageUpload = (props) => {
         }
     }
 
-    // useEffect(()=>{
-    //     getCard();
-    // }, [])
+    useEffect(()=>{
+        if (!submitted && !setSubmitted && !setUpload) {
+            getCard();
+        }
+    }, [])
 
     // const handleUpload = async (e) => {
     //     e.preventDefault();
