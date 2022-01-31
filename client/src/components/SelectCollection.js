@@ -85,6 +85,11 @@ const handleCollection = (e, newValue) => {
     setCollectionCards([...collectionCards, card]);
   }
 
+  const createCollectionToggle = () => {
+    setCollectionNew(true)
+    setToggleCollectionList(false)
+  }
+
   return(
     <div className="messagePageContainer">
         {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
@@ -104,7 +109,7 @@ const handleCollection = (e, newValue) => {
                                 />
                             </FormControl>}
                             <Button onClick={()=>setToggleCollectionList(true)}>Choose Another Collection</Button>
-                           {!collection && <div><Button onClick={()=>setCollectionNew(true)}>Create New Collection</Button></div>}
+                           {!collection && <div><Button onClick={()=>createCollectionToggle()}>Create New Collection</Button></div>}
                             </>
                             {collectionNew === true &&   
                               <>

@@ -35,6 +35,7 @@ import Register from './components/Register';
 import Welcome from './pages/Welcome';
 import SelectCollection from './components/SelectCollection';
 import SearchByName from './pages/SearchByName';
+import Faq from './pages/Faq';
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
                 <Route path="/cards/:id/image" element={<CardImageUpload />} />
                 <Route path="/users/:id/edit" element={<EditProfileForm />} />
                 <Route path="/select_collection" element={<SelectCollection/>}/>
+                <Route path="/faq" element={<Faq/>}/>
               </Route>
             </Route>
           </Routes>

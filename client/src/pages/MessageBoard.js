@@ -166,6 +166,7 @@ const clearSearch = (e) => {
         renderOnZeroPageCount={null}
         containerClassName="pagination-container"
         pageClassName="page-item"
+        activeClassName = "active-page-item"
         // pageLinkClassName="page-link"
         previousClassName="page-item"
         // previousLinkClassName="page-link"
