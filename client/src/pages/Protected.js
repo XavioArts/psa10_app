@@ -140,16 +140,16 @@ const Protected = () => {
                     className="circletag"
                   />
                 )}
-                {!user && (
-                  <>
-                    <h2>{auth.nickname}</h2>
-                    <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
-                    <p className="profileText">{auth.about}</p>
-                    <UserContactIcons {...auth} />
-                    <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
-                  </>
-                )}
-              </Paper>
+              {!user && (
+                <>
+                  <h2>{auth.nickname}</h2>
+                  <p onClick={() => window.location = `mailto:${auth.email}`} className="profileEmailText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
+                  <p className="profileText">{auth.about}</p>
+                  <UserContactIcons {...auth} />
+                  <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>
+                </>
+              )}
+            </Paper>
 
               </div>
             )}

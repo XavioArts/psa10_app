@@ -66,7 +66,7 @@ const CollectionCard = (props) => {
     }
     return "300px";
   }
-  
+
   const findHeight = () => {
     if (props.size === "xs") {
       return "213px";
@@ -122,12 +122,12 @@ const CollectionCard = (props) => {
               <ArrowForwardIosIcon sx={{fontSize: findButtonSize()}} />
             </IconButton>}
           </div>
-          {card.graded === true && 
-          <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: 0}} >
-            <Box sx={{borderRadius: "20px", backgroundColor: "#FFFFFF", width: 65, height: 30, display: "flex", alignItems: "center", justifyContent: "center", mr: 2, borderColor: "#90BDEE", borderWidth: "2px", borderStyle: "solid"}} >
-              <Typography variant="body2" color="secondary" >PSA {card.grade}</Typography>
-            </Box>
-          </Box>}
+          {card.graded === true &&
+            <Box sx={{ position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "flex-end", marginBottom: 0 }} >
+              <Box sx={{ borderRadius: "20px", backgroundColor: "#FFFFFF", width: 65, height: 30, display: "flex", alignItems: "center", justifyContent: "center", mr: 2, borderColor: "#90BDEE", borderWidth: "2px", borderStyle: "solid" }} >
+                <Typography variant="body2" color="secondary" >PSA {card.grade}</Typography>
+              </Box>
+            </Box>}
         </CardMedia>
       {show && 
       <Modal

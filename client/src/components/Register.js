@@ -30,8 +30,8 @@ const Register = () => {
             setNicknameVerify(false)
         } if (!checkEmail()) {
             setEmailVerify(false)
-        } if (first_name && last_name && nickname &&  checkPassword() && checkEmail()) {
-        handleRegister({ email, password, first_name, last_name, nickname }, navigate);
+        } if (first_name && last_name && nickname && checkPassword() && checkEmail()) {
+            handleRegister({ email, password, first_name, last_name, nickname }, navigate);
         }
     }
 
@@ -42,7 +42,7 @@ const Register = () => {
         if (verifyPassword !== verifyPasswordConfirm) {
             setPasswordVerify(1)
             return false;
-        } if (!filter.test(verifyPassword)){
+        } if (!filter.test(verifyPassword)) {
             setPasswordVerify(2)
             return false;
         } else {
@@ -53,7 +53,7 @@ const Register = () => {
     const checkEmail = () => {
         let verifyEmail = email
         let filter = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if (!filter.test(verifyEmail)){
+        if (!filter.test(verifyEmail)) {
             return false
         } else {
             return true
@@ -72,9 +72,9 @@ const Register = () => {
         }
 
     const handleEmailerror = () => {
-        if (!emailVerify){
-            return(
-                <TextField style={{margin: '10px'}}
+        if (!emailVerify) {
+            return (
+                <TextField style={{ margin: '10px' }}
                     error
                     label="Email"
                     value={email}
@@ -83,11 +83,11 @@ const Register = () => {
                         setEmailVerify(true)
                     }}
                     helperText="Valid email required"
-                /> 
-        )
-    } else {
-            return(
-                <TextField style={{margin: '10px'}}
+                />
+            )
+        } else {
+            return (
+                <TextField style={{ margin: '10px' }}
                     label="Email"
                     variant="outlined"
                     value={email}
@@ -98,9 +98,9 @@ const Register = () => {
     }
 
     const handleFirstNameError = () => {
-        if (!firstNameVerify){
-            return(
-                <TextField style={{margin: '10px'}}
+        if (!firstNameVerify) {
+            return (
+                <TextField style={{ margin: '10px' }}
                     error
                     label="First Name"
                     value={first_name}
@@ -109,23 +109,23 @@ const Register = () => {
                         setFirstNameVerify(true)
                     }}
                     helperText="First name required"
-                /> 
-        )
-    } else {
-            return(
-                <TextField style={{margin: '10px'}}
-                label="First Name"
-                value={first_name} 
-                onChange={(e) => setFirst_name(e.target.value)}
-            />
+                />
+            )
+        } else {
+            return (
+                <TextField style={{ margin: '10px' }}
+                    label="First Name"
+                    value={first_name}
+                    onChange={(e) => setFirst_name(e.target.value)}
+                />
             )
         }
     }
 
     const handleLastNameError = () => {
-        if (!lastNameVerify){
-            return(
-                <TextField style={{margin: '10px'}}
+        if (!lastNameVerify) {
+            return (
+                <TextField style={{ margin: '10px' }}
                     error
                     label="Last Name"
                     value={last_name}
@@ -134,23 +134,23 @@ const Register = () => {
                         setLastNameVerify(true)
                     }}
                     helperText="Last name required"
-                /> 
-        )
-    } else {
-            return(
-                <TextField style={{margin: '10px'}}
-                label="Last Name"
-                value={last_name} 
-                onChange={(e) => setLast_name(e.target.value)}
-            />
+                />
+            )
+        } else {
+            return (
+                <TextField style={{ margin: '10px' }}
+                    label="Last Name"
+                    value={last_name}
+                    onChange={(e) => setLast_name(e.target.value)}
+                />
             )
         }
     }
 
     const handleNicknameError = () => {
-        if (!nicknameVerify){
-            return(
-                <TextField style={{margin: '10px'}}
+        if (!nicknameVerify) {
+            return (
+                <TextField style={{ margin: '10px' }}
                     error
                     inputProps={{ maxLength: 10 }}
                     label="Nickname"
@@ -175,8 +175,8 @@ const Register = () => {
     }
 
     const handlePasswordError = () => {
-        if (passwordVerify === 1){
-            return(
+        if (passwordVerify === 1) {
+            return (
                 <>
                 <TextField style={{margin: '10px'}}
                     error
@@ -253,7 +253,7 @@ const Register = () => {
     }
 
     return (
-        <div style={{position: 'absolute', left: '15%', marginTop: '50px'}}>
+        <div style={{ position: 'absolute', left: '15%', marginTop: '50px' }}>
             <h1>Create a new account</h1>
             <p>You can set preferred display name and manage other personal settings.</p>
             <div>
