@@ -93,7 +93,7 @@ const SelectCollection = (props) => {
 const handleCollection = (e, newValue) => {
   setChosenCollection(newValue)
   setCollection(newValue)
-  let collection_id = collectionsObj.filter(c=> {if (c.name===chosenCollection) { return c.id }})
+  let collection_id = collectionsObj.filter(c=> {if (c.name===newValue) { return c.id }})
   setCollectionId(collection_id[0].id)
   console.log("collection_id", collection_id[0].id)
   return collection_id 
@@ -104,10 +104,14 @@ const handleCollection = (e, newValue) => {
   const handleCollectionSubmit = async (e) => {
     e.preventDefault();
     const newCollection = { category, name, description }
+    try {
     let res = await axios.post(`/api/collections`, newCollection)
     setCollection(res.data)
     console.log(res.data)
-    navigate(`/profile/collections/${res.data.id}`)
+    navigate(`/profile/collections/${res.data.id}`)}
+    catch (err) {
+      console.log(err)
+    }
     // the collection data doesn't seem to exist soon enough to show the page??
   }
 
@@ -196,7 +200,7 @@ const handleCollection = (e, newValue) => {
                                 </Container>
                               </>
                           }
-                            {collectionId && <>
+                            {collection && <>
                             <p>You selected collection {collection}</p>
                             <AddCard collectionId= {collectionId} addCard={addCard}/></>}
                             {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
