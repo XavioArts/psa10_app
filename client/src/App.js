@@ -33,6 +33,7 @@ import LandingPage from './pages/LandingPage';
 import UserSets from './pages/UserSets';
 import Register from './components/Register';
 import Welcome from './pages/Welcome';
+import SearchByName from './pages/SearchByName';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
                 <Route path="/profile_image" element={<ProfileImageUpload />} />
                 <Route path="/profile/edit_card/:id" element={<EditCard />} />
                 <Route path="/upload" element={<UploadCollectible />} />
+                <Route path="/search/:search" element={<SearchByName />} />
 
                 {/* All routes nested in here will be sub pages to the profile */}
                 <Route path="/profile" element={<Protected />}>
