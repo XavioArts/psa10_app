@@ -1,7 +1,8 @@
-import { Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
@@ -9,15 +10,18 @@ import CollectionLike from "./CollectionLike";
 import EditCollection from "./EditCollection";
 
 const Collection = () => {
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const params = useParams()
-  const [collectionCards, setCollectionCards] = useState(null)
-  const [collection, setCollection] = useState(null)
+  const params = useParams();
+  const [collectionCards, setCollectionCards] = useState(null);
+  const [collection, setCollection] = useState(null);
+  const [editedCollection, setEditedCollection] = useState(false);
+  console.log(collection)
 
   useEffect(() => {
     getCollectionCards();
-    console.log(collection)
-  }, [])
+    setEditedCollection(false)
+  }, [editedCollection])
 
   const getCollectionCards = async () => {
     let res = await axios.get(`/api/collections/${params.id}`)
@@ -58,22 +62,26 @@ const Collection = () => {
   return (
     <>
       {collection && (<div style={{ padding: "20px" }}>
-        <button className="link-button"><Link to={`/profile/collections`} style={{ textDecoration: "none" }}>Back to Collections</Link></button>
         <div>
           <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
-          <div style={{ display: "flex", justifyContent: "right" }}>
-            <EditCollection />
-            <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
-          </div>
-          <div>
-          </div>
           <Container>
-            <h3>Category: {collection.category}</h3>
-            <p>Description: {collection.description}</p>
             <CollectionLike collection={collection} setCollection={setCollection} />
+            <p>Description: {collection.description}</p>
           </Container>
+          {auth.id === collection.user_id &&
+            <div style={{ display: "flex", justifyContent: "right" }}>
+              <EditCollection {...collection} setEditedCollection={setEditedCollection}/>
+              <Button
+                onClick={() => deleteCollection(params.id)}
+                variant="contained"
+                style={{ margin: '10px' }}
+              >
+                Delete this Collection
+              </Button>
+            </div>
+          }
         </div>
-        <AddCard collectionId={params.id} addCard={addCard} />
+        {auth.id === collection.user_id && <AddCard collectionId={params.id} addCard={addCard} />}
         {renderCollectionCards()}
         <hr />
         <CollectionComments collectionId={collection.user_id} />

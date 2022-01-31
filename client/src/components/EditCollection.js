@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router";
-import { Textrea, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+import { TextField, Button, Modal } from "@mui/material";
+import { Box } from "@mui/system";
 
 
-const EditCollection = () => {
+const EditCollection = (props) => {
+  const { name, description, setEditedCollection } = props
+  const [collectionName, setCollectionName] = useState("")
+  const [collectionDescription, setCollectionDescription] = useState("")
   const params = useParams()
-  const [name, setName] = useState("")
-  const [category, setCategory] = useState("")
-  const [description, setDescription] = useState("")
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     getData();
@@ -18,16 +20,30 @@ const EditCollection = () => {
 
   const getData = async () => {
     let res = await axios.get(`/api/collections/${params.id}`)
-    setName(res.data.name)
-    setCategory(res.data.category)
-    setDescription(res.data.description)
+    setCollectionName(res.data.name)
+    setCollectionDescription(res.data.description)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let updatedCollection = {name, category, description}
+    let updatedCollection = { name: collectionName, description: collectionDescription }
     let res = await axios.put(`/api/collections/${params.id}`, updatedCollection);
-    navigate(`/profile/collections/${params.id}`)
+    setCollectionName(res.data.name)
+    setCollectionDescription(res.data.description)
+    setOpen(false)
+    setEditedCollection(true)
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 450,
+    bgcolor: '#FFFFFF',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
 
   return (
@@ -55,8 +71,8 @@ const EditCollection = () => {
               required
               id="standard-required"
               label="Collection Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={collectionName}
+              onChange={(e) => setCollectionName(e.target.value)}
             />
             <br />
             <br />
@@ -66,8 +82,8 @@ const EditCollection = () => {
               fullWidth
               multiline
               rows={5}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={collectionDescription}
+              onChange={(e) => setCollectionDescription(e.target.value)}
             />
           </div>
           <br />
