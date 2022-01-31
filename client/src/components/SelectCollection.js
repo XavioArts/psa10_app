@@ -104,12 +104,16 @@ const handleCollection = (e, newValue) => {
   const handleCollectionSubmit = async (e) => {
     e.preventDefault();
     const newCollection = { category, name, description }
+    console.log(newCollection)
     try {
     let res = await axios.post(`/api/collections`, newCollection)
-    setCollection(res.data)
-    console.log(res.data)
-    navigate(`/profile/collections/${res.data.id}`)}
-    catch (err) {
+    setCollection(res.data.name)
+    console.log(res.data.name)
+    let collection_id = collectionsObj.filter(c=> {if (c.name===res.data.name) { return c.id }})
+    console.log(collection_id[0].id)
+    setCollectionId(collection_id[0].id)
+    setCollectionNew(false)
+    } catch (err) {
       console.log(err)
     }
     // the collection data doesn't seem to exist soon enough to show the page??
@@ -143,7 +147,7 @@ const handleCollection = (e, newValue) => {
                             </FormControl>
                            {!collection && <div><Button onClick={()=>setCollectionNew(true)}>Create New Collection</Button></div>}
                             </>
-                            {collectionNew == true &&   
+                            {collectionNew === true &&   
                               <>
                                 <Container maxWidth="sm">
                                   <FormControl>

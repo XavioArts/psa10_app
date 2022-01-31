@@ -1,12 +1,8 @@
 import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
-<<<<<<< HEAD
-import React, { useContext, useState } from "react";
 import { Navigate } from "react-router";
-=======
 import React, { useContext, useEffect, useState } from "react";
->>>>>>> e99ca04fdef92cc819278d674ee1fc65075b158c
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
 
@@ -189,15 +185,10 @@ const AddCard = (props) => {
             </Box>
             {card && 
                 <div>
-<<<<<<< HEAD
+
                     {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
-                    {/* <h4>Please upload card images and then fill out card info</h4> */}
-                    <CardImageUpload id={card.id} />
-=======
-                    <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} submitted={submitted} setSubmitted={setSubmitted} setUpload={setUpload} />
->>>>>>> e99ca04fdef92cc819278d674ee1fc65075b158c
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
                             <Input type="text" value={name} required onChange={(e)=>setName(e.target.value)} />
