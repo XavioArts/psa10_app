@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     put "showcases/:showcase_id/card/:id", to: "showcases#card"
     get "cards/all_cards", to: "cards#all_cards"
     put "users/liked_collections", to: "users#update_collection_likes"
+    put "users/liked_cards", to: "users#update_card_likes"
     # put "showcases/:showcase_id/card/:id", to: "showcases#rmcard"
     resources :collections do
       resources :collection_comments
