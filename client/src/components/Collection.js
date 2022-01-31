@@ -70,7 +70,7 @@ const Collection = () => {
           <Container>
             <h3>Category: {collection.category}</h3>
             <p>Description: {collection.description}</p>
-            <CollectionLike collection={collection} />
+            <CollectionLike collection={collection} setCollection={setCollection} />
           </Container>
         </div>
         <AddCard collectionId={params.id} addCard={addCard} />

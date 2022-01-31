@@ -57,7 +57,7 @@ const UserCollectView = () => {
       <h1>{collection.name}</h1>
       <h3>Category: {collection.category}</h3>
       <p>Description: {collection.description}</p>
-      <CollectionLike collection={collection} />
+      <CollectionLike collection={collection} setCollection={setCollection} />
       {renderCollectionCards()}
       <CollectionComments />
     </div>
