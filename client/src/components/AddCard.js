@@ -28,6 +28,7 @@ const AddCard = (props) => {
     const [upload, setUpload] = useState(false);
     const [trueSubmit, setTrueSubmit] = useState(false)
     const [notUploaded, setNotUploaded] = useState(false);
+    const [notUploadedAlert, setNotUploadedAlert] = useState(false);
 
     useEffect(()=>{
         console.log("true",trueSubmit)
@@ -127,6 +128,7 @@ const AddCard = (props) => {
             } catch (err) {
                 console.log(err.response);
                 setFailed(true);
+                setTimeout(()=>setFailed(false), 6000);
             }
         }
     }
@@ -168,6 +170,7 @@ const AddCard = (props) => {
     const finished = () =>{
         if (!upload) {
             setNotUploaded(true);
+            setNotUploadedAlert(true);
             return
         }
         setSubmitted(true)
@@ -347,6 +350,7 @@ const AddCard = (props) => {
                                     </Select>
                                 </FormControl>
                             </div>
+                            {notUploadedAlert && <Alert onClose={()=>{setNotUploadedAlert(false)}} severity="error" >Please upload your images first</Alert>}
                             <Tooltip open={notUploaded} onClose={()=>setNotUploaded(false)} title="Please upload your images" >
                             <Button variant="contained" type="submit" onClick={()=>finished()} >Submit</Button>
                             </Tooltip>
