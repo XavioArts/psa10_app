@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
-import { TextareaAutosize } from "@mui/material";
+import { Textrea, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
@@ -31,28 +31,58 @@ const EditCollection = () => {
   };
 
   return (
-    <div>
-      <button><Link to={`/profile/collections/${params.id}`}>Back</Link></button>
-      <h1>Edit Collection Page</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => { setName(e.target.value); }} />
-        <input
-          placeholder="Category"
-          value={category}
-          onChange={(e) => { setCategory(e.target.value); }} />
-        <br />
-        <TextareaAutosize
-          placeholder="Description"
-          style={{ width: 350, height: 100 }}
-          value={description}
-          onChange={(e) => { setDescription(e.target.value); }} />
-        <br />
-        <button>Submit</button>
-      </form>
-    </div>
+    <>
+      <Button
+        style={{ margin: '10px' }}
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Edit this Collection
+      </Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <Box
+          sx={style}
+          component="form"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <TextField
+              fullWidth
+              required
+              id="standard-required"
+              label="Collection Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+            <br />
+            <TextField
+              id="standard-multiline-static"
+              label="Description"
+              fullWidth
+              multiline
+              rows={5}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <br />
+          <div style={{ display: "flex", justifyContent: "right" }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+            >
+              Submit
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+    </>
   )
 }
 

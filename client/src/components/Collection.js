@@ -6,7 +6,7 @@ import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
-import { FlexColumnDiv } from "./Styles";
+import EditCollection from "./EditCollection";
 
 const Collection = () => {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const Collection = () => {
         <div>
           <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
           <div style={{ display: "flex", justifyContent: "right" }}>
-            <button><Link to={`/profile/collections/${params.id}/edit`}>Edit Collection</Link></button>
+            <EditCollection />
             <button onClick={() => deleteCollection(params.id)}>Delete this Collection</button>
           </div>
           <div>
