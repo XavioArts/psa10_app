@@ -30,7 +30,7 @@ const Collections = () => {
             {c.cards.slice(0, 4).map((cc) => {
               return (
                 <Grid item xs="auto" sm="auto" md="auto" key={cc.id}>
-                  <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={false} size="small" />
+                  <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="small" />
                 </Grid>
               )
             })}

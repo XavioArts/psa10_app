@@ -1,4 +1,4 @@
-import { Button, Grid, Icon, Input, Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
@@ -37,19 +37,6 @@ const SearchByName = () => {
         return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="medium" /></div>)
       });
     };
-
-
-    ///// Not needed, the require auth supercedes it
-
-    // if (!auth.authenticated) {
-    //     return (
-    //         <div>
-    //             <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "20px"}} >
-    //                 <h2 style={{textAlign: "center"}} >Please log in or register to search your collectibles.</h2>
-    //             </Box>
-    //         </div>
-    //     )
-    // }
 
     return (
         <div>
