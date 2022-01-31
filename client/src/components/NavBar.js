@@ -8,6 +8,7 @@ import { styled, alpha } from '@mui/material/styles';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PSA10Logo from '../2.png';
 import LogIn from "../pages/LogIn";
+import Searchbar from "./Searchbar";
 
 const NavBar = () => {
 
@@ -20,6 +21,7 @@ const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElLogin, setAnchorElLogin] = useState(null);
+  const [search, setSearch] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -69,47 +71,47 @@ const NavBar = () => {
       }
   });
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.white,
-  '&:hover': {
-    backgroundColor: theme.palette.white,
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
+// const Search = styled('div')(({ theme }) => ({
+//   position: 'relative',
+//   borderRadius: theme.shape.borderRadius,
+//   backgroundColor: theme.palette.white,
+//   '&:hover': {
+//     backgroundColor: theme.palette.white,
+//   },
+//   marginLeft: 0,
+//   width: '100%',
+//   [theme.breakpoints.up('sm')]: {
+//     marginLeft: theme.spacing(1),
+//     width: 'auto',
+//   },
+// }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
+// const SearchIconWrapper = styled('div')(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: '100%',
+//   position: 'absolute',
+//   pointerEvents: 'none',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+// }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: 'inherit',
+//   '& .MuiInputBase-input': {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create('width'),
+//     width: '100%',
+//     [theme.breakpoints.up('sm')]: {
+//       width: '12ch',
+//       '&:focus': {
+//         width: '20ch',
+//       },
+//     },
+//   },
+// }));
 
   return (
       <ThemeProvider theme={theme} >
@@ -193,17 +195,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 ))}
             </Box>
             </>}
-            <Paper elevation={3} sx={{borderRadius: "10px", marginRight: "20px"}} >
-                <Search>
-                <SearchIconWrapper>
-                <SearchIcon color="black" />
-                </SearchIconWrapper>
-                <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                />
-                </Search>
-            </Paper>
+            <Searchbar />
             {!auth.authenticated && 
             <Box sx={{ flexGrow: 0, ml: 2, position: "relative" }} >
                 <Button 
@@ -244,8 +236,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             }
             {auth.authenticated &&
             <>
-            <NotificationsNoneIcon sx={{ marginRight: "20px" }} />
-            {/* ^^^ will need to figure out what to do with notifications ^^^ */}
+            {/* <NotificationsNoneIcon sx={{ marginRight: "20px" }} />
+             ^^^ will need to figure out what to do with notifications ^^^ */}
             <Button 
             variant="contained" 
             color="primary" 

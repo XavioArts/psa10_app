@@ -1,16 +1,25 @@
 class Api::CardsController < ApplicationController
   before_action :authenticate_user!, except: [:card_search]
   before_action :set_card, only: [:show, :destroy, :update, :upload]
-
+  before_action :set_user, only: [:user_cards]
 
   def index 
     render json: current_user.cards
   end
 
+  def user_cards
+    render json: @user.cards
+end
+
   def card_search
     @user = User.find(params[:id])
     phrase = params[:search]
     render json: @user.card_search(phrase)
+  end
+
+  def card_search_by_name
+    phrase = params[:search]
+    render json: current_user.card_search_by_name(phrase)
   end
 
   def all_cards
@@ -78,6 +87,9 @@ class Api::CardsController < ApplicationController
   def set_card
     @card = Card.find(params[:id])
   end
+  def set_user
+    @user = User.find(params[:id])
+end
 
   def card_params
     params.require(:card).permit(:name, :category, :condition, :available, :set, :likes, :front_image, :back_image, :graded, :grade, :year, :card_number, :user_id, :collection_id, :showcase)
