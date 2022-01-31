@@ -100,14 +100,14 @@ const normalizeStats = (cardStats, collectionStats) => {
   return (
     <ThemeProvider theme={theme} >
     <div>
-      {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
+      {/* {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
         <Alert severity="error">
           Finish building your profile.{" "}
           <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
             Edit Profile
           </button>
         </Alert>
-      )}
+      )} */}
       <div >
         <Cover image={coverImage()} className="profileInfo">
         <div className="flexLeft">
@@ -124,7 +124,7 @@ const normalizeStats = (cardStats, collectionStats) => {
               {!user && (
                 <>
                   <h2>{auth.nickname}</h2>
-                  <p className="profileText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
+                  <p onClick={() => window.location = `mailto:${auth.email}`} className="profileEmailText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {auth.email}</p>
                   <p className="profileText">{auth.about}</p>
                   <UserContactIcons {...auth} />
                   <p className="profileTextDate"> Member Since {DateTime.fromISO(auth.created_at).toFormat("LLLL yyyy")}</p>

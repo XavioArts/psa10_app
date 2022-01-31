@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_215911) do
+ActiveRecord::Schema.define(version: 2022_01_28_233949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2022_01_23_215911) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.string "category", default: ""
     t.string "name", default: ""
     t.text "description", default: ""
     t.integer "likes", default: 0
@@ -125,7 +124,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_215911) do
     t.string "unconfirmed_email"
     t.string "name"
     t.string "nickname", default: ""
-    t.string "image", default: ""
+    t.string "image", default: "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643411591/User%20Image.png.png"
     t.string "email", default: ""
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
@@ -145,7 +144,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_215911) do
     t.string "discord", default: ""
     t.string "facebook", default: ""
     t.string "instagram", default: ""
-    t.string "cover_image", default: "https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+    t.string "cover_image", default: "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643339571/Prowler%20006.jpg.jpg"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
