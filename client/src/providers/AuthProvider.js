@@ -13,9 +13,9 @@ const AuthProvider = (props) => {
 
     const [checkingAuthStatus, setCheckingAuthStatus] = useState(true);
 
-    useEffect(()=>{
+    useEffect(() => {
         getUser();
-    },[]);
+    }, []);
 
     const getUser = async () => {
         if (user || !localStorage.getItem("access-token")) {
@@ -44,7 +44,7 @@ const AuthProvider = (props) => {
             navigate("/profile");
         } catch (err) {
             console.log(err.response);
-            alert("An error occurred registering user");
+            alert("Email already in use. Please use another email.");
         }
     };
 
@@ -70,7 +70,7 @@ const AuthProvider = (props) => {
             navigate("/");
         } catch (err) {
             console.log(err.response);
-            alert("an error occurred logging out");
+            alert("An error occurred logging out");
         }
     };
 
@@ -80,9 +80,9 @@ const AuthProvider = (props) => {
             console.log(res.data);
             setUser(res.data.data);
             navigate("/profile/overview");
-        }   catch (err) {
+        } catch (err) {
             console.log(err.response);
-            alert("an error occurred updating user")
+            alert("An error occurred updating user")
         }
     }
 
@@ -94,7 +94,7 @@ const AuthProvider = (props) => {
             navigate("/");
         } catch (err) {
             console.log(err.response);
-            alert("there was an error deleting your account");
+            alert("Error deleting your account");
         }
     }
 
