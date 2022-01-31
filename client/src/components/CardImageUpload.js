@@ -39,6 +39,7 @@ const CardImageUpload = (props) => {
         if (fileFront === undefined || fileBack === undefined) {
             setNoneChosen(true);
             setClicked(false);
+            setSubmitted(false)
             return
         }
         data.append("fileFront", fileFront);

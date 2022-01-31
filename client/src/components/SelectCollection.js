@@ -5,21 +5,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import AddCard from "./AddCard";
 import CardImageUpload from "./CardImageUpload";
-import { useNavigate } from "react-router-dom";
 import CollectionNew from "../pages/CollectionNew";
 import { Link } from "react-router-dom";
+import { categories } from "./FormChoices";
 
 const SelectCollection = (props) => {
-  const [card, setCard] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [clicked, setClicked] = useState(false);
   const [collections, setCollections] = useState([])
   const [collection, setCollection] = useState("")
   const [chosenCollection, setChosenCollection] = useState("");
   const [collectionsObj, setCollectionsObj] = useState([]);
-  const navigate = useNavigate();
   const [collectionNew, setCollectionNew] = useState(false)
   const [collectionId, setCollectionId] = useState("")
   const [category, setCategory] = useState("");
@@ -27,43 +21,19 @@ const SelectCollection = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionCards, setCollectionCards] = useState(null)
-
+  const [toggleCollectionList, setToggleCollectionList] = useState(true)
+  const auth = useContext(AuthContext);
   
 
   useEffect(() => {
     getCollections();
   }, [])
 
-  useEffect(() => {
-    getCards();
-  }, [collection])
-
-  const categories = [
-  { name: 'Pokemon', value: "Pokemon", subCategory: "Trading Card Games" },
-  { name: 'Yu-Gi-Oh!', value: "Yu-Gi-Oh!", subCategory: "Trading Card Games" },
-  { name: 'Magic the Gathering', value: "Magic the Gathering", subCategory: "Trading Card Games" },
-  { name: 'Dragon Ball Super', value: "Dragon Ball Super", subCategory: "Trading Card Games" },
-  { name: 'Digimon', value: "Digimon", subCategory: "Trading Card Games" },
-  { name: 'Star Trek', value: "Star Trek", subCategory: "Pop Culture" },
-  { name: 'Star Wars', value: "Star Wars", subCategory: "Pop Culture" },
-  { name: 'Marvel', value: "Marvel", subCategory: "Pop Culture" },
-  { name: 'Garbage Pail Kids', value: "Garbage Pail Kids", subCategory: "Pop Culture" },
-  { name: 'Baseball', value: "Baseball", subCategory: "Sports" },
-  { name: 'Basketball', value: "Basketball", subCategory: "Sports" },
-  { name: 'Boxing', value: "Boxing", subCategory: "Sports" },
-  { name: 'Football', value: "Football", subCategory: "Sports" },
-  { name: 'Golf', value: "Golf", subCategory: "Sports" },
-  { name: 'Hockey', value: "Hockey", subCategory: "Sports" },
-  { name: 'MMA', value: "MMA", subCategory: "Sports" },
-  { name: 'Tennis', value: "Tennis", subCategory: "Sports" },
-  { name: 'Soccer', value: "Soccer", subCategory: "Sports" },
-  { name: 'Wrestling', value: "Wrestling", subCategory: "Sports" },
-];
 
   const getCollections = async () => {
     let collectionsList =[]
       try {
-    let res = await axios.get("/api/collections");
+    let res = await axios.get(`/api/users/${auth.id}/collections`);
     console.log(res.data);
     setCollectionsObj(res.data);
     let collectionsList = res.data.map((c)=>c.name)
@@ -74,29 +44,20 @@ const SelectCollection = (props) => {
       }
   }
 
-  const getCards = async () => {
-    try {
-    let res = await axios.get(`/api/collections/${collectionId}`)
-    setCollectionCards(res.data.cards)}
-    catch (err) {
-      console.log(err)
-    }
-  }
-
   const handleCollectionCreate = () => {
     setCollectionNew(true)
   }
 
 
-
-
 const handleCollection = (e, newValue) => {
   setChosenCollection(newValue)
   setCollection(newValue)
+  if(toggleCollectionList === true){
   let collection_id = collectionsObj.filter(c=> {if (c.name===newValue) { return c.id }})
   setCollectionId(collection_id[0].id)
   console.log("collection_id", collection_id[0].id)
-  return collection_id 
+  setToggleCollectionList(false)
+  return collection_id }
 }
 
 
@@ -109,10 +70,10 @@ const handleCollection = (e, newValue) => {
     let res = await axios.post(`/api/collections`, newCollection)
     setCollection(res.data.name)
     console.log(res.data.name)
-    let collection_id = collectionsObj.filter(c=> {if (c.name===res.data.name) { return c.id }})
-    console.log(collection_id[0].id)
-    setCollectionId(collection_id[0].id)
+    console.log(res.data.id)
+    setCollectionId(res.data.id)
     setCollectionNew(false)
+    setToggleCollectionList(false)
     } catch (err) {
       console.log(err)
     }
@@ -130,11 +91,8 @@ const handleCollection = (e, newValue) => {
         {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
             <div>
                 {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
-                {/* <CardImageUpload id={card.id} /> */}
-                    <form > 
-
                     <>
-                    <FormControl sx={{ m:1, minWidth: 250}} >
+                    {toggleCollectionList &&  <FormControl sx={{ m:1, minWidth: 250}} >
                                 <Autocomplete 
                                     options={collections}
                                     getOptionLabel={(c)=>c}
@@ -144,7 +102,8 @@ const handleCollection = (e, newValue) => {
                                     inputValue={chosenCollection}
                                     onInputChange={(e, newValue) => handleCollection(e, newValue)}
                                 />
-                            </FormControl>
+                            </FormControl>}
+                            <Button onClick={()=>setToggleCollectionList(true)}>Choose Another Collection</Button>
                            {!collection && <div><Button onClick={()=>setCollectionNew(true)}>Create New Collection</Button></div>}
                             </>
                             {collectionNew === true &&   
@@ -167,19 +126,6 @@ const handleCollection = (e, newValue) => {
                                           value={name}
                                           variant="standard"
                                           onChange={(e) => setName(e.target.value)}
-                                        />
-                                      </div>
-                                      <div>
-                                        <Autocomplete
-                                          options={categories}
-                                          groupBy={(cat) => cat.subCategory}
-                                          getOptionLabel={(cat) => cat.name}
-                                          renderInput={(params) => <TextField {...params} label="Select category" />}
-                                          value={category}
-                                          onChange={(e, newValue) => setCategory(newValue)}
-                                          inputValue={chosenCategory}
-                                          onInputChange={(e, newValue) => setChosenCategory(newValue)}
-
                                         />
                                       </div>
                                       <TextField
@@ -210,7 +156,7 @@ const handleCollection = (e, newValue) => {
                             {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
                             {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
                             {/* <Button variant="contained" type="submit" >Submit</Button> */}
-                        </form>
+                        {/* </form> */}
                     {/* </Paper> */}
                 </div>
         </div>
