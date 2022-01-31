@@ -29,8 +29,8 @@ const CollectionCommentEdit = (props) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'white',
+    width: 350,
+    bgcolor: '#FFFFFF',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -53,9 +53,10 @@ const CollectionCommentEdit = (props) => {
               multiline
               rows={4}
             />
+            <br />
+            <br />
             <button type="submit">Edit Comment</button>
           </form>
-          {JSON.stringify(comment)}
         </Box>
       </Modal>
     </div>

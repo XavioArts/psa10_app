@@ -4,10 +4,11 @@ import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
+import CollectionNew from './CollectionNew';
 
 const Collections = () => {
-
   const [collections, setCollections] = useState(null)
+  console.log(collections)
 
   useEffect(() => {
     getCollections();
@@ -24,6 +25,7 @@ const Collections = () => {
     }
     return collections.map((c, index) => {
       return (
+        <>
         <div key={index}>
           <h1 style={{ textAlign: 'center', textTransform: 'capitalize', fontWeight: "bold" }}><Link to={`/profile/collections/${c.id}`}>{c.name}</Link></h1>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -37,6 +39,7 @@ const Collections = () => {
           </Grid>
           <hr />
         </div>
+        </>
       )
     })
   }
@@ -45,12 +48,11 @@ const Collections = () => {
   return (
     <PageDiv>
       <div style={{ display: "flex", justifyContent: "right" }}>
-        <button className="link-button"><Link to="/collection/new" className="link">Add a Collection</Link></button>
+        <CollectionNew />
       </div>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>
-      <hr />
     </PageDiv>
   )
 };
