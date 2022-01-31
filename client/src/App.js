@@ -34,7 +34,7 @@ import UserSets from './pages/UserSets';
 import Register from './components/Register';
 import Welcome from './pages/Welcome';
 import SelectCollection from './components/SelectCollection';
-
+import SearchByName from './pages/SearchByName';
 
 function App() {
   return (
@@ -46,6 +46,14 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<LandingPage />} />
               <Route path="/test" element={<Home />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/messageboard" element={<MessageBoard />} />
+              <Route path="/messageboard/:id" element={<TopicPage />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/welcome" element={<Welcome />} />
+              {/* The community section needs to not be in requireAuth because
+              it cant determine the difference in protected when both are in there */}
               <Route path="/community" element={<Community />} />
               <Route path="/community/users/:user_id/profile" element={<Protected />}>
                 <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
@@ -53,23 +61,14 @@ function App() {
                 <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
                 <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
                 <Route path="/community/users/:user_id/profile" element={<UserOverview />} />
-
               </Route>
-
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/messageboard" element={<MessageBoard />} />
-              <Route path="/messageboard/:id" element={<TopicPage />} />
-              <Route path="/login" element={<LogIn />} />
-
-              <Route path="/register" element={<Register />} />
-              <Route path="/welcome" element={<Welcome />} />
-
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
 
                 <Route path="/profile_image" element={<ProfileImageUpload />} />
                 <Route path="/profile/edit_card/:id" element={<EditCard />} />
                 <Route path="/upload" element={<UploadCollectible />} />
+                <Route path="/search/:search" element={<SearchByName />} />
 
                 {/* All routes nested in here will be sub pages to the profile */}
                 <Route path="/profile" element={<Protected />}>

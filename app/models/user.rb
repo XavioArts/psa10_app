@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
   def card_search(phrase)
     self.cards.where("UPPER(cards.set) LIKE UPPER('%#{phrase}%')")
   end
+  
+  def card_search_by_name(phrase)
+    self.cards.where("UPPER(cards.name) LIKE UPPER('%#{phrase}%')")
+  end
 
   # SELECT users.id AS user_id, c.id AS card_id, c.likes AS card_likes, c.graded, c.available FROM users
   # INNER JOIN cards AS c ON users.id = c.user_id;

@@ -15,12 +15,14 @@ Rails.application.routes.draw do
     put "showcases/:showcase_id/card/:id", to: "showcases#card"
     get "cards/all_cards", to: "cards#all_cards"
     put "users/liked_collections", to: "users#update_collection_likes"
+    put "users/liked_cards", to: "users#update_card_likes"
     # put "showcases/:showcase_id/card/:id", to: "showcases#rmcard"
     resources :collections do
       resources :collection_comments
     end
     post "cards/:id/upload", to: "cards#upload"
     get "cards/:id/search/:search", to: "cards#card_search"
+    get "cards/search_by_name/:search", to: "cards#card_search_by_name"
     resources :cards do
       resources :card_comments
     end
