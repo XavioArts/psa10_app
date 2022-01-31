@@ -109,7 +109,7 @@ const TopicPage = () => {
       <p>{topic.body}</p>
       {auth.authenticated ? <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
         <form onSubmit={handleSubmit}>
-          <h6 style={{margin: '5px'}}>Posted by {auth.nickname}</h6>
+          <h6 style={{margin: '5px'}}>Comment as {auth.nickname}</h6>
           <textarea style={{ resize: 'none', overflow: 'auto', marginTop: '25px', marginBottom: '15px', fontSize: '1.17em', width: '99%'}} rows="4"  value={content} onChange={(e) => setContent(e.target.value)}/>
           <br/>
           <Button variant="contained" type='submit'>Post</Button>
