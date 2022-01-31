@@ -55,7 +55,7 @@ const onChangeFunc = (e) => {
 }
 
   return (
-      <div>
+      <div className="messagePageContainer">
           <h3>Update your cover image</h3>
           {success && <Alert severity="success" >Successfully updated cover image!</Alert>}
           {auth.cover_image === null &&
@@ -66,8 +66,8 @@ const onChangeFunc = (e) => {
                   <p style={{ fontSize: "12px" }} >No cover image</p>
               </div>}
           {auth.cover_image &&
-              <div style={{ width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden" }} >
-                  <img src={auth.cover_image} alt="profile" style={{ objectFit: "cover", width: "200px", height: "auto" }} />
+              <div style={{ width: "500px", height: "300px", overflow: "hidden", display: "flex" }} >
+                  <img src={auth.cover_image} alt="profile" style={{ objectFit: "cover", width: "auto", height: "auto", margin: "0", flexShrink: 1 }} />
               </div>}
           <br />
           <label htmlFor="contained-button-file" >

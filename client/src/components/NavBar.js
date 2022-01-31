@@ -250,7 +250,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             variant="contained" 
             color="primary" 
             sx={{borderRadius: "20px", marginRight: "20px"}}
-            onClick={()=>navigate("/upload")} >
+            onClick={()=>navigate("/select_collection")} >
                 Upload
             </Button>
 

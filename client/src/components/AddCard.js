@@ -2,6 +2,7 @@ import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperT
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { Navigate } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
 
@@ -59,9 +60,11 @@ const AddCard = (props) => {
     const [category, setCategory] = useState(categories[0]);
     const [condition, setCondition] = useState(conditions[0]);
 
+
     const startCreation = async (e) => {
         setLoading(true);
         e.preventDefault();
+        console.log({user_id: auth.id, collection_id: collectionId, likes: 0})
         let newCard = {user_id: auth.id, collection_id: collectionId, likes: 0};
         try {
             let res = await axios.post("/api/cards", newCard);
@@ -78,6 +81,7 @@ const AddCard = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let updatedCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded};
+        console.log({name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded})
         try {
             let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
             addCard(res.data);
@@ -94,6 +98,7 @@ const AddCard = (props) => {
             setAvailable(false);
             setSuccess(true);
             setTimeout(()=>setSuccess(false), 6000);
+            Navigate(`/profile/collections/${collectionId}`)
         } catch (err) {
             console.log(err.response);
             setFailed(true);
@@ -145,8 +150,8 @@ const AddCard = (props) => {
             </Box>
             {card && 
                 <div>
-                    <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
-                    <h4>Please upload card images and then fill out card info</h4>
+                    {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
+                    {/* <h4>Please upload card images and then fill out card info</h4> */}
                     <CardImageUpload id={card.id} />
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
@@ -309,7 +314,7 @@ const AddCard = (props) => {
                             <Button variant="contained" type="submit" >Submit</Button>
                         </form>
                         <Button variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
-                    </Paper>
+                    {/* </Paper> */}
                 </div>
             }
         </div>

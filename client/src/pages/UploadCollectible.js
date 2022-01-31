@@ -1,7 +1,8 @@
 import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, MenuItem, Paper, Radio, RadioGroup, Select, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CardImageUpload from "../components/CardImageUpload";
 
 const UploadCollectible = () => {
     const navigate = useNavigate();
@@ -18,7 +19,30 @@ const UploadCollectible = () => {
     const [available, setAvailable] = useState(false);
     const [graded, setGraded] = useState(false);
     const [grade, setGrade] = useState("");
+    const [collections, setCollections] = useState([])
+    const [collection, setCollection] = useState("")
+    const [chosenCollection, setChosenCollection] = useState("");
+    const [collectionsObj, setCollectionsObj] = useState([]);
 
+
+
+    useEffect(() => {
+        getCollections();
+      }, [])
+
+      const getCollections = async () => {
+        let collectionsList =[]
+          try {
+        let res = await axios.get("/api/collections");
+        console.log(res.data);
+        setCollectionsObj(res.data);
+        let collectionsList = res.data.map((c)=>c.name)
+        console.log(collectionsList)
+        setCollections(collectionsList)
+          } catch (err) {
+              console.log(err)
+          }
+      }
     // Will need to get collections to select a collection to add the card to
 
     const categories = [
@@ -53,9 +77,13 @@ const UploadCollectible = () => {
         {name: 'Damaged', value: 'Damaged'},
     ]
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let newCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded};
+        let collection_id = collectionsObj.filter(c=> {if (c.name===chosenCollection) { return c.id }})
+        console.log("collection_id", collection_id[0].id)
+        let newCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded };
+        console.log(newCard)
         try {
             let res = await axios.post('/api/cards', newCard)
             setFailed(false);
@@ -88,6 +116,7 @@ const UploadCollectible = () => {
                 <div>
                     <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
                     <h4>Please upload images and then fill out card info</h4>
+                    {/* <CardImageUpload id={card.id} /> */}
                         <form onSubmit={handleSubmit} > 
                             <label>Name: </label>
                             <Input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
@@ -113,6 +142,18 @@ const UploadCollectible = () => {
                                     onChange={(e, newValue) => setCondition(newValue)}
                                     inputValue={chosenCondition}
                                     onInputChange={(e, newValue) => setChosenCondition(newValue)}
+                                        
+                                />
+                            </FormControl>
+                            <FormControl sx={{ m:1, minWidth: 250}} >
+                                <Autocomplete 
+                                    options={collections}
+                                    getOptionLabel={(c)=>c}
+                                    renderInput={(params) => <TextField {...params} label="Choose a collection" />}
+                                    value={collection}
+                                    onChange={(e, newValue) => setCollection(newValue)}
+                                    inputValue={chosenCollection}
+                                    onInputChange={(e, newValue) => setChosenCollection(newValue)}
                                         
                                 />
                             </FormControl>

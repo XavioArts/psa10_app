@@ -42,7 +42,7 @@ const CollectionNew = () => {
     e.preventDefault();
     const newCollection = { category, name, description }
     let res = await axios.post(`/api/collections`, newCollection)
-    navigate('/profile/collections')
+    navigate(`/profile/collections/${res.data.id}`)
   }
 
   return (

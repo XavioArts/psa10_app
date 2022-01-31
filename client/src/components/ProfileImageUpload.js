@@ -41,9 +41,9 @@ const ProfileImageUpload = () => {
                 if (file >= 4096) {
                     alert(
                       "File too Big, please select a file less than 4mb");
-                } else if (file < 200) {
+                } else if (file < 30) {
                     alert(
-                      "File too small, please select a file greater than 200kb");
+                      "File too small, please select a file greater than 30kb");
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                     + file + '</b> KB';
@@ -69,9 +69,12 @@ const ProfileImageUpload = () => {
                     <p style={{ fontSize: "12px" }} >No profile image</p>
                 </div>}
             {auth.image &&
-                <div style={{ width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden" }} >
-                    <img src={auth.image} alt="profile" style={{ objectFit: "cover", width: "200px", height: "auto" }} />
-                </div>}
+                <div style={{ width: "200px"}} >
+                <img
+                  src={auth.image}
+                  alt="profile image"
+                  className="circletag"
+                />                </div>}
             <br />
             <label htmlFor="contained-button-file" >
                 <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />

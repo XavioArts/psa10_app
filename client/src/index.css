@@ -51,6 +51,24 @@ code {
   margin: 4px 0px;
   color: rgb(112, 112, 112);
   font-size: 15px;
+
+}
+
+.profileEmailText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 4px 0px;
+  color: rgb(112, 112, 112);
+  font-size: 15px;
+}
+.profileEmailText:hover {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 4px 0px;
+  color: #90BDEE;
+  font-size: 15px;
 }
 
 .profileInfo {

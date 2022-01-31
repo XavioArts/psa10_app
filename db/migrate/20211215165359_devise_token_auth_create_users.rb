@@ -31,7 +31,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.1]
       ## User Info
       t.string :name
       t.string :nickname, default: ""
-      t.string :image, default: ""
+      t.string :image, default: "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643411591/User%20Image.png.png"
       t.string :email, default: ""
 
       ## Tokens

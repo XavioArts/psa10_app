@@ -52,7 +52,7 @@ const CardImageUpload = (props) => {
         const fi = document.getElementById('input');
         // Check if any file is selected.
         if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
+            for (let i = 0; i <= fi.files.length - 1; i++) {
     
                 const fsize = fi.files.item(i).size;
                 const file = Math.round((fsize / 1024));
@@ -60,9 +60,9 @@ const CardImageUpload = (props) => {
                 if (file >= 4096) {
                     alert(
                       "File too Big, please select a file less than 4mb");
-                } else if (file < 200) {
+                } else if (file < 50) {
                     alert(
-                      "File too small, please select a file greater than 200kb");
+                      "File too small, please select a file greater than 50kb");
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                     + file + '</b> KB';
