@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import { FormControl, InputBase, Paper } from "@mui/material";
+import { FormControl, InputBase, Paper, Tooltip } from "@mui/material";
 
 const Searchbar = () => {
 
   const [search, setSearch] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [emptySearch, setEmptySearch] = useState(false);
   const navigate = useNavigate();
  
 
@@ -58,11 +59,16 @@ const Searchbar = () => {
       }));
 
       const handleSearch = (e) => {
-        //   e.preventDefault();
+        if (search === "") {
+          e.preventDefault();
+          setEmptySearch(true);
+          return
+        }
           navigate(`/search/${search}`)
       }
 
     return (
+      <Tooltip open={emptySearch} onClose={()=>setEmptySearch(false)} title="Please enter a search term" >
         <Paper elevation={3} sx={{borderRadius: "10px", marginRight: "20px"}} >
             <form onSubmit={handleSearch} >
                 <FormControl>
@@ -84,6 +90,7 @@ const Searchbar = () => {
                 </FormControl>
             </form>
         </Paper>
+        </Tooltip>
     )
 }
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Alert, Button, Icon, Input } from "@mui/material";
+import { Alert, Button, Icon, Input, Tooltip } from "@mui/material";
 import axios from "axios";
 
 const ProfileImageUpload = () => {
@@ -8,6 +8,7 @@ const ProfileImageUpload = () => {
     const auth = useContext(AuthContext);
     const [files, setFiles] = useState([]);
     const [success, setSuccess] = useState(false);
+    const [noneChosen, setNoneChosen] = useState(false);
     const [clicked, setClicked] = useState(false);
 
     const handleUpload = async (e) => {
@@ -15,6 +16,11 @@ const ProfileImageUpload = () => {
         setClicked(true);
         let data = new FormData();
         let file = document.getElementById("input").files[0];
+        if (file === undefined) {
+            setNoneChosen(true);
+            setClicked(false);
+            return
+        }
         data.append("file", file);
         console.log(data)
         try {
@@ -26,6 +32,7 @@ const ProfileImageUpload = () => {
         } catch (err) {
             console.log(err.response);
             alert("there was an error uploading")
+            setClicked(false);
         }
     }
 
@@ -41,9 +48,9 @@ const ProfileImageUpload = () => {
                 if (file >= 4096) {
                     alert(
                       "File too Big, please select a file less than 4mb");
-                } else if (file < 30) {
+                } else if (file < 10) {
                     alert(
-                      "File too small, please select a file greater than 30kb");
+                      "File too small, please select a file greater than 10kb");
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                     + file + '</b> KB';
@@ -77,7 +84,9 @@ const ProfileImageUpload = () => {
                 />                </div>}
             <br />
             <label htmlFor="contained-button-file" >
-                <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />
+                <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload" >
+                    <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />
+                </Tooltip>
                 <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
         </div>
