@@ -128,6 +128,7 @@ const AddCard = (props) => {
             } catch (err) {
                 console.log(err.response);
                 setFailed(true);
+                setTimeout(()=>setFailed(false), 6000);
             }
         }
     }
