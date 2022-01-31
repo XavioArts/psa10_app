@@ -80,7 +80,7 @@ const Overview = () => {
 
   const renderPrimaryShowcase = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} size="medium" /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="medium" /></div>)
     })
       return (
         <Box 
@@ -145,7 +145,7 @@ const Overview = () => {
 
   const renderShowcases = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={false} size="small" /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="small" /></div>)
     })
     if (primaryShowcase) {
     return showcases.map((s)=> {if (s.id !== primaryShowcase.id){
