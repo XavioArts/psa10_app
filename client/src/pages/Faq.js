@@ -34,6 +34,27 @@ const Faq = () => {
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel3a-content"
+            id="panel3a-header"
+          >
+            <Typography className="q_text">What is the difference between collections, showcases and sets?</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <p><strong>Collections</strong> are categories that you'll personally create in order to organize your collectibles. For example, you 
+              may have a collection of "Baseball Cards", "Japanese Pokemon Cards", and "Beanie Babies" while another user might 
+              choose collection names like "Basketball Cards" and "Autographed Balls."</p>
+              <p><strong>Showcases</strong> are for showing off the collectibles of which you're most proud. You might want to have a showcase called 
+              "Rarest Pokemon Cards" where you'll add collectibles from a few different collections.</p>
+              <p><strong>Sets</strong> are automatically created when you upload a collectible and complete the "sets" field. You can search for your 
+              collectibles by set by clicking the "SETS" tab in your profile and using the search bar. You can also search other users' collections 
+              for a particular set from the "SETS" tab on their profile.</p>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
@@ -46,23 +67,7 @@ const Faq = () => {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography className="q_text">What is the difference between collections, showcases and sets?</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <strong>Collections</strong> are categories that you'll personally create in order to organize your collectibles. For example, you 
-              may have a collection of "Baseball Cards", "Japanese Pokemon Cards", and "Beanie Babies" while another user might 
-              choose collection names like "My Rarest Basketball Cards" and "Autographed Balls."
-              <strong>Showcases</strong> are for showing off the collectibles of which you're most proud. 
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+
       </div>
     );}
 
