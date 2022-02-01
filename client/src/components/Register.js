@@ -62,14 +62,14 @@ const Register = () => {
 
     const handlePasswordMessage = () => {
         let filter = /[0-9a-zA-Z]{6,}/
-        if (filter.test(password)){
-            return(
-                <p style={{color: 'green', margin: '10px'}}>Password must be 6 characters long</p>
+        if (filter.test(password)) {
+            return (
+                <p style={{ color: 'green', margin: '10px' }}>Password must be 6 characters long</p>
             )
         } return (
-            <p style={{color: 'red', margin: '10px'}}>Password must be 6 characters long</p>
+            <p style={{ color: 'red', margin: '10px' }}>Password must be 6 characters long</p>
         )
-        }
+    }
 
     const handleEmailerror = () => {
         if (!emailVerify) {
@@ -160,16 +160,16 @@ const Register = () => {
                         setNicknameVerify(true)
                     }}
                     helperText="Nickname required"
-                /> 
-        )
-    } else {
-            return(
-                <TextField style={{margin: '10px'}}
-                inputProps={{ maxLength: 10 }}
-                label="Display Name"
-                value={nickname} 
-                onChange={(e) => setNickname(e.target.value)}
-            />
+                />
+            )
+        } else {
+            return (
+                <TextField style={{ margin: '10px' }}
+                    inputProps={{ maxLength: 10 }}
+                    label="Display Name"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                />
             )
         }
     }
@@ -178,82 +178,86 @@ const Register = () => {
         if (passwordVerify === 1) {
             return (
                 <>
-                <TextField style={{margin: '10px'}}
-                    error
-                    type='password'
-                    label="Password"
-                    value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                        setPasswordVerify(true)}
-                    }
-                    helperText="Passwords must match"
-                />
-                <br />
-                <TextField style={{margin: '10px'}}
-                    error
-                    type='password'
-                    label="Confirm Password"
-                    value={passwordConfirm}
-                    onChange={(e) => {
-                        setPasswordConfirm(e.target.value)
-                        setPasswordVerify(true)}
-                    }
-                    helperText="Passwords must match"
-                />
+                    <TextField style={{ margin: '10px' }}
+                        error
+                        type='password'
+                        label="Password"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                            setPasswordVerify(true)
+                        }
+                        }
+                        helperText="Passwords must match"
+                    />
+                    <br />
+                    <TextField style={{ margin: '10px' }}
+                        error
+                        type='password'
+                        label="Confirm Password"
+                        value={passwordConfirm}
+                        onChange={(e) => {
+                            setPasswordConfirm(e.target.value)
+                            setPasswordVerify(true)
+                        }
+                        }
+                        helperText="Passwords must match"
+                    />
                 </>
-        )
-    } if (passwordVerify === 2){
-        return(
-            <>
-            <TextField style={{margin: '10px'}}
-                error
-                type='password'
-                label="Password"
-                value={password}
-                onChange={(e) => {
-                    setPassword(e.target.value)
-                    setPasswordVerify(true)}
-                }
-                helperText="Passwords must contain at least 6 characters"
-            />
-            <br />
-            <TextField style={{margin: '10px'}}
-                error
-                type='password'
-                label="Confirm Password"
-                value={passwordConfirm}
-                onChange={(e) => {
-                    setPasswordConfirm(e.target.value)
-                    setPasswordVerify(true)}
-                }
-                helperText="Passwords must contain at least 6 characters"
-            />
-            </>
-        ) 
-    } else {
-            return(
+            )
+        } if (passwordVerify === 2) {
+            return (
                 <>
-                <TextField style={{margin: '10px'}}
-                    type='password'
-                    label="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <br />
-                <TextField style={{margin: '10px'}}
-                    type='password'
-                    label="Confirm Password"
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                />
+                    <TextField style={{ margin: '10px' }}
+                        error
+                        type='password'
+                        label="Password"
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                            setPasswordVerify(true)
+                        }
+                        }
+                        helperText="Passwords must contain at least 6 characters"
+                    />
+                    <br />
+                    <TextField style={{ margin: '10px' }}
+                        error
+                        type='password'
+                        label="Confirm Password"
+                        value={passwordConfirm}
+                        onChange={(e) => {
+                            setPasswordConfirm(e.target.value)
+                            setPasswordVerify(true)
+                        }
+                        }
+                        helperText="Passwords must contain at least 6 characters"
+                    />
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <TextField style={{ margin: '10px' }}
+                        type='password'
+                        label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <TextField style={{ margin: '10px' }}
+                        type='password'
+                        label="Confirm Password"
+                        value={passwordConfirm}
+                        onChange={(e) => setPasswordConfirm(e.target.value)}
+                    />
                 </>
             )
         }
     }
 
     return (
-        <div style={{ position: 'absolute', left: '15%', marginTop: '50px' }}>
+        <div style={{ position: 'relative', left: '15%', marginTop: '50px' }}>
             <h1>Create a new account</h1>
             <p>You can set preferred display name and manage other personal settings.</p>
             <div>
@@ -268,7 +272,7 @@ const Register = () => {
                     {handlePasswordError()}
                     <br />
                     {handlePasswordMessage()}
-                    <Button style={{margin: '10px'}} variant="contained" type="submit" >Register</Button>
+                    <Button style={{ margin: '10px' }} variant="contained" type="submit" >Register</Button>
                 </form>
             </div>
         </div>

@@ -5,7 +5,7 @@ import "./Footer.css"
 const Footer = () => {
   return (
     <div className="main-footer">
-      <div>
+      <div className="container">
         <div style={{ display: 'flex', justifyContent: "space-around", textAlign: "start" }}>
           {/* Column1 */}
           <div>
