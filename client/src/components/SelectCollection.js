@@ -1,4 +1,4 @@
-import { Alert, Autocomplete, Button, FormControl, Paper, TextField, Container, MenuItem } from "@mui/material";
+import { Alert, Autocomplete, Button, FormControl, Paper, TextField, Container, MenuItem, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
@@ -8,10 +8,12 @@ import CardImageUpload from "./CardImageUpload";
 import CollectionNew from "../pages/CollectionNew";
 import { Link } from "react-router-dom";
 import { categories } from "./FormChoices";
+import { theme } from "./Styles";
+
 
 const SelectCollection = (props) => {
   const [collections, setCollections] = useState([])
-  const [collection, setCollection] = useState("")
+  const [collection, setCollection] = useState(null)
   const [chosenCollection, setChosenCollection] = useState("");
   const [collectionsObj, setCollectionsObj] = useState([]);
   const [collectionNew, setCollectionNew] = useState(false)
@@ -96,6 +98,7 @@ const handleCollection = (e, newValue) => {
   }
 
   return(
+    <ThemeProvider theme={theme} >
     <div >
         {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
         {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
@@ -113,8 +116,9 @@ const handleCollection = (e, newValue) => {
                                     onInputChange={(e, newValue) => handleCollection(e, newValue)}
                                 />
                             </FormControl>}
-                            <Button onClick={()=>chooseAnotherCollectionToggle()}>Choose Another Collection</Button>
-                           {!collection && <div><Button onClick={()=>createCollectionToggle()}>Create New Collection</Button></div>}
+                            <br/>
+                           {collection && <div><Button style={{borderRadius: "40px"}} onClick={()=>chooseAnotherCollectionToggle()} variant="contained" color="primary" >Choose Another Collection</Button></div>}
+                           {!collection && <div><Button style={{borderRadius: "40px"}} onClick={()=>createCollectionToggle()} variant="contained" color="primary">Create New Collection</Button></div>}
                             </>
                             {collectionNew === true &&   
                               <>
@@ -170,6 +174,8 @@ const handleCollection = (e, newValue) => {
                     {/* </Paper> */}
                 </div>
         </div>
+        </ThemeProvider>
+
     )
 };
 

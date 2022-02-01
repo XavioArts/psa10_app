@@ -142,7 +142,7 @@ const AddCard = (props) => {
             {success && <Alert severity="success" >Successfuly created a new collectible!</Alert>}
             {failed && <Alert severity="error" >Failed to create a new collectible!</Alert>}
             <Box sx={{ m: 1, position: "relative" }} >
-                <Button onClick={startCreation} disabled={clicked} variant="contained" >Add a new collectible</Button>
+                <Button style={{borderRadius: "40px"}} onClick={startCreation} disabled={clicked} variant="contained" >Add a new collectible</Button>
                 <br />
                 {loading && (<LinearProgress />)}
             </Box>
