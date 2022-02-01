@@ -8,7 +8,7 @@ const Layout = () => {
     return (
         <div>
             <NavBar />
-            <div style={{height: "100vw"}} >
+            <div style={{height: "100%"}} >
                 <Outlet />
             </div>
             <Footer />
