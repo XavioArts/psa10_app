@@ -192,9 +192,6 @@ const sizeWindow = () => {
           {renderShowcases()}
         </div>
       </div>
-      <div>
-      <p>{sizeWindow()}</p>
-      </div>
     </div>
   )
 

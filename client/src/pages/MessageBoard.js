@@ -16,6 +16,7 @@ const MessageBoard = (props) => {
   const [currentTopics, setCurrentTopics] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [topicOffset, setTopicOffset] = useState(0);
+  const [searchVerify, setSearchVerify] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const topicsPerPage = 4
@@ -50,6 +51,10 @@ const MessageBoard = (props) => {
   useEffect(()=>{
     getTopics()
   },[open])
+
+  // useEffect(()=>{
+  //   setSearchVerify(true)
+  // }, [search])
 
 
   useEffect(() => {
@@ -110,21 +115,38 @@ const MessageBoard = (props) => {
 
   const searchTopics = async (e) => {
     e.preventDefault();
-    try {
-        let res = await axios.get(`/api/topics/search/${search}`);
-        setFilteredTopics(res.data);
-        setTopicOffset(0);
-    } catch (err) {
-        console.log(err.response);
-        alert("error searching")
+    if(checkSearch()){
+      try {
+          let res = await axios.get(`/api/topics/search/${search}`);
+          setFilteredTopics(res.data);
+          setTopicOffset(0);
+      } catch (err) {
+          console.log(err.response);
+          alert("error searching")
+      }
+    } else {
+      setSearchVerify(false)
+      return
     }
-}
+  }
 
-const clearSearch = (e) => {
-  e.preventDefault();
-  setFilteredTopics(topics);
-  setSearch("")
-}
+  const clearSearch = (e) => {
+    e.preventDefault();
+    setFilteredTopics(topics);
+    setSearch("")
+    setSearchVerify(true)
+  }
+
+  const checkSearch = () => {
+    let verifySearch = search
+    let filter = /[0-9a-zA-Z]{1,}/
+    if (!filter.test(verifySearch)){
+      return false
+    } else {
+      return true
+    }
+  }
+  
 
   return (
     <ThemeProvider theme={theme} >
@@ -135,10 +157,10 @@ const clearSearch = (e) => {
       </div>
         <div style={{width: "75vw", margin: "auto", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} >
           <div style={{width: "60vw", margin: "10px"}} >
-          <Input 
+          <Input
           fullWidth 
           startAdornment={<Icon>search</Icon>} 
-          placeholder="Search by Title or Description" 
+          placeholder={searchVerify ? "Search by Title or Description" : 'Entry is required to search'}
           value={search}
           onChange={(e)=>{setSearch(e.target.value)}}
           type="search" />
@@ -166,6 +188,7 @@ const clearSearch = (e) => {
         renderOnZeroPageCount={null}
         containerClassName="pagination-container"
         pageClassName="page-item"
+        activeClassName = "active-page-item"
         // pageLinkClassName="page-link"
         previousClassName="page-item"
         // previousLinkClassName="page-link"
