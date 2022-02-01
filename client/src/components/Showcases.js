@@ -169,9 +169,9 @@ const sizeWindow = () => {
           </div>}
       </div>
       <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
+      {auth.primary_showcase !== s.id && <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
       </ButtonDiv>
       </Box>
  
@@ -186,7 +186,7 @@ const sizeWindow = () => {
     <div>
       <div style={styles.centered}>
         <div style={styles.row}>
-        <Link to="/showcase/new" showcases = {showcases} >Create A New Showcase</Link>
+        <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/showcase/new`)} variant="contained">Create A New Showcase</Button>
         </div>
         <div >
           {renderShowcases()}

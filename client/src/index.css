@@ -89,6 +89,12 @@ code {
   display: flex;
   justify-content: flex-start;
 }
+.flexCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
 
 .flexEnd {
   float: right;
@@ -268,4 +274,11 @@ code {
 .faq_page {
 color: #272830;
 margin: 30px;
+}
+
+.active{
+  background-color: #272830;
+  color: white;
+  padding: 8px;
+  border-radius: 20px;
 }

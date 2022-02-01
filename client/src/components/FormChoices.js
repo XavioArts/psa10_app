@@ -31,3 +31,8 @@ export const conditions = [
   {name: 'Damaged', value: 'Damaged'},
 ]
 
+export const activeTab = (history, path) => {
+  if (history.location.pathname === path) {
+    return { color: "red" };
+  }
+};

@@ -61,7 +61,7 @@ function App() {
                 <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
                 <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
                 <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
-                <Route path="/community/users/:user_id/profile" element={<UserOverview />} />
+                <Route path="/community/users/:user_id/profile/overview" element={<UserOverview />} />
               </Route>
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >

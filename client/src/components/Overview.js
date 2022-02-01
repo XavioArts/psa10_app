@@ -224,16 +224,19 @@ const Overview = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
+          backgroundColor: 'white',
           textAlign: "center",
           '&:hover': {
-            backgroundColor: '#dbdbdb',
+            backgroundColor: 'white',
             // opacity: [0.9, 0.8, 0.7],
             
           },
         }}
-      ><h3>{s.name}</h3>
-      <p>{s.description}</p>
+      >
+        <div>
+          <h3>{s.name}</h3>
+          <p>{s.description}</p>
+        </div>
       <div >
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
@@ -284,14 +287,9 @@ const Overview = () => {
   return (
     <div>
       <div style={styles.centered}>
-        <div style={styles.row}>
-        <h3>This is my primary showcase</h3>
-        </div>
         
         {primaryShowcase && <div>{renderPrimaryShowcase()}</div>}
-        <div style={styles.row}>
-        <h3>These are the rest of my showcases</h3>
-        </div>
+
         {showcases && <div>{renderShowcases()}</div>}
       </div>
     </div>
