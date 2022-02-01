@@ -23,7 +23,7 @@ const Footer = () => {
           {/* Column3 */}
           <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center" }} >
             <p>
-              <a href="" style={{ textDecoration: 'none' }}>
+              <a href="/faq" style={{ textDecoration: 'none' }}>
                 Info
               </a>
             </p>
