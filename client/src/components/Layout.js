@@ -8,10 +8,12 @@ const Layout = () => {
     return (
         <div>
             <NavBar />
-            <div style={{height: "100%"}} >
+            <div style={{ height: "100%" }} >
                 <Outlet />
             </div>
-            <Footer />
+            <div>
+                {/* <Footer /> */}
+            </div>
         </div>
     );
 };

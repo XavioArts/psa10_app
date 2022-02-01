@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
@@ -79,27 +78,31 @@ const Showcase = (props) => {
   }
 
 const sizeWindow = () => {
-  if (size.width <= 500) {
+  if (size.width <= 575) {
     // console.log(1)
     // console.log(size.width)
-    return 1
+    return 2
   }
-  if (size.width > 500 && size.width <= 625) {
+  if (size.width > 575 && size.width <= 625) {
     // console.log(2)
     // console.log(size.width)
-    return 2
-  } if (size.width > 626 && size.width <= 910) {
-    // console.log(3)
+    return 3
+  }  if (size.width > 625 && size.width <= 780) {
+    // console.log(2)
     // console.log(size.width)
     return 3
-  }if (size.width > 911 && size.width <= 1260) {
+  } if (size.width > 780 && size.width <= 910) {
     // console.log(3)
     // console.log(size.width)
     return 4
+  }if (size.width > 911 && size.width <= 1260) {
+    // console.log(3)
+    // console.log(size.width)
+    return 5
   } if (size.width > 1260) {
     // console.log(4)
     // console.log(size.width)
-    return 5
+    return 6
   }  
 }
 
@@ -122,10 +125,11 @@ const sizeWindow = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
-          textAlign: "center",
+          backgroundColor: 'white',
+          textAlign: "left",
+          lineHeight: '5px',
           '&:hover': {
-            backgroundColor: '#dbdbdb',            
+            backgroundColor: 'white',            
           },
         }}
       ><h3>{s.name}</h3>
@@ -169,9 +173,9 @@ const sizeWindow = () => {
           </div>}
       </div>
       <ButtonDiv>
-      <Button style={styles.button} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
-      <Button style={styles.button} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
-      {auth.primary_showcase !== s.id && <Button style={styles.button} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
+      <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
+      <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
+      {auth.primary_showcase !== s.id && <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
       </ButtonDiv>
       </Box>
  
@@ -186,7 +190,7 @@ const sizeWindow = () => {
     <div>
       <div style={styles.centered}>
         <div style={styles.row}>
-        <Link to="/showcase/new" showcases = {showcases} >Create A New Showcase</Link>
+        <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/showcase/new`)} variant="contained">Create A New Showcase</Button>
         </div>
         <div >
           {renderShowcases()}

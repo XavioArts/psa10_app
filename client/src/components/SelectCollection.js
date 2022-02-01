@@ -52,7 +52,7 @@ const SelectCollection = (props) => {
 const handleCollection = (e, newValue) => {
   setChosenCollection(newValue)
   setCollection(newValue)
-  if(toggleCollectionList === true){
+  if(toggleCollectionList === true && collection){
   let collection_id = collectionsObj.filter(c=> {if (c.name===newValue) { return c.id }})
   setCollectionId(collection_id[0].id)
   console.log("collection_id", collection_id[0].id)
@@ -90,11 +90,16 @@ const handleCollection = (e, newValue) => {
     setToggleCollectionList(false)
   }
 
+  const chooseAnotherCollectionToggle = () => {
+    setCollection(null)
+    setToggleCollectionList(true)
+  }
+
   return(
-    <div className="messagePageContainer">
+    <div >
         {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
         {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
-            <div>
+            <div className="messagePageContainer">
                 {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
                     <>
                     {toggleCollectionList &&  <FormControl sx={{ m:1, minWidth: 250}} >
@@ -108,7 +113,7 @@ const handleCollection = (e, newValue) => {
                                     onInputChange={(e, newValue) => handleCollection(e, newValue)}
                                 />
                             </FormControl>}
-                            <Button onClick={()=>setToggleCollectionList(true)}>Choose Another Collection</Button>
+                            <Button onClick={()=>chooseAnotherCollectionToggle()}>Choose Another Collection</Button>
                            {!collection && <div><Button onClick={()=>createCollectionToggle()}>Create New Collection</Button></div>}
                             </>
                             {collectionNew === true &&   
