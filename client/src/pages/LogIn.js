@@ -15,7 +15,7 @@ const LogIn = () => {
     };
 
     return (
-        <div>
+        <>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit} >
                 <TextField style={{marginRight: '25px'}}label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} />
@@ -23,7 +23,7 @@ const LogIn = () => {
                 <br />
                 <Button style={{marginTop: '15px'}}variant="contained" type="submit" >Log in</Button>
             </form>
-        </div>
+        </>
     )
 
 }

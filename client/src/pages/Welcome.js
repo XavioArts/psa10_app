@@ -3,7 +3,6 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Carousel from '../components/Carousel';
-import useWindowSize from '../components/UseWindowSize';
 import Slide1 from '../slides/slide1.png'
 import Slide2 from '../slides/slide2.png'
 import Slide3 from '../slides/slide3.png'
