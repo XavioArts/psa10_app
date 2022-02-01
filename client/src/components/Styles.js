@@ -20,7 +20,7 @@ export const FlexColumnDiv = styled.div`
 `
 
 export const ModalBoxStyle = {
-    position: 'absolute',
+    position: 'relative',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -32,7 +32,7 @@ export const ModalBoxStyle = {
 };
 
 export const collectionModalStyle = {
-    position: 'absolute',
+    position: 'relative',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -41,7 +41,7 @@ export const collectionModalStyle = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
 export const Cover = styled.div`
   background-image: url(${props => props.image}), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));

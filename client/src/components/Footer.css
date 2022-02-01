@@ -1,8 +1,9 @@
 .main-footer{
-  background-color: whitesmoke;
-  padding-top: 1em;
+  background: rgb(247, 246, 246);
+  /* padding-top: 3em; */
   grid-row: auto;
   position: relative;
+  min-height: 22vh;
   bottom: 0;
-  width: 100%;
+  width: auto;
 }
