@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import AddTopic from '../components/AddTopic';
 import { AuthContext } from '../providers/AuthProvider';
 import ReactPaginate from 'react-paginate';
+import { theme } from '../components/Styles';
 
 const MessageBoard = (props) => {
   const auth = useContext(AuthContext);
@@ -22,31 +23,6 @@ const MessageBoard = (props) => {
   const topicsPerPage = 4
 
   const navigate = useNavigate()
-
-  const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#6569C8',
-            contrastText: '#FFFFFF',
-        },
-        secondary: {
-            main: '#90BDEE',
-            contrastText: '#FFFFFF',
-        },
-        accent: {
-            main: '#C4C4C4',
-            contrastText: '#FFFFFF',
-        },
-        white: {
-            main: '#FFFFFF',
-            contrastText: '#272830',
-        },
-        black: {
-            main: '#272830',
-            contrastText: '#FFFFFF',
-        },
-    }
-});
 
   useEffect(()=>{
     getTopics()

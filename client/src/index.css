@@ -89,6 +89,12 @@ code {
   display: flex;
   justify-content: flex-start;
 }
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}
 
 .flexEnd {
   float: right;
@@ -207,6 +213,9 @@ code {
 .carousel-content.show-5 > * {
   width: calc(100% / 5);
 }
+.carousel-content.show-6 > * {
+  width: calc(100% / 6);
+}
 
 .link {
   color: #6569C8;
@@ -253,6 +262,7 @@ code {
 
 .messagePageContainer {
   margin: 30px;
+  color: #272830;
 }
 
 .flexOpposite {
@@ -270,6 +280,12 @@ color: #272830;
 margin: 30px;
 }
 
+.active{
+  background-color: #272830;
+  color: white;
+  padding: 8px;
+  border-radius: 20px;
+}
 .confirm-button {
   flex: 20%;
   display: flex;
@@ -279,4 +295,11 @@ margin: 30px;
 
 .confirm-button .spacing {
   margin: 20px;
+}
+
+.editShowcaseCardsContainer {
+  border: 0.5px solid #C4C4C4;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 10px;
 }
