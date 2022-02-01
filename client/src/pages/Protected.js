@@ -1,7 +1,7 @@
 import { Alert, Paper, createTheme, ThemeProvider, Button, Modal } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, Outlet, useParams, useLocation } from "react-router-dom";
+import { Link, withRouter, useNavigate, Outlet, useParams, useLocation, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { DateTime } from "luxon";
 import styled from "styled-components";
@@ -11,6 +11,8 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import Welcome from "./Welcome";
+import { theme } from "../components/Styles";
+
 
 
 const Protected = () => {
@@ -43,30 +45,6 @@ const Protected = () => {
     }
   }
 
-  const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#6569C8',
-            contrastText: '#FFFFFF',
-        },
-        secondary: {
-            main: '#90BDEE',
-            contrastText: '#FFFFFF',
-        },
-        accent: {
-            main: '#C4C4C4',
-            contrastText: '#FFFFFF',
-        },
-        white: {
-            main: '#FFFFFF',
-            contrastText: '#272830',
-        },
-        black: {
-            main: '#272830',
-            contrastText: '#FFFFFF',
-        },
-    }
-});
 
   const normalizeStats = (cardStats, collectionStats) => {
       function add(accumulator, a) {
@@ -114,19 +92,12 @@ const Protected = () => {
     overflow: hidden;
   `;
 
+
   return (
     <ThemeProvider theme={theme} >
       <div>
         {handleWelcomeModal()}
         <div>
-          {/* {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
-            <Alert severity="error">
-              Finish building your profile.{" "}
-              <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
-                Edit Profile
-              </button>
-            </Alert>
-        )} */}
         <div >
           <Cover image={coverImage()} className="profileInfo">
           <div className="flexLeft">
@@ -188,25 +159,28 @@ const Protected = () => {
                         </div>
                         </div>)}
           </Cover>
-
-          <div className="profileNavContainer">
             {!user && (
+              <>
               <div className="profileNavContainer">
-                <Link className="profileNavText" to={"/profile/overview"}> Overview</Link>
-                <Link className="profileNavText" to={"/profile/collections"}> Collections </Link>
-                <Link className="profileNavText" to={"/profile/sets"}> Sets </Link>
-                <Link className="profileNavText" to={"/profile/showcases"}> Showcases </Link>
+                <NavLink className="profileNavText" to="/profile/overview" activeClassName="active"> Overview</NavLink>
+                <NavLink className="profileNavText" to="/profile/collections" activeClassName="active"> Collections </NavLink>
+                <NavLink className="profileNavText" to="/profile/sets" activeClassName="active"> Sets </NavLink>
+                <NavLink className="profileNavText" to="/profile/showcases" activeClassName="active"> Showcases </NavLink>
               </div>
+                 <hr style={{marginTop: '30px'}}/>
+                </>
             )}
             {user && (
+              <>
               <div className="profileNavContainer">
-                <Link className="profileNavText" to={`/community/users/${user_id}/profile`} >Overview</Link>
-                <Link className="profileNavText" to={`/community/users/${user_id}/profile/collections`} >Collections</Link>
-                <Link className="profileNavText" to={`/community/users/${user_id}/profile/sets`}>Sets</Link>
-                <Link className="profileNavText" to={`/community/users/${user_id}/profile/showcases`} >Showcases</Link>
+                <NavLink className="profileNavText" to={`/community/users/${user_id}/profile/overview`} activeClassName="active" >Overview</NavLink>
+                <NavLink className="profileNavText" to={`/community/users/${user_id}/profile/collections`} activeClassName="active">Collections</NavLink>
+                <NavLink className="profileNavText" to={`/community/users/${user_id}/profile/sets`} activeClassName="active">Sets</NavLink>
+                <NavLink className="profileNavText" to={`/community/users/${user_id}/profile/showcases`} activeClassName="active">Showcases</NavLink>
               </div>
+                <hr style={{marginTop: '30px'}}/>
+                </>
             )}
-          </div>
           <Outlet />
         </div>
       </div>

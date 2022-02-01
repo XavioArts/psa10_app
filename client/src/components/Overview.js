@@ -66,21 +66,37 @@ const Overview = () => {
   }
 
   const sizeWindow = () => {
-    if (size.width <= 500) {
-      return 1
-    }
-    if (size.width > 500 && size.width < 900) {
+    if (size.width <= 575) {
+      // console.log(1)
+      // console.log(size.width)
       return 2
-    } if (size.width > 900 && size.width < 1200) {
+    }
+    if (size.width > 575 && size.width <= 625) {
+      // console.log(2)
+      // console.log(size.width)
       return 3
-    } if (size.width > 1200) {
+    }  if (size.width > 625 && size.width <= 780) {
+      // console.log(2)
+      // console.log(size.width)
+      return 3
+    } if (size.width > 780 && size.width <= 910) {
+      // console.log(3)
+      // console.log(size.width)
       return 4
+    }if (size.width > 911 && size.width <= 1260) {
+      // console.log(3)
+      // console.log(size.width)
+      return 5
+    } if (size.width > 1260) {
+      // console.log(4)
+      // console.log(size.width)
+      return 6
     }  
   }
 
   const renderPrimaryShowcase = () => {
     const renderShowcaseCards=(s) => s.cards.map((c)=>{
-      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="medium" /></div>)
+      return (<div style={styles.margin} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="small" /></div>)
     })
       return (
         <Box 
@@ -92,13 +108,14 @@ const Overview = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
-          textAlign: "center",
+          backgroundColor: 'white',
+          textAlign: "left",
+          lineHeight: '5px',
           '&:hover': {
-            backgroundColor: '#dbdbdb'           
+            backgroundColor: 'white'           
           },
         }}
-      ><h3>{primaryShowcase.name}</h3>
+      ><h2>{primaryShowcase.name}</h2>
       <p>{primaryShowcase.description}</p>
       <div >
         {primaryShowcase.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
@@ -159,15 +176,16 @@ const Overview = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
-          textAlign: "center",
+          backgroundColor: '#white',
+          textAlign: "left",
+          lineHeight: '5px',
           '&:hover': {
-            backgroundColor: '#dbdbdb',
+            backgroundColor: '#white',
             // opacity: [0.9, 0.8, 0.7],
             
           },
         }}
-      ><h3>{s.name}</h3>
+      ><h2>{s.name}</h2>
       <p>{s.description}</p>
       <div >
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
@@ -224,16 +242,19 @@ const Overview = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
+          backgroundColor: 'white',
           textAlign: "center",
           '&:hover': {
-            backgroundColor: '#dbdbdb',
+            backgroundColor: 'white',
             // opacity: [0.9, 0.8, 0.7],
             
           },
         }}
-      ><h3>{s.name}</h3>
-      <p>{s.description}</p>
+      >
+        <div>
+          <h3>{s.name}</h3>
+          <p>{s.description}</p>
+        </div>
       <div >
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
@@ -274,24 +295,16 @@ const Overview = () => {
       </div>
       </Box>
  
-      )
-    }
-  
-    )
-  }
+      )}
+    )}
 
 
   return (
     <div>
       <div style={styles.centered}>
-        <div style={styles.row}>
-        <h3>This is my primary showcase</h3>
-        </div>
         
         {primaryShowcase && <div>{renderPrimaryShowcase()}</div>}
-        <div style={styles.row}>
-        <h3>These are the rest of my showcases</h3>
-        </div>
+
         {showcases && <div>{renderShowcases()}</div>}
       </div>
     </div>
