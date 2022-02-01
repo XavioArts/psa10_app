@@ -6,7 +6,7 @@ import { Box } from "@mui/system";
 
 
 const EditCollection = (props) => {
-  const { name, description, setEditedCollection } = props
+  const { setEditedCollection } = props
   const [collectionName, setCollectionName] = useState("")
   const [collectionDescription, setCollectionDescription] = useState("")
   const params = useParams()

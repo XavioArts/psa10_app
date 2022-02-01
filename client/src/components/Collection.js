@@ -1,12 +1,13 @@
 import { Button, Container, Grid } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
+import DeleteConfirmation from "./DeleteConfirmation";
 import EditCollection from "./EditCollection";
 
 const Collection = () => {
@@ -29,9 +30,8 @@ const Collection = () => {
     setCollection(res.data)
   }
 
-  const deleteCollection = async (id) => {
+  const deleteCollection = async () => {
     await axios.delete(`/api/collections/${params.id}`)
-    setCollectionCards(collectionCards.filter((cc) => cc.id !== id));
     navigate("/profile/collections")
   }
 
@@ -71,13 +71,14 @@ const Collection = () => {
           {auth.id === collection.user_id &&
             <div style={{ display: "flex", justifyContent: "right" }}>
               <EditCollection {...collection} setEditedCollection={setEditedCollection}/>
-              <Button
+              {/* <Button
                 onClick={() => deleteCollection(params.id)}
                 variant="contained"
                 style={{ margin: '10px' }}
               >
                 Delete this Collection
-              </Button>
+              </Button> */}
+              <DeleteConfirmation />
             </div>
           }
         </div>
