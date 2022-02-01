@@ -48,6 +48,7 @@ const CollectionNew = () => {
               label="Collection Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              inputProps={{ maxLength: 40 }}
             />
             <br />
             <br />

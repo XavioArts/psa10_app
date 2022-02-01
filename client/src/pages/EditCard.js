@@ -4,12 +4,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CardImageUpload from "../components/CardImageUpload";
 import { AuthContext } from "../providers/AuthProvider";
-
+import { categories, conditions } from "../components/FormChoices";
 
 const EditCard = () => {
 
     const auth = useContext(AuthContext);
-    const {id} = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [card, setCard] = useState(null);
     const [failed, setFailed] = useState(false);
@@ -31,14 +31,14 @@ const EditCard = () => {
             let res = await axios.get(`/api/cards/${id}`);
             setCard(res.data);
             setName(res.data.name);
-            setCategory(categories.find((c)=>c.value === res.data.category));
-            setCondition(conditions.find((c)=>c.value === res.data.condition));
+            setCategory(categories.find((c) => c.value === res.data.category));
+            setCondition(conditions.find((c) => c.value === res.data.condition));
             setSet(res.data.set);
             setYear(res.data.year);
             setCardNumber(res.data.card_number);
             setAvailable(res.data.available);
             setGraded(res.data.graded);
-            if(res.data.grade) {
+            if (res.data.grade) {
                 setGrade(res.data.grade);
             }
         } catch (err) {
@@ -47,60 +47,19 @@ const EditCard = () => {
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getCard();
     }, []);
 
-    const categories = [
-        {name: 'Pokemon', value: "Pokemon", subCategory: "Trading Card Games"},
-        {name: 'Yu-Gi-Oh!', value: "Yu-Gi-Oh!", subCategory: "Trading Card Games"},
-        {name: 'Magic the Gathering', value: "Magic the Gathering", subCategory: "Trading Card Games"},
-        {name: 'Dragon Ball Super', value: "Dragon Ball Super", subCategory: "Trading Card Games"},
-        {name: 'Digimon', value: "Digimon", subCategory: "Trading Card Games"},
-        {name: 'Star Trek', value: "Star Trek", subCategory: "Pop Culture"},
-        {name: 'Star Wars', value: "Star Wars", subCategory: "Pop Culture"},
-        {name: 'Marvel', value: "Marvel", subCategory: "Pop Culture"},
-        {name: 'Garbage Pail Kids', value: "Garbage Pail Kids", subCategory: "Pop Culture"},
-        {name: 'Baseball', value: "Baseball", subCategory: "Sports"},
-        {name: 'Basketball', value: "Basketball", subCategory: "Sports"},
-        {name: 'Boxing', value: "Boxing", subCategory: "Sports"},
-        {name: 'Football', value: "Football", subCategory: "Sports"},
-        {name: 'Golf', value: "Golf", subCategory: "Sports"},
-        {name: 'Hockey', value: "Hockey", subCategory: "Sports"},
-        {name: 'MMA', value: "MMA", subCategory: "Sports"},
-        {name: 'Tennis', value: "Tennis", subCategory: "Sports"},
-        {name: 'Soccer', value: "Soccer", subCategory: "Sports"},
-        {name: 'Wrestling', value: "Wrestling", subCategory: "Sports"},
-        {name: 'Coins', value: "Coins", subCategory: "Misc. Collectibles"},
-        {name: 'Stamps', value: "Stamps", subCategory: "Misc. Collectibles"},
-        {name: 'Pins', value: "Pins", subCategory: "Misc. Collectibles"},
-        {name: 'Rocks & Gems', value: "Rocks & Gems", subCategory: "Misc. Collectibles"},
-        {name: 'Comic Books', value: "Comic Books", subCategory: "Misc. Collectibles"},
-        {name: 'Toys', value: "Toys", subCategory: "Misc. Collectibles"},
-        {name: 'Furniture', value: "Furniture", subCategory: "Misc. Collectibles"},
-        {name: 'Vinyl Records', value: "Vinyl Records", subCategory: "Misc. Collectibles"},
-        {name: 'Other', value: "Other", subCategory: "Misc. Collectibles"},
-    ]
-    const conditions = [
-        {name: 'Mint', value: 'Mint'},
-        {name: 'Near Mint', value: 'Near Mint'},
-        {name: 'Excellent', value: 'Excellent'},
-        {name: 'Good', value: 'Good'},
-        {name: 'Lightly Played', value: 'Lightly Played'},
-        {name: 'Played', value: 'Played'},
-        {name: 'Poor', value: 'Poor'},
-        {name: 'Damaged', value: 'Damaged'},
-    ]
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let updatedCard = {name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded};
+        let updatedCard = { name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded };
         try {
             let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
             setCard(res.data);
             setFailed(false);
             setSuccess(true);
-            setTimeout(()=>navigate("/profile"), 1500);
+            setTimeout(() => navigate("/profile"), 1500);
         } catch (err) {
             console.log(err.response);
             setFailed(true);
@@ -134,73 +93,79 @@ const EditCard = () => {
         }
     };
 
-    return(
+    return (
         <div>
             {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
             {failed && <Alert severity="error" >Failed to update card!</Alert>}
-            {card && 
+            {card &&
                 <div>
-                    <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
-                    <h4>Please upload card images and then fill out card info</h4>
-                    <CardImageUpload id={card.id} />
-                        <form onSubmit={handleSubmit} > 
+                    <Paper sx={{ width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px" }} >
+                        <h4>Please upload card images and then fill out card info</h4>
+                        <CardImageUpload id={card.id} />
+                        <form onSubmit={handleSubmit} >
                             <label>Name: </label>
-                            <Input type="text" required value={name} onChange={(e)=>setName(e.target.value)} />
-                            <FormControl sx={{ m:1, minWidth: 250}} >
-                                <Autocomplete 
+                            <Input
+                                type="text"
+                                required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                inputProps={{ maxLength: 20 }}
+                            />
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <Autocomplete
                                     options={categories}
-                                    groupBy={(cat)=>cat.subCategory}
-                                    getOptionLabel={(cat)=>cat.name}
+                                    groupBy={(cat) => cat.subCategory}
+                                    getOptionLabel={(cat) => cat.name}
                                     renderInput={(params) => <TextField {...params} label="Select category" />}
                                     value={category}
                                     onChange={(e, newValue) => setCategory(newValue)}
                                     inputValue={chosenCategory}
                                     onInputChange={(e, newValue) => setChosenCategory(newValue)}
-                                        
+
                                 />
                             </FormControl>
-                            <FormControl sx={{ m:1, minWidth: 250}} >
-                                <Autocomplete 
+                            <FormControl sx={{ m: 1, minWidth: 250 }} >
+                                <Autocomplete
                                     options={conditions}
-                                    getOptionLabel={(c)=>c.name}
+                                    getOptionLabel={(c) => c.name}
                                     renderInput={(params) => <TextField {...params} label="Select condition" />}
                                     value={condition}
                                     onChange={(e, newValue) => setCondition(newValue)}
                                     inputValue={chosenCondition}
                                     onInputChange={(e, newValue) => setChosenCondition(newValue)}
-                                        
+
                                 />
                             </FormControl>
-                            <br/>
+                            <br />
                             <label>Set: </label>
-                            <Input type="text" required value={set} onChange={(e)=>setSet(e.target.value)} />
+                            <Input type="text" required value={set} onChange={(e) => setSet(e.target.value)} />
                             <label>Year: </label>
-                            <Input type="number" required value={year} onChange={(e)=>setYear(e.target.value)} />
+                            <Input type="number" required value={year} onChange={(e) => setYear(e.target.value)} />
                             <label>Card No.: </label>
-                            <Input type="text" required value={card_number} onChange={(e)=>setCardNumber(e.target.value)} />
-                            <br/>
-                            <div style={{display: "flex", alignItems: "center", justifyContent: "space-evenly"}} >
+                            <Input type="text" required value={card_number} onChange={(e) => setCardNumber(e.target.value)} />
+                            <br />
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }} >
                                 <div>
                                     <label>Available</label>
                                     <RadioGroup value={available} onChange={handleAvailable} >
-                                        <FormControlLabel value={true} control={<Radio/>} label="Yes" />
-                                        <FormControlLabel value={false} control={<Radio/>} label="No" />
+                                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                        <FormControlLabel value={false} control={<Radio />} label="No" />
                                     </RadioGroup>
                                 </div>
                                 <div>
                                     <label>Graded</label>
                                     <RadioGroup value={graded} onChange={handleGraded} >
-                                        <FormControlLabel value={true} control={<Radio/>} label="Yes" />
-                                        <FormControlLabel value={false} control={<Radio/>} label="No" />
+                                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                        <FormControlLabel value={false} control={<Radio />} label="No" />
                                     </RadioGroup>
                                 </div>
-                                <FormControl sx={{ m:1, minWidth: 150}} >
+                                <FormControl sx={{ m: 1, minWidth: 150 }} >
                                     <InputLabel id="grade-select-label" >Grade</InputLabel>
-                                    <Select 
+                                    <Select
                                         value={grade}
                                         label="Grade"
                                         labelId="grade-select-label"
-                                        onChange={(e)=>setGrade(e.target.value)}
+                                        onChange={(e) => setGrade(e.target.value)}
                                         disabled={handleDisabled()}
                                     >
                                         <MenuItem value="" >
