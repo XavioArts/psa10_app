@@ -269,3 +269,14 @@ code {
 color: #272830;
 margin: 30px;
 }
+
+.confirm-button {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-button .spacing {
+  margin: 20px;
+}

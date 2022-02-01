@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { collectionModalStyle } from "../components/Styles";
 
 const CollectionNew = () => {
   const navigate = useNavigate();
@@ -17,21 +18,8 @@ const CollectionNew = () => {
     const newCollection = { name, description }
     let res = await axios.post(`/api/collections`, newCollection)
     navigate(`/profile/collections/${res.data.id}`)
-    // navigate('/upload')
     setOpen(false)
   }
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 450,
-    bgcolor: '#FFFFFF',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
   return (
     <>
@@ -47,7 +35,7 @@ const CollectionNew = () => {
         onClose={handleClose}
       >
         <Box
-          sx={style}
+          sx={collectionModalStyle}
           component="form"
           autoComplete="off"
           onSubmit={handleSubmit}
