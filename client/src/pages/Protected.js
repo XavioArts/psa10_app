@@ -119,14 +119,14 @@ const Protected = () => {
       <div>
         {handleWelcomeModal()}
         <div>
-          {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
+          {/* {(!auth.image || !auth.first_name || !auth.last_name || !auth.nickname || !auth.email || !auth.about) && !user && (
             <Alert severity="error">
               Finish building your profile.{" "}
               <button onClick={() => navigate(`/users/${auth.id}/edit`)}>
                 Edit Profile
               </button>
             </Alert>
-        )}
+        )} */}
         <div >
           <Cover image={coverImage()} className="profileInfo">
           <div className="flexLeft">
