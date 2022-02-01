@@ -159,7 +159,9 @@ const ShowcaseEdit = () => {
         <input 
         placeholder="Showcase Name" 
         value={showcaseName} 
-        onChange={(e)=>{setShowcaseName(e.target.value);}}/>
+        onChange={(e)=>{setShowcaseName(e.target.value);}}
+        maxLength= "40"
+        />
         <p>Description</p>
         <TextareaAutosize 
         placeholder="Tell us about this showcase"  

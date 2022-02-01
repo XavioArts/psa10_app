@@ -38,7 +38,12 @@ const CollectionCommentEdit = (props) => {
 
   return (
     <div>
-      <button onClick={handleOpen}>Edit</button>
+      <button
+        onClick={handleOpen}
+        style={{ margin: '10px' }}
+      >
+        Edit
+      </button>
       <Modal
         open={open}
         onClose={handleClose}
