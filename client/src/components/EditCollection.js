@@ -3,10 +3,11 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { TextField, Button, Modal } from "@mui/material";
 import { Box } from "@mui/system";
+import { collectionModalStyle } from "./Styles";
 
 
 const EditCollection = (props) => {
-  const { name, description, setEditedCollection } = props
+  const { setEditedCollection } = props
   const [collectionName, setCollectionName] = useState("")
   const [collectionDescription, setCollectionDescription] = useState("")
   const params = useParams()
@@ -34,18 +35,6 @@ const EditCollection = (props) => {
     setEditedCollection(true)
   };
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 450,
-    bgcolor: '#FFFFFF',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
   return (
     <>
       <Button
@@ -60,7 +49,7 @@ const EditCollection = (props) => {
         onClose={handleClose}
       >
         <Box
-          sx={style}
+          sx={collectionModalStyle}
           component="form"
           autoComplete="off"
           onSubmit={handleSubmit}
