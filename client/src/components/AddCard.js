@@ -5,6 +5,7 @@ import { Navigate } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
+import { categories, conditions } from "../components/FormChoices";
 
 const AddCard = (props) => {
 
@@ -36,47 +37,6 @@ const AddCard = (props) => {
             handleSubmit()
         }
     }, [upload]);
-
-    const categories = [
-        { name: 'Pokemon', value: "Pokemon", subCategory: "Trading Card Games" },
-        { name: 'Yu-Gi-Oh!', value: "Yu-Gi-Oh!", subCategory: "Trading Card Games" },
-        { name: 'Magic the Gathering', value: "Magic the Gathering", subCategory: "Trading Card Games" },
-        { name: 'Dragon Ball Super', value: "Dragon Ball Super", subCategory: "Trading Card Games" },
-        { name: 'Digimon', value: "Digimon", subCategory: "Trading Card Games" },
-        { name: 'Star Trek', value: "Star Trek", subCategory: "Pop Culture" },
-        { name: 'Star Wars', value: "Star Wars", subCategory: "Pop Culture" },
-        { name: 'Marvel', value: "Marvel", subCategory: "Pop Culture" },
-        { name: 'Garbage Pail Kids', value: "Garbage Pail Kids", subCategory: "Pop Culture" },
-        { name: 'Baseball', value: "Baseball", subCategory: "Sports" },
-        { name: 'Basketball', value: "Basketball", subCategory: "Sports" },
-        { name: 'Boxing', value: "Boxing", subCategory: "Sports" },
-        { name: 'Football', value: "Football", subCategory: "Sports" },
-        { name: 'Golf', value: "Golf", subCategory: "Sports" },
-        { name: 'Hockey', value: "Hockey", subCategory: "Sports" },
-        { name: 'MMA', value: "MMA", subCategory: "Sports" },
-        { name: 'Tennis', value: "Tennis", subCategory: "Sports" },
-        { name: 'Soccer', value: "Soccer", subCategory: "Sports" },
-        { name: 'Wrestling', value: "Wrestling", subCategory: "Sports" },
-        { name: 'Coins', value: "Coins", subCategory: "Misc. Collectibles" },
-        { name: 'Stamps', value: "Stamps", subCategory: "Misc. Collectibles" },
-        { name: 'Pins', value: "Pins", subCategory: "Misc. Collectibles" },
-        { name: 'Rocks & Gems', value: "Rocks & Gems", subCategory: "Misc. Collectibles" },
-        { name: 'Comic Books', value: "Comic Books", subCategory: "Misc. Collectibles" },
-        { name: 'Toys', value: "Toys", subCategory: "Misc. Collectibles" },
-        { name: 'Furniture', value: "Furniture", subCategory: "Misc. Collectibles" },
-        { name: 'Vinyl Records', value: "Vinyl Records", subCategory: "Misc. Collectibles" },
-        { name: 'Other', value: "Other", subCategory: "Misc. Collectibles" },
-    ]
-    const conditions = [
-        { name: 'Mint', value: 'Mint' },
-        { name: 'Near Mint', value: 'Near Mint' },
-        { name: 'Excellent', value: 'Excellent' },
-        { name: 'Good', value: 'Good' },
-        { name: 'Lightly Played', value: 'Lightly Played' },
-        { name: 'Played', value: 'Played' },
-        { name: 'Poor', value: 'Poor' },
-        { name: 'Damaged', value: 'Damaged' },
-    ]
 
     const [category, setCategory] = useState(categories[0]);
     const [condition, setCondition] = useState(conditions[0]);
