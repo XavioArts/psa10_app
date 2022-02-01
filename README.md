@@ -12,3 +12,5 @@ This is an app for showing off colectibles and finding a community to talk, shar
 - styled-components
 - devise-axios
 - Material UI
+
+pagination is done with https://github.com/AdeleD/react-paginate

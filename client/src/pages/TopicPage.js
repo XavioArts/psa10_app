@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, TextField } from "@mui/material";
 import Modal from '@mui/material/Modal';
 import EditTopic from '../components/EditTopic';
 import axios from 'axios';
@@ -15,6 +15,7 @@ const TopicPage = () => {
   const [content, setContent] = useState([])
   const [open, setOpen] = useState(false);
   const [tic, setTic] = useState(false);
+  const [messageVerify, setMessageVerify] = useState(true);
   const handleOpen = () => setOpen(true);
   const navigate = useNavigate()
   
@@ -54,14 +55,18 @@ const TopicPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let user_id = auth.id
-    let newMessage = {content, user_id}
-    try {
-      let res =  await axios.post(`/api/topics/${params.id}/messages`, newMessage)
-      setMessages([res.data, ...messages])
-      setContent('')
-    } catch(err){
-      console.log(err)
+    if (!checkMessage()) {
+      setMessageVerify(false)
+    } if (checkMessage()) {
+      let user_id = auth.id
+      let newMessage = {content, user_id}
+      try {
+        let res =  await axios.post(`/api/topics/${params.id}/messages`, newMessage)
+        setMessages([res.data, ...messages])
+        setContent('')
+      } catch(err){
+        console.log(err)
+      }
     }
   }
 
@@ -81,6 +86,47 @@ const TopicPage = () => {
         <h3>{<Link to="/login">Login</Link>} or {<Link to="/login">Register</Link>}</h3>
       </div>
     )
+  }
+
+  const checkMessage = () => {
+    let verifyMessage = content
+    let filter = /[0-9a-zA-Z]{1,}/
+    if (!filter.test(verifyMessage)){
+      return false
+    } else {
+        return true
+    }
+  }
+
+  const handleMessageError = () => {
+    if (!messageVerify){
+        return(
+          <TextField
+            error
+            style={{ marginLeft: '7px', marginTop: '25px', marginBottom: '15px', width: '99%'}}
+            inputProps={{ maxLength: 250 }}
+            multiline
+            rows={3}
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value)
+              setMessageVerify(true)
+            }}
+            helperText="Messages can not be blank"
+            />
+        )
+    } else {
+        return(
+            <TextField
+            style={{ marginLeft: '7px', marginTop: '25px', marginBottom: '15px', width: '99%'}}
+            inputProps={{ maxLength: 250 }}
+            multiline
+            rows={3}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            />
+        )
+    }
   }
 
   const editTopic = () => {
@@ -109,8 +155,8 @@ const TopicPage = () => {
       <p>{topic.body}</p>
       {auth.authenticated ? <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
         <form onSubmit={handleSubmit}>
-          <h6 style={{margin: '5px'}}>Posted by {auth.nickname}</h6>
-          <textarea style={{ resize: 'none', overflow: 'auto', marginTop: '25px', marginBottom: '15px', fontSize: '1.17em', width: '99%'}} rows="4"  value={content} onChange={(e) => setContent(e.target.value)}/>
+          <h6 style={{margin: '5px'}}>Comment as {auth.nickname}</h6>
+          {handleMessageError()}
           <br/>
           <Button variant="contained" type='submit'>Post</Button>
         </form>

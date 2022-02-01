@@ -15,7 +15,7 @@ const NavBar = () => {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const pages = [{title: 'My Collection', link: '/profile/collections'}, {title: 'Community', link: '/community'}, {title: 'Message Board', link: '/messageboard'}, {title: 'About Us', link: '/about'}];
+    const pages = [{title: 'My Collections', link: '/profile/collections'}, {title: 'Community', link: '/community'}, {title: 'Message Board', link: '/messageboard'}, {title: 'About Us', link: '/about'}];
     const settings = [{title: 'Profile', link: '/profile/overview'}, {title: 'Account', link: `/users/${auth.id}/edit`}];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -242,7 +242,7 @@ const NavBar = () => {
             variant="contained" 
             color="primary" 
             sx={{borderRadius: "20px", marginRight: "20px"}}
-            onClick={()=>navigate("/upload")} >
+            onClick={()=>navigate("/select_collection")} >
                 Upload
             </Button>
 

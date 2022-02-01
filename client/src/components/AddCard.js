@@ -1,6 +1,7 @@
 import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
+import { Navigate } from "react-router";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
@@ -27,6 +28,7 @@ const AddCard = (props) => {
     const [upload, setUpload] = useState(false);
     const [trueSubmit, setTrueSubmit] = useState(false)
     const [notUploaded, setNotUploaded] = useState(false);
+    const [notUploadedAlert, setNotUploadedAlert] = useState(false);
 
     useEffect(()=>{
         console.log("true",trueSubmit)
@@ -79,9 +81,11 @@ const AddCard = (props) => {
     const [category, setCategory] = useState(categories[0]);
     const [condition, setCondition] = useState(conditions[0]);
 
+
     const startCreation = async (e) => {
         setLoading(true);
         e.preventDefault();
+        console.log({user_id: auth.id, collection_id: collectionId, likes: 0})
         let newCard = {user_id: auth.id, collection_id: collectionId, likes: 0};
         try {
             let res = await axios.post("/api/cards", newCard);
@@ -117,12 +121,14 @@ const AddCard = (props) => {
                 setUpload(false)
                 setTrueSubmit(false)
                 setTimeout(()=>setSuccess(false), 6000);
+                Navigate(`/profile/collections/${collectionId}`)
                 if(submitted === true){
                     setSubmitted(false)
                 }
             } catch (err) {
                 console.log(err.response);
                 setFailed(true);
+                setTimeout(()=>setFailed(false), 6000);
             }
         }
     }
@@ -164,6 +170,7 @@ const AddCard = (props) => {
     const finished = () =>{
         if (!upload) {
             setNotUploaded(true);
+            setNotUploadedAlert(true);
             return
         }
         setSubmitted(true)
@@ -181,7 +188,8 @@ const AddCard = (props) => {
             </Box>
             {card && 
                 <div>
-                    <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
+
+                    {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} submitted={submitted} setSubmitted={setSubmitted} setUpload={setUpload} />
                         <form onSubmit={handleSubmit} > 
@@ -342,12 +350,13 @@ const AddCard = (props) => {
                                     </Select>
                                 </FormControl>
                             </div>
+                            {notUploadedAlert && <Alert onClose={()=>{setNotUploadedAlert(false)}} severity="error" >Please upload your images first</Alert>}
                             <Tooltip open={notUploaded} onClose={()=>setNotUploaded(false)} title="Please upload your images" >
                             <Button variant="contained" type="submit" onClick={()=>finished()} >Submit</Button>
                             </Tooltip>
                         </form>
                         <Button variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
-                    </Paper>
+                    {/* </Paper> */}
                 </div>
             }
         </div>

@@ -19,7 +19,7 @@ const LogIn = () => {
             <h1>Log In</h1>
             <form onSubmit={handleSubmit} >
                 <TextField style={{marginRight: '25px'}}label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} />
-                <TextField label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                <TextField type='password' label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} />
                 <br />
                 <Button style={{marginTop: '15px'}}variant="contained" type="submit" >Log in</Button>
             </form>

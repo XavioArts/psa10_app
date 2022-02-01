@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -11,16 +11,103 @@ const EditTopic = (props) => {
   const params = useParams();
   const [title, setTitle] = useState(props.title ? props.title : '')
   const [body, setBody] = useState(props.body ? props.body : '')
+  const [titleVerify, setTitleVerify] = useState(true);
+  const [BodyVerify, setBodyVerify] = useState(true);
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let user_id = auth.id
-    let newTopic = {title, body, user_id}
-    try {
-      let res =  await axios.put(`/api/topics/${params.id}`, newTopic)
-      props.editTopic()
-    } catch(err){
-      console.log(err)
+    if (!checkTitle()) {
+      setTitleVerify(false)
+    } if (!checkBody()) {
+      setBodyVerify(false)
+    } if (checkTitle() && checkBody()) {
+      let user_id = auth.id
+      let newTopic = {title, body, user_id}
+      try {
+        let res =  await axios.put(`/api/topics/${params.id}`, newTopic)
+        props.editTopic()
+      } catch(err){
+        console.log(err)
+      }
+    }
+  }
+
+  const checkTitle = () => {
+    let verifyTitle = title
+    let filter = /[0-9a-zA-Z]{1,}/
+    if (!filter.test(verifyTitle)){
+      return false
+    } else {
+        return true
+    }
+  }
+
+  const checkBody = () => {
+    let verifyBody = body
+    let filter = /[0-9a-zA-Z]{1,}/
+    if (!filter.test(verifyBody)){
+      return false
+    } else {
+        return true
+    }
+  }
+ 
+  const handleTitleError = () => {
+    if (!titleVerify){
+        return(
+            <TextField style={{margin: '10px'}}
+                error
+                label="Title"
+                value={title}
+                onChange={(e) => {
+                    setTitle(e.target.value)
+                    setTitleVerify(true)
+                }}
+                helperText="Title required"
+            /> 
+        )
+    } else {
+        return(
+            <TextField style={{margin: '10px'}}
+                label="Title"
+                variant="outlined"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+        )
+    }
+  }
+
+  const handleBobyError = () => {
+    if (!BodyVerify){
+        return(
+              <TextField
+                error
+                style={{ margin: '10px', width: 400}}
+                id="filled-multiline-flexible"
+                label="Description"
+                multiline
+                rows={4}
+                value={body}
+                onChange={(e) => {
+                    setBody(e.target.value)
+                    setBodyVerify(true)
+                }}
+                helperText="Description required"
+            /> 
+        )
+    } else {
+        return(
+            <TextField
+              style={{ margin: '10px', width: 400}}
+              id="filled-multiline-flexible"
+              label="Description"
+              multiline
+              rows={4}
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              />
+        )
     }
   }
 
@@ -36,13 +123,12 @@ const EditTopic = (props) => {
     p: 4,
   };
   return (
-    <Box sx={style}>
+        <Box sx={style}>
           <form onSubmit={handleSubmit}>
-            <h3>Edit Title</h3>
-            <input value={title} onChange={(e) => setTitle(e.target.value)}/>
-            <h3>Description</h3>
-            <textarea style={{ resize: 'none', overflow: 'auto' }} rows="5" cols="47" value={body} onChange={(e) => setBody(e.target.value)}/>
-            <Button style={{marginTop: '25px'}} variant="contained" type='submit'>Update</Button>
+          {handleTitleError()}
+          <br/>
+          {handleBobyError()}
+            <Button style={{marginLeft: '10px', marginTop: '25px'}} variant="contained" type='submit'>Update</Button>
           </form>
         </Box>
   );

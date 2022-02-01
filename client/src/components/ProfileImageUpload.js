@@ -76,9 +76,12 @@ const ProfileImageUpload = () => {
                     <p style={{ fontSize: "12px" }} >No profile image</p>
                 </div>}
             {auth.image &&
-                <div style={{ width: "200px", height: "200px", borderRadius: "50%", overflow: "hidden" }} >
-                    <img src={auth.image} alt="profile" style={{ objectFit: "cover", width: "200px", height: "auto" }} />
-                </div>}
+                <div style={{ width: "200px"}} >
+                <img
+                  src={auth.image}
+                  alt="profile image"
+                  className="circletag"
+                />                </div>}
             <br />
             <label htmlFor="contained-button-file" >
                 <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload" >

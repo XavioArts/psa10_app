@@ -16,7 +16,8 @@ const CollectionNew = () => {
     e.preventDefault();
     const newCollection = { name, description }
     let res = await axios.post(`/api/collections`, newCollection)
-    navigate('/upload')
+    navigate(`/profile/collections/${res.data.id}`)
+    // navigate('/upload')
     setOpen(false)
   }
 

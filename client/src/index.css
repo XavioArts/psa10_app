@@ -51,6 +51,24 @@ code {
   margin: 4px 0px;
   color: rgb(112, 112, 112);
   font-size: 15px;
+
+}
+
+.profileEmailText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 4px 0px;
+  color: rgb(112, 112, 112);
+  font-size: 15px;
+}
+.profileEmailText:hover {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 4px 0px;
+  color: #90BDEE;
+  font-size: 15px;
 }
 
 .profileInfo {
@@ -215,13 +233,22 @@ code {
   width: max-content;
   color: #272830;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 0px;
 }
 
 .page-item {
   list-style-type: none;
   padding: 10px;
   font-size: 15px;
+}
+.page-item:hover {
+  list-style-type: none;
+  padding: 10px;
+  font-size: 15px;
+  background-color: whitesmoke;
+}
+.active-page-item {
+  border: 1px solid #272830;
 }
 
 .messagePageContainer {
@@ -232,4 +259,13 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.q_text {
+  color: #6569C8;
+}
+
+.faq_page {
+color: #272830;
+margin: 30px;
 }
