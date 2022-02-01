@@ -18,16 +18,25 @@ export const categories = [
   { name: 'Tennis', value: "Tennis", subCategory: "Sports" },
   { name: 'Soccer', value: "Soccer", subCategory: "Sports" },
   { name: 'Wrestling', value: "Wrestling", subCategory: "Sports" },
+  { name: 'Coins', value: "Coins", subCategory: "Misc. Collectibles" },
+  { name: 'Stamps', value: "Stamps", subCategory: "Misc. Collectibles" },
+  { name: 'Pins', value: "Pins", subCategory: "Misc. Collectibles" },
+  { name: 'Rocks & Gems', value: "Rocks & Gems", subCategory: "Misc. Collectibles" },
+  { name: 'Comic Books', value: "Comic Books", subCategory: "Misc. Collectibles" },
+  { name: 'Toys', value: "Toys", subCategory: "Misc. Collectibles" },
+  { name: 'Furniture', value: "Furniture", subCategory: "Misc. Collectibles" },
+  { name: 'Vinyl Records', value: "Vinyl Records", subCategory: "Misc. Collectibles" },
+  { name: 'Other', value: "Other", subCategory: "Misc. Collectibles" },
 ];
 
 export const conditions = [
-  {name: 'Mint', value: 'Mint'},
-  {name: 'Near Mint', value: 'Near Mint'},
-  {name: 'Excellent', value: 'Excellent'},
-  {name: 'Good', value: 'Good'},
-  {name: 'Lightly Played', value: 'Lightly Played'},
-  {name: 'Played', value: 'Played'},
-  {name: 'Poor', value: 'Poor'},
-  {name: 'Damaged', value: 'Damaged'},
+  { name: 'Mint', value: 'Mint' },
+  { name: 'Near Mint', value: 'Near Mint' },
+  { name: 'Excellent', value: 'Excellent' },
+  { name: 'Good', value: 'Good' },
+  { name: 'Lightly Played', value: 'Lightly Played' },
+  { name: 'Played', value: 'Played' },
+  { name: 'Poor', value: 'Poor' },
+  { name: 'Damaged', value: 'Damaged' },
 ]
 
