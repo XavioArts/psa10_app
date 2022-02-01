@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
         <hr />
         <div>
-          <h6 style={{ paddingBottom: '1em', display: 'flex', textAlign: 'start', color: '#B8B8B8' }}>
+          <h6 style={{ display: 'flex', textAlign: 'start', color: '#B8B8B8' }}>
             Copyright &copy;{new Date().getFullYear()} DevPoint Studios LLC. All rights reserved
           </h6>
         </div>
