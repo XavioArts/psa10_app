@@ -62,6 +62,7 @@ function App() {
                 <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
                 <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
                 <Route path="/community/users/:user_id/profile/overview" element={<UserOverview />} />
+                <Route path="/faq" element={<Faq/>}/>
               </Route>
           {/* All routes below here are required to be logged in */}
           <Route element={<RequireAuth/>} >
@@ -91,7 +92,7 @@ function App() {
                 <Route path="/cards/:id/image" element={<CardImageUpload />} />
                 <Route path="/users/:id/edit" element={<EditProfileForm />} />
                 <Route path="/select_collection" element={<SelectCollection/>}/>
-                <Route path="/faq" element={<Faq/>}/>
+                
               </Route>
             </Route>
           </Routes>
