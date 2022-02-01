@@ -31,6 +31,18 @@ export const ModalBoxStyle = {
     p: 4,
 };
 
+export const collectionModalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 450,
+    bgcolor: '#FFFFFF',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 export const Cover = styled.div`
   background-image: url(${props => props.image}), linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
   overflow: hidden;
