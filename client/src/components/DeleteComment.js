@@ -14,7 +14,6 @@ const DeleteComment = (props) => {
     <>
       <button
         onClick={handleOpen}
-        variant="contained"
         style={{ margin: '10px' }}
       >
         Delete this Comment

@@ -62,6 +62,7 @@ const EditCollection = (props) => {
               label="Collection Name"
               value={collectionName}
               onChange={(e) => setCollectionName(e.target.value)}
+              inputProps={{ maxLength: 40 }}
             />
             <br />
             <br />
