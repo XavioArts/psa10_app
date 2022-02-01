@@ -58,15 +58,33 @@ const Faq = () => {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography className="q_text">Accordion 2</Typography>
+            <Typography className="q_text">How can I trade or purchase cards from other users?</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
+              We encourage users to connect using our message board, or privately through email or social media. Create or find topics that interest you and 
+              chat with other collectors. You can post about collectibles you're searching for, or search through other users' profiles for collectibles that are 
+              available "4TRADE." 
             </Typography>
           </AccordionDetails>
         </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Typography className="q_text">How do I know if another user's collectible is available to buy or trade?</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+            The "4TRADE" indicator on a collectible means the user is willing to sell or trade. "HODL" means a user does not wish 
+            to sell that collectible. If you'd like to buy or trade, you can communicate privately with that user through the
+             email or social media links on their profile.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+
 
       </div>
     );}
