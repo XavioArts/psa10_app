@@ -3,11 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { useParams} from "react-router-dom";
 import { useNavigate } from "react-router";
 import { TextareaAutosize } from "@mui/base";
-import { Button } from "@mui/material";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import styled from "styled-components";
 import CollectionCard from "../components/CollectionCard";
 import { AuthContext } from "../providers/AuthProvider";
-
+import { theme } from "../components/Styles";
 
 const ShowcaseEdit = () => {
   const [cardChoices, setCardChoices] = useState([])
@@ -20,7 +20,6 @@ const ShowcaseEdit = () => {
   const auth = useContext(AuthContext);
   const {id} = useParams()
   const navigate = useNavigate();
-
 
 
   useEffect(() => {
@@ -129,7 +128,7 @@ const ShowcaseEdit = () => {
     
     return selectedCards.map((c)=>{
       return ( <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} size="xs"/>
-          <Button variant="contained" onClick={()=>removeCard(c)}>Remove Card</Button>
+          <Button style={{borderRadius: "40px", margin: '10px'}} variant="contained" onClick={()=>removeCard(c)}>Remove Card</Button>
         </div>
       )
     })
@@ -137,8 +136,8 @@ const ShowcaseEdit = () => {
 
   const renderCardChoices = () => {
     return cardChoices.map((c)=>{
-      return (  <div style={styles.margin}><CollectionCard key={c.id} card={{...c}} show={false} personal={false} size="xs" />
-        <Button variant="contained" onClick={()=>addCard(c)}>Add Card</Button>
+      return (  <div className='cardsContainer' ><CollectionCard key={c.id} card={{...c}} show={false} personal={false} size="xs" />
+        <Button style={{borderRadius: "40px", margin: '10px'}} variant="contained" onClick={()=>addCard(c)}>Add Card</Button>
         </div>
       )
     })
@@ -152,31 +151,35 @@ const ShowcaseEdit = () => {
   };
 
   return (
-    <div>
+    <ThemeProvider theme={theme} >
+    <div className="messagePageContainer">
       <h1>Edit Showcase</h1>
       <form  onSubmit={handleSubmit}>
-        <p>Showcase Name</p>
-        <input 
-        placeholder="Showcase Name" 
-        value={showcaseName} 
-        onChange={(e)=>{setShowcaseName(e.target.value);}}
-        maxLength= "40"
-        />
-        <p>Description</p>
-        <TextareaAutosize 
-        placeholder="Tell us about this showcase"  
-        style={{ width: 400, height: 100 }}
+        <TextField style={{margin: '10px'}}
+          label="Showcase Name" 
+          value={showcaseName} 
+          onChange={(e)=>{setShowcaseName(e.target.value);}}
+          maxLength= "40"
+          />
+       <br/>
+          <TextField
+        style={{ margin: '10px', width: 400}}
+        id="filled-multiline-flexible"
+        label="Tell us about this showcase"
+        multiline
+        rows={5}
         value={showcaseDescription} 
-        onChange={(e)=>{setShowcaseDescription(e.target.value);}}/>
+        onChange={(e)=>{setShowcaseDescription(e.target.value);}}
+        />
         
         <h2>Add Cards to Showcase</h2>
-        <div style={styles.graybox}>
+        <div className="editShowcaseCardsContainer">
           <h4>Selected Cards</h4>
           <div style={styles.cardsDiv}>
           {renderSelectedCards()}
           </div>
         </div>
-          <div style={styles.graybox}>
+          <div className="editShowcaseCardsContainer">
           <h4>Choose Cards to Add</h4>
           <div style={styles.cardsDiv}>
           {renderCardChoices()}
@@ -184,11 +187,13 @@ const ShowcaseEdit = () => {
         </div>
         <br/>
         <ButtonDiv>
-          <Button type="submit" variant="contained">Update Showcase</Button>
+          <Button style={{borderRadius: "40px"}} type="submit" variant="contained">Update Showcase</Button>
         </ButtonDiv>
         </form>
 
     </div>
+    </ThemeProvider>
+
   )
 }
 

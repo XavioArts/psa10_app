@@ -176,11 +176,11 @@ const Overview = () => {
           padding: '20px',
           margin: '15px 30px',
           color: 'rgb(77, 77, 77)',
-          backgroundColor: '#ebebeb',
+          backgroundColor: '#white',
           textAlign: "left",
           lineHeight: '5px',
           '&:hover': {
-            backgroundColor: '#dbdbdb',
+            backgroundColor: '#white',
             // opacity: [0.9, 0.8, 0.7],
             
           },
