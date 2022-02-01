@@ -96,10 +96,10 @@ const handleCollection = (e, newValue) => {
   }
 
   return(
-    <div className="messagePageContainer">
+    <div >
         {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
         {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
-            <div>
+            <div className="messagePageContainer">
                 {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
                     <>
                     {toggleCollectionList &&  <FormControl sx={{ m:1, minWidth: 250}} >
