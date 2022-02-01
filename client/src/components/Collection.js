@@ -7,7 +7,7 @@ import AddCard from "./AddCard";
 import CollectionCard from "./CollectionCard";
 import CollectionComments from "./CollectionComments";
 import CollectionLike from "./CollectionLike";
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteCollection from "./DeleteCollection";
 import EditCollection from "./EditCollection";
 
 const Collection = () => {
@@ -71,14 +71,7 @@ const Collection = () => {
           {auth.id === collection.user_id &&
             <div style={{ display: "flex", justifyContent: "right" }}>
               <EditCollection {...collection} setEditedCollection={setEditedCollection}/>
-              {/* <Button
-                onClick={() => deleteCollection(params.id)}
-                variant="contained"
-                style={{ margin: '10px' }}
-              >
-                Delete this Collection
-              </Button> */}
-              <DeleteConfirmation />
+              <DeleteCollection {...collection} deleteCollection={deleteCollection}/>
             </div>
           }
         </div>

@@ -12,6 +12,7 @@ import { Button, Modal, TextField } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { AuthContext } from "../providers/AuthProvider";
 import CollectionCommentEdit from "./CollectionCommentEdit";
+import DeleteComment from "./DeleteComment";
 
 const CollectionComments = (props) => {
   const auth = useContext(AuthContext)
@@ -86,39 +87,39 @@ const CollectionComments = (props) => {
               }
             />
           </ListItem>
-          {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment}/>}
-          {(auth.id === cc.user_id || auth.id === props.collectionId) && <button onClick={() => deleteCollectionComments(cc.id)}>Delete this comment</button>}
-          <Divider variant="inset" component="li" />
-        </div>
+          {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment} />}
+          {(auth.id === cc.user_id || auth.id === props.collectionId) && <DeleteComment {...cc} deleteCollectionComments={deleteCollectionComments} />}
+            <Divider variant="inset" component="li" />
+          </div>
         
       ))
-      )
+          )
     }
 
-  return (
-    <div>
-      <h2>Comments:</h2>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          required
-          label="Add comment"
-          variant="standard"
-          value={newContent}
-          onChange={(e) => setNewContent(e.target.value)}
-        />
-        <Button
-          type = "submit"
-          variant="contained"
-          color="success"
-        >
-          Submit &nbsp;<SendIcon />
-        </Button>
-      </form>
-      <List sx={{ width: '100%', maxWidth: "80%", bgcolor: 'background.paper' }}>
-        {renderCollectionComments()}
-      </List>
-    </div>
-  )
+          return (
+          <div>
+            <h2>Comments:</h2>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                required
+                label="Add comment"
+                variant="standard"
+                value={newContent}
+                onChange={(e) => setNewContent(e.target.value)}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="success"
+              >
+                Submit &nbsp;<SendIcon />
+              </Button>
+            </form>
+            <List sx={{ width: '100%', maxWidth: "80%", bgcolor: 'background.paper' }}>
+              {renderCollectionComments()}
+            </List>
+          </div>
+          )
 }
 
-export default CollectionComments;
+          export default CollectionComments;
