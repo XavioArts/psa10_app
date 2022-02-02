@@ -1,6 +1,7 @@
 import NotificationsNone from '@mui/icons-material/NotificationsNone';
 import React from 'react'
 import "./Footer.css"
+import Logo2 from '../2.png'
 
 const Footer = () => {
   return (
@@ -9,11 +10,13 @@ const Footer = () => {
         <div style={{ display: 'flex', justifyContent: "space-around", textAlign: "start" }}>
           {/* Column1 */}
           <div>
-            <h4>Footer</h4>
+            <a href="/" style={{ margin: '0px' }}>
+              <img src={Logo2} alt="psa10 logo" height="100px" />
+            </a>
             <h3>A new way to collect</h3>
           </div>
           {/* column2 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center" }}>
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px' }}>
             <p>
               <a href="/about" style={{ textDecoration: 'none' }}>
                 PSA 10
@@ -21,7 +24,7 @@ const Footer = () => {
             </p>
           </div>
           {/* Column3 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center" }} >
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px'  }} >
             <p>
               <a href="/faq" style={{ textDecoration: 'none' }}>
                 Info

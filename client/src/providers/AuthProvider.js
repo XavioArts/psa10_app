@@ -61,7 +61,7 @@ const AuthProvider = (props) => {
             navigate("/profile/overview");
         } catch (err) {
             console.log(err.response);
-            alert("An error occurred logging in");
+            alert("Email or Password is not correct. Please try again.");
         }
     };
 

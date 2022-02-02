@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from '../components/Carousel';
-import useWindowSize from '../components/UseWindowSize';
 import Slide1 from '../slides/slide1.png'
 import Slide2 from '../slides/slide2.png'
 import Slide3 from '../slides/slide3.png'
@@ -11,7 +11,7 @@ import Slide5 from '../slides/slide5.png'
 import Slide6 from '../slides/slide6.png'
 
 const Welcome = (props) => {
-  const size = useWindowSize();
+  const navigate = useNavigate();
 
   const style = {
     position: 'absolute',
@@ -19,7 +19,7 @@ const Welcome = (props) => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: `900px`,
-    height: `750px`,
+    height: `800px`,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -27,8 +27,6 @@ const Welcome = (props) => {
     px: 4,
     pb: 3
   };
-
-  console.log(size.height)
 
   const slides = [
     {id: 1, image: Slide1, text: 'First let head over to you collections and create you first collection'},
@@ -64,6 +62,8 @@ const Welcome = (props) => {
           </Carousel>
         </div>
         <Button style={{marginTop: '15px'}} variant="contained" onClick={props.handleClose}>I'm ready to get started!</Button>
+        <br/>
+        <Button style={{marginTop: '15px'}} variant="contained" onClick={()=>navigate('/FAQ')}>Have more question? Check out our FAQ</Button>
       </div>
     </Box>
   )
