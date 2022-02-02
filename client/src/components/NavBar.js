@@ -127,7 +127,9 @@ const NavBar = () => {
                 LOGO
             </Typography> */}
                         <Box sx={{ mr: 2, display: { xs: 'none', md: 'flex', overflow: "hidden", maxHeight: "65px", alignItems: "center" } }} >
-                            <img src={PSA10Logo} alt="psa10 logo" height="80px" />
+                            <a href="/" style={{ textDecoration: 'none' }}>
+                                <img src={PSA10Logo} alt="psa10 logo" height="80px" />
+                            </a>
                             <Divider orientation="vertical" flexItem variant="middle" />
                         </Box>
                         {!auth.authenticated &&

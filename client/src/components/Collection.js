@@ -1,4 +1,5 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -40,12 +41,19 @@ const Collection = () => {
   }
 
   const renderCollectionCards = () => {
-    if (!collectionCards && !collection) {
-      return <p>Loading cards</p>
+    console.log(collectionCards)
+    console.log(collection)
+    if (collectionCards.length === 0) {
+      return <p style={{ textAlign: "center" }}>You don't have any collectibles, start adding some!</p>
     }
     return (
-      <div >
-        <Grid style={{ display: "flex", justifyContent: "flex-start" }} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <div>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          style={{ display:'flex', justifyContent:'center' }}
+        >
           {collectionCards.map(cc => {
             return (
               <Grid item xs="auto" sm="auto" md="auto">
@@ -61,29 +69,49 @@ const Collection = () => {
 
   return (
     <>
-          <Container style={{ alignItems: "center"}}>
-      {collection && (<div style={{ margin: "33px" }}>
+      {collection && (<div style={{ padding: "20px" }}>
         <div >
-          <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
-          <Container>
-            <CollectionLike collection={collection} setCollection={setCollection} />
-            <p>Description: {collection.description}</p>
-          </Container>
           {auth.id === collection.user_id &&
-            <div style={{ display: "flex", justifyContent: "right" }}>
-              <EditCollection {...collection} setEditedCollection={setEditedCollection}/>
-              <DeleteCollection {...collection} deleteCollection={deleteCollection}/>
+            <>
+              <div style={{ display: "flex", justifyContent: "right", margin: "20px" }}>
+                <EditCollection {...collection} setEditedCollection={setEditedCollection} />
+                <DeleteCollection {...collection} deleteCollection={deleteCollection} />
+              </div>
+            </>
+          }
+          <Container>
+            <h1 style={{ textAlign: "center", textTransform: 'capitalize' }}>{collection.name}</h1>
+            <CollectionLike collection={collection} setCollection={setCollection} />
+            <p><b>Description: </b>{collection.description}</p>
+          </Container>
+        </div>
+        <Box
+          style={{
+            backgroundColor: "#C4C4C4",
+            width: "80%",
+            margin: "auto",
+            paddingTop: "10px",
+            paddingBottom: "40px"
+          }}
+        >
+          {auth.id === collection.user_id &&
+            <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
+              <AddCard collectionId={params.id} addCard={addCard} />
             </div>
           }
-        </div>
-        {auth.id === collection.user_id && <AddCard collectionId={params.id} addCard={addCard} />}
-        {renderCollectionCards()}
-        <hr style={{ marginTop: "30px" }}/>
-        <CollectionComments collectionId={collection.user_id} />
-      </div>)}
+          {renderCollectionCards()}
+        </Box>
+        <hr />
+        <Container>
+          <CollectionComments collectionId={collection.user_id} />
         </Container>
+      </div>)}
     </>
   )
+}
+
+const collectionBox = {
+  bgcolor: "#90BDEE"
 }
 
 export default Collection;

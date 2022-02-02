@@ -15,7 +15,7 @@ const Footer = () => {
           {/* column2 */}
           <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center" }}>
             <p>
-              <a href="/" style={{ textDecoration: 'none' }}>
+              <a href="/about" style={{ textDecoration: 'none' }}>
                 PSA 10
               </a>
             </p>
