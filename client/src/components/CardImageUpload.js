@@ -16,6 +16,7 @@ const CardImageUpload = (props) => {
     const getCard = async (e) => {
         try {
             let res = await axios.get(`/api/cards/${id}`);
+            console.log(res.data.front_image)
             setCard(res.data);
         } catch (err) {
             console.log(err.response);
@@ -60,9 +61,7 @@ const CardImageUpload = (props) => {
     }
 
     useEffect(()=>{
-        if (!submitted && !setSubmitted && !setUpload) {
-            getCard();
-        }
+        getCard();
     }, [])
 
     // const handleUpload = async (e) => {
@@ -124,7 +123,7 @@ const CardImageUpload = (props) => {
         <CenteredDiv>
                 <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload for each side" >
             {/* <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
-                <div>
+            <div>
             <h1>Upload A Collectible</h1>
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
             {failed && <Alert severity="error" >Failed! Please select a valid image for each side.</Alert>}
