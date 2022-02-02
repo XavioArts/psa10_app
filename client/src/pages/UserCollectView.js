@@ -44,7 +44,7 @@ const UserCollectView = () => {
         >
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={12} sm={6} md={4} lg={3} style={{paddingBottom: "20px"}}>
+              <Grid item xs={12} sm={6} md={4} lg={3} style={{paddingBottom: "40px"}}>
                 <CollectionCard key={cc.id} card={{...cc}} show={true} personal={false} user={user} size="medium" />
               </Grid>
             )
@@ -82,11 +82,10 @@ const UserCollectView = () => {
           }}
         >
           {renderCollectionCards()}
-        </Box>
-        <hr />
-        <Container style ={{ padding: "20px 50px 50px 50px", backgroundColor: "#f7f7f7", borderRadius: "40px"}}>
+        <div style ={{ padding: "20px 50px 50px 50px", backgroundColor: "#f7f7f7", borderRadius: "40px"}}>
           <CollectionComments collectionId={collection.user_id} />
-        </Container>
+        </div>
+        </Box>
       </div>)}
     </>
   )
