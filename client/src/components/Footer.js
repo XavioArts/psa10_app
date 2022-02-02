@@ -9,27 +9,27 @@ const Footer = () => {
       <div className="container">
         <div style={{ display: 'flex', justifyContent: "space-around", textAlign: "start" }}>
           {/* Column1 */}
-          <div>
-            <a href="/" style={{ margin: '0px' }}>
-              <img src={Logo2} alt="psa10 logo" height="50px" />
+          <div style={{ paddingBottom: '2%' }}>
+            <a href="/" style={{ margin: '-25px' }}>
+              <img src={Logo2} alt="psa10 logo" height="90px" />
             </a>
-            <h3>A new way to collect</h3>
+            <h2>A new way to collect</h2>
           </div>
           {/* column2 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px' }}>
-            <p>
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '95px', paddingLeft: '10%' }}>
+            <h4>
               <a href="/about" style={{ textDecoration: 'none' }}>
                 PSA 10
               </a>
-            </p>
+            </h4>
           </div>
           {/* Column3 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px' }} >
-            <p>
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '95px' }} >
+            <h4>
               <a href="/faq" style={{ textDecoration: 'none' }}>
                 Info
               </a>
-            </p>
+            </h4>
           </div>
         </div>
         <hr />
