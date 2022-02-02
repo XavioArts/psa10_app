@@ -1,10 +1,9 @@
 import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
-import { Avatar, Button, Card, CardContent, Stack, Typography, Paper, ThemeProvider } from '@mui/material';
+import { Button, Card, CardContent, Stack, Typography, Paper, ThemeProvider } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../components/Styles';
-import Footer from '../components/Footer';
 
 const LandingPage = () => {
   const navigate = useNavigate();

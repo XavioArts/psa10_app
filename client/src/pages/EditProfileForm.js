@@ -2,8 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
 import ProfileImageUpload from "../components/ProfileImageUpload";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { theme } from '../components/Styles';
 
 
 const EditUser = (props) => {
@@ -287,51 +288,60 @@ const EditUser = (props) => {
   }
 
   return (
-    <div style={{ position: 'relative', left: '15%', marginTop: '40px' }}>
+    <ThemeProvider theme={theme} >
       <div>
-        <h1>Edit My Profile</h1>
-        <p>You can set preferred display name and manage other personal settings.</p>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: 20, marginTop: '40px' }}>
         <div>
-          <ProfileImageUpload />
+          <h1 style={{textAlign: "center"}} >Edit my profile</h1>
+          <p style={{textAlign: "center"}}>You can set preferred display name and manage other personal settings.</p>
         </div>
-        <div>
-          <h3 style={{ margin: '10px', marginBottom: '20px' }}>Account Info</h3>
-          <form onSubmit={handleSubmit}>
-            {handleFirstNameError()}
-            {handleLastNameError()}
-            <br />
-            {handleNicknameError()}
-            <br />
-            {handleEmailerror()}
-            <br />
-            <TextField
-              style={{ margin: '10px', width: 400 }}
-              id="filled-multiline-flexible"
-              label="Tell Us About Yourself"
-              multiline
-              rows={5}
-              value={about}
-              onChange={(e) => { setAbout(e.target.value); }}
-            />
-            <h3 style={{ margin: '10px', marginBottom: '20px' }}>Social Media Links</h3>
-            <p style={{ margin: '10px', lineHeight: '25px' }}>{'To add social media links, copy your profile url from the address bar.'}<br style={{ margin: '5px' }} />{'It must contain the "https://" at the beginning'}</p>
-            <br />
-            {handleDiscordError()}
-            <br />
-            {handleTwitterError()}
-            <br />
-            {handleFacebookError()}
-            <br />
-            {handleInstagramError()}
-            <br />
-            <Button style={{ margin: '10px' }} variant="contained" type="submit" >Submit</Button>
-            <Button style={{ margin: '10px', color: 'grey' }} variant="text" onClick={() => { handleClearClick() }}>{<HighlightOffIcon style={{ marginRight: '5px' }} />}Clear all</Button>
-          </form>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridGap: 20, marginTop: '40px' }}>
+          <div></div>
+          <div>
+            <ProfileImageUpload />
+          </div>
+          <div>
+            <h3 style={{ margin: '10px', marginBottom: '20px' }}>Account Info</h3>
+            <form onSubmit={handleSubmit}>
+              {handleFirstNameError()}
+              {handleLastNameError()}
+              <br />
+              {handleNicknameError()}
+              <br />
+              {handleEmailerror()}
+              <br />
+              <TextField
+                style={{ margin: '10px', width: 400 }}
+                id="filled-multiline-flexible"
+                label="Tell Us About Yourself"
+                multiline
+                rows={5}
+                value={about}
+                onChange={(e) => { setAbout(e.target.value); }}
+              />
+              <h3 style={{ margin: '10px', marginBottom: '20px' }}>Social Media Links</h3>
+              <p style={{ margin: '10px', lineHeight: '25px' }}>{'To add social media links, copy your profile url from the address bar.'}<br style={{ margin: '5px' }} />{'It must contain the "https://" at the beginning'}</p>
+              <br />
+              {handleDiscordError()}
+              <br />
+              {handleTwitterError()}
+              <br />
+              {handleFacebookError()}
+              <br />
+              {handleInstagramError()}
+              <br />
+              <Button
+                style={{ margin: '10px' }}
+                variant="contained"
+                color="primary"
+                sx={{ borderRadius: "20px", marginRight: "20px" }}
+                type="submit" >Submit</Button>
+              <Button style={{ margin: '10px', color: 'grey' }} variant="text" onClick={() => { handleClearClick() }}>{<HighlightOffIcon style={{ marginRight: '5px' }} />}Clear all</Button>
+            </form>
+          </div>
+          <div></div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 
