@@ -79,14 +79,14 @@ const Sets = () => {
                     <Button onClick={clearSearch} variant="outlined" >Clear</Button>
                 </Stack>
             </div>
-            <hr/>
+            
             {!cards && <Box sx={{width: "80vw", bgcolor: "#D7D7D7", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
                 <Icon sx={{fontSize:"150px"}} >pageview</Icon>
                 <p>There are no cards to diplay, please search for a set..</p>
             </Box>}
-            {cards && <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "20px"}} >
-                <div style={{margin: "auto"}} >
-                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            {cards && <Box sx={{width: "100vw", margin: "auto", padding: "20px", width: "80vw"}} >
+                <div >
+                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={{ display: "flex", justifyContent: "center" }}>
                         {renderCards()}
                     </Grid>
                 </div>

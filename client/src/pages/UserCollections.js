@@ -32,7 +32,7 @@ const UserCollections = (props) => {
     return collections.map((c,index) => {
       return (
         <div key={index}>
-          <h1><Link to={`/community/users/${user_id}/profile/collections/${c.id}`}>Collection Name: {c.name}</Link></h1>
+          <h3 style={{ marginRight: '30px', textTransform: 'capitalize'}} ><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/community/users/${user_id}/profile/collections/${c.id}`}> {c.name}</Link></h3>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {c.cards.slice( 0,3).map((cc) => {
               return (
@@ -50,9 +50,7 @@ const UserCollections = (props) => {
 
   return (
     <div>
-      <hr />
       {renderCollectionCards()}
-      <hr />
     </div>
   )
 };

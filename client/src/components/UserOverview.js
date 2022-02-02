@@ -71,46 +71,65 @@ const UserOverview = () => {
   };
 
   const sizeWindow = () => {
-    if (size.width <= 500) {
-      return 1; }
-    if (size.width > 500 && size.width < 900) {
-      return 2;}
-    if (size.width > 900 && size.width < 1200) {
-      return 3; }
-    if (size.width > 1200) {
-      return 4; }
-  };
+    if (size.width <= 575) {
+      // console.log(1)
+      // console.log(size.width)
+      return 1
+    }
+    if (size.width > 575 && size.width <= 720) {
+      // console.log(2)
+      // console.log(size.width)
+      return 2
+    }  if (size.width > 720 && size.width <= 950) {
+      // console.log(3)
+      // console.log(size.width)
+      return 3
+    } if (size.width > 950 && size.width <= 1150) {
+      // console.log(4)
+      // console.log(size.width)
+      return 4
+    }if (size.width > 1150 && size.width <= 1260) {
+      // console.log(5)
+      // console.log(size.width)
+      return 5
+    } if (size.width > 1260) {
+      // console.log(6)
+      // console.log(size.width)
+      return 6
+    }  
+  }
 
   const renderPrimaryShowcase = () => {
     const renderShowcaseCards = (s) => {
       console.log(s);
       return s.cards.map((c) => {
         return (
-          <div style={styles.margin} key={c.id}>
+          <div style={{margin: "10px"}} key={c.id}>
             <CollectionCard
               key={c.id}
               card={{ ...c }}
               show={true}
               personal={false}
               user={user}
-              size="medium"
+              size="small"
             />
           </div>
         );
       });
     };
     return (
-      <Box
+      <Box         
         sx={{
           maxWidth: "100vw",
-          width: "1300px",
+          width: "80%",
           height: "auto",
           borderRadius: "7px",
           padding: "20px",
-          margin: "15px 30px",
+          margin: "auto",
           color: "#272830",
           backgroundColor: "white",
-          textAlign: "center",
+          textAlign: "left",
+          lineHeight: '5px',
           "&:hover": {
             backgroundColor: "white",
           },
@@ -185,14 +204,15 @@ const UserOverview = () => {
               key={s.key}
               sx={{
                 maxWidth: "100vw",
-                width: "1300px",
+                width: "80%",
                 height: "auto",
                 borderRadius: "7px",
                 padding: "20px",
-                margin: "15px 30px",
+                margin: "auto",
                 color: "#272830",
                 backgroundColor: "white",
-                textAlign: "center",
+                textAlign: "left",
+                lineHeight: '5px',
                 "&:hover": {
                   backgroundColor: "white",
                 },
@@ -246,22 +266,23 @@ const UserOverview = () => {
       return showcases.map((s) => {
         return (
           <Box
-            key={s.key}
-            sx={{
-              maxWidth: "100vw",
-              width: "1300px",
-              height: "auto",
-              borderRadius: "7px",
-              padding: "20px",
-              margin: "15px 30px",
-              color: "rgb(77, 77, 77)",
-              backgroundColor: "#ebebeb",
-              textAlign: "center",
-              "&:hover": {
-                backgroundColor: "#dbdbdb",
-              },
-            }}
-          >
+          key={s.key}
+          sx={{
+            maxWidth: "100vw",
+            width: "80%",
+            height: "auto",
+            borderRadius: "7px",
+            padding: "20px",
+            margin: "auto",
+            color: "#272830",
+            backgroundColor: "white",
+            textAlign: "left",
+            lineHeight: '5px',
+            "&:hover": {
+              backgroundColor: "white",
+            },
+          }}
+        >
             <h3>{s.name}</h3>
             <p>{s.description}</p>
             <div >
@@ -308,42 +329,19 @@ const UserOverview = () => {
   };
 
   return (
-    <div style={styles.centered}>
+    <div >
         {primaryShowcase && 
-        <div>
-          <h3>This is my primary showcase</h3>
           <div> {renderPrimaryShowcase()}</div>
-        </div>}
-        <div>
-          <h3>These are the rest of my showcases</h3>
+        }
         {showcases && <div>{renderShowcases()}</div>}
-        </div> 
     </div>
   );
 };
 
 const styles = {
-  button: {
-    margin: "10px",
-  },
-  row: {
-    margin: "auto",
-  },
   margin: {
     margin: "10px",
   },
-  centered: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-  cardsDiv: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-
 };
 
 export default UserOverview;
