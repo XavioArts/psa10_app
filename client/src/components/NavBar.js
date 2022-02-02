@@ -1,14 +1,12 @@
-import { AppBar, Avatar, Box, Button, Container, createTheme, Divider, IconButton, InputBase, Menu, MenuItem, Paper, ThemeProvider, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Container,  Divider, IconButton, Menu, MenuItem, ThemeProvider, Toolbar, Tooltip, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import SearchIcon from '@mui/icons-material/Search';
-import { styled, alpha } from '@mui/material/styles';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PSA10Logo from '../2.png';
 import LogIn from "../pages/LogIn";
 import Searchbar from "./Searchbar";
+import { theme } from "./Styles";
 
 const NavBar = () => {
 
@@ -21,7 +19,6 @@ const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [anchorElLogin, setAnchorElLogin] = useState(null);
-    const [search, setSearch] = useState("");
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -46,86 +43,12 @@ const NavBar = () => {
         setAnchorElLogin(null);
     };
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#6569C8',
-                contrastText: '#FFFFFF',
-            },
-            secondary: {
-                main: '#90BDEE',
-                contrastText: '#FFFFFF',
-            },
-            accent: {
-                main: '#C4C4C4',
-                contrastText: '#FFFFFF',
-            },
-            white: {
-                main: '#FFFFFF',
-                contrastText: '#272830',
-            },
-            black: {
-                main: '#272830',
-                contrastText: '#FFFFFF',
-            },
-        }
-    });
-
-    // const Search = styled('div')(({ theme }) => ({
-    //   position: 'relative',
-    //   borderRadius: theme.shape.borderRadius,
-    //   backgroundColor: theme.palette.white,
-    //   '&:hover': {
-    //     backgroundColor: theme.palette.white,
-    //   },
-    //   marginLeft: 0,
-    //   width: '100%',
-    //   [theme.breakpoints.up('sm')]: {
-    //     marginLeft: theme.spacing(1),
-    //     width: 'auto',
-    //   },
-    // }));
-
-    // const SearchIconWrapper = styled('div')(({ theme }) => ({
-    //   padding: theme.spacing(0, 2),
-    //   height: '100%',
-    //   position: 'absolute',
-    //   pointerEvents: 'none',
-    //   display: 'flex',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
-    // }));
-
-    // const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    //   color: 'inherit',
-    //   '& .MuiInputBase-input': {
-    //     padding: theme.spacing(1, 1, 1, 0),
-    //     // vertical padding + font size from searchIcon
-    //     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    //     transition: theme.transitions.create('width'),
-    //     width: '100%',
-    //     [theme.breakpoints.up('sm')]: {
-    //       width: '12ch',
-    //       '&:focus': {
-    //         width: '20ch',
-    //       },
-    //     },
-    //   },
-    // }));
 
     return (
         <ThemeProvider theme={theme} >
             <AppBar position="static" color="white" >
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        {/* <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            >
-                LOGO
-            </Typography> */}
                         <Box sx={{ mr: 2, display: { xs: 'none', md: 'flex', overflow: "hidden", maxHeight: "65px", alignItems: "center" } }} >
                             <a href="/" style={{ textDecoration: 'none' }}>
                                 <img src={PSA10Logo} alt="psa10 logo" height="80px" />
@@ -246,7 +169,9 @@ const NavBar = () => {
                                     variant="contained"
                                     color="primary"
                                     sx={{ borderRadius: "20px", marginRight: "20px" }}
-                                    onClick={() => navigate("/select_collection")} >
+                                    onClick={() => navigate("/select_collection")} 
+
+                                    >
                                     Upload
                                 </Button>
 

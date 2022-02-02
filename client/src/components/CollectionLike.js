@@ -12,13 +12,13 @@ const CollectionLike = (props) => {
   const [clicked, setClicked] = useState(false);
   const [like, setLike] = useState(props.collection.likes)
   // const [likedArray, setLikedArray] = useState([]);
-  
-  useEffect(()=>{
-    if (auth.likedCollections && auth.likedCollections.filter((c)=> c === props.collection.id).length > 0) {
+
+  useEffect(() => {
+    if (auth.likedCollections && auth.likedCollections.filter((c) => c === props.collection.id).length > 0) {
       setLiked(true);
     }
-  },[]);
-  
+  }, []);
+
   // const getUser = async () => {
   //   let res = await axios.get(`/api/users/${auth.id}`)
   //   setLikedArray(res.data.liked_collections)
@@ -50,23 +50,26 @@ const CollectionLike = (props) => {
       auth.setUser(removeUserLikes.data);
       auth.setLikedCollections(removeUserLikes.data.liked_collections)
     }
-    setTimeout(()=>{setClicked(false)},700)
+    setTimeout(() => { setClicked(false) }, 700)
 
   }
 
   return (
-    <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}} >
-      <IconButton
-        onClick={handleLike}
-        disabled={clicked}
-        sx={{color: '#90BDEE'}}
-      >
-        {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
-      </IconButton>
-      <Box sx={{borderRadius: "20px", backgroundColor: "#90BDEE", color: "#FFFFFF",  width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
+    <>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
+        <IconButton
+          onClick={handleLike}
+          disabled={clicked}
+          sx={{ color: '#90BDEE' }}
+        >
+          {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+        </IconButton>
+        <p style={{ color: '#90BDEE' }}>Like &nbsp;</p>
+      <Box sx={{ borderRadius: "20px", backgroundColor: "#90BDEE", color: "#FFFFFF", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center" }} >
         <Typography variant="body2" >{like}</Typography>
       </Box>
-    </Box>
+      </Box>
+    </>
   );
 }
 

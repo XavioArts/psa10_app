@@ -64,7 +64,8 @@ const Showcase = (props) => {
     let res_id = id
     await axios.delete(`/api/showcases/${res_id}`);
     // remove from UI
-    setShowcases(showcases.filter((s) => s.showcase_id !== res_id));
+    console.log(showcases)
+    setShowcases(showcases.filter((s) => s.id !== res_id));
   };
 
   const updatePrimaryShowcase = async (id) => {
@@ -122,7 +123,7 @@ const Showcase = (props) => {
           width: '80%',
           height: 'auto',
           borderRadius: '7px',
-          padding: '20px',
+          // padding: '20px',
           margin: 'auto',
           color: '#272830',
           backgroundColor: 'white',
@@ -132,15 +133,18 @@ const Showcase = (props) => {
             backgroundColor: 'white',            
           },
         }}
-      ><h3>{s.name}</h3>
+      >
+        <div style={{margin:'10px 0px'}}>
+        <h3>{s.name}</h3>
       <p>{s.description}</p>
+      </div>
       <div >
       {s.cards.length > 4 && <Carousel show={(sizeWindow())} infiniteLoop={true} style={styles.margin}>
         {renderShowcaseCards(s)}
       </Carousel>}
       {s.cards.length === 4 && (sizeWindow() === 4) &&
           <div style={{margin: "auto"}} >
-            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid style={{display: "flex", justifyContent: "left", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
             </Grid>
           </div>}
@@ -149,7 +153,7 @@ const Showcase = (props) => {
       </Carousel>}
       {s.cards.length === 3 && (sizeWindow() >= 3) &&
           <div style={{margin: "auto"}} >
-            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid style={{display: "flex", justifyContent: "left", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
             </Grid>
           </div>}
@@ -158,7 +162,7 @@ const Showcase = (props) => {
       </Carousel>}
       {s.cards.length === 2 && (sizeWindow() >= 2) &&
           <div style={{margin: "auto"}} >
-            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid style={{display: "flex", justifyContent: "left", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
             </Grid>
           </div>}
@@ -167,7 +171,7 @@ const Showcase = (props) => {
       </Carousel>}
       {s.cards.length === 1 && (sizeWindow() >= 1) &&
           <div style={{margin: "auto"}} >
-            <Grid style={{display: "flex", justifyContent: "center", alignItems: "center"}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid style={{display: "flex", justifyContent: "left", alignItems: "center", marginTop: '10px'}} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {renderShowcaseCards(s)}
             </Grid>
           </div>}
@@ -189,11 +193,11 @@ const Showcase = (props) => {
   return (
 
     <div style={styles.centered}>
-        <div style={styles.row}>
+        <div className='flexCenterColumn'>
         <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/showcase/new`)} variant="contained">Create A New Showcase</Button>
-        </div>
         <div style={{margin: '0em 5em'}}>
           {renderShowcases()}
+        </div>
         </div>
       </div>
     

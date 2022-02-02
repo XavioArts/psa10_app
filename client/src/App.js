@@ -37,6 +37,8 @@ import SelectCollection from './components/SelectCollection';
 import SearchByName from './pages/SearchByName';
 import Faq from './pages/Faq';
 import Footer from './components/Footer';
+import { ThemeProvider } from "@mui/material";
+import { theme } from './components/Styles';
 
 function App() {
   return (

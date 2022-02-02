@@ -41,7 +41,7 @@ const SearchByName = () => {
     return (
         <div>
             {!cards && <h2>Searching collectibles..</h2>}
-            {cards && <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "20px"}} >
+            {cards && <Box sx={{width: "100vw", bgcolor: "#D7D7D7", margin: "auto", padding: "40px"}} >
                 <div style={{margin: "auto"}} >
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                         {renderCards()}

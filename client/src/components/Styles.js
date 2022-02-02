@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material";
 import styled from "styled-components";
+// import DMSansBold from '../Fonts/DMSans-Bold.tff'
 
 export const ButtonDiv = styled.div`
 margin: 10px;
@@ -48,6 +49,21 @@ export const Cover = styled.div`
   overflow: hidden;
   `;
 
+
+//   const DMSans = {
+//     fontFamily: 'DMSans',
+//     fontStyle: 'bold',
+//     fontDisplay: 'swap',
+//     fontWeight: '700',
+//     src: `
+//       local('DMSans-Bold'),
+//       local('DMSans-BoldItalic'),
+//       url(${DMSansBold}) format('ttf')
+//     `,
+//     unicodeRange:
+//       'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
+//    };
+
 export const theme = createTheme({
     palette: {
         // Primary is Violet Blue Crayola
@@ -75,5 +91,18 @@ export const theme = createTheme({
             main: '#272830',
             contrastText: '#FFFFFF',
         },
-    }
+    },
+    typography: {
+        fontFamily: [
+          'DM Sans',
+          'sans-serif',
+        ].join(','),
+      },
+    //   overrides: {
+    //     MuiCssBaseline: {
+    //       '@global': {
+    //         '@font-face': ['DM Sans'],
+    //       },
+    //     }
+    //   } 
 });
