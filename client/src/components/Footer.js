@@ -16,7 +16,7 @@ const Footer = () => {
             <h3>A new way to collect</h3>
           </div>
           {/* column2 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px' }}>
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '0px' }}>
             <p>
               <a href="/about" style={{ textDecoration: 'none' }}>
                 PSA 10
