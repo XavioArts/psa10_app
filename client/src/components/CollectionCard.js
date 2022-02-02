@@ -18,7 +18,7 @@ import CardLike from './CardLike';
 
 const CollectionCard = (props) => {
   const auth = React.useContext(AuthContext)
-  const {card, show, personal, user} = props
+  const { card, show, personal, user } = props
   const [cardData, setCardData] = React.useState(card)
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -40,7 +40,7 @@ const CollectionCard = (props) => {
   const editCard = (e, url) => {
     e.preventDefault();
     navigate(url);
-}
+  }
   const flipCard = (e) => {
     e.preventDefault();
     if (visibleImage === card.front_image) {
@@ -105,21 +105,21 @@ const CollectionCard = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px" }} key={card.id} >
-      <CardMedia
-        component="div"
-        sx={{height: findHeight(), maxHeight: "425px", borderRadius: "15px"}}
-        image={visibleImage}
-        alt={card.name}
-         >
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%"}} >
-            {props.size !== "xs" && 
-            <IconButton onClick={flipCard} sx={{background: "rgba(255,255,255,0.35)"}} >
-              <ArrowBackIosIcon sx={{fontSize: findButtonSize()}} />
-            </IconButton>}
-            <div onClick={handleOpen} style={{height: "100%", width: "100%"}} />
-            {props.size !== "xs" && <IconButton onClick={flipCard} sx={{background: "rgba(255,255,255,0.35)"}} >
-              <ArrowForwardIosIcon sx={{fontSize: findButtonSize()}} />
+      <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px" }} key={card.id} >
+        <CardMedia
+          component="div"
+          sx={{ height: findHeight(), maxHeight: "425px", borderRadius: "15px" }}
+          image={visibleImage}
+          alt={card.name}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", height: "100%" }} >
+            {props.size !== "xs" &&
+              <IconButton onClick={flipCard} sx={{ background: "rgba(255,255,255,0.75)" }} >
+                <ArrowBackIosIcon sx={{ fontSize: findButtonSize() }} />
+              </IconButton>}
+            <div onClick={handleOpen} style={{ height: "100%", width: "100%" }} />
+            {props.size !== "xs" && <IconButton onClick={flipCard} sx={{ background: "rgba(255,255,255,0.75)" }} >
+              <ArrowForwardIosIcon sx={{ fontSize: findButtonSize() }} />
             </IconButton>}
           </div>
           {card.graded === true &&
@@ -129,72 +129,72 @@ const CollectionCard = (props) => {
               </Box>
             </Box>}
         </CardMedia>
-      {show && 
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <Box sx={style}>
-          <h1>{card.name}</h1>
-          <h4>Category: {card.category}</h4>
-          <h4>Condition: {card.condition}</h4>
-          <h4>Set: {card.set}</h4>
-          <h4>Year: {card.year}</h4>
-          <h4>Card No.: {card.card_number}</h4>
-          {card.graded && <h4>Grade: {card.grade}</h4>}
-          {card.available === true && <Button variant="outlined" color="primary">
-          Available
-          </Button>}
-          {card.graded === true && <Button variant="outlined" color="warning">
-          Graded
-          </Button>}
-          {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e)=>editCard(e,`/profile/edit_card/${card.id}`)} >Edit this card</Button>}
-        </Box>
-      </Modal>}
-      {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
+        {show &&
+          <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <Box sx={style}>
+              <h1>{card.name}</h1>
+              <h4>Category: {card.category}</h4>
+              <h4>Condition: {card.condition}</h4>
+              <h4>Set: {card.set}</h4>
+              <h4>Year: {card.year}</h4>
+              <h4>Card No.: {card.card_number}</h4>
+              {card.graded && <h4>Grade: {card.grade}</h4>}
+              {card.available === true && <Button variant="outlined" color="primary">
+                Available
+              </Button>}
+              {card.graded === true && <Button variant="outlined" color="warning">
+                Graded
+              </Button>}
+              {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
+            </Box>
+          </Modal>}
+        {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
         <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
         </Box>
       </Box> */}
-      {props.size !== "xs" && 
-      <>
-      <Box sx={{margin: "10px 0px 0px 0px", display: 'flex', alignItems: "center", justifyContent: "space-between"}} >
-        <Typography sx={{ ml: '15px', textTransform: 'capitalize', fontWeight:"bold", fontSize: findFontSize()}}>
-          {card.name}
-        </Typography>
-        {card.available && <Button variant="contained" color="primary" size="small" sx={{mr: "15px"}} >4trade</Button>}
-        {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{mr: "15px"}} >hodl</Button>}
-      </Box>
-      <CardActions disableSpacing >
-          <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
-          <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image}/>
-          <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}} >
-            {/* <IconButton aria-label="like">
+        {props.size !== "xs" &&
+          <>
+            <Box sx={{ margin: "10px 0px 0px 0px", display: 'flex', alignItems: "center", justifyContent: "space-between" }} >
+              <Typography sx={{ ml: '15px', textTransform: 'capitalize', fontWeight: "bold", fontSize: findFontSize() }}>
+                {card.name}
+              </Typography>
+              {card.available && <Button variant="contained" color="primary" size="small" sx={{ mr: "15px" }} >4trade</Button>}
+              {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{ mr: "15px" }} >hodl</Button>}
+            </Box>
+            <CardActions disableSpacing >
+              <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }} >
+                <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image} />
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }} >
+                  {/* <IconButton aria-label="like">
               <FavoriteIcon />
             </IconButton> */}
-            <CardLike {...card} setCard={setCard} />
-            <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
-              <p>{cardData.likes}</p>
+                  <CardLike {...card} setCard={setCard} />
+                  <Box sx={{ borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center" }} >
+                    <p>{cardData.likes}</p>
+                  </Box>
+                </Box>
+                {!card.showcase && <IconButton disableRipple sx={{ mr: 1 }} aria-label="trophy">
+                  <EmojiEventsIcon />
+                </IconButton>}
+                {card.showcase && <IconButton disableRipple sx={{ mr: 1 }} aria-label="trophy">
+                  <EmojiEventsIcon color="secondary" />
+                </IconButton>}
+              </Box>
+            </CardActions>
+          </>}
+        {props.size === "xs" &&
+          <CardContent>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }} >
+              <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image} />
+              {card.available && <Button variant="contained" color="primary" size="small" sx={{ mr: "15px" }} >4trade</Button>}
+              {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{ mr: "15px" }} >hodl</Button>}
             </Box>
-          </Box>
-        {!card.showcase && <IconButton disableRipple sx={{mr: 1}} aria-label="trophy">
-          <EmojiEventsIcon  />
-        </IconButton>}
-        {card.showcase && <IconButton disableRipple sx={{mr: 1}} aria-label="trophy">
-          <EmojiEventsIcon color="secondary" />
-        </IconButton>}
-        </Box>
-      </CardActions>
-      </>}
-      {props.size === "xs" && 
-      <CardContent>
-        <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%"}} >
-          <Avatar sx={{ width: 30, height: 30 }} src={user ? user.image : auth.image}/>
-          {card.available && <Button variant="contained" color="primary" size="small" sx={{mr: "15px"}} >4trade</Button>}
-        {!card.available && <Button variant="outlined" color="secondary" size="small" sx={{mr: "15px"}} >hodl</Button>}
-        </Box>
-      </CardContent>
-      }
-    </Card>
+          </CardContent>
+        }
+      </Card>
     </ThemeProvider>
   );
 }
