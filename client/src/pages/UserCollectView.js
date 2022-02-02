@@ -1,14 +1,17 @@
-import { Grid } from "@mui/material";
+import { Grid, Container, Paper } from "@mui/material";
+import { Box } from "@mui/system";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import CollectionCard from "../components/CollectionCard";
 import CollectionComments from "../components/CollectionComments";
 import CollectionLike from "../components/CollectionLike";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const UserCollectView = () => {
 
+  const auth = useContext(AuthContext);
   const params = useParams()
   const [collectionCards, setCollectionCards] = useState(null)
   const [collection, setCollection] = useState(null)
@@ -29,15 +32,19 @@ const UserCollectView = () => {
   }
 
   const renderCollectionCards = () => {
-    if (!collectionCards) {
-      return <p>Loading cards</p>
+    if (collectionCards.length === 0) {
+      return <p style={{ textAlign: "center" }}>You don't have any collectibles, start adding some!</p>
     }
     return (
       <div>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid
+          container
+          spacing={1}
+          columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
+        >
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={2} sm={4} md={4}>
+              <Grid item xs={12} sm={6} md={4} lg={3} style={{paddingBottom: "40px"}}>
                 <CollectionCard key={cc.id} card={{...cc}} show={true} personal={false} user={user} size="medium" />
               </Grid>
             )
@@ -52,15 +59,35 @@ const UserCollectView = () => {
   }
 
   return (
-    <div>
-      <Link to={`/community/users/${params.user_id}/profile/collections`} >Back to Collections</Link>
-      <h1>{collection.name}</h1>
-      <h3>Category: {collection.category}</h3>
-      <p>Description: {collection.description}</p>
-      <CollectionLike collection={collection} setCollection={setCollection} />
-      {renderCollectionCards()}
-      <CollectionComments />
-    </div>
+    <>
+      {collection && (<div style={{ padding: "20px" }}>
+        <div>
+          <Box
+          style={{
+            width: "50%",
+            margin: "auto",
+          }}
+        >
+            <h1 style={{ textAlign: "center", textTransform: 'capitalize' }}><b>{collection.name}</b></h1>
+            <p>{collection.description}</p>
+            <CollectionLike collection={collection} setCollection={setCollection} />
+          </Box>
+        </div>
+        <Box
+          style={{
+            width: "85%",
+            margin: "auto",
+            paddingTop: "10px",
+            paddingBottom: "30px",
+          }}
+        >
+          {renderCollectionCards()}
+        <div style ={{ padding: "20px 50px 50px 50px", backgroundColor: "#f7f7f7", borderRadius: "40px"}}>
+          <CollectionComments collectionId={collection.user_id} />
+        </div>
+        </Box>
+      </div>)}
+    </>
   )
 }
 

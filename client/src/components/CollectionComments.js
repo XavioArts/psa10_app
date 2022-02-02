@@ -39,7 +39,6 @@ const CollectionComments = (props) => {
   const deleteCollectionComments = async (id) => {
     await axios.delete(`/api/collections/${params.id}/collection_comments/${id}`)
     setCollectionComments(collectionComments.filter((cc) => cc.id !== id));
-    navigate(`/profile/collections/${params.id}`)
   }
 
   const addComment = (collectionComment) => {
@@ -59,22 +58,31 @@ const CollectionComments = (props) => {
     if (collectionComments.length === 0) {
       return (
         <div>
-          <p style={{textAlign: "center"}}>Be the first one to leave a comment!</p>
+          <p style={{ textAlign: "center" }}>Be the first one to leave a comment!</p>
         </div>
       )
     }
     return (
       collectionComments.map((cc) => (
         <div key={cc.id}>
-
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Avatar alt="userNickname" src={cc.image} />
             </ListItemAvatar>
             <ListItemText
-              primary={cc.nickname}
+              primary={
+                <>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    color="text.primary"
+                  >
+                    <b>{cc.nickname}</b>
+                  </Typography>
+                </>
+              }
               secondary={
-                <React.Fragment>
+                <>
                   <Typography
                     sx={{ display: 'inline' }}
                     component="span"
@@ -83,50 +91,49 @@ const CollectionComments = (props) => {
                   >
                     {cc.content}
                   </Typography>
-                </React.Fragment>
+                </>
               }
             />
+            {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment} />}
+            {(auth.id === cc.user_id || auth.id === props.collectionId) && <DeleteComment {...cc} deleteCollectionComments={deleteCollectionComments} />}
           </ListItem>
-          {auth.id === cc.user_id && <CollectionCommentEdit {...cc} setEditedComment={setEditedComment} />}
-          {(auth.id === cc.user_id || auth.id === props.collectionId) && <DeleteComment {...cc} deleteCollectionComments={deleteCollectionComments} />}
-            <Divider variant="inset" component="li" />
-          </div>
-        
-      ))
-          )
-    }
+          <Divider variant="inset" component="li" />
+        </div>
 
-          return (
-          <div>
-            <h2>Comments:</h2>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                required
-                label="Add comment"
-                fullWidth
-                multiline
-                rows={2}
-                variant="standard"
-                value={newContent}
-                onChange={(e) => setNewContent(e.target.value)}
-              />
-              <br />
-              <br />
-              <div style={{ display: "flex", justifyContent: "right" }}>
-              <Button
-                type="submit"
-                variant="contained"
-                style = {{backgroundColor: "#6569C8"}}
-              >
-                Send &nbsp;<SendIcon />
-              </Button>
-              </div>
-            </form>
-            <List sx={{ width: '100%' }}>
-              {renderCollectionComments()}
-            </List>
-          </div>
-          )
+      ))
+    )
+  }
+
+  return (
+    <div>
+      <h2>Comments:</h2>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          required
+          label="Add comment"
+          fullWidth
+          multiline
+          rows={2}
+          value={newContent}
+          onChange={(e) => setNewContent(e.target.value)}
+        />
+        <br />
+        <br />
+        <div style={{ display: "flex", justifyContent: "right" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: "#6569C8", borderRadius: "40px", }}
+          >
+            Send &nbsp;<SendIcon />
+          </Button>
+        </div>
+      </form>
+      <List sx={{ width: '100%' }}>
+        {renderCollectionComments()}
+      </List>
+    </div>
+  )
 }
 
-          export default CollectionComments;
+export default CollectionComments;

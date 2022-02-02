@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Box } from "@mui/system";
-import { Modal, TextField } from "@mui/material";
+import { Button, IconButton, Modal, TextField } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router";
+import EditIcon from '@mui/icons-material/Edit';
 
 const CollectionCommentEdit = (props) => {
   const { content, collection_id, user_id, id, setEditedComment } = props
@@ -29,7 +30,7 @@ const CollectionCommentEdit = (props) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 350,
+    width: 400,
     bgcolor: '#FFFFFF',
     border: '2px solid #000',
     boxShadow: 24,
@@ -38,29 +39,29 @@ const CollectionCommentEdit = (props) => {
 
   return (
     <div>
-      <button
+      <IconButton
         onClick={handleOpen}
         style={{ margin: '10px' }}
       >
-        Edit
-      </button>
+        <EditIcon />
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
       >
         <Box sx={style}>
           <form onSubmit={handleEdit}>
-            <h2>Edit this Comment</h2>
+            <h2 style = {{textAlign:"center"}}>Edit this Comment</h2>
             <TextField
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              style={{ width: 300 }}
+              fullWidth
               multiline
-              rows={4}
+              rows={5}
             />
-            <br />
-            <br />
-            <button type="submit">Edit Comment</button>
+            <div style={{ display: "flex", justifyContent: "right" }}>
+            <Button type="submit" variant="contained" style={{borderRadius: "40px", marginTop: "20px"}}>Edit Comment</Button>
+            </div>
           </form>
         </Box>
       </Modal>

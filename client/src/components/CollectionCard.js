@@ -105,7 +105,7 @@ const CollectionCard = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px" }} key={card.id} >
+      <Card sx={{ maxWidth: "300px", width: findWidth(), borderRadius: "15px", margin:"auto" }} key={card.id} >
         <CardMedia
           component="div"
           sx={{ height: findHeight(), maxHeight: "425px", borderRadius: "15px" }}
