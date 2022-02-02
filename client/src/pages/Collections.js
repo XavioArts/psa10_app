@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FlexColumnDiv, PageDiv } from '../components/Styles';
 import CollectionNew from './CollectionNew';
 import { useNavigate } from "react-router";
+import { Box } from '@mui/system';
 
 
 const Collections = () => {
@@ -32,7 +33,7 @@ const Collections = () => {
         <>
         <div key={index}>
           <div className='flexLeft'>
-          <h3 style={{ marginRight: '30px'}}><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/profile/collections/${c.id}`}> {c.name}</Link></h3>
+          <h3 style={{ marginRight: '30px', textTransform: 'capitalize'}}><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/profile/collections/${c.id}`}> {c.name}</Link></h3>
           <Button  onClick={()=>navigate(`/profile/collections/${c.id}`)} style={{borderRadius: "40px", margin: '10px 0px' }}  component="span">View Full Collection
           </Button>
           </div>
@@ -54,14 +55,14 @@ const Collections = () => {
 
 
   return (
-    <PageDiv>
+    <Box sx={{width: "80vw", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
       <div style={{ display: "flex", justifyContent: "center" }}>
         <CollectionNew />
       </div>
       <FlexColumnDiv>
         {renderCollectionCards()}
       </FlexColumnDiv>
-    </PageDiv>
+    </Box>
   )
 };
 

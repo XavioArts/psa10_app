@@ -135,7 +135,7 @@ const Protected = () => {
                 )}
                 <h2>{user.nickname}</h2>
                 <p className="profileTextDate">Member Since {DateTime.fromISO(user.created_at).toFormat("LLLL yyyy")}</p>
-                <p className="profileText">{user.email}</p>
+                <p onClick={() => window.location = `mailto:${auth.email}`} className="profileEmailText"><EmailIcon style={{margin: "2px", position: "relative", top:"6px", fontSize:"medium"}}/> {user.email}</p>
                 <p className="profileText">{user.about}</p>
                 <UserContactIcons {...user} />
               </Paper>
@@ -162,10 +162,10 @@ const Protected = () => {
             {!user && (
               <>
               <div className="profileNavContainer">
-                <NavLink className="profileNavText" to="/profile/overview" activeClassName="active"> Overview</NavLink>
-                <NavLink className="profileNavText" to="/profile/collections" activeClassName="active"> Collections </NavLink>
-                <NavLink className="profileNavText" to="/profile/sets" activeClassName="active"> Sets </NavLink>
-                <NavLink className="profileNavText" to="/profile/showcases" activeClassName="active"> Showcases </NavLink>
+                <NavLink className="profileNavText" to="/profile/overview" activeClassName="active">Overview</NavLink>
+                <NavLink className="profileNavText" to="/profile/collections" activeClassName="active">Collections</NavLink>
+                <NavLink className="profileNavText" to="/profile/sets" activeClassName="active">Sets</NavLink>
+                <NavLink className="profileNavText" to="/profile/showcases" activeClassName="active">Showcases</NavLink>
               </div>
                  <hr style={{marginTop: '30px'}}/>
                 </>

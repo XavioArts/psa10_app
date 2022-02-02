@@ -77,34 +77,34 @@ const Showcase = (props) => {
     }
   }
 
-const sizeWindow = () => {
-  if (size.width <= 575) {
-    // console.log(1)
-    // console.log(size.width)
-    return 2
+  const sizeWindow = () => {
+    if (size.width <= 575) {
+      // console.log(1)
+      // console.log(size.width)
+      return 1
+    }
+    if (size.width > 575 && size.width <= 720) {
+      // console.log(2)
+      // console.log(size.width)
+      return 2
+    }  if (size.width > 720 && size.width <= 950) {
+      // console.log(3)
+      // console.log(size.width)
+      return 3
+    } if (size.width > 950 && size.width <= 1150) {
+      // console.log(4)
+      // console.log(size.width)
+      return 4
+    }if (size.width > 1150 && size.width <= 1260) {
+      // console.log(5)
+      // console.log(size.width)
+      return 5
+    } if (size.width > 1260) {
+      // console.log(6)
+      // console.log(size.width)
+      return 6
+    }  
   }
-  if (size.width > 575 && size.width <= 625) {
-    // console.log(2)
-    // console.log(size.width)
-    return 3
-  }  if (size.width > 625 && size.width <= 780) {
-    // console.log(2)
-    // console.log(size.width)
-    return 3
-  } if (size.width > 780 && size.width <= 910) {
-    // console.log(3)
-    // console.log(size.width)
-    return 4
-  }if (size.width > 911 && size.width <= 1260) {
-    // console.log(3)
-    // console.log(size.width)
-    return 5
-  } if (size.width > 1260) {
-    // console.log(4)
-    // console.log(size.width)
-    return 6
-  }  
-}
 
 
   const renderShowcases = () => {
@@ -119,11 +119,11 @@ const sizeWindow = () => {
         <Box key={s.key}
         sx={{
           maxWidth: '100vw',
-          width: '1300px',
+          width: '80%',
           height: 'auto',
           borderRadius: '7px',
           padding: '20px',
-          margin: '15px 30px',
+          margin: 'auto',
           color: '#272830',
           backgroundColor: 'white',
           textAlign: "left",
@@ -187,6 +187,7 @@ const sizeWindow = () => {
   
 
   return (
+
     <div style={styles.centered}>
         <div style={styles.row}>
         <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/showcase/new`)} variant="contained">Create A New Showcase</Button>
@@ -195,6 +196,7 @@ const sizeWindow = () => {
           {renderShowcases()}
         </div>
       </div>
+    
   )
 
 }
@@ -204,7 +206,7 @@ const styles = {
     margin: '10px',
   },
   row: {
-    margin: '10px 200px 0px 200px'
+    margin: '10px '
   },
   margin: {
     margin: '10px'
