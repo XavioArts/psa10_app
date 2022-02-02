@@ -223,7 +223,7 @@ const NavBar = () => {
                                         horizontal: 'right',
                                     }}
                                     open={Boolean(anchorElLogin)}
-                                    onClose={handleCloseLoginMenu}
+                                    onBackdropClick={handleCloseLoginMenu}
                                 >
                                     <Box sx={{ marginLeft: '25px', marginRight: '25px', marginBottom: '10px' }}>
                                         <LogIn />
