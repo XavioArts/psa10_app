@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import Box from "@mui/material/Box";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { theme } from '../components/Styles';
 
 
 const EditTopic = (props) => {
@@ -123,14 +124,20 @@ const EditTopic = (props) => {
     p: 4,
   };
   return (
+    <ThemeProvider theme={theme} >
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
           {handleTitleError()}
           <br/>
           {handleBobyError()}
-            <Button style={{marginLeft: '10px', marginTop: '25px'}} variant="contained" type='submit'>Update</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: "20px", margin: "20px" }}
+              type='submit'>Update</Button>
           </form>
         </Box>
+    </ThemeProvider>
   );
 };
 

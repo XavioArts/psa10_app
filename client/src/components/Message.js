@@ -94,8 +94,16 @@ const Message = (props) => {
             <h6 style={{margin: '5px'}}>Posted by {message.user_nickname}</h6>
             {handleMessageError()}            
             <br/>
-            {auth.id === message.user_id &&<Button variant="contained" type='submit'>Update</Button>}
-            {auth.id === message.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
+            {auth.id === message.user_id &&<Button 
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: "20px", marginTop: "20px", marginBottom: "20px", marginLeft: "10px" }}
+              type='submit'>Update</Button>}
+            {auth.id === message.user_id &&<Button 
+              variant="outlined"
+              color="black"
+              sx={{ borderRadius: "20px", marginTop: "20px", marginBottom: "20px", marginLeft: "10px", ':hover': {bgcolor: '#D61A3C', borderColor: 'transparent', color: '#FFFFFF'}}}
+              onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
         </form>
       </Paper>
       )
@@ -103,9 +111,17 @@ const Message = (props) => {
     return(
       <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', marginTop: '25px', marginRight: '20px', marginLeft: '20px', marginBottom: '20px' }}>
         <h6 style={{margin: '5px'}}>Posted by {message.user_nickname}</h6>
-        <h3 style={{margin: '5px', marginTop: '15px'}}>{message.content}</h3>
-        {auth.id === message.user_id &&<Button variant="contained" onClick={handleEditClicked}>Edit</Button>}
-        {auth.id === message.user_id &&<Button style={{ backgroundColor: 'red'}} variant="contained" onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
+        <h3 style={{margin: '5px', marginTop: '15px', marginLeft: '15px'}}>{message.content}</h3>
+        {auth.id === message.user_id &&<Button
+          variant="outlined"
+          color="black"
+          sx={{ borderRadius: "20px", marginTop: "20px", marginBottom: "20px", marginLeft: "10px" }}
+          onClick={handleEditClicked}>Edit</Button>}
+        {auth.id === message.user_id &&<Button
+          variant="outlined"
+          color="black"
+          sx={{ borderRadius: "20px", marginTop: "20px", marginBottom: "20px", marginLeft: "10px", ':hover': {bgcolor: '#D61A3C', borderColor: 'transparent', color: '#FFFFFF'}}}
+          onClick={()=>props.deleteMessage(message.id)}>Delete</Button>}
       </Paper>
     )
   }
