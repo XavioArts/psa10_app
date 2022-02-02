@@ -59,7 +59,6 @@ function App() {
                 {/* The community section needs to not be in requireAuth because
               it cant determine the difference in protected when both are in there */}
                 <Route path="/community" element={<Community />} />
-                <Route path="/faq" element={<Faq />} />
                 <Route path="/community/users/:user_id/profile" element={<Protected />}>
                   <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
                   <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
