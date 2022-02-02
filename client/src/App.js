@@ -55,6 +55,7 @@ function App() {
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/welcome" element={<Welcome />} />
+                <Route path="/faq" element={<Faq />} />
                 {/* The community section needs to not be in requireAuth because
               it cant determine the difference in protected when both are in there */}
               <Route path="/community" element={<Community />} />
@@ -93,7 +94,6 @@ function App() {
                   <Route path="/cards/:id/image" element={<CardImageUpload />} />
                   <Route path="/users/:id/edit" element={<EditProfileForm />} />
                   <Route path="/select_collection" element={<SelectCollection />} />
-                  <Route path="/faq" element={<Faq />} />
                 </Route>
               </Route>
             </Routes>
