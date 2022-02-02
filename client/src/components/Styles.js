@@ -75,5 +75,11 @@ export const theme = createTheme({
             main: '#272830',
             contrastText: '#FFFFFF',
         },
-    }
+    },
+    typography: {
+        fontFamily: [
+          'DM Sans',
+          'sans-serif',
+        ].join(','),
+      } 
 });

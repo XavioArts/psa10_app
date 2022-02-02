@@ -87,7 +87,7 @@ const ProfileImageUpload = () => {
                 <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload" >
                     <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />
                 </Tooltip>
-                <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+                <Button style={{borderRadius:'40px', marginTop: '10px'}}disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
             </label>
         </div>
     )
