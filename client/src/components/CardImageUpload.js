@@ -123,7 +123,8 @@ const CardImageUpload = (props) => {
     return (
         <CenteredDiv>
                 <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload for each side" >
-            <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
+            {/* <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
+                <div>
             <h3>Upload your images</h3>
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
             {failed && <Alert severity="error" >Failed! Please select a valid image for each side.</Alert>}
@@ -166,10 +167,11 @@ const CardImageUpload = (props) => {
                     <label>Upload back image of card:</label>
                     <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>onChangeFuncBack(e.target.value)} />
                     <br/>
-                    <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+                    <Button style={{borderRadius: "40px"}} disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
                 </label>
             </div>
-                </Paper>
+                {/* </Paper> */}
+                </div>
                 </Tooltip>
         </CenteredDiv>
     )

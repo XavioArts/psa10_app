@@ -19,7 +19,6 @@ const SelectCollection = (props) => {
   const [collectionNew, setCollectionNew] = useState(false)
   const [collectionId, setCollectionId] = useState("")
   const [category, setCategory] = useState("");
-  const [chosenCategory, setChosenCategory] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [collectionCards, setCollectionCards] = useState(null)
@@ -54,11 +53,10 @@ const SelectCollection = (props) => {
 const handleCollection = (e, newValue) => {
   setChosenCollection(newValue)
   setCollection(newValue)
-  if(toggleCollectionList === true && collection){
+  if(newValue){
   let collection_id = collectionsObj.filter(c=> {if (c.name===newValue) { return c.id }})
   setCollectionId(collection_id[0].id)
   console.log("collection_id", collection_id[0].id)
-  setToggleCollectionList(false)
   return collection_id }
 }
 
@@ -79,7 +77,6 @@ const handleCollection = (e, newValue) => {
     } catch (err) {
       console.log(err)
     }
-    // the collection data doesn't seem to exist soon enough to show the page??
   }
 
 
@@ -99,7 +96,7 @@ const handleCollection = (e, newValue) => {
 
   return(
     <ThemeProvider theme={theme} >
-    <div >
+    <div className="flexLeft">
         {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
         {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
             <div className="messagePageContainer">
@@ -117,10 +114,12 @@ const handleCollection = (e, newValue) => {
                                 />
                             </FormControl>}
                             <br/>
-                           {collection && <div><Button style={{borderRadius: "40px"}} onClick={()=>chooseAnotherCollectionToggle()} variant="contained" color="primary" >Choose Another Collection</Button></div>}
-                           {!collection && <div><Button style={{borderRadius: "40px"}} onClick={()=>createCollectionToggle()} variant="contained" color="primary">Create New Collection</Button></div>}
+                           {/* {!collection && <div><Button style={{borderRadius: "40px"}} onClick={()=>chooseAnotherCollectionToggle()} variant="outlined" color="primary" >Choose Another Collection</Button></div>} */}
+                           {!collection && !collectionNew && <div><Button style={{borderRadius: "40px"}} onClick={()=>createCollectionToggle()} variant="contained" color="primary">Create New Collection</Button></div>}
                             </>
                             {collectionNew === true &&   
+
+
                               <>
                                 <Container maxWidth="sm">
                                   <FormControl>
@@ -133,29 +132,30 @@ const handleCollection = (e, newValue) => {
                                       autoComplete="off"
                                     >
                                       <div>
+                                        <h2>Create A New Collection</h2>
                                         <TextField
+                                          style={{margin: '10px'}}
                                           required
                                           id="standard-required"
                                           label="Collection Name"
                                           value={name}
-                                          variant="standard"
                                           onChange={(e) => setName(e.target.value)}
                                         />
                                       </div>
                                       <TextField
-                                        id="standard-multiline-static"
+                                        id="filled-multiline-flexible"
                                         label="Description"
                                         multiline
                                         rows={5}
-                                        variant="standard"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                       />
                                       <br />
                                       <Button
+                                        style={{borderRadius: "40px"}}
                                         onClick={handleCollectionSubmit}
                                         variant="contained"
-                                        color="success"
+                                        color="primary"
                                       >
                                         Submit
                                       </Button>
@@ -165,7 +165,8 @@ const handleCollection = (e, newValue) => {
                               </>
                           }
                             {collection && <>
-                            <p>You selected collection {collection}</p>
+                            <h3>You're now able to add to your {collection} collection</h3>
+                            <p className='descriptionText'>Start adding collectibles!</p>
                             <AddCard collectionId= {collectionId} addCard={addCard}/></>}
                             {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
                             {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}

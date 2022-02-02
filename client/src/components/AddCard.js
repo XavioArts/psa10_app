@@ -1,4 +1,4 @@
-import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip } from "@mui/material";
+import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { Navigate } from "react-router";
@@ -6,6 +6,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import CardImageUpload from "./CardImageUpload";
 import { categories, conditions } from "../components/FormChoices";
+import { theme } from "./Styles";
+
 
 const AddCard = (props) => {
 
@@ -138,18 +140,18 @@ const AddCard = (props) => {
     }
 
     return (
-        <div>
+        <ThemeProvider theme={theme} >
+        <div >
             {success && <Alert severity="success" >Successfuly created a new collectible!</Alert>}
             {failed && <Alert severity="error" >Failed to create a new collectible!</Alert>}
-            <Box sx={{ m: 1, position: "relative" }} >
+            <Box sx={{  position: "relative",  }} >
                 <Button style={{borderRadius: "40px"}} onClick={startCreation} disabled={clicked} variant="contained" >Add a new collectible</Button>
-                <br />
                 {loading && (<LinearProgress />)}
             </Box>
+            <br/>
             {card &&
                 <div>
-
-                    {/* <Paper sx={{width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
+                    <br/>
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} submitted={submitted} setSubmitted={setSubmitted} setUpload={setUpload} />
                     <form onSubmit={handleSubmit} >
@@ -319,14 +321,16 @@ const AddCard = (props) => {
                         </div>
                         {notUploadedAlert && <Alert onClose={() => { setNotUploadedAlert(false) }} severity="error" >Please upload your images first</Alert>}
                         <Tooltip open={notUploaded} onClose={() => setNotUploaded(false)} title="Please upload your images" >
-                            <Button variant="contained" type="submit" onClick={() => finished()} >Submit</Button>
+                            <Button style={{borderRadius: "40px"}} variant="contained" type="submit" onClick={() => finished()} >Submit</Button>
                         </Tooltip>
+                    <Button style={{borderRadius: "40px"}} variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
                     </form>
-                    <Button variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
                     {/* </Paper> */}
                 </div>
             }
         </div>
+        </ThemeProvider>
+
     )
 };
 
