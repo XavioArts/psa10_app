@@ -107,7 +107,7 @@ const Overview = () => {
           borderRadius: '7px',
           padding: '20px',
           margin: '15px 30px',
-          color: 'rgb(77, 77, 77)',
+          color: '#272830',
           backgroundColor: 'white',
           textAlign: "left",
           lineHeight: '5px',

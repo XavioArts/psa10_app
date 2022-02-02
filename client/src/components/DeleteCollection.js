@@ -15,7 +15,7 @@ const DeleteCollection = (props) => {
       <Button
         onClick={handleOpen}
         variant="contained"
-        style={{ margin: '10px' }}
+        style={{ margin: '10px', borderRadius: '40px' }}
       >
         Delete this Collection
       </Button>

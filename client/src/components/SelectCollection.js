@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import AddCard from "./AddCard";
+import AddCardUpload from "./AddCardUpload";
 import CardImageUpload from "./CardImageUpload";
 import CollectionNew from "../pages/CollectionNew";
 import { Link } from "react-router-dom";
@@ -165,9 +165,9 @@ const handleCollection = (e, newValue) => {
                               </>
                           }
                             {collection && <>
-                            <h3>You're now able to add to your {collection} collection</h3>
+                              <p className='descriptionTextPurple'>You're now able to add to your {collection} collection</p>
                             <p className='descriptionText'>Start adding collectibles!</p>
-                            <AddCard collectionId= {collectionId} addCard={addCard}/></>}
+                            <AddCardUpload collectionId= {collectionId} addCard={addCard}/></>}
                             {/* {success && <Alert severity="success" >Successfuly uploaded collectible!</Alert>}
                             {failed && <Alert severity="error" >Failed to upload collectible!</Alert>} */}
                             {/* <Button variant="contained" type="submit" >Submit</Button> */}

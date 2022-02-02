@@ -100,7 +100,7 @@ const Protected = () => {
         <div>
         <div >
           <Cover image={coverImage()} className="profileInfo">
-          <div className="flexLeft">
+          <div className="flexLeftStats">
             {!user && (
                 <div className="leftRight">
               <Paper className="profileInfoTextBox" elevation={7}>

@@ -9,6 +9,7 @@ import { categories, conditions } from "../components/FormChoices";
 import { theme } from "./Styles";
 
 
+
 const AddCard = (props) => {
 
     const auth = useContext(AuthContext);
@@ -71,7 +72,7 @@ const AddCard = (props) => {
             try {
                 let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
                 console.log(res.data)
-                addCard(res.data);
+                // addCard(res.data);
                 setCard(null);
                 setClicked(false);
                 setFailed(false);
@@ -82,12 +83,16 @@ const AddCard = (props) => {
                 setSet("");
                 setYear(2022);
                 setCardNumber("");
+                console.log("hey")
                 setAvailable(false);
+                console.log("hi")
                 setSuccess(true);
+                console.log("success")
                 setUpload(false)
                 setTrueSubmit(false)
                 setTimeout(() => setSuccess(false), 6000);
-                navigate(`/profile/collections/${collectionId}`)
+                console.log("timeout")
+                navigate(`/profile/collections`)
                 if (submitted === true) {
                     setSubmitted(false)
                 }

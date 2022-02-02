@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import { ButtonDiv } from "./Styles";
 import CollectionCard from "./CollectionCard";
@@ -124,7 +124,7 @@ const sizeWindow = () => {
           borderRadius: '7px',
           padding: '20px',
           margin: '15px 30px',
-          color: 'rgb(77, 77, 77)',
+          color: '#272830',
           backgroundColor: 'white',
           textAlign: "left",
           lineHeight: '5px',
@@ -172,11 +172,11 @@ const sizeWindow = () => {
             </Grid>
           </div>}
       </div>
-      <ButtonDiv>
+      <div style={{margin: '10px 0px'}}>
       <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/profile/showcases/${s.id}/edit`)} variant="contained">Edit Showcase</Button>
       <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>deleteShowcase(s.id)} variant="contained">Delete Showcase</Button>
       {auth.primary_showcase !== s.id && <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>updatePrimaryShowcase(s.id)} variant="contained">Set to Primary Showcase</Button>}
-      </ButtonDiv>
+      </div>
       </Box>
  
       )
@@ -187,16 +187,14 @@ const sizeWindow = () => {
   
 
   return (
-    <div>
-      <div style={styles.centered}>
+    <div style={styles.centered}>
         <div style={styles.row}>
         <Button style={{borderRadius: "40px", margin: '10px' }} onClick={()=>navigate(`/showcase/new`)} variant="contained">Create A New Showcase</Button>
         </div>
-        <div >
+        <div style={{margin: '0em 5em'}}>
           {renderShowcases()}
         </div>
       </div>
-    </div>
   )
 
 }
