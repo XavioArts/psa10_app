@@ -69,26 +69,26 @@ const Overview = () => {
     if (size.width <= 575) {
       // console.log(1)
       // console.log(size.width)
-      return 2
+      return 1
     }
-    if (size.width > 575 && size.width <= 625) {
+    if (size.width > 575 && size.width <= 720) {
       // console.log(2)
       // console.log(size.width)
-      return 3
-    }  if (size.width > 625 && size.width <= 780) {
-      // console.log(2)
-      // console.log(size.width)
-      return 3
-    } if (size.width > 780 && size.width <= 910) {
+      return 2
+    }  if (size.width > 720 && size.width <= 950) {
       // console.log(3)
+      // console.log(size.width)
+      return 3
+    } if (size.width > 950 && size.width <= 1150) {
+      // console.log(4)
       // console.log(size.width)
       return 4
-    }if (size.width > 911 && size.width <= 1260) {
-      // console.log(3)
+    }if (size.width > 1150 && size.width <= 1260) {
+      // console.log(5)
       // console.log(size.width)
       return 5
     } if (size.width > 1260) {
-      // console.log(4)
+      // console.log(6)
       // console.log(size.width)
       return 6
     }  
@@ -102,11 +102,11 @@ const Overview = () => {
         <Box 
         sx={{
           maxWidth: '100vw',
-          width: '1300px',
+          width: '80%',
           height: 'auto',
           borderRadius: '7px',
           padding: '20px',
-          margin: '15px 30px',
+          margin: 'auto',
           color: '#272830',
           backgroundColor: 'white',
           textAlign: "left",
@@ -170,12 +170,12 @@ const Overview = () => {
         <Box key={s.key}
         sx={{
           maxWidth: '100vw',
-          width: '1300px',
+          width: '80%',
           height: 'auto',
           borderRadius: '7px',
           padding: '20px',
-          margin: '15px 30px',
-          color: 'rgb(77, 77, 77)',
+          margin: 'auto',
+          color: '#272830',
           backgroundColor: '#white',
           textAlign: "left",
           lineHeight: '5px',
