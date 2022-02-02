@@ -87,6 +87,7 @@ code {
 
 .flexLeft {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
 }
 .cardsContainer {
@@ -106,6 +107,11 @@ code {
   margin: 4px 0px;
   font-size: 13px;
   font-style: italic;
+}
+.descriptionText {
+  color: rgb(112, 112, 112);
+  margin: 10px 0px;
+  font-size: 15px;
 }
 
 .profileButton {
@@ -302,4 +308,10 @@ margin: 30px;
   padding: 20px;
   border-radius: 4px;
   margin: 10px;
+}
+
+.radio{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
