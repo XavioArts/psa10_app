@@ -18,7 +18,6 @@ const Collection = () => {
   const [collectionCards, setCollectionCards] = useState(null);
   const [collection, setCollection] = useState(null);
   const [editedCollection, setEditedCollection] = useState(false);
-  console.log(collection)
 
   useEffect(() => {
     getCollectionCards();
@@ -41,8 +40,6 @@ const Collection = () => {
   }
 
   const renderCollectionCards = () => {
-    console.log(collectionCards)
-    console.log(collection)
     if (collectionCards.length === 0) {
       return <p style={{ textAlign: "center" }}>You don't have any collectibles, start adding some!</p>
     }
@@ -52,13 +49,11 @@ const Collection = () => {
           container
           spacing={1}
           columns={{ xs: 12, sm: 12, md: 12, lg: 12 }}
-          // columns={{ xs: 4, sm: 8, md: 12 }}
-          // style={{ display:'flex', justifyContent:'center' }}
         >
           {collectionCards.map(cc => {
             return (
-              <Grid item xs={12} sm={6} md={4} lg={3} style={{paddingBottom: "20px"}}>
-                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="medium"/>
+              <Grid item xs={12} sm={6} md={4} lg={3} style={{ paddingBottom: "40px" }}>
+                <CollectionCard key={cc.id} card={{ ...cc }} show={true} personal={true} size="medium" />
               </Grid>
             )
           })}
@@ -73,19 +68,19 @@ const Collection = () => {
       {collection && (<div style={{ padding: "20px" }}>
         <div>
           {auth.id === collection.user_id &&
-            
-              <div style={{ display: "flex", justifyContent: "right", margin: "20px" }}>
-                <EditCollection {...collection} setEditedCollection={setEditedCollection} />
-                <DeleteCollection {...collection} deleteCollection={deleteCollection} />
-              </div>
-            
+
+            <div style={{ display: "flex", justifyContent: "right", margin: "20px" }}>
+              <EditCollection {...collection} setEditedCollection={setEditedCollection} />
+              <DeleteCollection {...collection} deleteCollection={deleteCollection} />
+            </div>
+
           }
           <Box
-          style={{
-            width: "50%",
-            margin: "auto",
-          }}
-        >
+            style={{
+              width: "50%",
+              margin: "auto",
+            }}
+          >
             <h1 style={{ textAlign: "center", textTransform: 'capitalize' }}><b>{collection.name}</b></h1>
             <p>{collection.description}</p>
             <CollectionLike collection={collection} setCollection={setCollection} />
@@ -93,7 +88,6 @@ const Collection = () => {
         </div>
         <Box
           style={{
-            // backgroundColor: "#C4C4C4",
             width: "85%",
             margin: "auto",
             paddingTop: "10px",
@@ -106,20 +100,14 @@ const Collection = () => {
             </div>
           }
           {renderCollectionCards()}
+          <div style={{ padding: "20px 50px 50px 50px", backgroundColor: "#fcfcfc", borderRadius: "40px" }}>
+            <CollectionComments collectionId={collection.user_id} />
+          </div>
         </Box>
-        <hr />
-        <div style={{backgroundColor: "#C4C4C4"}}>
-        <Container style ={{ paddingTop:"30px"}}>
-          <CollectionComments collectionId={collection.user_id} />
-        </Container>
-        </div>
       </div>)}
     </>
   )
 }
 
-const collectionBox = {
-  bgcolor: "#90BDEE"
-}
 
 export default Collection;

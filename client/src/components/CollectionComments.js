@@ -39,7 +39,6 @@ const CollectionComments = (props) => {
   const deleteCollectionComments = async (id) => {
     await axios.delete(`/api/collections/${params.id}/collection_comments/${id}`)
     setCollectionComments(collectionComments.filter((cc) => cc.id !== id));
-    navigate(`/profile/collections/${params.id}`)
   }
 
   const addComment = (collectionComment) => {
@@ -66,7 +65,6 @@ const CollectionComments = (props) => {
     return (
       collectionComments.map((cc) => (
         <div key={cc.id}>
-
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Avatar alt="userNickname" src={cc.image} />
