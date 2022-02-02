@@ -4,7 +4,6 @@ import { AuthContext } from "../providers/AuthProvider"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Box, IconButton, Typography } from "@mui/material";
-import { ModalBoxStyle } from "./Styles";
 
 
 const CollectionLike = (props) => {
@@ -60,10 +59,11 @@ const CollectionLike = (props) => {
       <IconButton
         onClick={handleLike}
         disabled={clicked}
+        sx={{color: '#90BDEE'}}
       >
         {liked === false ? <FavoriteBorderIcon /> : <FavoriteIcon />}
       </IconButton>
-      <Box sx={{borderRadius: "20px", backgroundColor: "#C4C4C4", width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
+      <Box sx={{borderRadius: "20px", backgroundColor: "#90BDEE", color: "#FFFFFF",  width: 50, height: 25, display: "flex", alignItems: "center", justifyContent: "center"}} >
         <Typography variant="body2" >{like}</Typography>
       </Box>
     </Box>
