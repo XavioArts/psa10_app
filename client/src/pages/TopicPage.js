@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { Button, Paper, TextField } from "@mui/material";
+import { Button, Paper, TextField, ThemeProvider } from "@mui/material";
 import Modal from '@mui/material/Modal';
 import EditTopic from '../components/EditTopic';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import Message from '../components/Message';
+import { theme } from '../components/Styles';
 
 const TopicPage = () => {
   const auth = useContext(AuthContext);
@@ -144,25 +145,45 @@ const TopicPage = () => {
   }
 
   return (
-    <div>
-      <Button variant="contained" style={{ backgroundColor: 'green'}} onClick={routeBack}>Back to Message Board</Button>
-      {auth.id === topic.user_id &&<Button variant="contained" onClick={handleOpen}>Edit Topic</Button>}
-      <Modal open={open} onClose={handleClose}>
-        <div><EditTopic title={topic.title} body={topic.body} editTopic={()=>{editTopic()}}/></div>
-      </Modal>
-      {auth.id === topic.user_id &&<Button variant="contained" style={{ backgroundColor: 'red'}} onClick={() => deleteTopic(topic.id)}>Delete Topic</Button>}
-      <h1>{topic.title}</h1>
-      <p>{topic.body}</p>
-      {auth.authenticated ? <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
-        <form onSubmit={handleSubmit}>
-          <h6 style={{margin: '5px'}}>Comment as {auth.nickname}</h6>
-          {handleMessageError()}
-          <br/>
-          <Button variant="contained" type='submit'>Post</Button>
-        </form>
-      </Paper> : renderLoginBox()}
-      {renderMessages(messages)}
-    </div>
+    <ThemeProvider theme={theme} >
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ borderRadius: "20px", margin: "20px" }}
+          onClick={routeBack}>Back to Message Board</Button>
+        {auth.id === topic.user_id &&<Button
+          variant="outlined"
+          color="black"
+          sx={{ borderRadius: "20px", marginTop: "20px", marginBottom: "20px" }} 
+          onClick={handleOpen}>Edit Topic</Button>}
+        <Modal open={open} onClose={handleClose}>
+          <div><EditTopic title={topic.title} body={topic.body} editTopic={()=>{editTopic()}}/></div>
+        </Modal>
+        {auth.id === topic.user_id &&<Button
+          variant="outlined"
+          color="black"
+          sx={{ borderRadius: "20px", margin: "20px", ':hover': {bgcolor: '#D61A3C', borderColor: 'transparent', color: '#FFFFFF'}}}
+          onClick={() => deleteTopic(topic.id)}>Delete Topic</Button>}
+        <div style={{marginLeft: '20px', marginBottom: '40px'}}>
+          <h1>{topic.title}</h1>
+          <p>{topic.body}</p>
+        </div>
+        {auth.authenticated ? <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+          <form onSubmit={handleSubmit}>
+            <h6 style={{margin: '5px'}}>Comment as {auth.nickname}</h6>
+            {handleMessageError()}
+            <br/>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: "20px", marginLeft: "10px", marginBottom: "5px" }}
+              type='submit'>Post</Button>
+          </form>
+        </Paper> : renderLoginBox()}
+        {renderMessages(messages)}
+      </div>
+    </ThemeProvider>
   )
 }
 
