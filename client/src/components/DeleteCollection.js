@@ -33,6 +33,7 @@ const DeleteCollection = (props) => {
               onClick={deleteCollection}
               variant="contained"
               color="error"
+              style={{borderRadius: "40px", marginTop: "20px"}}
             >
               Delete
             </Button>
@@ -40,6 +41,7 @@ const DeleteCollection = (props) => {
               className="spacing"
               variant="contained"
               onClick={handleClose}
+              style={{borderRadius: "40px", marginTop: "20px"}}
             >
               Cancel
             </Button>
