@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Column1 */}
           <div>
             <a href="/" style={{ margin: '0px' }}>
-              <img src={Logo2} alt="psa10 logo" height="100px" />
+              <img src={Logo2} alt="psa10 logo" height="50px" />
             </a>
             <h3>A new way to collect</h3>
           </div>
@@ -24,7 +24,7 @@ const Footer = () => {
             </p>
           </div>
           {/* Column3 */}
-          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px'  }} >
+          <div style={{ display: 'inline-flex', justifyContent: "space-evenly", textAlign: "center", marginTop: '20px' }} >
             <p>
               <a href="/faq" style={{ textDecoration: 'none' }}>
                 Info
