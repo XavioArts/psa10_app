@@ -1,7 +1,8 @@
-import { Button, Modal } from "@mui/material";
+import { Button, IconButton, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { collectionModalStyle } from "./Styles";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 const DeleteComment = (props) => {
@@ -12,12 +13,12 @@ const DeleteComment = (props) => {
 
   return (
     <>
-      <button
+      <IconButton
         onClick={handleOpen}
         style={{ margin: '10px' }}
       >
-        Delete this Comment
-      </button>
+        <DeleteForeverIcon />
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -32,6 +33,7 @@ const DeleteComment = (props) => {
               onClick={()=>deleteCollectionComments(id)}
               variant="contained"
               color="error"
+              style={{borderRadius: "40px"}}
             >
               Delete
             </Button>
@@ -39,6 +41,7 @@ const DeleteComment = (props) => {
               className="spacing"
               variant="contained"
               onClick={handleClose}
+              style={{borderRadius: "40px"}}
             >
               Cancel
             </Button>

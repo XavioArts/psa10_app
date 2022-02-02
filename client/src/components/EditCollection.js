@@ -76,14 +76,13 @@ const EditCollection = (props) => {
               onChange={(e) => setCollectionDescription(e.target.value)}
             />
           </div>
-          <br />
           <div style={{ display: "flex", justifyContent: "right" }}>
             <Button
               type="submit"
               variant="contained"
-              color="success"
+              style={{borderRadius: "40px", marginTop: "20px"}}
             >
-              Submit
+              Edit Collection
             </Button>
           </div>
         </Box>
