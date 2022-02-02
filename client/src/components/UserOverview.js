@@ -108,11 +108,11 @@ const UserOverview = () => {
           borderRadius: "7px",
           padding: "20px",
           margin: "15px 30px",
-          color: "rgb(77, 77, 77)",
-          backgroundColor: "#ebebeb",
+          color: "#272830",
+          backgroundColor: "white",
           textAlign: "center",
           "&:hover": {
-            backgroundColor: "#dbdbdb",
+            backgroundColor: "white",
           },
         }}
       >
@@ -190,11 +190,11 @@ const UserOverview = () => {
                 borderRadius: "7px",
                 padding: "20px",
                 margin: "15px 30px",
-                color: "rgb(77, 77, 77)",
-                backgroundColor: "#ebebeb",
+                color: "#272830",
+                backgroundColor: "white",
                 textAlign: "center",
                 "&:hover": {
-                  backgroundColor: "#dbdbdb",
+                  backgroundColor: "white",
                 },
               }}
             >

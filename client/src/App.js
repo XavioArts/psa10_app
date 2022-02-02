@@ -58,16 +58,17 @@ function App() {
                 <Route path="/faq" element={<Faq />} />
                 {/* The community section needs to not be in requireAuth because
               it cant determine the difference in protected when both are in there */}
-              <Route path="/community" element={<Community />} />
-              <Route path="/community/users/:user_id/profile" element={<Protected />}>
-                <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
-                <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
-                <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
-                <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
-                <Route path="/community/users/:user_id/profile/overview" element={<UserOverview />} />
-              </Route>
-          {/* All routes below here are required to be logged in */}
-          <Route element={<RequireAuth/>} >
+                <Route path="/community" element={<Community />} />
+                <Route path="/faq" element={<Faq />} />
+                <Route path="/community/users/:user_id/profile" element={<Protected />}>
+                  <Route path="/community/users/:user_id/profile/collections" element={<UserCollections />} />
+                  <Route path="/community/users/:user_id/profile/collections/:id" element={<UserCollectView />} />
+                  <Route path="/community/users/:user_id/profile/showcases" element={<UserShowcases />} />
+                  <Route path="/community/users/:user_id/profile/sets" element={<UserSets />} />
+                  <Route path="/community/users/:user_id/profile/overview" element={<UserOverview />} />
+                </Route>
+                {/* All routes below here are required to be logged in */}
+                <Route element={<RequireAuth />} >
 
                   <Route path="/profile_image" element={<ProfileImageUpload />} />
                   <Route path="/profile/edit_card/:id" element={<EditCard />} />

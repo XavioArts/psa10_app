@@ -56,10 +56,10 @@ const CollectionComments = (props) => {
   }
 
   const renderCollectionComments = () => {
-    if (!collectionComments) {
+    if (collectionComments.length === 0) {
       return (
         <div>
-          <h2>Be the first one to leave a comment on this collection!</h2>
+          <p style={{textAlign: "center"}}>Be the first one to leave a comment!</p>
         </div>
       )
     }
@@ -103,19 +103,26 @@ const CollectionComments = (props) => {
               <TextField
                 required
                 label="Add comment"
+                fullWidth
+                multiline
+                rows={2}
                 variant="standard"
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
               />
+              <br />
+              <br />
+              <div style={{ display: "flex", justifyContent: "right" }}>
               <Button
                 type="submit"
                 variant="contained"
-                color="success"
+                style = {{backgroundColor: "#6569C8"}}
               >
-                Submit &nbsp;<SendIcon />
+                Send &nbsp;<SendIcon />
               </Button>
+              </div>
             </form>
-            <List sx={{ width: '100%', maxWidth: "80%", bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%' }}>
               {renderCollectionComments()}
             </List>
           </div>

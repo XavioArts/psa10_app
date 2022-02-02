@@ -97,8 +97,18 @@ code {
 
 .flexLeft {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+
+.flexLeftStats {
+  display: flex;
+  flex-direction: row;
   justify-content: flex-start;
 }
+
 .cardsContainer {
   display: flex;
   flex-direction: column;
@@ -116,6 +126,17 @@ code {
   margin: 4px 0px;
   font-size: 13px;
   font-style: italic;
+}
+.descriptionText {
+  color: rgb(112, 112, 112);
+  margin: 10px 0px;
+  font-size: 15px;
+}
+
+.descriptionTextPurple {
+  color: #6569C8;
+  margin: 10px 0px;
+  font-size: 15px;
 }
 
 .profileButton {
@@ -312,4 +333,14 @@ margin: 30px;
   padding: 20px;
   border-radius: 4px;
   margin: 10px;
+}
+
+.radio{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.collectionTitle:hover {
+  color: #6569C8 !important;
 }

@@ -123,12 +123,13 @@ const CardImageUpload = (props) => {
     return (
         <CenteredDiv>
                 <Tooltip open={noneChosen} onClose={()=>setNoneChosen(false)} title="Please select an image to upload for each side" >
-            <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} >
-            <h3>Upload your images</h3>
+            {/* <Paper sx={{width: "75vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px"}} > */}
+                <div>
+            <h1>Upload A Collectible</h1>
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
             {failed && <Alert severity="error" >Failed! Please select a valid image for each side.</Alert>}
             <br/>
-            <p>Current images</p>
+            <h4>Current images</h4>
             <div style={{display: "flex", margin: "10px", padding: "10px", justifyContent: "space-around", width: "500px"}} >
                 <div>
                     <label>Front:</label>
@@ -160,23 +161,24 @@ const CardImageUpload = (props) => {
             <Divider/>
             <div style={{width: "70vw"}} >
                 <label htmlFor="contained-button-file" >
-                    <label>Upload front image of card:</label>
+                    <label><h4>Upload front image of card:</h4></label>
                     <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>onChangeFuncFront(e.target.value)} />
                     <br/>
-                    <label>Upload back image of card:</label>
+                    <label><h4>Upload back image of card:</h4></label>
                     <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>onChangeFuncBack(e.target.value)} />
                     <br/>
-                    <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+                    <Button style={{borderRadius: "40px", margin: '10px 0px' }} disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
                 </label>
             </div>
-                </Paper>
+                {/* </Paper> */}
+                </div>
                 </Tooltip>
         </CenteredDiv>
     )
 }
 
 const CenteredDiv = styled.div`
-    text-align: center;
+    text-align: left;
     margin: 10px;
     display: flex;
     flex-direction: column;

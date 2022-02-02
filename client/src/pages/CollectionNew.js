@@ -24,7 +24,7 @@ const CollectionNew = () => {
   return (
     <>
       <Button
-        style={{ margin: '10px' }}
+        style={{ margin: '10px', borderRadius:'40px' }}
         variant="contained"
         onClick={handleOpen}
       >
@@ -65,6 +65,7 @@ const CollectionNew = () => {
           <br />
           <div style={{ display: "flex", justifyContent: "right" }}>
             <Button
+              style={{borderRadius: "40px"}}
               type="submit"
               variant="contained"
               color="success"
