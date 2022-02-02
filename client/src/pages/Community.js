@@ -1,10 +1,11 @@
-import { Avatar, Box, Button, Icon, IconButton, Input, List, ListItem, ListItemAvatar, ListItemText, Stack, Tooltip } from "@mui/material";
+import { Avatar, Box, Button, Icon, IconButton, Input, List, ListItem, ListItemAvatar, ListItemText, Stack, Tooltip, ThemeProvider } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageDiv } from "../components/Styles";
 import UserContactModal from "../components/UserContactModal";
 import { AuthContext } from "../providers/AuthProvider";
+import { theme } from "../components/Styles";
 
 const Community = () => {
 
@@ -51,21 +52,39 @@ const Community = () => {
         }
         return filteredUsers.map((u) => {
             return (
+                <Box 
+                sx={{
+                  maxWidth: '100vw',
+                  width: '95%',
+                  height: 'auto',
+                  borderRadius: '7px',
+                  padding: '5px 10px',
+                  margin: 'auto',
+                  color: '#272830',
+                  backgroundColor: 'white',
+                  textAlign: "left",
+                  lineHeight: '5px',
+                  '&:hover': {
+                    backgroundColor: 'whitesmoke',            
+                  },
+                }}
+              >
                 <ListItem key={u.id} secondaryAction={
                     <>
                     <label>View profile</label>
-                    <IconButton onClick={()=>navigate(`/community/users/${u.id}/profile`)} >
-                        <Icon>visibility</Icon>
+                    <IconButton onClick={()=>navigate(`/community/users/${u.id}/profile/overview`)} >
+                        <Icon>visibility</Icon> 
                     </IconButton>
                     <label>Socials</label>
                     <UserContactModal {...u} />
                     </>
                 } >
-                    <ListItemAvatar onClick={()=>navigate(`/community/users/${u.id}/profile`)} >
+                    <ListItemAvatar onClick={()=>navigate(`/community/users/${u.id}/profile/overview`)} >
                         <Avatar alt="profile" src={u.image} />
                     </ListItemAvatar>
-                    <ListItemText onClick={()=>navigate(`/community/users/${u.id}/profile`)} primary={u.nickname} secondary={`${u.first_name} ${u.last_name}`} />
+                    <ListItemText onClick={()=>navigate(`/community/users/${u.id}/profile/overview`)} primary={u.nickname} secondary={`${u.first_name} ${u.last_name}`} />
                 </ListItem>
+                </Box>
             )
         })
     }
@@ -76,6 +95,7 @@ const Community = () => {
     }
 
     return (
+        <ThemeProvider theme={theme} >
         <PageDiv>
             {!authenticated && <h2>Loading..</h2>}
             { authenticated &&
@@ -97,8 +117,8 @@ const Community = () => {
                 </Tooltip>
                 </div>
                 <Stack spacing={1} direction="row" >    
-                    <Button onClick={searchUsers} variant="contained" >Search</Button>
-                    <Button onClick={clearSearch} variant="outlined" >Clear</Button>
+                    <Button style={{borderRadius:'40px'}} onClick={searchUsers} variant="contained" >Search</Button>
+                    <Button style={{borderRadius:'40px'}} onClick={clearSearch} variant="outlined" >Clear</Button>
                 </Stack>
             </div>
             <Box sx={{display: "flex", justifyContent: "center"}} >
@@ -108,6 +128,7 @@ const Community = () => {
             </Box>
             </>}
         </PageDiv>
+        </ThemeProvider>
     );
 };
 
