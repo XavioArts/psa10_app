@@ -103,6 +103,13 @@ code {
   margin-bottom: 20px;
   align-items: flex-end;
 }
+.flexCenterColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  align-items: center;
+}
 
 .flexLeftStats {
   display: flex;
