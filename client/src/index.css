@@ -92,7 +92,8 @@ code {
   line-height: 9px;
   float: left;
   margin: 2em 0em 0em 6em;
-  text-shadow: 2px 2px black;
+  /* text-shadow: 2px 2px #272830; */
+  text-shadow: 1px 1px 1px black, 0 0 0.1em black, 0 0 0.2em black;
 }
 
 .flexLeft {

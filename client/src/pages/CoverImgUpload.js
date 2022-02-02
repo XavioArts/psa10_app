@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Alert, Button, Icon, Input } from "@mui/material";
+import { Alert, Button, Icon, Input, ThemeProvider } from "@mui/material";
 import axios from "axios";
+import { theme } from "../components/Styles";
+
 
 const CoverImgUpload = () => {
   const auth = useContext(AuthContext);
@@ -55,6 +57,7 @@ const onChangeFunc = (e) => {
 }
 
   return (
+    <ThemeProvider theme={theme} >
       <div className="messagePageContainer">
           <h3>Update your cover image</h3>
           {success && <Alert severity="success" >Successfully updated cover image!</Alert>}
@@ -72,9 +75,11 @@ const onChangeFunc = (e) => {
           <br />
           <label htmlFor="contained-button-file" >
               <Input accept="image/*" value={files} type="file" id="input" onChange={(e) => onChangeFunc(e.target.value)} />
-              <Button disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
+              <Button style={{borderRadius:'40px'}} disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>
           </label>
       </div>
+      </ThemeProvider>
+
   )
 }
 
