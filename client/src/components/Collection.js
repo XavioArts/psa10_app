@@ -44,8 +44,8 @@ const Collection = () => {
       return <p>Loading cards</p>
     }
     return (
-      <div>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <div >
+        <Grid style={{ display: "flex", justifyContent: "flex-start" }} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {collectionCards.map(cc => {
             return (
               <Grid item xs="auto" sm="auto" md="auto">
@@ -61,8 +61,9 @@ const Collection = () => {
 
   return (
     <>
-      {collection && (<div style={{ padding: "20px" }}>
-        <div>
+          <Container style={{ alignItems: "center"}}>
+      {collection && (<div style={{ margin: "33px" }}>
+        <div >
           <h1 style={{ textAlign: "center" }}>{collection.name}</h1>
           <Container>
             <CollectionLike collection={collection} setCollection={setCollection} />
@@ -77,9 +78,10 @@ const Collection = () => {
         </div>
         {auth.id === collection.user_id && <AddCard collectionId={params.id} addCard={addCard} />}
         {renderCollectionCards()}
-        <hr />
+        <hr style={{ marginTop: "30px" }}/>
         <CollectionComments collectionId={collection.user_id} />
       </div>)}
+        </Container>
     </>
   )
 }

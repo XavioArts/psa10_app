@@ -129,7 +129,7 @@ const CardImageUpload = (props) => {
             {success && <Alert severity="success" >Successfully uploaded card pictures!</Alert>}
             {failed && <Alert severity="error" >Failed! Please select a valid image for each side.</Alert>}
             <br/>
-            <p>Current images</p>
+            <h4>Current images</h4>
             <div style={{display: "flex", margin: "10px", padding: "10px", justifyContent: "space-around", width: "500px"}} >
                 <div>
                     <label>Front:</label>
@@ -161,10 +161,10 @@ const CardImageUpload = (props) => {
             <Divider/>
             <div style={{width: "70vw"}} >
                 <label htmlFor="contained-button-file" >
-                    <label>Upload front image of card:</label>
+                    <label><h4>Upload front image of card:</h4></label>
                     <Input fullWidth accept="image/*" value={files} type="file" id="input" onChange={(e)=>onChangeFuncFront(e.target.value)} />
                     <br/>
-                    <label>Upload back image of card:</label>
+                    <label><h4>Upload back image of card:</h4></label>
                     <Input fullWidth accept="image/*" value={filesBack} type="file" id="inputBack" onChange={(e)=>onChangeFuncBack(e.target.value)} />
                     <br/>
                     <Button style={{borderRadius: "40px", margin: '10px 0px' }} disabled={clicked} variant="contained" component="span" endIcon={<Icon>photocamera</Icon>} onClick={handleUpload} >Upload</Button>

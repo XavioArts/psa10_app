@@ -89,7 +89,16 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-bottom: 20px;
+  align-items: flex-end;
 }
+
+.flexLeftStats {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
 .cardsContainer {
   display: flex;
   flex-direction: column;
@@ -110,6 +119,12 @@ code {
 }
 .descriptionText {
   color: rgb(112, 112, 112);
+  margin: 10px 0px;
+  font-size: 15px;
+}
+
+.descriptionTextPurple {
+  color: #6569C8;
   margin: 10px 0px;
   font-size: 15px;
 }
@@ -314,4 +329,8 @@ margin: 30px;
   display: flex;
   flex-direction: row;
   justify-content: left;
+}
+
+.collectionTitle:hover {
+  color: #6569C8 !important;
 }

@@ -38,7 +38,7 @@ const EditCollection = (props) => {
   return (
     <>
       <Button
-        style={{ margin: '10px' }}
+        style={{ margin: '10px', borderRadius: '40px' }}
         variant="contained"
         onClick={handleOpen}
       >
