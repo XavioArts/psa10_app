@@ -1,4 +1,4 @@
-import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip, ThemeProvider } from "@mui/material";
+import { Alert, Autocomplete, Button, FormControl, FormControlLabel, FormHelperText, Input, InputLabel, LinearProgress, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Tooltip, ThemeProvider, FormLabel } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { Navigate } from "react-router";
@@ -65,8 +65,11 @@ const AddCard = (props) => {
         if (e) { e.preventDefault(); }
         if (upload === true) {
             let updatedCard = { name, category: chosenCategory, condition: chosenCondition, set, year, card_number, available, grade, graded };
+            console.log(updatedCard)
             try {
                 let res = await axios.put(`/api/cards/${card.id}`, updatedCard)
+                console.log(res.data)
+                console.log('hi')
                 addCard(res.data);
                 setCard(null);
                 setClicked(false);
@@ -75,14 +78,17 @@ const AddCard = (props) => {
                 setName("");
                 setCategory(categories[0]);
                 setCondition(conditions[0]);
+                console.log("hey")
                 setSet("");
                 setYear(2022);
                 setCardNumber("");
                 setAvailable(false);
                 setSuccess(true);
+                console.log("hey")
                 setUpload(false)
                 setTrueSubmit(false)
                 setTimeout(() => setSuccess(false), 6000);
+                console.log("hey")
                 Navigate(`/profile/collections/${collectionId}`)
                 if (submitted === true) {
                     setSubmitted(false)
@@ -155,15 +161,14 @@ const AddCard = (props) => {
                     <h4>Please upload card images and then fill out card info</h4>
                     <CardImageUpload id={card.id} submitted={submitted} setSubmitted={setSubmitted} setUpload={setUpload} />
                     <form onSubmit={handleSubmit} >
-                        <label>Name: </label>
-                        <Input
-                            type="text"
+                        <TextField style={{ margin: '10px' }}
+                            label="Name"
                             value={name}
                             required
                             onChange={(e) => setName(e.target.value)}
                             inputProps={{ maxLength: 20 }}
+                            />
 
-                        />
                         <FormControl sx={{ m: 1, minWidth: 250 }} >
                             <Autocomplete
                                 options={categories}
@@ -190,29 +195,40 @@ const AddCard = (props) => {
                             />
                         </FormControl>
                         <br />
-                        <label>Set: </label>
-                        <Input type="text" required value={set} onChange={(e) => setSet(e.target.value)} />
-                        <label>Year: </label>
-                        <Input type="number" required value={year} onChange={(e) => setYear(e.target.value)} />
-                        <label>Card No.: </label>
-                        <Input type="text" required value={card_number} onChange={(e) => setCardNumber(e.target.value)} />
+                        <TextField style={{ margin: '10px' }}
+                            label="Set"
+                            value={set}
+                            required
+                            onChange={(e) => setSet(e.target.value)}
+                            />
+                        <TextField style={{ margin: '10px' }}
+                            label="Year"
+                            value={year}
+                            required
+                            onChange={(e) => setYear(e.target.value)}
+                            />
+                        <TextField style={{ margin: '10px' }}
+                            label="Card Number"
+                            value={card_number}
+                            onChange={(e) => setCardNumber(e.target.value)}
+                            />
                         <br />
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }} >
-                            <div>
-                                <label>Available</label>
+                        <div style={{ display: "flex", alignItems: "left", justifyContent: "flex-start" }} >
+                            <div style={{margin: '10px 30px'}}>
                                 <RadioGroup value={available} onChange={handleAvailable} >
+                                <FormLabel>Available</FormLabel>
                                     <FormControlLabel value={true} control={<Radio />} label="Yes" />
                                     <FormControlLabel value={false} control={<Radio />} label="No" />
                                 </RadioGroup>
                             </div>
-                            <div>
-                                <label>Graded</label>
+                            <div style={{margin: '10px 20px'}}>
+                                <FormLabel>Graded</FormLabel>
                                 <RadioGroup value={graded} onChange={handleGraded} >
-                                    <FormControlLabel value={true} control={<Radio />} label="Yes" />
-                                    <FormControlLabel value={false} control={<Radio />} label="No" />
+                                    <FormControlLabel value={true} control={<Radio />} label="Yes" labelPlacement="start"/>
+                                    <FormControlLabel value={false} control={<Radio />} label="No" labelPlacement="start"/>
                                 </RadioGroup>
-                            </div>
-                            <FormControl sx={{ m: 1, minWidth: 150 }} >
+                            </div> 
+                            <FormControl sx={{ m: 3, minWidth: 150 }} >
                                 <InputLabel id="grade-select-label" >Grade</InputLabel>
                                 <Select
                                     value={grade}
@@ -323,7 +339,7 @@ const AddCard = (props) => {
                         <Tooltip open={notUploaded} onClose={() => setNotUploaded(false)} title="Please upload your images" >
                             <Button style={{borderRadius: "40px"}} variant="contained" type="submit" onClick={() => finished()} >Submit</Button>
                         </Tooltip>
-                    <Button style={{borderRadius: "40px"}} variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
+                    <Button style={{borderRadius: "40px", margin: '10px' }} variant="contained" color="error" onClick={deleteCard} >Cancel</Button>
                     </form>
                     {/* </Paper> */}
                 </div>

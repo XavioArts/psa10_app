@@ -309,3 +309,9 @@ margin: 30px;
   border-radius: 4px;
   margin: 10px;
 }
+
+.radio{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
