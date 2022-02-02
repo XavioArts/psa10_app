@@ -101,7 +101,7 @@ const Message = (props) => {
       )
   } else {
     return(
-      <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', margin: '20px' }}>
+      <Paper elevation={5} style={{ padding: '5px', border: '1px solid grey', borderRadius: '10px', marginTop: '25px', marginRight: '20px', marginLeft: '20px', marginBottom: '20px' }}>
         <h6 style={{margin: '5px'}}>Posted by {message.user_nickname}</h6>
         <h3 style={{margin: '5px', marginTop: '15px'}}>{message.content}</h3>
         {auth.id === message.user_id &&<Button variant="contained" onClick={handleEditClicked}>Edit</Button>}
