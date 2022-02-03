@@ -52,16 +52,7 @@ const AboutUs = () => {
               Madeline Armstrong
             </Typography>
             <Typography sx={{textAlign: "right"}} variant="body1" component="div" gutterBottom >
-            Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              Starting my career in tech with DevPoint labs is a decision I could have made. I can now confidently say I am ready for my first job in development. I love seeing a product go from idea to completion with full-stack development, and the feeling of accomplishment after an issue is fixed. I decided to enter into tech because I saw so many inefficiencies in my previous workplaces that could be solved with programming. I can't wait to start providing solutions that will make people's lives easier.
             </Typography>
           </div>
         </div>
