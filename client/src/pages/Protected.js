@@ -88,7 +88,7 @@ const Protected = () => {
 
   const Cover = styled.div`
     background-image: url(${(props) => props.image}),
-      linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) 80%);
     overflow: hidden;
   `;
 
