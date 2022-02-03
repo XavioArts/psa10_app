@@ -148,7 +148,7 @@ const CollectionCard = (props) => {
               {card.graded === true && <Button variant="outlined" color="warning">
                 Graded
               </Button>}
-              {personal && <Button startIcon={<Icon>settings</Icon>} variant="contained" color="success" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
+              {personal && <Button style={{borderRadius: '40px', margin: '0px 10px'}} startIcon={<Icon>settings</Icon>} variant="contained" color="primary" onClick={(e) => editCard(e, `/profile/edit_card/${card.id}`)} >Edit this card</Button>}
             </Box>
           </Modal>}
         {/* <Box sx={{position: "relative", width: "100%", height: "35px", top: "-45px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0}} >
