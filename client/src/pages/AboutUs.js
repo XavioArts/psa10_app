@@ -127,16 +127,11 @@ const AboutUs = () =>{
               Sky Lin
             </Typography>
             <Typography sx={{textAlign: "right"}} variant="body1" component="div" gutterBottom >
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+            I have always been interested in web development and have enjoyed the process of problem-solving since high school.
+            After graduating from the University of Utah with a bachelor’s degree in information systems, I realized the skills and knowledge I have gained from school were limited and I wanted to become proficient in coding.
+            I decided to resign from my full-time job and join DevPoint Labs. 
+            After thirteen weeks of coding, I have advanced my skills in various programming languages, such as JavaScript, React, React Native, Ruby on Rails, etc. 
+            I’m looking forward to the life after DevPoint and I’m excited to move on to the next chapter.
             </Typography>
           </div>
         </div>
