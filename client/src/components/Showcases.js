@@ -80,8 +80,8 @@ const Showcase = (props) => {
 
   const sizeWindow = () => {
     if (size.width <= 575) {
-      // console.log(1)
-      // console.log(size.width)
+      console.log(1)
+      console.log(size.width)
       return 1
     }
     if (size.width > 575 && size.width <= 810) {
