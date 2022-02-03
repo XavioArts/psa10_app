@@ -50,7 +50,7 @@ const Sets = () => {
 
     const renderCards = () => {
         if (cards.length === 0) {
-            return <h1 style={{textAlign: "center"}} >No cards found with the set "{search}"</h1>
+            return <h1 style={{textAlign: "center"}} >No collectibles found with the set "{search}"</h1>
         }
         return cards.map((c)=>{
         return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="medium" /></div>)
@@ -75,14 +75,14 @@ const Sets = () => {
                     </Tooltip>
                 </div>
                 <Stack spacing={1} direction="row" >    
-                    <Button onClick={searchCards} variant="contained" >Search</Button>
-                    <Button onClick={clearSearch} variant="outlined" >Clear</Button>
+                    <Button style={{borderRadius: '40px'}} onClick={searchCards} variant="contained" >Search</Button>
+                    <Button style={{borderRadius: '40px'}} onClick={clearSearch} variant="outlined" >Clear</Button>
                 </Stack>
             </div>
             
             {!cards && <Box sx={{width: "80vw", bgcolor: "#D7D7D7", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
                 <Icon sx={{fontSize:"150px"}} >pageview</Icon>
-                <p>There are no cards to diplay, please search for a set..</p>
+                <p>There are no collectibles to diplay, please search for a set..</p>
             </Box>}
             {cards && <Box sx={{width: "100vw", margin: "auto", padding: "20px", width: "80vw"}} >
                 <div >

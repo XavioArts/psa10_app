@@ -145,10 +145,10 @@ const Protected = () => {
             <Box >
                   <h3>STATS</h3>
                   <h4>{stats.collectionLikes} collection likes</h4>
-                  <h4>{stats.cardLikes} card likes</h4>  
-                  <h4>{stats.totalCards} total cards</h4> 
-                  <h4>{stats.gradedCards} graded cards</h4>
-                  <h4>{stats.availableCards} cards for trade</h4>
+                  <h4>{stats.cardLikes} collectible likes</h4>  
+                  <h4>{stats.totalCards} total collectibles</h4> 
+                  <h4>{stats.gradedCards} graded collectibles</h4>
+                  <h4>{stats.availableCards} collectibles for trade</h4>
                 </Box>
             </div>
             </div>
