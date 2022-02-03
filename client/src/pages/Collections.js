@@ -30,8 +30,7 @@ const Collections = () => {
     }
     return collections.map((c, index) => {
       return (
-        <>
-        <div key={index}>
+        <div key={index} style={{width: '100%'}}>
           <div className='flexLeft'>
           <h3 style={{ marginRight: '30px', textTransform: 'capitalize'}}><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/profile/collections/${c.id}`}> {c.name}</Link></h3>
           <Button  onClick={()=>navigate(`/profile/collections/${c.id}`)} style={{borderRadius: "40px", margin: '10px 0px' }}  component="span">View Full Collection
@@ -48,21 +47,20 @@ const Collections = () => {
           </Grid>
           <hr style={{marginTop: '30px'}}/>
         </div>
-        </>
       )
     })
   }
 
 
   return (
-    <Box sx={{width: "80vw", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
         <CollectionNew />
       </div>
-      <FlexColumnDiv>
+    <Box sx={{width: "80vw", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
         {renderCollectionCards()}
-      </FlexColumnDiv>
     </Box>
+    </div>
   )
 };
 
