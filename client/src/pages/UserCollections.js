@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
 import { Grid } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
+import { Box } from '@mui/system';
 
 const UserCollections = (props) => {
 
@@ -34,14 +35,16 @@ const UserCollections = (props) => {
         <div key={index}>
           <h3 style={{ marginRight: '30px', textTransform: 'capitalize'}} ><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/community/users/${user_id}/profile/collections/${c.id}`}> {c.name}</Link></h3>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {c.cards.slice( 0,3).map((cc) => {
+            {c.cards.slice( 0,5).map((cc) => {
               return (
-                <Grid item xs={2} sm={4} md={4} key={cc.id}>
+                <Grid item xs="auto" sm="auto" md="auto" key={cc.id}>
                   <CollectionCard key={cc.id} card={{...cc}} show={false} personal={false} user={user} size="small" />
                 </Grid>
               )
             })}
           </Grid>
+          <hr style={{marginTop: '30px'}}/>
+
         </div>
       )
     })
@@ -49,9 +52,11 @@ const UserCollections = (props) => {
 
 
   return (
+      <Box sx={{width: "80vw", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "20px"}} >
     <div>
       {renderCollectionCards()}
     </div>
+      </Box>
   )
 };
 
