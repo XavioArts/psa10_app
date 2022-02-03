@@ -87,11 +87,12 @@ const Protected = () => {
     };
 
   const Cover = styled.div`
-    background-image: url(${(props) => props.image}),
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) 80%);
+    background-image: url(${(props) => props.image});
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2); 
     overflow: hidden;
   `;
-
+   // linear-gradient(rgba(0.5, 0, 0.5, 0.5), rgba(0.5, 0, 0.5, 0.5));
+// linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 100%);
 
   return (
     <ThemeProvider theme={theme} >
