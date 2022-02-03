@@ -102,16 +102,14 @@ const AboutUs = () =>{
               John Leosco
             </Typography>
             <Typography sx={{textAlign: "right"}} variant="body1" component="div" gutterBottom >
-            Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+              As a former collector of multiple TCG’s, this project really 
+              spoke to me.  I came from a career in restaurant management and
+              during the pandemic I started looking for other opportunities. My 
+              love of problem solving and interest in building cool and 
+              interesting things has drawn me into the coding field. I came to 
+              Devpoint Labs with limited knowedge of javascript and have enjoyed my 
+              time learning here.  I am excited for my future in coding and look forward 
+              to continuing to learn at my next challenge. 
             </Typography>
           </div>
         </div>
