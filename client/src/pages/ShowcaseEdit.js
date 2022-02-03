@@ -172,15 +172,15 @@ const ShowcaseEdit = () => {
         onChange={(e)=>{setShowcaseDescription(e.target.value);}}
         />
         
-        <h2>Add Cards to Showcase</h2>
+        <h2>Add Collectables to Showcase</h2>
         <div className="editShowcaseCardsContainer">
-          <h4>Selected Cards</h4>
+          <h4>Selected Collectables</h4>
           <div style={styles.cardsDiv}>
           {renderSelectedCards()}
           </div>
         </div>
           <div className="editShowcaseCardsContainer">
-          <h4>Choose Cards to Add</h4>
+          <h4>Choose Collectables to Add</h4>
           <div style={styles.cardsDiv}>
           {renderCardChoices()}
           </div>
