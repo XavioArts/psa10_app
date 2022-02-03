@@ -51,17 +51,8 @@ const AboutUs = () => {
             <Typography sx={{ textAlign: "right" }} variant="h3" component="div" gutterBottom >
               Madeline Armstrong
             </Typography>
-            <Typography sx={{ textAlign: "right" }} variant="body1" component="div" gutterBottom >
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+            <Typography sx={{textAlign: "right"}} variant="body1" component="div" gutterBottom >
+            Starting my career in tech with DevPoint labs is a decision I could have made. I can now confidently say I am ready for my first job in development. I love seeing a product go from idea to completion with full-stack development, and the feeling of accomplishment after an issue is fixed. I decided to enter into tech because I saw so many inefficiencies in my previous workplaces that could be solved with programming. I can't wait to start providing solutions that will make people's lives easier.
             </Typography>
           </div>
         </div>
@@ -128,17 +119,12 @@ const AboutUs = () => {
             <Typography sx={{ textAlign: "right" }} variant="h3" component="div" gutterBottom >
               Sky Lin
             </Typography>
-            <Typography sx={{ textAlign: "right" }} variant="body1" component="div" gutterBottom >
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+            <Typography sx={{textAlign: "right"}} variant="body1" component="div" gutterBottom >
+            I have always been interested in web development and have enjoyed the process of problem-solving since high school.
+            After graduating from the University of Utah with a bachelor’s degree in information systems, I realized the skills and knowledge I have gained from school were limited and I wanted to become proficient in coding.
+            I decided to resign from my full-time job and join DevPoint Labs. 
+            After thirteen weeks of coding, I have advanced my skills in various programming languages, such as JavaScript, React, React Native, Ruby on Rails, etc. 
+            I’m looking forward to the life after DevPoint and I’m excited to move on to the next chapter.
             </Typography>
           </div>
         </div>

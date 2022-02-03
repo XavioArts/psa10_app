@@ -1,16 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CollectionCard from '../components/CollectionCard';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import { Box } from '@mui/system';
+import { useNavigate } from "react-router";
 
 const UserCollections = (props) => {
 
     const {user_id} = useParams();
   const [collections, setCollections] = useState(null)
   const [user, setUser] = useState(null);
-
+  const navigate = useNavigate();
   console.log(collections)
   console.log(props.user)
 
@@ -33,7 +34,11 @@ const UserCollections = (props) => {
     return collections.map((c,index) => {
       return (
         <div key={index}>
+          <div className='flexLeft'>
           <h3 style={{ marginRight: '30px', textTransform: 'capitalize'}} ><Link style={{ textDecoration: 'none', color: '#272830'}} className='collectionTitle' to={`/community/users/${user_id}/profile/collections/${c.id}`}> {c.name}</Link></h3>
+          <Button  onClick={()=>navigate(`/community/users/${user_id}/profile/collections/${c.id}`)} style={{borderRadius: "40px", margin: '10px 0px' }}  component="span">View Full Collection
+          </Button>
+          </div>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {c.cards.slice( 0,5).map((cc) => {
               return (
