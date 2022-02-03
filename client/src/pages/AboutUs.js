@@ -43,10 +43,10 @@ const AboutUs = () =>{
       </Paper>
       <Paper sx={{m: 10}} elevation={4} >
         <div style={{display: "flex", alignItems: "center", justifyContent: "space-around", margin: "20px"}} >
-          <img src={MADELINE_ICON} alt="fabio pokemon icon" width="450px" />
+          <img src={MADELINE_ICON} alt="madeline pokemon icon" width="450px" />
           <div>
             <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%", marginBottom: "10px"}} >
-              <Avatar src={MADELINE_AVATAR} alt="fabio avatar" sx={{ width: 175, height: 175 }} />
+              <Avatar src={MADELINE_AVATAR} alt="madeline avatar" sx={{ width: 175, height: 175 }} />
             </div>
             <Typography sx={{textAlign: "right"}} variant="h3" component="div" gutterBottom >
               Madeline Armstrong
@@ -68,10 +68,10 @@ const AboutUs = () =>{
       </Paper>
       <Paper sx={{m: 10}} elevation={4} >
         <div style={{display: "flex", alignItems: "center", justifyContent: "space-around", margin: "20px"}} >
-          <img src={AUSTIN_ICON} alt="fabio pokemon icon" width="450px" />
+          <img src={AUSTIN_ICON} alt="austin pokemon icon" width="450px" />
           <div>
             <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%", marginBottom: "10px"}} >
-              <Avatar src={AUSTIN_AVATAR} alt="fabio avatar" sx={{ width: 175, height: 175 }} />
+              <Avatar src={AUSTIN_AVATAR} alt="austin avatar" sx={{ width: 175, height: 175 }} />
             </div>
             <Typography sx={{textAlign: "right"}} variant="h3" component="div" gutterBottom >
               Austin Choi
@@ -93,10 +93,10 @@ const AboutUs = () =>{
       </Paper>
       <Paper sx={{m: 10}} elevation={4} >
         <div style={{display: "flex", alignItems: "center", justifyContent: "space-around", margin: "20px"}} >
-          <img src={JOHN_ICON} alt="fabio pokemon icon" width="450px" />
+          <img src={JOHN_ICON} alt="john pokemon icon" width="450px" />
           <div>
             <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%", marginBottom: "10px"}} >
-              <Avatar alt="fabio avatar" sx={{ width: 175, height: 175 }} />
+              <Avatar alt="john avatar" sx={{ width: 175, height: 175 }} />
             </div>
             <Typography sx={{textAlign: "right"}} variant="h3" component="div" gutterBottom >
               John Leosco
