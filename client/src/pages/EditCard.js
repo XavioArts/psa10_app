@@ -83,7 +83,7 @@ const EditCard = () => {
                 setCard(res.data);
                 setFailed(false);
                 setSuccess(true);
-                setTimeout(() => navigate("/profile"), 1500);
+                setTimeout(() => navigate("/profile/overview"), 1500);
             } catch (err) {
                 console.log(err.response);
                 setFailed(true);
