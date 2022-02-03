@@ -121,8 +121,8 @@ const EditCard = () => {
     return (
         <ThemeProvider theme={theme} >
             <div>
-                {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
-                {failed && <Alert severity="error" >Failed to update card!</Alert>}
+                {success && <Alert severity="success" >Successfuly edited your collectible!</Alert>}
+                {failed && <Alert severity="error" >Failed to update collectible!</Alert>}
                 {card &&
                     <div>
                         <Paper sx={{ width: "85vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: "20px" }} >
@@ -168,7 +168,7 @@ const EditCard = () => {
                                 <label>Year: </label>
                                 <Input type="number" required value={year} onChange={(e) => setYear(e.target.value)} />
                                 <label>Card No.: </label>
-                                <Input type="text" required value={card_number} onChange={(e) => setCardNumber(e.target.value)} />
+                                <Input type="text" value={card_number} onChange={(e) => setCardNumber(e.target.value)} />
                                 <br />
                                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }} >
                                     <div>
@@ -292,14 +292,14 @@ const EditCard = () => {
                                         </Select>
                                     </FormControl>
                                 </div>
-                                {success && <Alert severity="success" >Successfuly edited your card!</Alert>}
+                                {success && <Alert severity="success" >Successfuly edited your collectible!</Alert>}
                                 {failed && <Alert severity="error" >Failed to update card!</Alert>}
                                 {notUploadedAlert && <Alert onClose={() => { setNotUploadedAlert(false) }} severity="error" >Please upload your images first</Alert>}
                                 <Tooltip open={notUploaded} onClose={() => setNotUploaded(false)} title="Please upload your images" >
                                     <Button style={{borderRadius: "40px"}} variant="contained" type="submit" onClick={() => finished()} >Submit</Button>
                                 </Tooltip>
                             </form>
-                            <Button variant="contained" color="error" onClick={deleteCard} >Delete this card</Button>
+                            <Button style={{borderRadius: '40px'}} variant="contained" color="error" onClick={deleteCard} >Delete this collectible</Button>
                         </Paper>
                     </div>
                 }
