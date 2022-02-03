@@ -64,6 +64,7 @@ const AddTopic = (props) => {
                     setTitleVerify(true)
                 }}
                 helperText="Title required"
+                inputProps ={{maxLength: 50}}
             /> 
         )
     } else {
@@ -73,6 +74,7 @@ const AddTopic = (props) => {
                 variant="outlined"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                inputProps ={{maxLength: 50}}
             />
         )
     }
