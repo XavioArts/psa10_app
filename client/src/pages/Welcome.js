@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Carousel from '../components/Carousel';
-import Slide1 from '../slides/slide1.png'
+import Slide1 from '../slides/slide1.mov'
 import Slide2 from '../slides/slide2.png'
 import Slide3 from '../slides/slide3.png'
 import Slide4 from '../slides/slide4.png'
@@ -44,7 +44,9 @@ const Welcome = (props) => {
         <div key={s.id}>
           <h3>{s.text}</h3>
           <br />
-          <img src={s.image} style={{ width: `900px`, height: `460px`}}/>
+          <video style={{ width: `900px`, height: `460px`}} autoPlay muted>
+            <source src={s.image} type="video/mp4"></source>
+        </video>
         </div>
       )
     })
