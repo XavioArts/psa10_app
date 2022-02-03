@@ -63,7 +63,7 @@ const Welcome = (props) => {
         </div>
         <Button style={{marginTop: '15px'}} variant="contained" onClick={props.handleClose}>I'm ready to get started!</Button>
         <br/>
-        <Button style={{marginTop: '15px'}} variant="contained" onClick={()=>navigate('/FAQ')}>Have more question? Check out our FAQ</Button>
+        <Button style={{marginTop: '15px'}} variant="contained" onClick={()=>navigate('/FAQ')}>Have more questions? Check out our FAQ</Button>
       </div>
     </Box>
   )
