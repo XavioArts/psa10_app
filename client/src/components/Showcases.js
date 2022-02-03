@@ -80,29 +80,29 @@ const Showcase = (props) => {
 
   const sizeWindow = () => {
     if (size.width <= 575) {
-      // console.log(1)
-      // console.log(size.width)
+      console.log(1)
+      console.log(size.width)
       return 1
     }
     if (size.width > 575 && size.width <= 720) {
-      // console.log(2)
-      // console.log(size.width)
+      console.log(2)
+      console.log(size.width)
       return 2
     }  if (size.width > 720 && size.width <= 950) {
-      // console.log(3)
-      // console.log(size.width)
+      console.log(3)
+      console.log(size.width)
       return 3
     } if (size.width > 950 && size.width <= 1150) {
-      // console.log(4)
-      // console.log(size.width)
+      console.log(4)
+      console.log(size.width)
       return 4
     }if (size.width > 1150 && size.width <= 1260) {
-      // console.log(5)
-      // console.log(size.width)
+      console.log(5)
+      console.log(size.width)
       return 5
     } if (size.width > 1260) {
-      // console.log(6)
-      // console.log(size.width)
+      console.log(6)
+      console.log(size.width)
       return 6
     }  
   }

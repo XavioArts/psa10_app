@@ -82,7 +82,7 @@ const Collection = () => {
             }}
           >
             <h1 style={{ textAlign: "center", textTransform: 'capitalize' }}><b>{collection.name}</b></h1>
-            <p>{collection.description}</p>
+            <p style={{ textAlign: "center"}}>{collection.description}</p>
             <CollectionLike collection={collection} setCollection={setCollection} />
           </Box>
         </div>
