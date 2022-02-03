@@ -31,7 +31,7 @@ const SearchByName = () => {
 
     const renderCards = () => {
         if (cards.length === 0) {
-            return <h1>No cards found with the name "{search}"</h1>
+            return <h1>No collectibles found with the name "{search}"</h1>
         }
         return cards.map((c)=>{
         return (<div style={{margin: "10px"}} key={c.id}><CollectionCard key={c.id} card={{...c}} show={true} personal={true} size="medium" /></div>)

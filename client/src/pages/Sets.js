@@ -60,7 +60,7 @@ const Sets = () => {
     return (
         <div>
             <div style={{width: "75vw", margin: "auto", padding: "10px"}} >
-                <h3 style={{marginLeft: "3vw"}} >Search through your cards by set</h3>
+                <h3 style={{marginLeft: "3vw"}} >Search through your collectables by set</h3>
             </div>
             <div style={{width: "75vw", margin: "auto", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center"}} >
                 <div style={{width: "60vw", margin: "10px"}} >
