@@ -6,9 +6,11 @@ const SKY_ICON = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843045/
 const MADELINE_ICON = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843045/Dev%20Icons/Pok%C3%A9mon_icons_madeline_oxdwfn.jpg";
 const JOHN_ICON = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843045/Dev%20Icons/Pok%C3%A9mon_icons_john_hbceje.jpg";
 const AUSTIN_ICON = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843044/Dev%20Icons/Pok%C3%A9mon_icons_austin_ynvmqm.jpg";
-const FABIO_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843207/Dev%20Icons/20220202_140602_zcagvm.jpg"
-const MADELINE_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843208/Dev%20Icons/Image_from_iOS_oyqjq4.jpg"
-const AUSTIN_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843208/Dev%20Icons/IMG_1660_gqcjb9.jpg"
+const FABIO_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843208/Dev%20Icons/20220202_140944_yybfux.jpg";
+const MADELINE_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843208/Dev%20Icons/Image_from_iOS_1_mp4alz.jpg";
+const AUSTIN_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643843211/Dev%20Icons/IMG_1651_jbyga9.jpg";
+const JOHN_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643869255/Dev%20Icons/Image_from_iOS_2_xoeycj.jpg";
+const SKY_AVATAR = "https://res.cloudinary.com/dsm4zxnsy/image/upload/v1643869257/Dev%20Icons/Image_from_iOS_3_jnipfb.jpg";
 
 const AboutUs = () => {
 
@@ -89,7 +91,7 @@ const AboutUs = () => {
           <img src={JOHN_ICON} alt="john pokemon icon" width="450px" />
           <div>
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%", marginBottom: "10px" }} >
-              <Avatar alt="john avatar" sx={{ width: 175, height: 175 }} />
+              <Avatar src={JOHN_AVATAR} alt="john avatar" sx={{ width: 175, height: 175 }} />
             </div>
             <Typography sx={{ textAlign: "right" }} variant="h3" component="div" gutterBottom >
               John Leosco
@@ -112,7 +114,7 @@ const AboutUs = () => {
           <img src={SKY_ICON} alt="sky pokemon icon" width="450px" />
           <div>
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", width: "100%", marginBottom: "10px" }} >
-              <Avatar alt="sky avatar" sx={{ width: 175, height: 175 }} />
+              <Avatar src={SKY_AVATAR} alt="sky avatar" sx={{ width: 175, height: 175 }} />
             </div>
             <Typography sx={{ textAlign: "right" }} variant="h3" component="div" gutterBottom >
               Sky Lin
